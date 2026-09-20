@@ -4,6 +4,7 @@
  */
 
 import '@/global.css';
+import { StyleSheet } from 'react-native';
 
 import { Platform } from 'react-native';
 
@@ -60,6 +61,20 @@ export const Spacing = {
   five: 32,
   six: 64,
 } as const;
+
+export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 60,
+        paddingHorizontal: Spacing.four,
+    },
+    title: {
+        marginBottom: Spacing.four,
+    },
+    subtitle: {
+        marginBottom: Spacing.three,
+    },
+});
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;

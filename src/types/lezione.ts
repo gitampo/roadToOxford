@@ -9,5 +9,4 @@ export type Lezione = {
     titolo: string;
     testo: string;
     livello: string;
-
 }

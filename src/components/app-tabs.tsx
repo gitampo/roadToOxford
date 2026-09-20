@@ -27,10 +27,6 @@ export default function AppTabs() {
           renderingMode="template"
         />
       </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="lezioni">
-        <NativeTabs.Trigger.Label>Lezioni</NativeTabs.Trigger.Label>
-      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }

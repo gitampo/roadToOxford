@@ -4,17 +4,32 @@
  * toccandone uno si apre la lezione corrispondente.
  */
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { styles } from "@/constants/theme";
+import { LEZIONI } from "@/data/lezioni";
+import { Link } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Lezioni() {
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-        <ThemedView style={{ flex: 1, paddingTop: 60, paddingHorizontal: Spacing.four }}>
-            <ThemedText type="title">Lezioni</ThemedText>
-        </ThemedView>
-        </SafeAreaView>
-    );    
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemedView style={styles.container}>
+        <ThemedText type="title" style={styles.title}>
+          Lezioni
+        </ThemedText>
+        {LEZIONI.map((lezione) => (
+          <Link
+            style={styles.subtitle}
+            key={lezione.id}
+            href={{ pathname: "/lezione/[id]", params: { id: lezione.id } }}
+          >
+            <ThemedText>
+              {lezione.livello} - {lezione.titolo}
+            </ThemedText>
+          </Link>
+        ))}
+      </ThemedView>
+    </SafeAreaView>
+  );
 }
