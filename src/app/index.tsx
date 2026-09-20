@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { Link } from "expo-router";
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -30,34 +31,14 @@ function getDevMenuHint() {
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+    <ThemedView style={{ flex: 1, paddingTop: Spacing.six, paddingHorizontal: Spacing.four, gap: Spacing.three }}>
+      <ThemedText type="title">Road To Oxford</ThemedText>
+      <Link href="/lezioni">
+        <ThemedText type="link">Vai alle lezioni</ThemedText>
+      </Link>
     </ThemedView>
+    </SafeAreaView>
   );
 }
 
