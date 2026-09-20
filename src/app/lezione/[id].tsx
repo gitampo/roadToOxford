@@ -17,7 +17,7 @@ export default function Dettagli() {
     <SafeAreaView style={{ flex: 1 }}>
       <ThemedView style={styles.container}>
         <ThemedText type="title" style={styles.title}>
-          Lezione {lezione.id} - {lezione.titolo}
+          Lezione {lezione.id} - {lezione.titolo} - {lezione.livello}
         </ThemedText>
       </ThemedView>
     </SafeAreaView>
