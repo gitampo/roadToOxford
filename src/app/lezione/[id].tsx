@@ -4,10 +4,12 @@ import { styles } from "@/constants/theme";
 import { LEZIONI } from "@/data/lezioni";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { QuoteCard } from "@/components/quote-card";
 
 export default function Dettagli() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const lezione = LEZIONI.find((l) => l.id == id);
+  const lezione = LEZIONI.find((l) => l.id === id);
+  const indice = LEZIONI.findIndex((l) => l.id === id);
 
   if (!lezione) {
     return <ThemedText>Lezione non trovata</ThemedText>;
@@ -17,8 +19,14 @@ export default function Dettagli() {
     <SafeAreaView style={{ flex: 1 }}>
       <ThemedView style={styles.container}>
         <ThemedText type="title" style={styles.title}>
-          Lezione {lezione.id} - {lezione.titolo} - {lezione.livello}
+          Lezione {indice + 1}
         </ThemedText>
+        <ThemedText type="subtitle" style={styles.subtitle}>
+            {lezione.titolo} - {lezione.livello}
+        </ThemedText>
+        <QuoteCard
+            citazione = {lezione.citazione}
+        />
       </ThemedView>
     </SafeAreaView>
   );

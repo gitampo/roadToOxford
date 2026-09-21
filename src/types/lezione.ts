@@ -4,9 +4,12 @@
  * e dalle schermate che la mostrano.
  */
 
+import { Citazione } from "./citazione";
+
 export type Lezione = {
     id: string;
     titolo: string;
     testo: string;
     livello: string;
+    citazione: Citazione;
 }
