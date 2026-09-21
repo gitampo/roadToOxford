@@ -74,6 +74,9 @@ export const styles = StyleSheet.create({
     subtitle: {
         marginBottom: Spacing.four,
     },
+    button: {
+      marginBottom: 5,
+    }
 });
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
