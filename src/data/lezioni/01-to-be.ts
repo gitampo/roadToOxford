@@ -70,7 +70,8 @@ I am right. — Ho ragione.
   livello: "[A1]",
   citazione: {
     testo: "I am me. I am not you.",
-    fonte: " Rei Ayanami, Evangelion",
+    fonte: "Rei Ayanami, Evangelion",
     traduzione: "Io sono io. Io non sono te.",
+    immagine: require("@/assets/images/textures/rei.jpeg"),
   },
 };
