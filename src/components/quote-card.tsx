@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderColor: "#ffec9834",
     borderWidth: 1,
     borderRadius: 12,
-    padding: 10,
+    padding: 15,
     minHeight: 170,
     justifyContent: "space-between",
     marginBottom: Spacing.five,
@@ -37,20 +37,17 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     fontSize: 16,
     color: "#ffe100",
+    marginBottom: -Spacing.five,
+    alignSelf: 'flex-start'
   },
   fonte: {
     fontSize: 13,
-    marginTop: 8,
     alignSelf: "flex-end",
     color: "#ffffff",
   },
   texture: {
     borderRadius: 12,
     opacity: 0.25,
-  },
-  immagine: {
-    ...StyleSheet.absoluteFill,
-    opacity: 0,
   },
   traduzione: {
     color: "#ffffff",
