@@ -1,17 +1,17 @@
 import { Spacing } from "@/constants/theme";
 import { useState } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
-import Animated, {FadeIn, FadeOut } from "react-native-reanimated"
-
 
 type Props = {
   titolo: string;
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
-export function Sezione({ titolo, children }: Props) {
+export function Sezione({ titolo, children, style }: Props) {
   const [aperta, setAperta] = useState(false);
 
   return (
@@ -20,8 +20,11 @@ export function Sezione({ titolo, children }: Props) {
         <ThemedText>{titolo}</ThemedText>
       </Pressable>
       {aperta && (
-        <Animated.View entering={FadeIn.duration(250)} exiting={FadeOut.duration(200)}>
-            {children}
+        <Animated.View
+          entering={FadeIn.duration(250)}
+          exiting={FadeOut.duration(100)}
+        >
+          {children}
         </Animated.View>
       )}
     </ThemedView>
