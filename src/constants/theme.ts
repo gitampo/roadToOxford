@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
         marginBottom: Spacing.four,
     },
     subtitle: {
-        marginBottom: Spacing.three,
+        marginBottom: Spacing.four,
     },
 });
 

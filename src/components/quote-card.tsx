@@ -1,6 +1,7 @@
 import { Citazione } from "@/types/citazione";
 import { ImageBackground, StyleSheet } from "react-native";
 import { ThemedText } from "./themed-text";
+import { Spacing } from "@/constants/theme";
 
 type Props = {
   citazione: Citazione;
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     borderColor: "#ffec9884",
     borderRadius: 5,
     padding: 10,
-    marginTop: 10,
+    marginBottom: Spacing.five,
   },
   testo: {
     fontStyle: "italic",
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 8,
     alignSelf: "flex-end",
-    color: "#fefbfb",
+    color: "#ffffff",
   },
   texture: { borderRadius: 5, opacity: 0.25 },
 });

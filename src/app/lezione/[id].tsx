@@ -24,11 +24,14 @@ export default function Dettagli() {
                 Lezione {indice + 1}
             </ThemedText>
             <ThemedText type="subtitle" style={styles.subtitle}>
-                {lezione.titolo} - {lezione.livello}
+                {lezione.livello} - {lezione.titolo}
             </ThemedText>
             <QuoteCard
                 citazione = {lezione.citazione}
             />
+            <ThemedText style={styles.subtitle}>
+                {lezione.testo}
+            </ThemedText>
         </ThemedView>
         </SafeAreaView>
     </ScrollView>
