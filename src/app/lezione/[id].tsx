@@ -5,6 +5,7 @@ import { LEZIONI } from "@/data/lezioni";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { QuoteCard } from "@/components/quote-card";
+import { ScrollView } from "react-native";
 
 export default function Dettagli() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -16,18 +17,20 @@ export default function Dettagli() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={styles.container}>
-        <ThemedText type="title" style={styles.title}>
-          Lezione {indice + 1}
-        </ThemedText>
-        <ThemedText type="subtitle" style={styles.subtitle}>
-            {lezione.titolo} - {lezione.livello}
-        </ThemedText>
-        <QuoteCard
-            citazione = {lezione.citazione}
-        />
-      </ThemedView>
-    </SafeAreaView>
+    <ScrollView style={ { flex: 1} } >
+        <SafeAreaView style={{ flex: 1 }}>
+        <ThemedView style={styles.container}>
+            <ThemedText type="title" style={styles.title}>
+                Lezione {indice + 1}
+            </ThemedText>
+            <ThemedText type="subtitle" style={styles.subtitle}>
+                {lezione.titolo} - {lezione.livello}
+            </ThemedText>
+            <QuoteCard
+                citazione = {lezione.citazione}
+            />
+        </ThemedView>
+        </SafeAreaView>
+    </ScrollView>
   );
 }
