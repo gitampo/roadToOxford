@@ -31,10 +31,10 @@ export default function Dettagli() {
           <Sezione titolo="Teoria">
             <ThemedText>{lezione.testo}</ThemedText>
           </Sezione>
-          <Sezione titolo="Quiz" >
+          <Sezione titolo="Quiz">
             <ThemedText>{lezione.testo}</ThemedText>
           </Sezione>
-          <Sezione titolo="Scrivi un testo e l'IA te lo correggerà!" >
+          <Sezione titolo="Scrivi un testo e l'IA te lo correggerà!">
             <ThemedText>{lezione.testo}</ThemedText>
           </Sezione>
         </ThemedView>

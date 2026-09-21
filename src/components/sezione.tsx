@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
+import Animated, {FadeIn, FadeOut } from "react-native-reanimated"
+
 
 type Props = {
   titolo: string;
@@ -17,7 +19,11 @@ export function Sezione({ titolo, children }: Props) {
       <Pressable onPress={() => setAperta((a) => !a)}>
         <ThemedText>{titolo}</ThemedText>
       </Pressable>
-      {aperta && children}
+      {aperta && (
+        <Animated.View entering={FadeIn.duration(250)} exiting={FadeOut.duration(200)}>
+            {children}
+        </Animated.View>
+      )}
     </ThemedView>
   );
 }
