@@ -5,8 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Globo } from "@/components/globo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import VoceMenu from "@/components/voceMenu";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
-import { Link } from "expo-router";
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -29,20 +29,14 @@ function getDevMenuHint() {
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView
-        style={{
-          flex: 1,
-          paddingTop: Spacing.six,
-          paddingHorizontal: Spacing.four,
-          gap: Spacing.three,
-        }}
-      >
-        <ThemedText type="title">Road To Oxford</ThemedText>
-        <Link href="/lezioni">
-          <ThemedText type="link">Vai alle lezioni</ThemedText>
-        </Link>
-        <Globo></Globo>
+    <SafeAreaView style={styles.safeArea}>
+      <ThemedView style={styles.page}>
+        <ThemedText type="title" style={styles.title}>
+          Road To Oxford
+        </ThemedText>
+        <Globo style={styles.globeStyle}></Globo>
+        <VoceMenu voce="Vai alle lezioni" href="/lezioni" />
+        <VoceMenu voce="Ripassa i paradigmi" href="/paradigmi" />
       </ThemedView>
     </SafeAreaView>
   );
@@ -56,11 +50,16 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: "center",
+    paddingHorizontal: Spacing.one,
     gap: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
+  },
+  page: {
+    flex: 1,
+    paddingTop: Spacing.six,
+    paddingHorizontal: Spacing.four,
+    gap: Spacing.three,
   },
   heroSection: {
     alignItems: "center",
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
+    marginBottom: 10,
   },
   code: {
     textTransform: "uppercase",
@@ -81,5 +81,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
+  },
+  globeStyle: {
+    alignItems: "center",
+    marginBottom: 10,
   },
 });

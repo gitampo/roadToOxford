@@ -1,11 +1,13 @@
 import { useEffect } from "react";
+import { StyleProp, ViewStyle } from "react-native";
 import Animated, {
-    Easing,
-    useAnimatedProps,
-    useSharedValue,
-    withRepeat,
-    withTiming,
+  Easing,
+  useAnimatedProps,
+  useSharedValue,
+  withRepeat,
+  withTiming,
 } from "react-native-reanimated";
+import { View } from "react-native";
 import Svg, { Circle, Ellipse, G, Path } from "react-native-svg";
 
 const R = 90;
@@ -21,13 +23,16 @@ const PARALLELI = [
   { cy: 160, rx: 65, ry: 8, w: 0.4 },
 ];
 
+type Props = { style?: StyleProp<ViewStyle> };
+
 // posizione approssimativa di Oxford sulla sagoma
 const OXFORD = { cx: 99, cy: 135 };
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-export function Globo() {
+export function Globo({style}: Props) {
   return (
+    <View style={style}>
     <Svg width={200} height={200} viewBox="0 0 200 200">
       <Circle
         cx={100}
@@ -81,6 +86,7 @@ export function Globo() {
 
       <PuntoOxford />
     </Svg>
+    </View>
   );
 }
 

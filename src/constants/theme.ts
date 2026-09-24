@@ -62,7 +62,7 @@ export const Spacing = {
   six: 64,
 } as const;
 
-export const styles = StyleSheet.create({
+export const constants = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 60,

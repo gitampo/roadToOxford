@@ -6,7 +6,7 @@
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { styles } from "@/constants/theme";
+import { constants } from "@/constants/theme";
 import { LEZIONI } from "@/data/lezioni";
 import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,13 +14,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Lezioni() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={styles.container}>
-        <ThemedText type="title" style={styles.title}>
+      <ThemedView style={constants.container}>
+        <ThemedText type="title" style={constants.title}>
           Lezioni
         </ThemedText>
         {LEZIONI.map((lezione) => (
           <Link
-            style={styles.subtitle}
+            style={constants.subtitle}
             key={lezione.id}
             href={{ pathname: "/lezione/[id]", params: { id: lezione.id } }}
           >

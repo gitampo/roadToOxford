@@ -2,7 +2,7 @@ import { QuoteCard } from "@/components/quote-card";
 import { Sezione } from "@/components/sezione";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { styles } from "@/constants/theme";
+import { constants } from "@/constants/theme";
 import { LEZIONI } from "@/data/lezioni";
 import { useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native";
@@ -20,11 +20,11 @@ export default function Dettagli() {
   return (
     <ScrollView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
-        <ThemedView style={styles.container}>
-          <ThemedText type="title" style={styles.title}>
+        <ThemedView style={constants.container}>
+          <ThemedText type="title" style={constants.title}>
             Lezione {indice + 1}
           </ThemedText>
-          <ThemedText type="subtitle" style={styles.subtitle}>
+          <ThemedText type="subtitle" style={constants.subtitle}>
             {lezione.livello} - {lezione.titolo}
           </ThemedText>
           <QuoteCard citazione={lezione.citazione} />
