@@ -35,7 +35,7 @@ export default function HomeScreen() {
           Road To Oxford
         </ThemedText>
         <Globo style={styles.globeStyle}></Globo>
-        <VoceMenu voce="Vai alle lezioni" href="/lezioni" />
+        <VoceMenu voce="Vai alle lezioni" href="/lezioni"/>
         <VoceMenu voce="Paradigmi dei verbi irregolari" href="/paradigmi" />
       </ThemedView>
     </SafeAreaView>

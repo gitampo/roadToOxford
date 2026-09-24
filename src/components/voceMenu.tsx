@@ -14,7 +14,7 @@ export default function VoceMenu({ voce, href, style }: Props) {
   return (
     <ThemedView style={[styles.riquadro, style]}>
       <Link href={href}>
-          <ThemedText type="link">{voce}</ThemedText>
+          <ThemedText type="link" style={styles.testoVoce}>{voce}</ThemedText>
       </Link>
       </ThemedView>
   );
@@ -23,9 +23,12 @@ export default function VoceMenu({ voce, href, style }: Props) {
 const styles = StyleSheet.create({
   riquadro: {
     borderWidth: 1,
-    borderColor: "#ffffff",
-    borderRadius: 5,
-    padding: 5,
+    borderColor: "#4da3ff",
+    borderRadius: 12,
+    padding: 20,
     alignItems: "center",
   },
+  testoVoce: {
+    fontSize: 20,
+  }
 });

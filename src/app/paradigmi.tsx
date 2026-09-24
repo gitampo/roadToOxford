@@ -8,8 +8,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const COLONNE = [
   { titolo: "Italiano", flex: 2, campo: "traduzione" },
   { titolo: "Present", flex: 1.6, campo: "present" },
-  { titolo: "Past", flex: 1.6, campo: "past_simple" },
-  { titolo: "Participle", flex: 1.5, campo: "past_participle" },
+  { titolo: "P. Simple", flex: 1.6, campo: "past_simple" },
+  { titolo: "P. Participle", flex: 1.8, campo: "past_participle" },
 ] as const;
 
 export default function Paradigmi() {
