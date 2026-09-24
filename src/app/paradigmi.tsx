@@ -2,59 +2,72 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { constants } from "@/constants/theme";
 import { PARADIGMI } from "@/data/paradigmi";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const COLONNE = [
+  { titolo: "Italiano", flex: 2, campo: "traduzione" },
+  { titolo: "Present", flex: 1.6, campo: "present" },
+  { titolo: "Past", flex: 1.6, campo: "past_simple" },
+  { titolo: "Participle", flex: 1.5, campo: "past_participle" },
+] as const;
 
 export default function Paradigmi() {
   return (
-    <ScrollView>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ThemedView style={constants.container}>
-          <ThemedText type="title" style={constants.title}>
-            Paradigmi
-          </ThemedText>
-          <ThemedText type="subtitle" style={constants.subtitle}>
-            Lista verbi irregolari
-          </ThemedText>
-          <ThemedView style={styles.riga}>
-            <ThemedText style={styles.intestazione}>Italiano</ThemedText>
-            <ThemedText style={styles.intestazione}>Present</ThemedText>
-            <ThemedText style={styles.intestazione}>Past simple</ThemedText>
-            <ThemedText style={styles.intestazione}>Past Participle</ThemedText>
-          </ThemedView>
-          {PARADIGMI.map((p) => (
-            <ThemedView key={p.present} style={styles.riga}>
-              <ThemedText style={styles.cella}>{p.traduzione}</ThemedText>
-              <ThemedText style={styles.cella}>{p.present}</ThemedText>
-              <ThemedText style={styles.cella}>{p.past_simple}</ThemedText>
-              <ThemedText style={styles.cella}>{p.past_participle}</ThemedText>
-            </ThemedView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemedView style={constants.container}>
+        <ThemedText type="title" style={constants.title}>
+          Verbi irregolari
+        </ThemedText>
+        <View style={styles.intestazione}>
+          {COLONNE.map((c) => (
+            <ThemedText key={c.titolo} style={[styles.testoIntestazione, { flex: c.flex }]}>
+              {c.titolo}
+            </ThemedText>
           ))}
-        </ThemedView>
-      </SafeAreaView>
-    </ScrollView>
+        </View>
+
+        <ScrollView contentContainerStyle={styles.corpo}>
+          {PARADIGMI.map((p) => (
+            <View key={p.present} style={styles.riga}>
+              {COLONNE.map((c) => (
+                <ThemedText key={c.campo} style={[styles.cella, { flex: c.flex }]}>
+                  {p[c.campo]}
+                </ThemedText>
+              ))}
+            </View>
+          ))}
+        </ScrollView>
+      </ThemedView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  intestazione: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#4da3ff",
+    paddingBottom: 6,
+    marginBottom: 4,
+  },
+  testoIntestazione: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#4da3ff",
+    textTransform: "uppercase",
+  },
+  corpo: {
+    paddingBottom: 40,
+  },
   riga: {
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#333",
+    borderBottomColor: "#22303d",
+    paddingVertical: 8,
   },
   cella: {
-    flex: 1,
-    borderRightWidth: 1,
-    borderRightColor: "#333",
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-  },
-  intestazione: {
-    flex: 1,
-    fontWeight: "bold",
-    borderRightWidth: 1,
-    borderRightColor: "#333",
-    paddingVertical: 6,
-    paddingHorizontal: 5,
+    fontSize: 14,
+    paddingRight: 6,
   },
 });
