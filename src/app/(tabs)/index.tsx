@@ -32,11 +32,20 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.safeArea}>
       <ThemedView style={styles.page}>
         <ThemedText type="title" style={styles.title}>
-          Road To Oxford
+          ROAD{"\n"}TO{"\n"}ENGLAND
         </ThemedText>
-        <Globo style={styles.globeStyle}></Globo>
-        <VoceMenu voce="Vai alle lezioni" href="/lezioni"/>
+        <ThemedView style={{ flexDirection: "row", alignItems: "center" }}>
+          <ThemedView style={{ width: "50%", borderRadius: 12 }}>
+            <ThemedText style={styles.subtitle}>
+              Learn English from absolute beginner to holding a real
+              conversation in England.
+            </ThemedText>
+          </ThemedView>
+          <Globo style={styles.globeStyle}></Globo>
+        </ThemedView>
+        <VoceMenu voce="Vai alle lezioni" href="/lezioni" />
         <VoceMenu voce="Paradigmi dei verbi irregolari" href="/paradigmi" />
+        <VoceMenu voce="Appunti" href="/lezioni" />
       </ThemedView>
     </SafeAreaView>
   );
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.one,
     gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
+    paddingBottom: BottomTabInset,
     maxWidth: MaxContentWidth,
   },
   page: {
@@ -60,6 +69,7 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.six,
     paddingHorizontal: Spacing.four,
     gap: Spacing.three,
+    backgroundColor: "#000000",
   },
   heroSection: {
     alignItems: "center",
@@ -69,8 +79,16 @@ const styles = StyleSheet.create({
     gap: Spacing.four,
   },
   title: {
-    textAlign: "center",
+    textAlign: "left",
     marginBottom: 10,
+    fontFamily: "PlayfairDisplay_700Bold",
+    color: "#ffffff",
+  },
+  subtitle: {
+    alignItems: "flex-start",
+    fontFamily: "Inter_400Regular",
+    letterSpacing: 2,
+    opacity: 1,
   },
   code: {
     textTransform: "uppercase",
@@ -83,7 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.four,
   },
   globeStyle: {
-    alignItems: "center",
     marginBottom: 10,
   },
 });
