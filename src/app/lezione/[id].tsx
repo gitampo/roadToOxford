@@ -22,15 +22,10 @@ export default function Dettagli() {
       <SafeAreaView style={{ flex: 1 }}>
         <ThemedView style={constants.container}>
           <ThemedText type="title" style={constants.title}>
-            Lezione {indice + 1}
-          </ThemedText>
-          <ThemedText type="subtitle" style={constants.subtitle}>
-            {lezione.livello} - {lezione.titolo}
+            {lezione.livello} {lezione.titolo}
           </ThemedText>
           <QuoteCard citazione={lezione.citazione} />
-          <Sezione titolo="Teoria">
             <ThemedText>{lezione.testo}</ThemedText>
-          </Sezione>
           <Sezione titolo="Quiz">
             <ThemedText>{lezione.testo}</ThemedText>
           </Sezione>

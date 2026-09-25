@@ -5,6 +5,7 @@
 
 import '@/global.css';
 import { StyleSheet } from 'react-native';
+import { useFonts, PlayfairDisplay_700Bold, PlayfairDisplay_600SemiBold } from '@expo-google-fonts/playfair-display';
 
 import { Platform } from 'react-native';
 
@@ -70,6 +71,7 @@ export const constants = StyleSheet.create({
     },
     title: {
         marginBottom: Spacing.four,
+        fontFamily: "PlayfairDisplay_600SemiBold"
     },
     subtitle: {
         marginBottom: Spacing.four,

@@ -19,6 +19,9 @@ export default function Paradigmi() {
         <ThemedText type="title" style={constants.title}>
           Verbi irregolari
         </ThemedText>
+        <ThemedText style={constants.subtitle}>
+          Ti consiglio di leggere e ripetere ad alta voce tutti questi verbi finchè non li saprai a memoria.
+        </ThemedText>
         <View style={styles.intestazione}>
           {COLONNE.map((c) => (
             <ThemedText key={c.titolo} style={[styles.testoIntestazione, { flex: c.flex }]}>

@@ -6,6 +6,7 @@ import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import { Inter_400Regular, Inter_600SemiBold } from "@expo-google-fonts/inter";
 import {
   PlayfairDisplay_700Bold,
+  PlayfairDisplay_600SemiBold,
   useFonts,
 } from "@expo-google-fonts/playfair-display";
 import { useEffect } from "react";
@@ -18,6 +19,7 @@ export default function TabLayout() {
     PlayfairDisplay_700Bold,
     Inter_400Regular,
     Inter_600SemiBold,
+    PlayfairDisplay_600SemiBold,
   });
 
   useEffect(() => {
