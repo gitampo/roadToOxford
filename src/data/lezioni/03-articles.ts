@@ -1,7 +1,7 @@
 import { Lezione } from "@/types/lezione";
 
 export const articles: Lezione = {
-  id: "2",
+  id: "3",
   titolo: "Articoli: a / an / the",
   testo: `L'inglese ha solo tre articoli: a, an e the. Sono molti meno di quelli italiani, e non cambiano né con il genere né con il numero. Ma si usano con regole diverse dalle nostre — ed è lì che si sbaglia.
 

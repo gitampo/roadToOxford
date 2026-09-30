@@ -1,7 +1,7 @@
 import { Lezione } from "@/types/lezione";
 
 export const pluralNouns: Lezione = {
-  id: "3",
+  id: "4",
   titolo: "Il plurale dei sostantivi",
   testo: `In inglese il plurale si forma quasi sempre aggiungendo -s. Le eccezioni sono poche, ma riguardano proprio le parole che si usano di più. In questa lezione vediamo tutte le regole, dalle più semplici alle più sottili.
 

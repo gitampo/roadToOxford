@@ -21,3 +21,6 @@ Meglio ancora se il livello segue le lezioni completate: se hai fatto fino al Pr
 2. La correzione separata dalla conversazione. Se l'IA corregge ogni errore dentro il dialogo, la conversazione muore. Il modo giusto: l'IA risponde normalmente, e sotto il tuo messaggio compare una nota discreta — "Hai scritto I have 20 years → I'm 20". Tecnicamente, chiedi al modello un JSON con due campi, risposta e correzione.
 
 3. Una situazione, non una chat libera. "Parla con me" blocca chiunque. "Sei al pub, ordina da bere" dà uno scopo. Qui si aggancia l'idea delle situazioni a Oxford: ogni livello ha i suoi scenari.
+
+
+#4da3ff

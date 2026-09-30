@@ -45,7 +45,7 @@ export default function HomeScreen() {
         </ThemedView>
         <VoceMenu voce="Vai alle lezioni" href="/lezioni" />
         <VoceMenu voce="Paradigmi dei verbi irregolari" href="/paradigmi" />
-        <VoceMenu voce="Metitti alla Prova" href="/lezioni" />
+        <VoceMenu voce="Testa il tuo livello" href="/lezioni" />
       </ThemedView>
     </SafeAreaView>
   );

@@ -23,7 +23,7 @@ export default function VoceMenu({ voce, href, style }: Props) {
 const styles = StyleSheet.create({
   riquadro: {
     borderWidth: 1,
-    borderColor: "#4da3ff",
+    borderColor: "#d85e0c",
     borderRadius: 12,
     padding: 15,
     alignItems: "center",

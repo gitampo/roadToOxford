@@ -1,8 +1,9 @@
 import { Lezione } from "@/types/lezione"
-import { toBe } from "./01-to-be";
-import { articles } from "./02-articles";
-import { pluralNouns } from "./03-plural-nouns";
+import { pronouns } from "./01-pronouns";
+import { toBe } from "./02-to-be";
+import { articles } from "./03-articles";
+import { pluralNouns } from "./04-plural-nouns";
 
 export const LEZIONI: Lezione [] = [
-    toBe, articles, pluralNouns
+    pronouns, toBe, articles, pluralNouns
 ];
