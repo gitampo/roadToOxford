@@ -2,6 +2,8 @@ import { Lezione } from "@/types/lezione";
 export const pronouns: Lezione = {
   id: "1",
   titolo: "Pronomi Personali",
+  descrizione: "Dire chi fa l'azione: io, tu, lui, lei…",
+  chiavi: "pronomi personali, soggetto",
   livello: "[A1]",
   citazione: {
     testo: "I am me. I am not you.",

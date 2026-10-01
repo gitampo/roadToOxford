@@ -1,6 +1,7 @@
 import { useTheme } from "@/hooks/use-theme";
 import { Esempio } from "@/types/lezione";
 import { StyleSheet } from "react-native";
+import TestoConRimandi from "./testoConRimandi";
 import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
 
@@ -32,11 +33,10 @@ export default function CardEsempi({ esempi }: Props) {
             </ThemedText>
           ) : (
             esempio.it && (
-              <ThemedText
+              <TestoConRimandi
+                testo={esempio.it}
                 style={[styles.italiano, { color: theme.textSecondary }]}
-              >
-                {esempio.it}
-              </ThemedText>
+              />
             )
           )}
         </ThemedView>

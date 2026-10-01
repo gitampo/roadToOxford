@@ -2,6 +2,8 @@ import { Lezione } from "@/types/lezione";
 export const toBe: Lezione = {
   id: "2",
   titolo: "Il Verbo Essere",
+  descrizione: "Presentarsi: nome, età, provenienza",
+  chiavi: "verbo essere",
   livello: "[A1]",
   citazione: {
     testo: "To be, or not to be, that is the question.",
@@ -90,7 +92,7 @@ export const toBe: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Non confonderla con la 's del possesso (Mark's car), che vedremo nella lezione 5.",
+            "Non confonderla con la 's del possesso (Mark's car), che vedremo nella lezione 5{6}.",
         },
       ],
     },

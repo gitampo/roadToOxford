@@ -1,5 +1,6 @@
 import { useTheme } from "@/hooks/use-theme";
 import { StyleSheet } from "react-native";
+import TestoConRimandi from "./testoConRimandi";
 import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
 
@@ -18,9 +19,10 @@ export default function Tabella({ righe }: Props) {
       {righe.map(([sinistra, destra], i) => (
         <ThemedView key={i} type="backgroundElement" style={styles.riga}>
           <ThemedText style={styles.sinistra}>{sinistra}</ThemedText>
-          <ThemedText style={[styles.destra, { color: theme.textSecondary }]}>
-            {destra}
-          </ThemedText>
+          <TestoConRimandi
+            testo={destra}
+            style={[styles.destra, { color: theme.textSecondary }]}
+          />
         </ThemedView>
       ))}
     </ThemedView>

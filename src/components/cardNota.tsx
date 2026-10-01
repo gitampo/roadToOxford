@@ -1,6 +1,6 @@
 import { useTheme } from "@/hooks/use-theme";
 import { StyleSheet } from "react-native";
-import { ThemedText } from "./themed-text";
+import TestoConRimandi from "./testoConRimandi";
 import { ThemedView } from "./themed-view";
 
 type Props = {
@@ -13,9 +13,10 @@ export default function CardNota({ testo }: Props) {
 
   return (
     <ThemedView style={[styles.card, { borderColor: theme.backgroundSelected }]}>
-      <ThemedText style={[styles.testo, { color: theme.textSecondary }]}>
-        {testo}
-      </ThemedText>
+      <TestoConRimandi
+        testo={testo}
+        style={[styles.testo, { color: theme.textSecondary }]}
+      />
     </ThemedView>
   );
 }

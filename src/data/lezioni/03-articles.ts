@@ -3,241 +3,8 @@ import { Lezione } from "@/types/lezione";
 export const articles: Lezione = {
   id: "3",
   titolo: "Articoli: a / an / the",
-  testo: `L'inglese ha solo tre articoli: a, an e the. Sono molti meno di quelli italiani, e non cambiano né con il genere né con il numero. Ma si usano con regole diverse dalle nostre — ed è lì che si sbaglia.
-
-A E AN — L'ARTICOLO INDETERMINATIVO
-
-Corrispondono a "un, uno, una, un'". Si usano con un sostantivo singolare numerabile, quando parli di una cosa qualsiasi o la nomini per la prima volta:
-
-I have a dog.
-She eats an apple.
-There's a problem.
-
-A/AN DIPENDE DAL SUONO, NON DALLA LETTERA
-
-a + suono di consonante: a car, a house, a book
-an + suono di vocale: an egg, an idea, an orange
-
-La regola riguarda il suono con cui si pronuncia la parola, non la lettera con cui si scrive. Da qui i casi che sembrano strani:
-
-a university — si pronuncia "iuniversiti": inizia con un suono di consonante
-a European — si pronuncia "iuropian"
-a one-way ticket — "one" si pronuncia "uan"
-
-an hour — la h è muta, si pronuncia "auer"
-an honest man — "onest"
-an MBA — la lettera M si pronuncia "em"
-an FBI agent — la lettera F si pronuncia "ef"
-
-Il trucco: leggi la parola ad alta voce. Se il primo suono è una vocale, an.
-
-A/AN SOLO CON IL SINGOLARE NUMERABILE
-
-A/an significa "uno", quindi non si usa:
-
-con i plurali: a dogs — sbagliato. Si dice dogs, oppure some dogs.
-con i non numerabili: a water, an advice — sbagliato. Si dice water, some advice, a piece of advice.
-
-A/AN CON I MESTIERI
-
-In italiano diciamo "sono studente", "fa l'ingegnere". In inglese l'articolo è obbligatorio:
-
-I'm a student.
-She's an engineer.
-He works as a waiter.
-
-"I'm student" è uno degli errori più frequenti.
-
-A/AN PER DESCRIVERE
-
-Quando descrivi una caratteristica di qualcuno, si usa a/an anche dove l'italiano mette "il" o niente:
-
-She has a big nose. — Ha il naso grande.
-He has a beautiful voice. — Ha una bella voce.
-
-E con molti disturbi di salute:
-
-I have a cold. — Ho il raffreddore.
-I have a headache. — Ho mal di testa.
-
-A/AN NELLE ESCLAMAZIONI
-
-In italiano diciamo "che bella giornata!" senza articolo. In inglese l'articolo ci vuole:
-
-What a beautiful day! — Che bella giornata!
-What a surprise! — Che sorpresa!
-What an idea! — Che idea!
-
-"What beautiful day" è sbagliato. Con i plurali e i non numerabili, invece, niente articolo: What beautiful flowers! What good news!
-
-A/AN COME "OGNI"
-
-Nelle frequenze e nei prezzi, a/an significa "ogni" o "al":
-
-twice a day — due volte al giorno
-three times a week — tre volte alla settimana
-100 km an hour — 100 km all'ora
-5 pounds a kilo — 5 sterline al chilo
-
-È il senso di "An apple a day keeps the doctor away": una mela ogni giorno.
-
-A O ONE?
-
-A e one significano entrambi "uno", ma one si usa quando il numero è importante:
-
-I have a car. — ho una macchina (e basta)
-I have one car, not two. — ne ho una sola, non due
-
-THE — L'ARTICOLO DETERMINATIVO
-
-Corrisponde a "il, lo, la, i, gli, le", ed è uno solo per tutti:
-
-the book, the books, the girl, the girls
-
-Si usa quando è chiaro di QUALE cosa parli.
-
-Perché l'hai già nominata:
-
-I have a dog. The dog is black.
-(prima volta: a — seconda volta: the, perché ormai sappiamo quale)
-
-Perché il contesto la rende evidente:
-
-Close the door, please. — la porta di questa stanza
-Where's the bathroom? — il bagno di questa casa
-
-Perché ne esiste una sola:
-
-the sun, the moon, the sky, the world, the internet
-
-Perché la frase la definisce:
-
-The man in the red shirt is my brother.
-The book you gave me is great.
-
-THE CON SUPERLATIVI E ORDINALI
-
-Il superlativo e i numeri ordinali indicano una cosa unica, quindi vogliono sempre the:
-
-the best film — il film migliore
-the tallest building — l'edificio più alto
-the first time — la prima volta
-the last day — l'ultimo giorno
-
-THE CON GLI STRUMENTI, NON CON GLI SPORT
-
-I play the piano. — Suono il pianoforte.
-She plays the guitar. — Suona la chitarra.
-
-I play football. — Gioco a calcio.
-He plays tennis. — Gioca a tennis.
-
-THE + AGGETTIVO PER INDICARE UN GRUPPO
-
-the rich — i ricchi
-the poor — i poveri
-the young — i giovani
-the elderly — gli anziani
-
-Il verbo va al plurale: The rich are getting richer.
-
-Lo stesso con molte nazionalità: the Italians, the British, the French.
-
-COME SI PRONUNCIA THE
-
-"De" davanti a suono di consonante: the car, the university
-"Di" davanti a suono di vocale: the apple, the hour
-
-E "di" anche quando vuoi dare enfasi: "It's THE place to be" — è IL posto dove stare.
-
-NESSUN ARTICOLO
-
-Quando parli di qualcosa IN GENERALE, con plurali o non numerabili, l'inglese non mette l'articolo:
-
-I like dogs. — Mi piacciono i cani.
-Life is beautiful. — La vita è bella.
-Coffee is expensive. — Il caffè è caro.
-Music makes me happy. — La musica mi rende felice.
-
-Niente articolo anche con:
-
-i pasti: have breakfast, lunch is ready
-le lingue: I speak English
-le materie: I study history
-i giorni, i mesi, le feste: on Monday, in May, at Christmas
-i mezzi di trasporto con by: by car, by train, by plane
-i titoli seguiti dal nome: Mr Smith, Queen Elizabeth, Doctor Brown
-
-Ma senza nome il titolo vuole the: the Queen, the President, the doctor.
-
-LUOGHI: CON THE O SENZA?
-
-È la parte più irregolare, ma le regole principali sono queste.
-
-Senza articolo:
-
-la maggior parte dei paesi e delle città: Italy, England, London
-continenti: Europe, Asia
-singole montagne e singoli laghi: Mount Everest, Lake Como
-strade, piazze e parchi: Oxford Street, Hyde Park
-stazioni e aeroporti: Victoria Station, Heathrow
-
-Con the:
-
-paesi con nomi plurali o che contengono Kingdom, States, Republic: the UK, the USA, the Netherlands, the Czech Republic
-fiumi, mari e oceani: the Thames, the Mediterranean, the Atlantic
-catene montuose e gruppi di isole: the Alps, the Canaries
-musei, teatri, alberghi: the British Museum, the Globe, the Ritz
-giornali: The Times, The Guardian
-
-Un caso che ti riguarda: si dice Oxford University, senza articolo, ma the University of Oxford. Quando compare "of", di solito serve the.
-
-SCUOLA, LETTO, CHIESA: CON O SENZA THE?
-
-Con alcuni luoghi, l'articolo cambia il significato. Senza the parli della funzione; con the parli dell'edificio:
-
-I go to school. — vado a scuola (come studente)
-I go to the school. — vado alla scuola (all'edificio, per esempio per parlare con un professore)
-
-Lo stesso con: bed, church, hospital, prison, university, work.
-
-She's in hospital. — è ricoverata
-She's at the hospital. — è all'ospedale (magari in visita)
-
-"Home" non vuole mai l'articolo né la preposizione "to":
-
-I'm going home. — Vado a casa.
-I'm at home. — Sono a casa.
-
-L'ERRORE TIPICO DEGLI ITALIANI: L'ARTICOLO NELLE GENERALIZZAZIONI
-
-L'italiano mette l'articolo quando generalizza, l'inglese no.
-
-The life is beautiful. — sbagliato
-Life is beautiful. — corretto
-
-The dogs are loyal. — significa "quei cani specifici sono fedeli"
-Dogs are loyal. — significa "i cani, in generale, sono fedeli"
-
-Prima di scrivere "the", chiediti: sto parlando di una cosa precisa, o di tutte le cose di quel tipo? Se è la seconda, niente articolo.
-
-ALTRI ERRORI TIPICI
-
-L'articolo con i possessivi. In italiano diciamo "la mia macchina", in inglese il possessivo sostituisce l'articolo:
-
-the my car — sbagliato
-my car — corretto
-
-Next e last. In italiano "la settimana prossima", "l'anno scorso"; in inglese niente articolo:
-
-next week, last year, next Monday
-
-"The next week" esiste, ma significa "la settimana successiva" rispetto a un altro momento, non "la prossima settimana" rispetto a oggi.
-
-Gli sport:
-
-I play the football. — sbagliato
-I play football. — corretto`,
+  descrizione: "Nominare persone e cose",
+  chiavi: "articoli, determinativo, indeterminativo",
   livello: "[A1]",
   citazione: {
     testo: "An apple a day keeps the doctor away.",
@@ -245,4 +12,372 @@ I play football. — corretto`,
     traduzione: "Una mela al giorno toglie il medico di torno.",
     immagine: require("@/assets/images/textures/doc.jpg"),
   },
+  riquadri: [
+    {
+      titolo: "A E AN",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "L'inglese ha solo tre articoli: a, an e the. Non cambiano né con il genere né con il numero, ma si usano con regole diverse dalle nostre.",
+        },
+        {
+          tipo: "testo",
+          testo:
+            'A e an corrispondono a "un, uno, una, un\'". Si usano con un sostantivo singolare numerabile, quando parli di una cosa qualsiasi o la nomini per la prima volta:',
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "I have a dog.", it: "Ho un cane." },
+            { en: "She eats an apple.", it: "Mangia una mela." },
+            { en: "There's a problem.", it: "C'è un problema." },
+          ],
+        },
+      ],
+    },
+    {
+      titolo: "A O AN? CONTA IL SUONO",
+      blocchi: [
+        {
+          tipo: "tabella",
+          righe: [
+            ["a + suono di consonante", "a car, a house, a book"],
+            ["an + suono di vocale", "an egg, an idea, an orange"],
+          ],
+        },
+        {
+          tipo: "testo",
+          testo:
+            "La regola riguarda il suono con cui si pronuncia la parola, non la lettera con cui si scrive. Da qui i casi che sembrano strani:",
+        },
+        {
+          tipo: "tabella",
+          righe: [
+            ["a university", 'si pronuncia "iuniversiti"'],
+            ["a European", 'si pronuncia "iuropian"'],
+            ["a one-way ticket", 'one si pronuncia "uan"'],
+            ["an hour", 'la h è muta: "auer"'],
+            ["an honest man", 'si pronuncia "onest"'],
+            ["an MBA", 'la M si pronuncia "em"'],
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Il trucco: leggi la parola ad alta voce. Se il primo suono è una vocale, an.",
+        },
+      ],
+    },
+    {
+      titolo: "QUANDO SERVE A/AN",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            'A/an significa "uno", quindi non si usa con i plurali né con i non numerabili:',
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "a dogs", sbagliato: true },
+            { en: "dogs / some dogs", it: "cani / dei cani" },
+            { en: "an advice", sbagliato: true },
+            { en: "some advice / a piece of advice", it: "dei consigli / un consiglio" },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo:
+            'In italiano diciamo "sono studente". In inglese, con i mestieri, l\'articolo è obbligatorio:',
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "I'm student.", sbagliato: true },
+            { en: "I'm a student.", it: "Sono studente." },
+            { en: "She's an engineer.", it: "Fa l'ingegnere." },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Si usa a/an anche per descrivere qualcuno e con molti disturbi di salute:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "She has a big nose.", it: "Ha il naso grande." },
+            { en: "I have a cold.", it: "Ho il raffreddore." },
+            { en: "I have a headache.", it: "Ho mal di testa." },
+          ],
+        },
+      ],
+    },
+    {
+      titolo: "ESCLAMAZIONI E FREQUENZE",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            'Nelle esclamazioni con un singolare numerabile, l\'articolo ci vuole, anche se in italiano diciamo "che bella giornata!" senza:',
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "What beautiful day!", sbagliato: true },
+            { en: "What a beautiful day!", it: "Che bella giornata!" },
+            { en: "What an idea!", it: "Che idea!" },
+            { en: "What good news!", it: "Che belle notizie! (non numerabile: niente articolo)" },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: 'Nelle frequenze e nei prezzi, a/an significa "ogni" o "al":',
+        },
+        {
+          tipo: "tabella",
+          righe: [
+            ["twice a day", "due volte al giorno"],
+            ["three times a week", "tre volte alla settimana"],
+            ["100 km an hour", "100 km all'ora"],
+            ["5 pounds a kilo", "5 sterline al chilo"],
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            'A e one significano entrambi "uno", ma one si usa quando conta il numero: "I have one car, not two".',
+        },
+      ],
+    },
+    {
+      titolo: "THE",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            'The corrisponde a "il, lo, la, i, gli, le", ed è uno solo per tutti. Si usa quando è chiaro di quale cosa parli.',
+        },
+        {
+          tipo: "testo",
+          testo: "Perché l'hai già nominata:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "I have a dog. The dog is black.", it: "Ho un cane. Il cane è nero." },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "Perché il contesto la rende evidente, o perché ne esiste una sola:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "Close the door, please.", it: "Chiudi la porta, per favore." },
+            { en: "Where's the bathroom?", it: "Dov'è il bagno?" },
+            { en: "The sun is hot.", it: "Il sole è caldo." },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "Perché la frase stessa la definisce:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            {
+              en: "The man in the red shirt is my brother.",
+              it: "L'uomo con la maglia rossa è mio fratello.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      titolo: "ALTRI USI DI THE",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo: "Superlativi e numeri ordinali indicano una cosa unica, quindi vogliono sempre the:",
+        },
+        {
+          tipo: "tabella",
+          righe: [
+            ["the best film", "il film migliore"],
+            ["the first time", "la prima volta"],
+            ["the last day", "l'ultimo giorno"],
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "Gli strumenti vogliono the, gli sport no:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "I play the piano.", it: "Suono il pianoforte." },
+            { en: "I play football.", it: "Gioco a calcio." },
+            { en: "I play the football.", sbagliato: true },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "The + aggettivo indica un gruppo di persone, e il verbo va al plurale:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "The rich are getting richer.", it: "I ricchi diventano sempre più ricchi." },
+            { en: "the young, the elderly", it: "i giovani, gli anziani" },
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            'The si pronuncia "de" davanti a un suono di consonante (the car) e "di" davanti a un suono di vocale (the apple, the hour).',
+        },
+      ],
+    },
+    {
+      titolo: "NESSUN ARTICOLO",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Quando parli di qualcosa in generale, con plurali o non numerabili, l'inglese non mette l'articolo:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "I like dogs.", it: "Mi piacciono i cani." },
+            { en: "Life is beautiful.", it: "La vita è bella." },
+            { en: "Coffee is expensive.", it: "Il caffè è caro." },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "Niente articolo anche con:",
+        },
+        {
+          tipo: "tabella",
+          righe: [
+            ["i pasti", "have breakfast"],
+            ["le lingue", "I speak English"],
+            ["le materie", "I study history"],
+            ["giorni, mesi, feste", "on Monday, in May"],
+            ["mezzi con by", "by car, by train"],
+            ["titolo + nome", "Mr Smith, Queen Elizabeth"],
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Senza il nome, il titolo vuole the: the Queen, the President.",
+        },
+      ],
+    },
+    {
+      titolo: "LUOGHI: CON THE O SENZA?",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo: "È la parte più irregolare. Senza articolo:",
+        },
+        {
+          tipo: "tabella",
+          righe: [
+            ["paesi e città", "Italy, London"],
+            ["continenti", "Europe, Asia"],
+            ["singole montagne e laghi", "Mount Everest, Lake Como"],
+            ["strade, piazze, parchi", "Oxford Street, Hyde Park"],
+            ["stazioni e aeroporti", "Victoria Station, Heathrow"],
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "Con the:",
+        },
+        {
+          tipo: "tabella",
+          righe: [
+            ["paesi plurali o con Kingdom, States…", "the UK, the USA"],
+            ["fiumi, mari, oceani", "the Thames, the Atlantic"],
+            ["catene montuose, arcipelaghi", "the Alps, the Canaries"],
+            ["musei, teatri, alberghi", "the British Museum"],
+            ["giornali", "The Times, The Guardian"],
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            'Si dice Oxford University, ma the University of Oxford. Quando compare "of", di solito serve the.',
+        },
+      ],
+    },
+    {
+      titolo: "SCUOLA, LETTO, OSPEDALE",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Con alcuni luoghi l'articolo cambia il significato. Senza the parli della funzione, con the dell'edificio:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "I go to school.", it: "Vado a scuola (come studente)." },
+            { en: "I go to the school.", it: "Vado alla scuola (all'edificio)." },
+            { en: "She's in hospital.", it: "È ricoverata." },
+            { en: "She's at the hospital.", it: "È all'ospedale (magari in visita)." },
+          ],
+        },
+        {
+          tipo: "testo",
+          testo: "Lo stesso vale per bed, church, prison, university, work.",
+        },
+        {
+          tipo: "nota",
+          testo:
+            'Home non vuole mai l\'articolo, e dopo i verbi di movimento nemmeno "to": I\'m going home. I\'m at home.',
+        },
+      ],
+    },
+    {
+      titolo: "GLI ERRORI TIPICI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo: "L'italiano mette l'articolo quando generalizza, l'inglese no:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "The life is beautiful.", sbagliato: true },
+            { en: "Life is beautiful.", it: "La vita è bella." },
+            { en: "Dogs are loyal.", it: "I cani (in generale) sono fedeli." },
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Prima di scrivere the, chiediti: parlo di una cosa precisa, o di tutte le cose di quel tipo? Nel secondo caso, niente articolo.",
+        },
+        {
+          tipo: "testo",
+          testo: "Il possessivo sostituisce l'articolo, e next e last non lo vogliono:",
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            { en: "the my car", sbagliato: true },
+            { en: "my car", it: "la mia macchina" },
+            { en: "next week, last year", it: "la settimana prossima, l'anno scorso" },
+          ],
+        },
+      ],
+    },
+  ],
 };
