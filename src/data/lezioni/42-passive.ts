@@ -5,7 +5,7 @@ export const passive: Lezione = {
   titolo: "La forma passiva",
   descrizione: "Descrivere notizie e processi",
   chiavi: "forma passiva",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "Rome wasn't built in a day.",
     fonte: "Proverbio inglese",

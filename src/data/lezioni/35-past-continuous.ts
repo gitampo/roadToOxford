@@ -5,7 +5,7 @@ export const pastContinuous: Lezione = {
   titolo: "Past Continuous e Past Simple",
   descrizione: "Raccontare imprevisti e storie",
   chiavi: "passato progressivo, while, when",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "As I was going to St Ives, I met a man with seven wives.",
     fonte: "Filastrocca inglese",

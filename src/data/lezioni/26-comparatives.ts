@@ -5,7 +5,7 @@ export const comparatives: Lezione = {
   titolo: "Comparativi e superlativi",
   descrizione: "Fare confronti tra persone, luoghi, oggetti",
   chiavi: "comparativo, superlativo",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Mirror, mirror on the wall, who is the fairest of them all?",
     fonte: "Biancaneve",

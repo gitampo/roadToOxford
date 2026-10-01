@@ -5,7 +5,7 @@ export const pastSimpleIrregular: Lezione = {
   titolo: "Past Simple: verbi irregolari",
   descrizione: "Raccontare eventi passati",
   chiavi: "verbi irregolari, paradigmi",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "I came, I saw, I conquered.",
     fonte: "Giulio Cesare",

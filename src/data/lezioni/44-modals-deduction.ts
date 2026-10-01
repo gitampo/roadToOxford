@@ -5,7 +5,7 @@ export const modalsDeduction: Lezione = {
   titolo: "Modali di deduzione",
   descrizione: "Fare supposizioni",
   chiavi: "must be, can't be, deduzione",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "When you have eliminated the impossible, whatever remains, however improbable, must be the truth.",
     fonte: "Arthur Conan Doyle, Il segno dei quattro",

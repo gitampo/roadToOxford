@@ -5,7 +5,7 @@ export const adverbsFrequency: Lezione = {
   titolo: "Avverbi di frequenza",
   descrizione: "Dire quanto spesso fai qualcosa",
   chiavi: "always, never, avverbi di frequenza",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Always look on the bright side of life.",
     fonte: "Monty Python, Brian di Nazareth",

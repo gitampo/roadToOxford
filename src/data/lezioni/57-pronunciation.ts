@@ -5,7 +5,7 @@ export const pronunciation: Lezione = {
   titolo: "Pronuncia e accento britannico",
   descrizione: "Suonare britannico",
   chiavi: "pronuncia, accento, RP",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "The rain in Spain stays mainly in the plain.",
     fonte: "My Fair Lady",

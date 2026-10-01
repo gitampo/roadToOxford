@@ -5,7 +5,7 @@ export const simpleVsContinuous: Lezione = {
   titolo: "Present Simple o Continuous?",
   descrizione: "Distinguere abitudini e azioni in corso; i verbi di stato",
   chiavi: "verbi di stato, state verbs",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "I'm lovin' it.",
     fonte: "Slogan McDonald's",

@@ -15,6 +15,7 @@ import {
   cancellaProgressi,
   leggiProgressi,
   salvaProgressi,
+  segnaVisto,
 } from "@/data/progressi";
 import { TESTI } from "@/data/testi";
 import { useTheme } from "@/hooks/use-theme";
@@ -151,6 +152,11 @@ export default function Dettagli() {
       risultato: { giuste: r.giuste, totale: r.totale, risposte: r.risposte },
     });
   }, [stati, caricato, id, lezione]);
+
+  // Ogni riquadro aperto conta per la barra della teoria nella lista
+  useEffect(() => {
+    if (pagina > 0) segnaVisto(id, pagina);
+  }, [id, pagina]);
 
   if (!lezione) {
     return <ThemedText>Lezione non trovata</ThemedText>;

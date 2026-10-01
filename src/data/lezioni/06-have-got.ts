@@ -5,7 +5,7 @@ export const haveGot: Lezione = {
   titolo: "Have got",
   descrizione: "Descrivere cosa possiedi e com'è una persona",
   chiavi: "avere, possesso",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "I've got a bad feeling about this.",
     fonte: "Star Wars",

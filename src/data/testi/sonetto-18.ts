@@ -41,7 +41,7 @@ export const sonetto18: Lezione = {
   titolo: "Sonetto 18",
   descrizione: "La bellezza resa eterna dalla poesia: lettura, analisi ed esercizi",
   chiavi: "sonetto shakespeariano, pentametro giambico, thou / thee",
-  livello: "[Cultura]",
+  livello: "Cultura",
   sottotitolo: "Modulo C3 · William Shakespeare",
   citazione: {
     testo: "Shall I compare thee to a summer's day?",

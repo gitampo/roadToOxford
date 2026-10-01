@@ -5,7 +5,7 @@ export const demonstratives: Lezione = {
   titolo: "This, that, these, those",
   descrizione: "Indicare oggetti vicini e lontani",
   chiavi: "dimostrativi",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "This is Sparta!",
     fonte: "300",

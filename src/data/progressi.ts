@@ -51,3 +51,35 @@ export async function leggiRisultati(
     return {};
   }
 }
+
+// I riquadri aperti di una lezione (per la barra della teoria),
+// salvati a parte rispetto alle risposte
+const chiaveVisti = (id: string) => `visti:${id}`;
+
+export async function segnaVisto(id: string, pagina: number) {
+  try {
+    const testo = await AsyncStorage.getItem(chiaveVisti(id));
+    const visti: number[] = testo ? JSON.parse(testo) : [];
+    if (visti.includes(pagina)) return;
+    await AsyncStorage.setItem(
+      chiaveVisti(id),
+      JSON.stringify([...visti, pagina]),
+    );
+  } catch {}
+}
+
+// Legge i riquadri visti di più lezioni in una volta sola
+export async function leggiVisti(
+  ids: string[],
+): Promise<Record<string, number[]>> {
+  try {
+    const coppie = await AsyncStorage.multiGet(ids.map(chiaveVisti));
+    const visti: Record<string, number[]> = {};
+    coppie.forEach(([, testo], i) => {
+      if (testo) visti[ids[i]] = JSON.parse(testo) as number[];
+    });
+    return visti;
+  } catch {
+    return {};
+  }
+}

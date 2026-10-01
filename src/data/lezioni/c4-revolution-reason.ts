@@ -5,7 +5,7 @@ export const revolutionReason: Lezione = {
   titolo: "Rivoluzione e Ragione",
   descrizione: "Guerra civile, Cromwell, Restaurazione, coffee houses",
   chiavi: "Defoe (Robinson Crusoe), Swift (Gulliver's Travels)",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "When a man is tired of London, he is tired of life.",
     fonte: "Samuel Johnson, 1777",

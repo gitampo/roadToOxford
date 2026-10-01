@@ -5,7 +5,7 @@ export const numbersTimeDates: Lezione = {
   titolo: "Numeri, ore e date",
   descrizione: "Dire l'ora, le date, i prezzi",
   chiavi: "numeri, ore, date",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Remember, remember the fifth of November.",
     fonte: "Filastrocca inglese",

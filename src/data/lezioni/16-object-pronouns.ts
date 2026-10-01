@@ -5,7 +5,7 @@ export const objectPronouns: Lezione = {
   titolo: "Pronomi complemento",
   descrizione: "Riferirsi a persone e cose già nominate",
   chiavi: "pronomi complemento, me, him, them",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Show me the money!",
     fonte: "Jerry Maguire",

@@ -5,7 +5,7 @@ export const pastSimpleToBe: Lezione = {
   titolo: "Il passato di to be",
   descrizione: "Raccontare biografie; was born",
   chiavi: "passato di essere, nascere",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "It was the best of times, it was the worst of times.",
     fonte: "Charles Dickens, Racconto di due città",

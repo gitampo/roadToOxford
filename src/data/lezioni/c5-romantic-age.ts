@@ -5,7 +5,7 @@ export const romanticAge: Lezione = {
   titolo: "Il Romanticismo",
   descrizione: "Rivoluzione industriale, francese e americana",
   chiavi: "Blake, Wordsworth, Coleridge, Byron",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "Poetry is the spontaneous overflow of powerful feelings.",
     fonte: "William Wordsworth, Prefazione alle Lyrical Ballads",

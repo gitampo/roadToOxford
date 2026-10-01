@@ -5,7 +5,7 @@ export const goingTo: Lezione = {
   titolo: "Il futuro: going to e present continuous",
   descrizione: "Parlare di progetti e appuntamenti",
   chiavi: "futuro intenzionale",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "I'm gonna make him an offer he can't refuse.",
     fonte: "Il Padrino",

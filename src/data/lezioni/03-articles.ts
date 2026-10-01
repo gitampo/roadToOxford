@@ -5,7 +5,7 @@ export const articles: Lezione = {
   titolo: "Articoli: a / an / the",
   descrizione: "Nominare persone e cose",
   chiavi: "articoli, determinativo, indeterminativo",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "An apple a day keeps the doctor away.",
     fonte: "Proverbio inglese",

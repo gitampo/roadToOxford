@@ -5,7 +5,7 @@ export const victorianAge: Lezione = {
   titolo: "L'età vittoriana",
   descrizione: "La società vittoriana, il colonialismo, il cartismo",
   chiavi: "Dickens, Stevenson, Wilde",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "We are all in the gutter, but some of us are looking at the stars.",
     fonte: "Oscar Wilde, Il ventaglio di Lady Windermere",

@@ -5,7 +5,7 @@ export const mixedConditionals: Lezione = {
   titolo: "I condizionali misti",
   descrizione: "Collegare passato e presente nelle ipotesi",
   chiavi: "periodo ipotetico misto",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "I took the one less traveled by, and that has made all the difference.",
     fonte: "Robert Frost, The Road Not Taken",

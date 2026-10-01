@@ -5,7 +5,7 @@ export const makeDo: Lezione = {
   titolo: "Make o do?",
   descrizione: "Parlare di impegni e faccende",
   chiavi: "fare, collocazioni",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "Do or do not. There is no try.",
     fonte: "Yoda, L'Impero colpisce ancora",

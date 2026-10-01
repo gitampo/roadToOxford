@@ -5,7 +5,7 @@ export const scientificEnglish: Lezione = {
   titolo: "L'inglese scientifico",
   descrizione: "Presentare dati e ricerche",
   chiavi: "inglese scientifico, ESP",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "If I have seen further it is by standing on the shoulders of Giants.",
     fonte: "Isaac Newton, 1675",

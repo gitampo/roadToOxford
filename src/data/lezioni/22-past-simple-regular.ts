@@ -5,7 +5,7 @@ export const pastSimpleRegular: Lezione = {
   titolo: "Past Simple: verbi regolari",
   descrizione: "Raccontare cosa hai fatto",
   chiavi: "passato semplice, -ed",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "And they lived happily ever after.",
     fonte: "Finale delle fiabe",

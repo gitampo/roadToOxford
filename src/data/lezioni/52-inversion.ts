@@ -5,7 +5,7 @@ export const inversion: Lezione = {
   titolo: "Inversione ed enfasi",
   descrizione: "Dare enfasi",
   chiavi: "inversione, frasi scisse",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "Never in the field of human conflict was so much owed by so many to so few.",
     fonte: "Winston Churchill, 1940",

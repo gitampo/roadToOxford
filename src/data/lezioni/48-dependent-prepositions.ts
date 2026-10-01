@@ -5,7 +5,7 @@ export const dependentPrepositions: Lezione = {
   titolo: "Preposizioni rette",
   descrizione: "Usare la preposizione giusta dopo verbi e aggettivi",
   chiavi: "preposizioni rette",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "I'm in love with the shape of you.",
     fonte: "Ed Sheeran, Shape of You",

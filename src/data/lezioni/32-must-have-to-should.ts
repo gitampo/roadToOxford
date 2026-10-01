@@ -5,7 +5,7 @@ export const mustHaveToShould: Lezione = {
   titolo: "Must, have to, should",
   descrizione: "Esprimere obblighi, regole e consigli",
   chiavi: "dovere, obbligo, mustn't",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "The show must go on.",
     fonte: "Queen",

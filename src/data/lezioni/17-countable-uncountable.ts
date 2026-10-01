@@ -5,7 +5,7 @@ export const countableUncountable: Lezione = {
   titolo: "Numerabili e non numerabili",
   descrizione: "Parlare di cibo e bevande",
   chiavi: "numerabili, non numerabili",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Money can't buy me love.",
     fonte: "The Beatles, Can't Buy Me Love",

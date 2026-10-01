@@ -5,7 +5,7 @@ export const canCould: Lezione = {
   titolo: "Can e could",
   descrizione: "Parlare di capacità, chiedere permessi",
   chiavi: "potere, saper fare",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Yes, we can.",
     fonte: "Barack Obama, 2008",

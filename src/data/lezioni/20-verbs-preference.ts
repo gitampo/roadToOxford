@@ -5,7 +5,7 @@ export const verbsPreference: Lezione = {
   titolo: "Esprimere gusti e preferenze",
   descrizione: "Esprimere gusti; ordinare con would like",
   chiavi: "like, love, hate, preferenze",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "I love it when a plan comes together.",
     fonte: "A-Team",

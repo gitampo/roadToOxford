@@ -4,7 +4,7 @@ export const pronouns: Lezione = {
   titolo: "Pronomi Personali",
   descrizione: "Dire chi fa l'azione: io, tu, lui, lei…",
   chiavi: "pronomi personali, soggetto",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "I am me. I am not you.",
     fonte: "Rei Ayanami, Evangelion",

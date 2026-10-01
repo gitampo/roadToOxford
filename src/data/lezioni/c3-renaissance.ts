@@ -5,7 +5,7 @@ export const renaissance: Lezione = {
   titolo: "Il Rinascimento",
   descrizione: "Tudor, Enrico VIII, Elisabetta I, l'Impero",
   chiavi: "Shakespeare (Sonetto 18, Romeo and Juliet, Hamlet), Donne",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "All the world's a stage, and all the men and women merely players.",
     fonte: "William Shakespeare, Come vi piace",

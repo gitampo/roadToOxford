@@ -5,7 +5,7 @@ export const twentiethCentury: Lezione = {
   titolo: "Il Novecento",
   descrizione: "Le due guerre, il modernismo",
   chiavi: "McCrae, Joyce, Woolf, Beckett (solo riassunto)",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "yes I said yes I will Yes.",
     fonte: "James Joyce, Ulisse",

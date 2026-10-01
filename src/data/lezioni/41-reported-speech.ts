@@ -5,7 +5,7 @@ export const reportedSpeech: Lezione = {
   titolo: "Il discorso indiretto",
   descrizione: "Riferire cosa ha detto qualcuno; say vs tell",
   chiavi: "discorso indiretto",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "Mama always said life was like a box of chocolates.",
     fonte: "Forrest Gump",

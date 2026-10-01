@@ -5,7 +5,7 @@ export const relativeClauses: Lezione = {
   titolo: "Le frasi relative",
   descrizione: "Definire persone e cose",
   chiavi: "pronomi relativi, who, which, that",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "Not all those who wander are lost.",
     fonte: "J.R.R. Tolkien, Il Signore degli Anelli",

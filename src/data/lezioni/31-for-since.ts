@@ -5,7 +5,7 @@ export const forSince: Lezione = {
   titolo: "For e since",
   descrizione: "Dire da quanto tempo",
   chiavi: "durata",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "I've been waiting for this moment for all my life.",
     fonte: "Phil Collins, In the Air Tonight",

@@ -5,7 +5,7 @@ export const secondConditional: Lezione = {
   titolo: "Second conditional e wish",
   descrizione: "Immaginare situazioni ed esprimere desideri",
   chiavi: "periodo ipotetico, secondo tipo, congiuntivo",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "If I were a rich man…",
     fonte: "Il violinista sul tetto",

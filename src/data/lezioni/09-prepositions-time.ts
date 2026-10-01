@@ -5,7 +5,7 @@ export const prepositionsTime: Lezione = {
   titolo: "Preposizioni di tempo: in / on / at",
   descrizione: "Parlare di orari e appuntamenti",
   chiavi: "preposizioni di tempo",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "At the going down of the sun and in the morning we will remember them.",
     fonte: "Laurence Binyon, For the Fallen",

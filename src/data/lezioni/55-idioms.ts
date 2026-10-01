@@ -5,7 +5,7 @@ export const idioms: Lezione = {
   titolo: "Espressioni idiomatiche e collocazioni",
   descrizione: "Parlare come un madrelingua",
   chiavi: "espressioni idiomatiche",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "It's raining cats and dogs.",
     fonte: "Espressione inglese",

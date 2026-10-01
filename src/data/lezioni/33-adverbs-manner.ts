@@ -5,7 +5,7 @@ export const adverbsManner: Lezione = {
   titolo: "Avverbi di modo",
   descrizione: "Descrivere come si fa qualcosa",
   chiavi: "avverbi di modo, -ly",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "Speak softly and carry a big stick.",
     fonte: "Theodore Roosevelt",

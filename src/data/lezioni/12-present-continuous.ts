@@ -5,7 +5,7 @@ export const presentContinuous: Lezione = {
   titolo: "Present Continuous",
   descrizione: "Dire cosa sta succedendo adesso",
   chiavi: "presente progressivo, -ing",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Winter is coming.",
     fonte: "Il Trono di Spade",

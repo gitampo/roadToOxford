@@ -5,7 +5,7 @@ export const perfectVsPast: Lezione = {
   titolo: "Present Perfect o Past Simple?",
   descrizione: "Parlare di eventi recenti",
   chiavi: "just, already, yet",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "I have not yet begun to fight!",
     fonte: "John Paul Jones, 1779 (attribuita)",

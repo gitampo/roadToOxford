@@ -5,7 +5,7 @@ export const pastSimpleQuestions: Lezione = {
   titolo: "Past Simple: negativa e domande",
   descrizione: "Chiedere e raccontare un viaggio",
   chiavi: "did, didn't",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Why did the chicken cross the road?",
     fonte: "Indovinello tradizionale",

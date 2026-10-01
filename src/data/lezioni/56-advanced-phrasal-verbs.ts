@@ -5,7 +5,7 @@ export const advancedPhrasalVerbs: Lezione = {
   titolo: "Phrasal verbs avanzati",
   descrizione: "Capire e usare l'inglese colloquiale",
   chiavi: "verbi frasali avanzati",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "Get up, stand up, stand up for your rights.",
     fonte: "Bob Marley, Get Up, Stand Up",

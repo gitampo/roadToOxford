@@ -5,7 +5,7 @@ export const pastModals: Lezione = {
   titolo: "I modali al passato",
   descrizione: "Criticare, rimpiangere, fare ipotesi sul passato",
   chiavi: "should have, might have",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "I should have known better.",
     fonte: "The Beatles",

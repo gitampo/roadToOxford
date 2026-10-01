@@ -5,7 +5,7 @@ export const possessivePronouns: Lezione = {
   titolo: "Pronomi possessivi e whose",
   descrizione: "Dire di chi è qualcosa",
   chiavi: "pronomi possessivi, mine, yours",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Whose Line Is It Anyway?",
     fonte: "Programma televisivo britannico",

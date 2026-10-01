@@ -5,7 +5,7 @@ export const discourseMarkers: Lezione = {
   titolo: "I connettivi",
   descrizione: "Argomentare e collegare le idee",
   chiavi: "connettivi, however, nevertheless",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "Nevertheless, she persisted.",
     fonte: "Mitch McConnell su Elizabeth Warren, 2017",

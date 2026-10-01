@@ -5,7 +5,7 @@ export const quantifiers: Lezione = {
   titolo: "Some, any, much, many",
   descrizione: "Fare la spesa, chiedere quantità",
   chiavi: "quantificatori, a lot of",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Much Ado About Nothing.",
     fonte: "William Shakespeare",

@@ -5,7 +5,7 @@ export const thereIs: Lezione = {
   titolo: "There is / there are",
   descrizione: "Descrivere luoghi: casa, città, scuola",
   chiavi: "c'è, ci sono",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "There's no place like home.",
     fonte: "Il mago di Oz",

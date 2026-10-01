@@ -5,7 +5,7 @@ export const pastPerfect: Lezione = {
   titolo: "Past Perfect",
   descrizione: "Raccontare fatti in sequenza, come nelle storie di vita",
   chiavi: "trapassato prossimo, had + participio",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "He had come a long way to this blue lawn.",
     fonte: "F. Scott Fitzgerald, Il grande Gatsby",

@@ -5,7 +5,7 @@ export const middleAges: Lezione = {
   titolo: "Il Medioevo",
   descrizione: "Feudalesimo, Plantageneti, Magna Carta, peste nera",
   chiavi: "Beowulf, Lord Randal, Chaucer (The Canterbury Tales)",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "No free man shall be seized or imprisoned… except by the lawful judgement of his equals or by the law of the land.",
     fonte: "Magna Carta, 1215",

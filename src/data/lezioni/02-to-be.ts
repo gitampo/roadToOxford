@@ -4,7 +4,7 @@ export const toBe: Lezione = {
   titolo: "Il Verbo Essere",
   descrizione: "Presentarsi: nome, età, provenienza",
   chiavi: "verbo essere",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "To be, or not to be, that is the question.",
     fonte: "William Shakespeare, Hamlet",

@@ -5,7 +5,7 @@ export const willMayMight: Lezione = {
   titolo: "Will, may, might",
   descrizione: "Fare previsioni, promesse e offerte",
   chiavi: "futuro, probabilità",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "I'll be back.",
     fonte: "Terminator",

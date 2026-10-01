@@ -5,7 +5,7 @@ export const imperatives: Lezione = {
   titolo: "L'imperativo",
   descrizione: "Dare istruzioni e indicazioni",
   chiavi: "imperativo, ricette",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Keep calm and carry on.",
     fonte: "Manifesto britannico, 1939",

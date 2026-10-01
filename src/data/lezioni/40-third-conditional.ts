@@ -5,7 +5,7 @@ export const thirdConditional: Lezione = {
   titolo: "Third conditional",
   descrizione: "Fare ipotesi sul passato, esprimere rimpianti",
   chiavi: "periodo ipotetico, terzo tipo",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "If you had been here, my brother would not have died.",
     fonte: "Vangelo di Giovanni 11,21",

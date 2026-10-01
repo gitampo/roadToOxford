@@ -5,7 +5,7 @@ export const presentSimple: Lezione = {
   titolo: "Present Simple",
   descrizione: "Descrivere la giornata e le abitudini",
   chiavi: "presente semplice, abitudini, routine",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "The early bird catches the worm.",
     fonte: "Proverbio inglese",

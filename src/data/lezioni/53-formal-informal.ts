@@ -5,7 +5,7 @@ export const formalInformal: Lezione = {
   titolo: "Inglese formale e informale",
   descrizione: "Scrivere email formali, affrontare un colloquio",
   chiavi: "registro, formale, informale",
-  livello: "[B2-C1]",
+  livello: "B2-C1",
   citazione: {
     testo: "In matters of grave importance, style, not sincerity, is the vital thing.",
     fonte: "Oscar Wilde, L'importanza di chiamarsi Ernesto",

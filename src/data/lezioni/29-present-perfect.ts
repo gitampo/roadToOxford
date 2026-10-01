@@ -5,7 +5,7 @@ export const presentPerfect: Lezione = {
   titolo: "Present Perfect",
   descrizione: "Parlare di esperienze",
   chiavi: "passato prossimo, ever, never",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "Houston, we've had a problem.",
     fonte: "Jack Swigert, Apollo 13, 1970",

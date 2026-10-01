@@ -5,7 +5,7 @@ export const usedTo: Lezione = {
   titolo: "Used to e would",
   descrizione: "Parlare di abitudini passate",
   chiavi: "abitudini passate, solevo",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "I used to be an adventurer like you, then I took an arrow in the knee.",
     fonte: "The Elder Scrolls V: Skyrim",

@@ -5,7 +5,7 @@ export const presentPerfectContinuous: Lezione = {
   titolo: "Present Perfect Continuous",
   descrizione: "Parlare di attività in corso da tempo",
   chiavi: "how long, been + -ing",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "I've been working on the railroad.",
     fonte: "Canzone popolare americana",

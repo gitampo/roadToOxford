@@ -5,7 +5,7 @@ export const infinitiveGerund: Lezione = {
   titolo: "Infinito o -ing?",
   descrizione: "Esprimere scelte, preferenze e opinioni",
   chiavi: "to do, doing, gerundio",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "Stop Making Sense.",
     fonte: "Talking Heads, 1984",

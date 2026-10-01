@@ -5,7 +5,7 @@ export const firstConditional: Lezione = {
   titolo: "Zero e first conditional",
   descrizione: "Parlare di condizioni e conseguenze",
   chiavi: "periodo ipotetico, primo tipo",
-  livello: "[A2]",
+  livello: "A2",
   citazione: {
     testo: "If you build it, he will come.",
     fonte: "L'uomo dei sogni",

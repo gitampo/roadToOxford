@@ -5,7 +5,7 @@ export const oxford: Lezione = {
   titolo: "Oxford",
   descrizione: "La città e l'università",
   chiavi: "Lewis Carroll (Alice's Adventures in Wonderland)",
-  livello: "[Cultura]",
+  livello: "Cultura",
   citazione: {
     testo: "That sweet City with her dreaming spires.",
     fonte: "Matthew Arnold, Thyrsis",

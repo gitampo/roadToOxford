@@ -5,7 +5,7 @@ export const phrasalVerbs: Lezione = {
   titolo: "Phrasal verbs di base",
   descrizione: "Parlare in modo naturale nella vita quotidiana",
   chiavi: "verbi frasali",
-  livello: "[B1]",
+  livello: "B1",
   citazione: {
     testo: "Never gonna give you up, never gonna let you down.",
     fonte: "Rick Astley, Never Gonna Give You Up",

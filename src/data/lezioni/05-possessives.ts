@@ -5,7 +5,7 @@ export const possessives: Lezione = {
   titolo: "Aggettivi possessivi e 's",
   descrizione: "Parlare della famiglia e delle proprie cose",
   chiavi: "aggettivi possessivi, genitivo sassone",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "An Englishman's home is his castle.",
     fonte: "Proverbio inglese",

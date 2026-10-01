@@ -5,7 +5,7 @@ export const pluralNouns: Lezione = {
   titolo: "Il plurale dei sostantivi",
   descrizione: "Parlare di più cose",
   chiavi: "plurale, plurali irregolari",
-  livello: "[A1]",
+  livello: "A1",
   citazione: {
     testo: "Friends don't lie.",
     fonte: "Stranger Things",
