@@ -137,5 +137,142 @@ export const pastSimpleRegular: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "La forma",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["She workeds in a bank.", "She worked in a bank.", "She works yesterday."],
+          giusta: 1,
+          spiegazione: "Al past simple il verbo è uguale per tutti: niente -s della terza persona.",
+          rivedi: "COME SI FORMA",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si traduce \"Ieri sera ho guardato un film\"?",
+          opzioni: ["I have watched a film last night.", "I watched a film last night."],
+          giusta: 1,
+          spiegazione:
+            "Con un momento finito (last night) si usa il past simple, anche dove l'italiano usa il passato prossimo.",
+          rivedi: "A COSA SERVE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Come si scrive",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni verbo al suo passato.",
+          coppie: [
+            ["live", "lived"],
+            ["study", "studied"],
+            ["enjoy", "enjoyed"],
+            ["stop", "stopped"],
+            ["travel", "travelled"],
+          ],
+          spiegazione:
+            "-e + d, consonante + y → -ied, vocale + y → -ed, consonante raddoppiata in stop e (in britannico) travel.",
+          rivedi: "COME SI SCRIVE -ED",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il passato di \"try\".",
+          prima: "I",
+          dopo: "to call you.",
+          risposte: ["tried"],
+          spiegazione: "Consonante + y: la y diventa -ied.",
+          rivedi: "COME SI SCRIVE -ED",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il passato di \"play\".",
+          prima: "We",
+          dopo: "football all afternoon.",
+          risposte: ["played"],
+          spiegazione: "Vocale + y: si aggiunge solo -ed.",
+          rivedi: "COME SI SCRIVE -ED",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Come si pronuncia",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca i verbi in cui -ed si pronuncia /id/, con una sillaba in più.",
+          parole: ["wanted", "walked", "needed", "played", "started", "watched"],
+          giuste: [0, 2, 4],
+          spiegazione: "Il suono /id/ c'è solo dopo t e d: wanted, needed, started. Walked e watched finiscono con /t/, played con /d/.",
+          rivedi: "COME SI PRONUNCIA -ED",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quante sillabe ha \"worked\"?",
+          opzioni: ["Una: \"uorkt\"", "Due: \"uor-ked\""],
+          giusta: 0,
+          spiegazione: "Dopo k la -ed si pronuncia /t/: nessuna sillaba in più.",
+          rivedi: "COME SI PRONUNCIA -ED",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Il tempo e la storia",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Siamo arrivati due ore fa\".",
+          parole: ["hours", "arrived", "ago", "two", "we"],
+          soluzione: ["we", "arrived", "two", "hours", "ago"],
+          rivedi: "LE ESPRESSIONI DI TEMPO",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Metti le azioni in ordine: \"Ho aperto la porta, ho guardato fuori e ho chiamato il cane\".",
+          parole: ["looked", "called", "I", "outside", "the", "opened", "door", "and", "my", "dog"],
+          soluzione: ["I", "opened", "the", "door", "looked", "outside", "and", "called", "my", "dog"],
+          spiegazione: "Con il past simple le azioni si mettono in fila, e il soggetto non si ripete.",
+          rivedi: "RACCONTARE UNA STORIA",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Racconta cosa hai fatto ieri in 4–5 frasi, usando solo verbi regolari.",
+          punti: ["la mattina", "il pomeriggio", "la sera", "almeno un'espressione di tempo"],
+          modello:
+            "Yesterday morning I walked to school and I studied history. In the afternoon I played tennis with my sister. In the evening I cooked dinner and watched a film. I finished my homework at eleven.",
+          spiegazione:
+            "Controlla la grafia (studied, played) e che non ci siano -s con he o she.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

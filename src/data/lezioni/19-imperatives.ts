@@ -152,5 +152,138 @@ export const imperatives: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Affermativo e negativo",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Sedetevi\" a una classe?",
+          opzioni: ["You sit down.", "Sit down.", "Sit you down."],
+          giusta: 1,
+          spiegazione: "L'imperativo è il verbo base senza soggetto, uguale per tu e per voi.",
+          rivedi: "COME SI FORMA",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Non toccare!\"?",
+          opzioni: ["Not touch!", "Don't touch!", "No touch!"],
+          giusta: 1,
+          spiegazione: "La negativa si fa con don't davanti al verbo.",
+          rivedi: "LA FORMA NEGATIVA",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non essere triste\".",
+          prima: "",
+          dopo: "be sad.",
+          risposte: ["Don't", "Do not"],
+          spiegazione: "Nell'imperativo anche to be vuole don't: è l'unico caso.",
+          rivedi: "LA FORMA NEGATIVA",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Proponi \"Facciamo una pausa\".",
+          parole: ["break", "have", "a", "let's"],
+          soluzione: ["let's", "have", "a", "break"],
+          spiegazione: "Let's + verbo base per proporre qualcosa da fare insieme.",
+          rivedi: "LET'S",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Non litighiamo\"?",
+          opzioni: ["Don't let's argue.", "Let's not argue.", "Let's don't argue."],
+          giusta: 1,
+          spiegazione: "La negativa di let's si fa con not dopo let's.",
+          rivedi: "LET'S",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Essere gentili",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "In un negozio chiedi al commesso di chiudere la porta. Qual è il modo più educato?",
+          opzioni: ["Close the door.", "Close the door now.", "Could you close the door, please?"],
+          giusta: 2,
+          spiegazione: "Con gli sconosciuti l'imperativo da solo suona brusco: meglio una domanda con could you + please.",
+          rivedi: "ESSERE GENTILI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Indicazioni e ricette",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni indicazione alla traduzione.",
+          coppie: [
+            ["go straight on", "vai sempre dritto"],
+            ["turn left", "gira a sinistra"],
+            ["cross the road", "attraversa la strada"],
+            ["take the second right", "prendi la seconda a destra"],
+            ["it's on your left", "è sulla tua sinistra"],
+          ],
+          rivedi: "LE INDICAZIONI STRADALI",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Scrivi il passo della ricetta: \"Aggiungi il sale e cuoci per dieci minuti\".",
+          parole: ["cook", "salt", "minutes", "add", "for", "ten", "and"],
+          soluzione: ["add", "salt", "and", "cook", "for", "ten", "minutes"],
+          spiegazione: "Ricette e istruzioni usano l'imperativo.",
+          rivedi: "LE RICETTE",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni espressione al suo significato.",
+          coppie: [
+            ["Have a nice day!", "Buona giornata!"],
+            ["Take care.", "Stammi bene."],
+            ["Help yourself.", "Serviti pure."],
+            ["Hurry up!", "Sbrigati!"],
+          ],
+          rivedi: "ALTRE ESPRESSIONI UTILI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Un turista ti chiede la strada per la stazione. Dagli le indicazioni in 3–4 frasi.",
+          punti: ["vai dritto", "gira a destra o a sinistra", "un punto di riferimento", "dove si trova alla fine"],
+          modello:
+            "Go straight on for about two hundred metres. Turn right at the lights and cross the road. Take the second left: the station is on your right, opposite a big supermarket.",
+          spiegazione:
+            "Controlla che ogni frase cominci con il verbo base, senza you. Se vuoi essere ancora più gentile, aggiungi \"Don't worry, it's easy!\".",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

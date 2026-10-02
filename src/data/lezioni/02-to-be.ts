@@ -326,5 +326,214 @@ export const toBe: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Am, is, are",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con am, is o are.",
+          prima: "She",
+          dopo: "from Italy.",
+          risposte: ["is"],
+          spiegazione: "He, she e it vogliono is.",
+          rivedi: "IL VERBO TO BE (ESSERE)",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con am, is o are.",
+          prima: "We",
+          dopo: "students.",
+          risposte: ["are"],
+          spiegazione: "We, you e they vogliono are.",
+          rivedi: "IL VERBO TO BE (ESSERE)",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con am, is o are.",
+          prima: "I",
+          dopo: "at home.",
+          risposte: ["am"],
+          spiegazione: "Am si usa solo con I.",
+          rivedi: "IL VERBO TO BE (ESSERE)",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni forma intera alla sua forma contratta.",
+          coppie: [
+            ["I am", "I'm"],
+            ["you are", "you're"],
+            ["she is", "she's"],
+            ["it is", "it's"],
+            ["they are", "they're"],
+          ],
+          spiegazione:
+            "L'apostrofo prende il posto della lettera che cade: I am → I'm, they are → they're.",
+          rivedi: "LE FORME CONTRATTE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "In questa frase, che cosa significa 's?",
+          citazione: "He's tired.",
+          opzioni: ["is", "has", "il possesso"],
+          giusta: 0,
+          spiegazione:
+            "Davanti a un aggettivo (tired) 's è is. Davanti a got è has (He's got a car); dopo un nome indica possesso (Mark's car).",
+          rivedi: "LE FORME CONTRATTE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Negative e domande",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qual è la forma negativa contratta di \"I am not\"?",
+          opzioni: ["I amn't", "I'm not", "I aren't"],
+          giusta: 1,
+          spiegazione:
+            "Con I esiste una sola contrazione: I'm not. \"I amn't\" non esiste.",
+          rivedi: "LA FORMA NEGATIVA",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le due forme corrette di \"they are not\".",
+          parole: ["they aren't", "they're not", "they not are", "they isn't"],
+          giuste: [0, 1],
+          spiegazione:
+            "Esistono due contrazioni, entrambe corrette: they aren't e they're not. La seconda è un po' più enfatica.",
+          rivedi: "LA FORMA NEGATIVA",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Trasforma in domanda: \"She is at home.\"",
+          parole: ["at", "she", "home", "is"],
+          soluzione: ["is", "she", "at", "home"],
+          spiegazione:
+            "Nella domanda il verbo passa davanti al soggetto: Is she…?",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Dove sei?\".",
+          parole: ["you", "are", "where"],
+          soluzione: ["where", "are", "you"],
+          spiegazione:
+            "La parola interrogativa va all'inizio, poi verbo e soggetto.",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si chiede \"Come ti chiami?\"",
+          opzioni: ["How do you call?", "What is your name?", "How is your name?"],
+          giusta: 1,
+          spiegazione:
+            "In inglese si chiede \"qual è il tuo nome\": What is your name?",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qual è la risposta breve corretta?",
+          citazione: "Are you tired?",
+          opzioni: ["Yes, I'm.", "Yes, I am.", "Yes, I tired."],
+          giusta: 1,
+          spiegazione:
+            "Nella risposta breve affermativa non si contrae mai: Yes, I am. Nella negativa invece sì: No, I'm not.",
+          rivedi: "LE RISPOSTE BREVI",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa la risposta breve negativa.",
+          prima: "Is she Italian? No, she",
+          dopo: ".",
+          risposte: ["isn't", "is not"],
+          spiegazione: "Si ripetono soggetto e verbo: No, she isn't.",
+          rivedi: "LE RISPOSTE BREVI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Essere o avere?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Ho 20 anni\"?",
+          opzioni: ["I have 20 years.", "I'm 20 years.", "I'm 20 years old."],
+          giusta: 2,
+          spiegazione:
+            "Per l'età si usa to be. Si può dire I'm 20 years old o solo I'm 20, ma mai I'm 20 years.",
+          rivedi: "TO BE AL POSTO DI AVERE",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni frase italiana alla traduzione.",
+          coppie: [
+            ["Ho fame.", "I'm hungry."],
+            ["Ho sete.", "I'm thirsty."],
+            ["Ho freddo.", "I'm cold."],
+            ["Ho ragione.", "I'm right."],
+            ["Ho fretta.", "I'm in a hurry."],
+          ],
+          spiegazione:
+            "Tutte queste sensazioni in inglese si \"sono\", non si \"hanno\".",
+          rivedi: "TO BE AL POSTO DI AVERE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Sono d'accordo\"?",
+          opzioni: ["I am agree.", "I agree.", "I'm agreeing with."],
+          giusta: 1,
+          spiegazione:
+            "Agree è un verbo, non un aggettivo: non vuole to be.",
+          rivedi: "ALTRI DUE ERRORI DA EVITARE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Il film è lungo e lento. Come dici \"Mi annoio\"?",
+          opzioni: ["I'm boring.", "I'm bored.", "I bore."],
+          giusta: 1,
+          spiegazione:
+            "Gli aggettivi in -ed dicono come ti senti (bored), quelli in -ing cosa provoca la sensazione (boring = noioso).",
+          rivedi: "ALTRI DUE ERRORI DA EVITARE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Presentati in inglese in 4–5 frasi.",
+          punti: ["il nome", "l'età", "da dove vieni", "il lavoro o lo studio", "come stai oggi"],
+          modello:
+            "Hi! I'm Giulia. I'm 22 years old and I'm from Bologna, in Italy. I'm a student: I'm at university. Today I'm a bit tired, but I'm happy.",
+          spiegazione:
+            "Controlla l'età (I'm 22, non I have 22) e le forme contratte: in una presentazione informale suonano più naturali.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

@@ -128,5 +128,149 @@ export const pastSimpleQuestions: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "La negativa",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["I didn't went.", "I didn't go.", "I not went."],
+          giusta: 1,
+          spiegazione: "Did porta già il passato: il verbo torna alla forma base.",
+          rivedi: "IL PASSATO SI USA UNA VOLTA SOLA",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non ha chiamato\".",
+          prima: "She didn't",
+          dopo: ".",
+          risposte: ["call"],
+          spiegazione: "Dopo didn't il verbo è base: call, non called.",
+          rivedi: "IL PASSATO SI USA UNA VOLTA SOLA",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non ho dormito bene\".",
+          prima: "I",
+          dopo: "sleep well.",
+          risposte: ["didn't", "did not"],
+          spiegazione: "Didn't vale per tutte le persone, con i regolari e con gli irregolari.",
+          rivedi: "LA NEGATIVA: DIDN'T",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Le domande",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Cosa hai fatto ieri?\".",
+          parole: ["yesterday", "do", "you", "what", "did"],
+          soluzione: ["what", "did", "you", "do", "yesterday"],
+          spiegazione: "Did va davanti al soggetto; do qui è il verbo principale (fare).",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale domanda è corretta?",
+          opzioni: ["Did you liked it?", "Did you like it?", "You liked it did?"],
+          giusta: 1,
+          spiegazione: "Anche nelle domande il passato è solo su did: like resta base.",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qual è la risposta breve corretta?",
+          citazione: "Did she call you?",
+          opzioni: ["Yes, she called.", "Yes, she did.", "Yes, she does."],
+          giusta: 1,
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Senza did",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si chiede \"Eri stanco?\"",
+          opzioni: ["Did you be tired?", "Were you tired?", "Did you were tired?"],
+          giusta: 1,
+          spiegazione: "To be non vuole did, nemmeno al passato.",
+          rivedi: "TO BE NON VUOLE DID",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Non sono potuto venire\"?",
+          opzioni: ["I didn't can come.", "I couldn't come.", "I didn't could come."],
+          giusta: 1,
+          spiegazione: "Can al passato è could, e fa la negativa da solo: couldn't.",
+          rivedi: "TO BE NON VUOLE DID",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Vuoi sapere chi ha telefonato a tua sorella. Cosa chiedi?",
+          opzioni: ["Who did call her?", "Who called her?"],
+          giusta: 1,
+          spiegazione: "Who è il soggetto (è lui che ha chiamato): niente did.",
+          rivedi: "WHO SENZA DID",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Vuoi sapere quale persona ha chiamato tua sorella. Cosa chiedi?",
+          opzioni: ["Who did she call?", "Who called she?"],
+          giusta: 0,
+          spiegazione: "Qui il soggetto è she e who è il complemento: serve did.",
+          rivedi: "WHO SENZA DID",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Cos'è successo?\".",
+          prima: "What",
+          dopo: "?",
+          risposte: ["happened"],
+          spiegazione: "What è il soggetto: niente did, il verbo va al passato.",
+          rivedi: "WHO SENZA DID",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Scrivi un breve dialogo (5–6 battute) in cui chiedi a un amico della sua ultima vacanza.",
+          punti: ["dove è andato", "come ha viaggiato", "una domanda con did", "una risposta negativa con didn't", "una domanda con what happened o who"],
+          modello:
+            "— Where did you go on holiday?\n— I went to Edinburgh with my family.\n— How did you travel?\n— We took the plane.\n— Did you visit the castle?\n— No, we didn't. It was closed! But we saw a lot of other things.",
+          spiegazione:
+            "Controlla ogni domanda: did + soggetto + verbo base. E nelle risposte il passato vero (went, took), ma il verbo base dopo didn't.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

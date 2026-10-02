@@ -154,5 +154,158 @@ export const comparatives: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "-er o more?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il comparativo di \"cheap\".",
+          prima: "The bus is",
+          dopo: "than the train.",
+          risposte: ["cheaper"],
+          spiegazione: "Aggettivo di una sillaba: + -er.",
+          rivedi: "AGGETTIVI CORTI: -ER E -EST",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il comparativo di \"expensive\".",
+          prima: "London is",
+          dopo: "than Rome.",
+          risposte: ["more expensive"],
+          spiegazione: "Aggettivo lungo: more + aggettivo.",
+          rivedi: "AGGETTIVI LUNGHI: MORE E MOST",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni aggettivo al suo comparativo.",
+          coppie: [
+            ["nice", "nicer"],
+            ["happy", "happier"],
+            ["big", "bigger"],
+            ["easy", "easier"],
+            ["interesting", "more interesting"],
+          ],
+          spiegazione:
+            "-e + r, consonante + y → -ier (anche con due sillabe), consonante raddoppiata in big, more per gli aggettivi lunghi.",
+          rivedi: "COME SI SCRIVONO",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le forme corrette.",
+          parole: ["more cheaper", "cheaper", "expensiver", "more expensive", "funnier", "more funny"],
+          giuste: [1, 3, 4],
+          spiegazione: "Mai -er e more insieme. Funny finisce in -y, quindi funnier.",
+          rivedi: "AGGETTIVI LUNGHI: MORE E MOST",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Superlativi e irregolari",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il superlativo di \"tall\".",
+          prima: "He's",
+          dopo: "in the class.",
+          risposte: ["the tallest"],
+          spiegazione: "Il superlativo vuole sempre the: the tallest.",
+          rivedi: "AGGETTIVI CORTI: -ER E -EST",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni aggettivo irregolare alle sue forme.",
+          coppie: [
+            ["good", "better, the best"],
+            ["bad", "worse, the worst"],
+            ["far", "further, the furthest"],
+          ],
+          rivedi: "GLI IRREGOLARI",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Questo film è meglio del libro\"?",
+          opzioni: ["This film is more good than the book.", "This film is gooder than the book.", "This film is better than the book."],
+          giusta: 2,
+          spiegazione: "Good è irregolare: better, the best.",
+          rivedi: "GLI IRREGOLARI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Than, in, as… as",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"È più grande di me\"?",
+          opzioni: ["She's older of me.", "She's older than me.", "She's older that me."],
+          giusta: 1,
+          spiegazione: "Nel comparativo \"di\" si dice than.",
+          rivedi: "THAN, IN, OF",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"il ristorante migliore della città\".",
+          prima: "the best restaurant",
+          dopo: "town",
+          risposte: ["in"],
+          spiegazione: "Nel superlativo, con i luoghi, \"di\" si dice in.",
+          rivedi: "THAN, IN, OF",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Anna è alta quanto sua madre\".",
+          parole: ["as", "mother", "tall", "is", "her", "Anna", "as"],
+          soluzione: ["Anna", "is", "as", "tall", "as", "her", "mother"],
+          spiegazione: "As + aggettivo + as per dire che due cose sono uguali.",
+          rivedi: "AS… AS",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Che cosa significa \"It's not as cold as yesterday\"?",
+          opzioni: ["Fa più freddo di ieri.", "Fa meno freddo di ieri.", "Fa freddo come ieri."],
+          giusta: 1,
+          spiegazione: "Not as… as è un modo gentile per dire \"meno\".",
+          rivedi: "AS… AS",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Confronta la tua città con una città famosa in 4–5 frasi.",
+          punti: ["un comparativo corto (-er)", "un comparativo lungo (more)", "un irregolare (better, worse)", "un superlativo", "una frase con as… as"],
+          modello:
+            "My town is smaller than Milan, but it's quieter and greener. Milan is more interesting for young people. The food in my town is better! Our castle is the oldest building in the area. Life here isn't as expensive as in a big city.",
+          spiegazione:
+            "Controlla: mai -er e more insieme, than per il confronto, the + superlativo, in per \"della zona\".",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

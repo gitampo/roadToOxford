@@ -186,5 +186,164 @@ export const quantifiers: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Some, any, no",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con some o any.",
+          prima: "I have",
+          dopo: "friends in London.",
+          risposte: ["some"],
+          spiegazione: "Frase affermativa: some.",
+          rivedi: "SOME E ANY",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con some o any.",
+          prima: "Are there",
+          dopo: "eggs in the fridge?",
+          risposte: ["any"],
+          spiegazione: "Domanda normale, senza offrire nulla: any.",
+          rivedi: "SOME E ANY",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Offri del tè a un ospite. Cosa dici?",
+          opzioni: ["Would you like any tea?", "Would you like some tea?"],
+          giusta: 1,
+          spiegazione: "Quando offri o chiedi qualcosa e ti aspetti un sì, si usa some anche nelle domande.",
+          rivedi: "SOME NELLE DOMANDE",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le frasi che significano \"Non ho tempo\".",
+          parole: ["I haven't got any time.", "I haven't got no time.", "I've got no time.", "I've got any time."],
+          giuste: [0, 2],
+          spiegazione: "Not + any oppure no con il verbo affermativo. Mai due negazioni insieme.",
+          rivedi: "NO E NOT ANY",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Something, anyone, nowhere",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"C'è qualcuno?\".",
+          prima: "Is",
+          dopo: "here?",
+          risposte: ["anyone", "anybody"],
+          spiegazione: "Domanda: le composte con any.",
+          rivedi: "SOMETHING, ANYONE, NOWHERE…",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Non ho visto niente\"?",
+          opzioni: ["I didn't see nothing.", "I didn't see anything.", "I saw anything."],
+          giusta: 1,
+          spiegazione: "Con il verbo negativo si usa anything. In alternativa: I saw nothing. Mai entrambe le negazioni.",
+          rivedi: "SOMETHING, ANYONE, NOWHERE…",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Much, many, a lot of",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con much o many.",
+          prima: "How",
+          dopo: "brothers have you got?",
+          risposte: ["many"],
+          spiegazione: "Brothers è plurale numerabile: many.",
+          rivedi: "MUCH E MANY",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con much o many.",
+          prima: "I don't have",
+          dopo: "time.",
+          risposte: ["much"],
+          spiegazione: "Time è non numerabile: much.",
+          rivedi: "MUCH E MANY",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase suona più naturale?",
+          opzioni: ["I have much money.", "I have a lot of money."],
+          giusta: 1,
+          spiegazione: "Nelle frasi affermative much suona formale o strano: si usa a lot of.",
+          rivedi: "A LOT OF",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Mi piace molto\" (alla fine della frase)?",
+          opzioni: ["I like it a lot of.", "I like it a lot.", "I like it much."],
+          giusta: 1,
+          spiegazione: "Alla fine della frase si usa a lot, senza of.",
+          rivedi: "A LOT OF",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "A few e a little",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con few o little.",
+          prima: "Can I have a",
+          dopo: "sugar, please?",
+          risposte: ["little"],
+          spiegazione: "Sugar è non numerabile: a little.",
+          rivedi: "A FEW E A LITTLE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase ha un significato negativo (non abbastanza)?",
+          opzioni: ["I have a few friends.", "I have few friends."],
+          giusta: 1,
+          spiegazione: "Senza a, few significa \"pochi, non abbastanza\". A few è positivo: \"qualche\".",
+          rivedi: "A FEW E A LITTLE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "C'è del latte, ma non ci sono uova. Hai molti amici a Londra? No, solo qualcuno.",
+          soluzione:
+            "There's some milk, but there aren't any eggs. Have you got many friends in London? No, only a few.",
+          spiegazione:
+            "Controlla: some nell'affermativa, any nella negativa, many nella domanda con un plurale, a few (positivo) per \"qualcuno\".",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

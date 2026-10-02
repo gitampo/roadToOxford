@@ -191,5 +191,169 @@ export const prepositionsTime: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "In, on o at?",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni espressione alla preposizione giusta.",
+          coppie: [
+            ["July", "in"],
+            ["Monday", "on"],
+            ["7 o'clock", "at"],
+          ],
+          spiegazione:
+            "Pensa all'imbuto: in per i periodi lunghi, on per i giorni, at per i momenti precisi.",
+          rivedi: "DAL PIÙ GRANDE AL PIÙ PICCOLO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con in, on o at.",
+          prima: "I was born",
+          dopo: "1999.",
+          risposte: ["in"],
+          spiegazione: "Anni, mesi, stagioni e secoli vogliono in.",
+          rivedi: "IN",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con in, on o at.",
+          prima: "My birthday is",
+          dopo: "25th December.",
+          risposte: ["on"],
+          spiegazione: "Le date e i giorni vogliono on.",
+          rivedi: "ON",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con in, on o at.",
+          prima: "The film starts",
+          dopo: "8:30.",
+          risposte: ["at"],
+          spiegazione: "Gli orari vogliono at.",
+          rivedi: "AT",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"di notte\"?",
+          opzioni: ["in the night", "at night", "on the night"],
+          giusta: 1,
+          spiegazione:
+            "Le parti del giorno vogliono in (in the morning, in the evening), ma la notte è un'eccezione: at night.",
+          rivedi: "IN",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"lunedì mattina\"?",
+          opzioni: ["in Monday morning", "on Monday morning", "at Monday morning"],
+          giusta: 1,
+          spiegazione: "Quando c'è il nome del giorno, vince on: on Monday morning.",
+          rivedi: "ON",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase indica un'abitudine?",
+          opzioni: ["I play tennis on Saturday.", "I play tennis on Saturdays."],
+          giusta: 1,
+          spiegazione: "Con il giorno al plurale si intende \"ogni sabato\": è un'abitudine.",
+          rivedi: "ON",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Vai dai nonni durante le feste di Natale. Come lo dici?",
+          opzioni: ["at Christmas", "on Christmas", "in Christmas"],
+          giusta: 0,
+          spiegazione:
+            "At Christmas indica il periodo; on Christmas Day solo il giorno del 25.",
+          rivedi: "AT",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Nessuna preposizione",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le espressioni corrette.",
+          parole: ["next Monday", "on next Monday", "last year", "in last year", "this morning", "in this morning", "every day"],
+          giuste: [0, 2, 4, 6],
+          spiegazione: "Davanti a next, last, this ed every non si mette nessuna preposizione.",
+          rivedi: "NESSUNA PREPOSIZIONE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Luoghi e \"tra\"",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["I live at Rome.", "I live in Rome.", "I live on Rome."],
+          giusta: 1,
+          spiegazione: "Per le città si usa in. At è per un punto preciso, come un indirizzo o la stazione.",
+          rivedi: "IN, AT E ON PER I LUOGHI",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"La foto è sul muro\".",
+          prima: "The photo is",
+          dopo: "the wall.",
+          risposte: ["on"],
+          spiegazione: "On per le superfici: on the table, on the wall.",
+          rivedi: "IN, AT E ON PER I LUOGHI",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Torno tra dieci minuti\"?",
+          opzioni: [
+            "I'll be back between ten minutes.",
+            "I'll be back in ten minutes.",
+            "I'll be back after ten minutes.",
+          ],
+          giusta: 1,
+          spiegazione:
+            "In + periodo significa \"tra\", da adesso a un momento futuro. Between è \"tra\" solo nel senso di \"in mezzo a\".",
+          rivedi: "IN O AFTER?",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Il sabato mattina vado in palestra alle nove. Lunedì prossimo inizio un corso: finisce a giugno.",
+          soluzione:
+            "On Saturday mornings I go to the gym at nine. Next Monday I start a course: it finishes in June.",
+          spiegazione:
+            "Controlla: on Saturday mornings (giorno, al plurale per l'abitudine), at nine, next Monday senza preposizione, in June.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

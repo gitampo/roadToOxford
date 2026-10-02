@@ -332,5 +332,219 @@ export const pluralNouns: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Le regole",
+        },
+        {
+          tipo: "completa",
+          consegna: "Scrivi il plurale di \"box\".",
+          prima: "two",
+          dopo: "",
+          risposte: ["boxes"],
+          spiegazione: "Dopo s, ss, sh, ch, x, z si aggiunge -es: la vocale in più rende la parola pronunciabile.",
+          rivedi: "-ES E LE PAROLE IN -Y",
+        },
+        {
+          tipo: "completa",
+          consegna: "Scrivi il plurale di \"city\".",
+          prima: "three big",
+          dopo: "",
+          risposte: ["cities"],
+          spiegazione: "Consonante + y: la y diventa -ies.",
+          rivedi: "-ES E LE PAROLE IN -Y",
+        },
+        {
+          tipo: "completa",
+          consegna: "Scrivi il plurale di \"day\".",
+          prima: "five",
+          dopo: "",
+          risposte: ["days"],
+          spiegazione: "Vocale + y: si aggiunge solo -s (days, boys).",
+          rivedi: "-ES E LE PAROLE IN -Y",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qual è il plurale di \"knife\"?",
+          opzioni: ["knifes", "knives", "knifs"],
+          giusta: 1,
+          spiegazione: "Molte parole in -f e -fe cambiano in -ves: knife → knives, life → lives.",
+          rivedi: "LE PAROLE IN -F E IN -O",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca i plurali scritti correttamente.",
+          parole: ["potatoes", "photoes", "tomatos", "pianos", "heroes", "leafs"],
+          giuste: [0, 3, 4],
+          spiegazione:
+            "Potatoes, tomatoes e heroes prendono -es; photos e pianos (parole abbreviate o straniere) solo -s. Leaf fa leaves.",
+          rivedi: "LE PAROLE IN -F E IN -O",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["the reds cars", "the red cars", "the reds car"],
+          giusta: 1,
+          spiegazione: "In inglese l'aggettivo non ha mai il plurale: cambia solo il sostantivo.",
+          rivedi: "LA REGOLA BASE: -S",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Gli irregolari",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni singolare al suo plurale.",
+          coppie: [
+            ["man", "men"],
+            ["child", "children"],
+            ["person", "people"],
+            ["foot", "feet"],
+            ["tooth", "teeth"],
+            ["mouse", "mice"],
+          ],
+          spiegazione: "Sono residui dell'inglese antico: pochi, ma tra le parole più usate.",
+          rivedi: "I PLURALI IRREGOLARI",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Al lago vedi un pesce, poi altri due. Come dici \"tre pesci\"?",
+          opzioni: ["three fishes", "three fish", "three fishs"],
+          giusta: 1,
+          spiegazione: "Fish, sheep e series hanno singolare e plurale identici.",
+          rivedi: "I PLURALI IRREGOLARI",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"un bambino di dieci anni\".",
+          prima: "a ten-year-old",
+          dopo: "",
+          risposte: ["boy", "child"],
+          spiegazione:
+            "Attenzione alla parte prima: ten-year-old resta al singolare, perché un sostantivo che fa da aggettivo non va mai al plurale.",
+          rivedi: "IL SOSTANTIVO CHE FA DA AGGETTIVO",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale espressione è corretta?",
+          opzioni: ["a five-stars hotel", "a five-star hotel", "a hotel of five stars"],
+          giusta: 1,
+          spiegazione: "Five-star descrive l'albergo, quindi resta singolare anche con un numero.",
+          rivedi: "IL SOSTANTIVO CHE FA DA AGGETTIVO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Pronuncia e casi speciali",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le parole in cui la -s finale si pronuncia /iz/ (una sillaba in più).",
+          parole: ["cats", "buses", "dogs", "boxes", "days", "churches"],
+          giuste: [1, 3, 5],
+          spiegazione:
+            "Dopo i suoni sibilanti (s, x, ch) la -s diventa /iz/. Cats ha /s/, dogs e days /z/.",
+          rivedi: "COME SI PRONUNCIA LA -S",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Completa: \"The police ___ coming.\"",
+          opzioni: ["is", "are"],
+          giusta: 1,
+          spiegazione: "People e police sono sempre plurali: il verbo va al plurale.",
+          rivedi: "SEMPRE PLURALI E COLLETTIVI",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"due paia di occhiali\"?",
+          opzioni: ["two glasses", "two pairs of glasses", "two pair of glass"],
+          giusta: 1,
+          spiegazione:
+            "Le cose formate da due parti uguali (glasses, jeans, scissors) si contano con a pair of. Two glasses vuol dire due bicchieri.",
+          rivedi: "SEMPRE PLURALI E COLLETTIVI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "I non numerabili",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: [
+            "Can you give me some informations?",
+            "Can you give me an information?",
+            "Can you give me some information?",
+          ],
+          giusta: 2,
+          spiegazione:
+            "Information è non numerabile: niente -s e niente an. È uno degli errori più riconoscibili degli italiani.",
+          rivedi: "L'ERRORE TIPICO DEGLI ITALIANI",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le parole che in inglese NON hanno plurale.",
+          parole: ["advice", "chair", "furniture", "luggage", "suitcase", "homework", "book"],
+          giuste: [0, 2, 3, 5],
+          spiegazione:
+            "Advice, furniture, luggage e homework sono non numerabili. Chair, suitcase e book si contano normalmente.",
+          rivedi: "L'ERRORE TIPICO DEGLI ITALIANI",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Le notizie sono buone\".",
+          prima: "The news",
+          dopo: "good.",
+          risposte: ["is"],
+          spiegazione: "News finisce in -s ma è singolare e non numerabile: the news is.",
+          rivedi: "L'ERRORE TIPICO DEGLI ITALIANI",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"un bicchiere d'acqua\".",
+          parole: ["water", "glass", "of", "a"],
+          soluzione: ["a", "glass", "of", "water"],
+          spiegazione: "I non numerabili si contano con un'unità di misura: a glass of, a piece of, a bottle of.",
+          rivedi: "I NON NUMERABILI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Ho due bambini di cinque anni. Mi servono dei consigli: i miei bagagli sono pieni di giocattoli!",
+          soluzione:
+            "I have two five-year-old children. I need some advice: my luggage is full of toys!",
+          spiegazione:
+            "Controlla: children (irregolare), five-year-old al singolare, advice e luggage senza -s e con il verbo al singolare (is).",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

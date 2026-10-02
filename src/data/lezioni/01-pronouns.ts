@@ -150,5 +150,180 @@ export const pronouns: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Il pronome giusto",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni pronome inglese al suo significato.",
+          coppie: [
+            ["I", "io"],
+            ["he", "lui"],
+            ["she", "lei"],
+            ["we", "noi"],
+            ["they", "loro"],
+          ],
+          spiegazione:
+            "Manca you perché vale sia per tu sia per voi: non ha un solo abbinamento possibile.",
+          rivedi: "I PRONOMI PERSONALI SOGGETTO",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["Am tired.", "I am tired.", "Tired I am."],
+          giusta: 1,
+          spiegazione:
+            "In inglese il soggetto va sempre espresso: il verbo da solo non dice chi fa l'azione.",
+          rivedi: "I PRONOMI PERSONALI SOGGETTO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il pronome giusto.",
+          prima: "Yesterday",
+          dopo: "was at home.",
+          risposte: ["I"],
+          spiegazione:
+            "\"I\" si scrive sempre maiuscolo, anche in mezzo alla frase.",
+          rivedi: "I PRONOMI PERSONALI SOGGETTO",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Parli con un professore che non conosci. Come gli dai del \"Lei\"?",
+          opzioni: [
+            "Uso she o he",
+            "Uso you, come con tutti",
+            "Uso they",
+          ],
+          giusta: 1,
+          spiegazione:
+            "L'inglese non ha una forma di cortesia nel pronome: you vale per tutti. La gentilezza passa dal tono e da parole come please.",
+          rivedi: "I PRONOMI PERSONALI SOGGETTO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "He, she, it o they?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Si parla del tuo telefono. Completa.",
+          prima: "Where is my phone?",
+          dopo: "'s on the table.",
+          risposte: ["It", "it"],
+          spiegazione: "Per le cose si usa it.",
+          rivedi: "HE, SHE O IT?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Parli della tua gatta, Luna. Quale pronome è più naturale?",
+          citazione: "This is my cat. ___ is three years old.",
+          opzioni: ["It", "She", "They"],
+          giusta: 1,
+          spiegazione:
+            "Per gli animali domestici si usa di solito he o she: li consideriamo quasi persone. It va bene per gli animali in generale.",
+          rivedi: "HE, SHE O IT?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qualcuno ti ha chiamato, ma non sai chi. Come continui?",
+          citazione: "Someone called. ___ left a message.",
+          opzioni: ["He", "It", "They"],
+          giusta: 2,
+          spiegazione:
+            "Quando il genere non è noto si usa they anche per una persona sola. Il verbo resta al plurale: they are, they were.",
+          rivedi: "THEY AL SINGOLARE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Il soggetto \"it\"",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le frasi che in inglese cominciano con \"It's\".",
+          parole: ["Piove.", "Sono stanco.", "È tardi.", "Sono le cinque.", "Siamo a casa.", "Fa freddo."],
+          giuste: [0, 2, 3, 5],
+          spiegazione:
+            "Meteo, ora e temperatura vogliono il soggetto vuoto it: It's raining, It's late, It's five o'clock, It's cold. Sono stanco e Siamo a casa hanno un soggetto vero: I'm tired, We're at home.",
+          rivedi: 'IL SOGGETTO "IT" CHE NON SIGNIFICA NIENTE',
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Oggi fa freddo\" rimettendo in ordine le parole.",
+          parole: ["today", "cold", "it's"],
+          soluzione: ["it's", "cold", "today"],
+          spiegazione:
+            "Anche se in italiano non c'è un soggetto, in inglese ci vuole: it.",
+          rivedi: 'IL SOGGETTO "IT" CHE NON SIGNIFICA NIENTE',
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"È a 10 km da qui\".",
+          prima: "",
+          dopo: "'s 10 km from here.",
+          risposte: ["It", "it"],
+          spiegazione: "Anche le distanze vogliono it come soggetto.",
+          rivedi: 'IL SOGGETTO "IT" CHE NON SIGNIFICA NIENTE',
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "You per dire \"si\"",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Non si sa mai\"?",
+          opzioni: ["It never knows.", "You never know.", "They never knows."],
+          giusta: 1,
+          spiegazione:
+            "Il nostro \"si\" impersonale diventa spesso you: una persona qualsiasi, anche chi parla.",
+          rivedi: 'YOU PER DIRE "SI"',
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Qui non si può fumare\".",
+          parole: ["smoke", "here", "can't", "you"],
+          soluzione: ["you", "can't", "smoke", "here"],
+          spiegazione: "You generico + can't: è il modo più naturale di dare una regola.",
+          rivedi: 'YOU PER DIRE "SI"',
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Piove. Sono a casa con la mia gatta: è sul divano.",
+          soluzione: "It's raining. I'm at home with my cat: she's on the sofa.",
+          spiegazione:
+            "Controlla tre cose: It's per il meteo, il soggetto I espresso, she (non it) per la gatta.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

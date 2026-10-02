@@ -193,5 +193,161 @@ export const presentSimple: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "La forma affermativa",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["He play football.", "He plays football.", "He playes football."],
+          giusta: 1,
+          spiegazione:
+            "Con he, she, it la -s ci vuole sempre. Play finisce con vocale + y, quindi prende solo -s.",
+          rivedi: "LA FORMA AFFERMATIVA",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il verbo \"watch\".",
+          prima: "My dad",
+          dopo: "TV every evening.",
+          risposte: ["watches"],
+          spiegazione: "Dopo ch si aggiunge -es: watches.",
+          rivedi: "COME SI SCRIVE LA -S",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il verbo \"study\".",
+          prima: "Sara",
+          dopo: "medicine.",
+          risposte: ["studies"],
+          spiegazione: "Consonante + y: la y diventa -ies.",
+          rivedi: "COME SI SCRIVE LA -S",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il verbo \"have\".",
+          prima: "She",
+          dopo: "a dog.",
+          risposte: ["has"],
+          spiegazione: "Have è irregolare: he/she/it has.",
+          rivedi: "COME SI SCRIVE LA -S",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le forme corrette della terza persona.",
+          parole: ["goes", "dos", "plaies", "does", "haves", "tries"],
+          giuste: [0, 3, 5],
+          spiegazione: "Go e do prendono -es (goes, does), try fa tries, play fa plays, have fa has.",
+          rivedi: "COME SI SCRIVE LA -S",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Negativa e domande",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["He doesn't works here.", "He don't work here.", "He doesn't work here."],
+          giusta: 2,
+          spiegazione:
+            "La -s va su doesn't, quindi il verbo torna base. La -s si usa una volta sola.",
+          rivedi: "LA FORMA NEGATIVA",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non mi piace il caffè\".",
+          prima: "I",
+          dopo: "like coffee.",
+          risposte: ["don't", "do not"],
+          spiegazione: "Con I, you, we, they la negativa usa don't.",
+          rivedi: "LA FORMA NEGATIVA",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Le piace la musica?\".",
+          parole: ["like", "she", "music", "does"],
+          soluzione: ["does", "she", "like", "music"],
+          spiegazione: "Does va davanti al soggetto e il verbo resta base: like, non likes.",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"A che ora apre il negozio?\".",
+          parole: ["the", "open", "time", "shop", "does", "what"],
+          soluzione: ["what", "time", "does", "the", "shop", "open"],
+          spiegazione: "Parola interrogativa (What time) + does + soggetto + verbo base.",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qual è la risposta breve corretta?",
+          citazione: "Does your brother speak English?",
+          opzioni: ["Yes, he speaks.", "Yes, he does.", "Yes, he do."],
+          giusta: 1,
+          spiegazione: "La risposta breve riprende l'ausiliare della domanda: does.",
+          rivedi: "LE DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale domanda è corretta?",
+          opzioni: ["Do you are tired?", "Are you tired?", "Do you be tired?"],
+          giusta: 1,
+          spiegazione: "To be fa le domande da solo, senza do.",
+          rivedi: "TO BE NON VUOLE DO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "La routine",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Mi alzo alle sette\"?",
+          opzioni: ["I get up me at seven.", "I get up at seven.", "Me I get up at seven."],
+          giusta: 1,
+          spiegazione: "Molti verbi riflessivi italiani in inglese non lo sono: get up, get dressed.",
+          rivedi: "LA GIORNATA",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Racconta la giornata di un tuo amico o di un familiare in 5 frasi.",
+          punti: ["a che ora si sveglia", "come va al lavoro o a scuola", "cosa fa il pomeriggio", "una cosa che non fa mai", "a che ora va a letto"],
+          modello:
+            "My brother Luca wakes up at half past six. He goes to work by train. In the afternoon he plays basketball with his friends. He doesn't watch TV in the evening: he reads. He goes to bed at eleven.",
+          spiegazione:
+            "Scrivendo di un'altra persona, ogni verbo vuole la -s (wakes, goes, plays). Nella negativa la -s passa su doesn't.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

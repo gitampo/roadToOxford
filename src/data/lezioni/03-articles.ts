@@ -379,5 +379,189 @@ export const articles: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "A o an?",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le parole che vogliono \"an\". Ricorda: conta il suono, non la lettera.",
+          parole: ["hour", "university", "egg", "house", "honest man", "one-way ticket", "idea", "European"],
+          giuste: [0, 2, 4, 6],
+          spiegazione:
+            "An hour e an honest man: la h è muta, quindi il primo suono è una vocale. University, European e one-way cominciano con un suono di consonante (\"iu\", \"uan\"), quindi vogliono a.",
+          rivedi: "A O AN? CONTA IL SUONO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con a o an.",
+          prima: "She eats",
+          dopo: "apple every day.",
+          risposte: ["an"],
+          spiegazione: "Apple comincia con un suono di vocale: an apple.",
+          rivedi: "A O AN? CONTA IL SUONO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Quando serve a/an",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Sono studente\"?",
+          opzioni: ["I'm student.", "I'm a student.", "I'm the student."],
+          giusta: 1,
+          spiegazione:
+            "Con i mestieri e i ruoli l'articolo a/an è obbligatorio, anche se in italiano non c'è.",
+          rivedi: "QUANDO SERVE A/AN",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["Can I give you an advice?", "Can I give you some advice?", "Can I give you advices?"],
+          giusta: 1,
+          spiegazione:
+            "Advice è non numerabile: niente a/an e niente plurale. Per un consiglio solo si dice a piece of advice.",
+          rivedi: "QUANDO SERVE A/AN",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Che bella giornata!\"",
+          parole: ["day", "beautiful", "a", "what"],
+          soluzione: ["what", "a", "beautiful", "day"],
+          spiegazione:
+            "Nelle esclamazioni con un singolare numerabile l'articolo ci vuole: What a…!",
+          rivedi: "ESCLAMAZIONI E FREQUENZE",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni espressione alla traduzione.",
+          coppie: [
+            ["twice a day", "due volte al giorno"],
+            ["three times a week", "tre volte alla settimana"],
+            ["100 km an hour", "100 km all'ora"],
+            ["5 pounds a kilo", "5 sterline al chilo"],
+          ],
+          spiegazione: "Nelle frequenze e nei prezzi a/an significa \"ogni\" o \"al\".",
+          rivedi: "ESCLAMAZIONI E FREQUENZE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "The o niente?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con l'articolo giusto.",
+          prima: "I have a dog.",
+          dopo: "dog is black.",
+          risposte: ["The"],
+          spiegazione:
+            "La prima volta il cane è \"un cane qualsiasi\" (a dog); la seconda è quel cane preciso (the dog).",
+          rivedi: "THE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["I play the football.", "I play football.", "I play a football."],
+          giusta: 1,
+          spiegazione: "Gli sport non vogliono articolo; gli strumenti sì: I play the piano.",
+          rivedi: "ALTRI USI DI THE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"La vita è bella\"?",
+          opzioni: ["The life is beautiful.", "Life is beautiful.", "A life is beautiful."],
+          giusta: 1,
+          spiegazione:
+            "Quando parli di qualcosa in generale, l'inglese non mette l'articolo. È l'errore più tipico di chi parla italiano.",
+          rivedi: "GLI ERRORI TIPICI",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le espressioni corrette (senza articolo).",
+          parole: ["have breakfast", "the English", "by car", "on the Monday", "I study history", "Mr Smith"],
+          giuste: [0, 2, 4, 5],
+          spiegazione:
+            "Pasti, lingue, materie, giorni, mezzi con by e titolo + nome non vogliono articolo: I speak English, on Monday.",
+          rivedi: "NESSUN ARTICOLO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "I luoghi",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca i nomi che vogliono \"the\".",
+          parole: ["Italy", "UK", "Thames", "London", "Alps", "Lake Como", "British Museum", "Hyde Park"],
+          giuste: [1, 2, 4, 6],
+          spiegazione:
+            "The UK (paese con Kingdom), the Thames (fiume), the Alps (catena montuosa), the British Museum (museo). Città, paesi singoli, laghi e parchi vanno senza.",
+          rivedi: "LUOGHI: CON THE O SENZA?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Tua nonna è ricoverata. Come lo dici?",
+          opzioni: ["She's in hospital.", "She's at the hospital.", "She's in the hospital for visit."],
+          giusta: 0,
+          spiegazione:
+            "Senza the parli della funzione (è lì come paziente). At the hospital vuol dire che è nell'edificio, per esempio in visita.",
+          rivedi: "SCUOLA, LETTO, OSPEDALE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["I'm going to home.", "I'm going to the home.", "I'm going home."],
+          giusta: 2,
+          spiegazione: "Home non vuole articolo, e dopo i verbi di movimento nemmeno to.",
+          rivedi: "SCUOLA, LETTO, OSPEDALE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"la settimana prossima\"?",
+          opzioni: ["the next week", "next week", "the week next"],
+          giusta: 1,
+          spiegazione: "Next e last, usati per il tempo, non vogliono l'articolo: next week, last year.",
+          rivedi: "GLI ERRORI TIPICI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Mio fratello è ingegnere. Ama i cani e suona la chitarra due volte alla settimana.",
+          soluzione:
+            "My brother is an engineer. He loves dogs and he plays the guitar twice a week.",
+          spiegazione:
+            "Quattro trappole: an engineer (mestiere, suono di vocale), dogs senza the (in generale), the guitar (strumento), twice a week.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

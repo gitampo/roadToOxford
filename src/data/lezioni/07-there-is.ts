@@ -187,5 +187,156 @@ export const thereIs: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "There is o there are?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con is o are.",
+          prima: "There",
+          dopo: "two banks in this street.",
+          risposte: ["are"],
+          spiegazione: "Ci sono + plurale: there are.",
+          rivedi: "C'È E CI SONO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con is o are.",
+          prima: "There",
+          dopo: "some milk in the fridge.",
+          risposte: ["is", "'s"],
+          spiegazione:
+            "Milk è non numerabile, quindi there is, anche se in italiano diremmo \"del latte\".",
+          rivedi: "LA FORMA CONTRATTA",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Completa: \"There ___ a sofa and two chairs.\"",
+          opzioni: ["is", "are"],
+          giusta: 0,
+          spiegazione: "In una lista il verbo si accorda con il primo elemento: a sofa, singolare.",
+          rivedi: "DESCRIVERE UN LUOGO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Negative e domande",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"C'è un ascensore?\".",
+          parole: ["lift", "there", "a", "is"],
+          soluzione: ["is", "there", "a", "lift"],
+          spiegazione: "Nella domanda is passa davanti a there.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le due frasi che significano \"Qui non ci sono negozi\".",
+          parole: ["There aren't any shops here.", "There isn't shops here.", "There are no shops here.", "There are not shops here."],
+          giuste: [0, 2],
+          spiegazione: "La negativa si fa con not + any, oppure con no: mai entrambi.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Quanti studenti ci sono nella tua classe?\".",
+          parole: ["are", "in", "class", "students", "how", "there", "your", "many"],
+          soluzione: ["how", "many", "students", "are", "there", "in", "your", "class"],
+          spiegazione: "How many + plurale, poi are there.",
+          rivedi: "HOW MANY",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "There is o it is?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"C'è un parco vicino a casa mia\"?",
+          opzioni: [
+            "It is a park near my house.",
+            "There is a park near my house.",
+            "Near my house have a park.",
+          ],
+          giusta: 1,
+          spiegazione: "\"C'è\" si traduce con there is, mai con it is o con have.",
+          rivedi: "THERE IS O IT IS?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con There's o It's.",
+          prima: "There's a restaurant near here.",
+          dopo: "very good.",
+          risposte: ["It's", "It is"],
+          spiegazione:
+            "There is presenta il ristorante; poi, per descriverlo, si usa it is.",
+          rivedi: "THERE IS O IT IS?",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Dov'è?",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni preposizione al suo significato.",
+          coppie: [
+            ["under", "sotto"],
+            ["next to", "accanto a"],
+            ["between", "tra"],
+            ["behind", "dietro"],
+            ["opposite", "di fronte a"],
+          ],
+          rivedi: "LE PREPOSIZIONI DI LUOGO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"C'è una lampada sulla scrivania\".",
+          prima: "There's a lamp",
+          dopo: "the desk.",
+          risposte: ["on"],
+          spiegazione: "On indica che una cosa è sopra un'altra, a contatto.",
+          rivedi: "LE PREPOSIZIONI DI LUOGO",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Descrivi la tua città o il tuo quartiere in 4–5 frasi.",
+          punti: ["una cosa che c'è", "più cose che ci sono", "una cosa che non c'è", "dove si trova qualcosa"],
+          modello:
+            "I live in a small town near Verona. There's a beautiful old castle and there are two parks. There isn't a cinema, but there are a lot of restaurants. There's a train station opposite my school.",
+          spiegazione:
+            "Controlla: there is con il singolare e i non numerabili, there are con il plurale, e nessun \"it is\" per dire \"c'è\".",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

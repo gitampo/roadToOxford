@@ -27,6 +27,23 @@ function getDevMenuHint() {
   );
 }
 
+const GIALLO = "#ffe100";
+const ROSSO = "#ff3700";
+const VERDE = "#3dc70b";
+const BLU = "#2800f2";
+const BIANCO = "#FFFFFF";
+const COLORI_TRATTINI = [GIALLO, ROSSO, VERDE, BLU, BIANCO];
+
+const VOCI = [
+  { voce: "Vai alle lezioni", href: "/lezioni", colore: "#ffe100" },
+  {
+    voce: "Paradigmi dei verbi irregolari",
+    href: "/paradigmi",
+    colore: "#2800f2",
+  },
+  { voce: "Testa il tuo livello", href: "/lezioni", colore: "#ff3700" },
+] as const;
+
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -34,6 +51,19 @@ export default function HomeScreen() {
         <ThemedText type="title" style={styles.title}>
           ROAD{"\n"}TO{"\n"}ENGLAND
         </ThemedText>
+        <ThemedView style={styles.avanzamento}>
+          {COLORI_TRATTINI.map((colore) => (
+            <ThemedView
+              key={colore}
+              style={[
+                styles.trattino,
+                {
+                  backgroundColor: colore,
+                },
+              ]}
+            />
+          ))}
+        </ThemedView>
         <ThemedView style={{ flexDirection: "row", alignItems: "center" }}>
           <ThemedView style={{ width: "50%", borderRadius: 12 }}>
             <ThemedText style={styles.subtitle}>
@@ -43,9 +73,21 @@ export default function HomeScreen() {
           </ThemedView>
           <Globo style={styles.globeStyle}></Globo>
         </ThemedView>
-        <VoceMenu voce="Vai alle lezioni" href="/lezioni" />
-        <VoceMenu voce="Paradigmi dei verbi irregolari" href="/paradigmi" />
-        <VoceMenu voce="Testa il tuo livello" href="/lezioni" />
+        <ThemedView style={styles.quadrati}>
+          {VOCI.map((v, i) => (
+            <VoceMenu
+              key={v.voce}
+              voce={v.voce}
+              href={v.href}
+              colore={v.colore}
+              style={[
+                styles.voce,
+                VOCI.length % 2 === 1 &&
+                  i === VOCI.length - 1 && { aspectRatio: 2 },
+              ]}
+            />
+          ))}
+        </ThemedView>
       </ThemedView>
     </SafeAreaView>
   );
@@ -102,5 +144,26 @@ const styles = StyleSheet.create({
   },
   globeStyle: {
     marginBottom: 10,
+  },
+  avanzamento: {
+    flexDirection: "row",
+    gap: 4,
+    marginBottom: Spacing.three,
+    width: 150,
+  },
+  trattino: {
+    flex: 1,
+    height: 3,
+    borderRadius: 2,
+  },
+  quadrati: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: Spacing.three,
+  },
+  voce: {
+    flexBasis: "40%", // larghezza minima di partenza
+    flexGrow: 1,
+    aspectRatio: 1, // poi si allarga per riempire la riga
   },
 });

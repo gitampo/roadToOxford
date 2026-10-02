@@ -182,5 +182,160 @@ export const presentContinuous: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Come si forma",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Sto lavorando\"?",
+          opzioni: ["I working.", "I'm working.", "I work now."],
+          giusta: 1,
+          spiegazione: "Serve to be + -ing: senza am la frase non ha verbo.",
+          rivedi: "COME SI FORMA",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il verbo \"rain\".",
+          prima: "Take an umbrella: it's",
+          dopo: ".",
+          risposte: ["raining"],
+          rivedi: "COME SI FORMA",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Come si scrive -ing",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni verbo alla sua forma in -ing.",
+          coppie: [
+            ["write", "writing"],
+            ["run", "running"],
+            ["lie", "lying"],
+            ["visit", "visiting"],
+            ["begin", "beginning"],
+          ],
+          spiegazione:
+            "La -e muta cade, -ie diventa -y, la consonante si raddoppia se l'accento è sull'ultima sillaba (beGIN, ma VISit).",
+          rivedi: "COME SI SCRIVE -ING",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con il verbo \"sit\".",
+          prima: "She is",
+          dopo: "next to me.",
+          risposte: ["sitting"],
+          spiegazione: "Vocale + consonante finale, in una sola sillaba: la consonante si raddoppia.",
+          rivedi: "COME SI SCRIVE -ING",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le forme scritte correttamente.",
+          parole: ["makeing", "making", "swiming", "swimming", "dying", "dieing"],
+          giuste: [1, 3, 4],
+          spiegazione: "Make perde la e (making), swim raddoppia la m (swimming), die cambia -ie in -y (dying).",
+          rivedi: "COME SI SCRIVE -ING",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Negativa e domande",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Cosa stai facendo?\".",
+          parole: ["doing", "you", "what", "are"],
+          soluzione: ["what", "are", "you", "doing"],
+          spiegazione: "Come con to be: la parola interrogativa, poi are, poi il soggetto.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa la negativa: \"Non sta ascoltando\".",
+          prima: "She",
+          dopo: "listening.",
+          risposte: ["isn't", "is not", "'s not"],
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Quando si usa",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase descrive una situazione temporanea?",
+          opzioni: [
+            "She lives with her parents.",
+            "She's living with her parents at the moment.",
+          ],
+          giusta: 1,
+          spiegazione: "Il continuous con at the moment indica che è una situazione di questo periodo, non per sempre.",
+          rivedi: "IN QUESTO PERIODO",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Il tuo inglese sta migliorando\"?",
+          opzioni: ["Your English improves.", "Your English is improving.", "Your English improving."],
+          giusta: 1,
+          spiegazione: "Il continuous si usa anche per i cambiamenti in corso.",
+          rivedi: "IN QUESTO PERIODO",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le espressioni che vanno spesso con il present continuous.",
+          parole: ["right now", "every day", "at the moment", "always", "Look!", "this week"],
+          giuste: [0, 2, 4, 5],
+          spiegazione: "Every day e always indicano abitudini: vogliono il present simple.",
+          rivedi: "LE PAROLE CHIAVE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Un amico ti chiama e senti rumore. Gli chiedi \"Cosa fai?\". Come lo dici?",
+          opzioni: ["What do you do?", "What are you doing?"],
+          giusta: 1,
+          spiegazione: "What do you do? chiede che lavoro fai. Per l'azione di adesso serve il continuous.",
+          rivedi: "L'ITALIANO USA IL PRESENTE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Guarda! Sta nevicando. I bambini stanno correndo in giardino e io sto facendo una foto.",
+          soluzione:
+            "Look! It's snowing. The children are running in the garden and I'm taking a photo.",
+          spiegazione:
+            "Controlla il to be in ogni frase (it's, are, I'm), running con due n e \"fare una foto\" = take a photo.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

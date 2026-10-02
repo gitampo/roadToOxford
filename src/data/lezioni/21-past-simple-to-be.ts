@@ -151,5 +151,143 @@ export const pastSimpleToBe: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Was o were?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con was o were.",
+          prima: "I",
+          dopo: "tired yesterday.",
+          risposte: ["was"],
+          spiegazione: "I, he, she, it vogliono was.",
+          rivedi: "WAS E WERE",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con was o were.",
+          prima: "They",
+          dopo: "at home last night.",
+          risposte: ["were"],
+          spiegazione: "You, we, they vogliono were.",
+          rivedi: "WAS E WERE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si chiede \"Eri alla festa?\"",
+          opzioni: ["Did you be at the party?", "Were you at the party?", "Was you at the party?"],
+          giusta: 1,
+          spiegazione: "To be fa le domande da solo, anche al passato: niente did.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non è stato facile\".",
+          prima: "It",
+          dopo: "easy.",
+          risposte: ["wasn't", "was not"],
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Nascere",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Sono nato a Roma\"?",
+          opzioni: ["I born in Rome.", "I was born in Rome.", "I am born in Rome."],
+          giusta: 1,
+          spiegazione: "Nascere si dice be born: la nascita è un fatto concluso, quindi was born.",
+          rivedi: "BE BORN: NASCERE",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Dove sei nato?\".",
+          parole: ["born", "you", "where", "were"],
+          soluzione: ["where", "were", "you", "born"],
+          rivedi: "BE BORN: NASCERE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Il tempo",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Tre anni fa ero a Londra\".",
+          parole: ["ago", "London", "in", "years", "I", "three", "was"],
+          soluzione: ["I", "was", "in", "London", "three", "years", "ago"],
+          spiegazione: "Ago va dopo il periodo, proprio come \"fa\": three years ago.",
+          rivedi: "LE ESPRESSIONI DI TEMPO",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni espressione alla traduzione.",
+          coppie: [
+            ["yesterday", "ieri"],
+            ["last night", "ieri sera"],
+            ["last year", "l'anno scorso"],
+            ["two days ago", "due giorni fa"],
+          ],
+          rivedi: "LE ESPRESSIONI DI TEMPO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"C'era molta gente\".",
+          prima: "There",
+          dopo: "a lot of people.",
+          risposte: ["were"],
+          spiegazione: "People è plurale: there were.",
+          rivedi: "THERE WAS, THERE WERE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si chiede \"C'era una festa?\"",
+          opzioni: ["Was there a party?", "There was a party?", "Did there be a party?"],
+          giusta: 0,
+          spiegazione: "Nella domanda was passa davanti a there.",
+          rivedi: "THERE WAS, THERE WERE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Scrivi una breve biografia (4 frasi) di un personaggio famoso, usando solo was e were.",
+          punti: ["chi era", "quando e dove è nato", "perché era famoso", "com'era il suo lavoro"],
+          modello:
+            "Leonardo da Vinci was an Italian artist and scientist. He was born in Vinci in 1452. He was famous for his paintings, like the Mona Lisa. His ideas were very modern for his time.",
+          spiegazione:
+            "Controlla: was born, was con he/she, were con un soggetto plurale (his ideas).",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

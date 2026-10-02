@@ -224,5 +224,166 @@ export const possessives: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Gli aggettivi possessivi",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni pronome al suo aggettivo possessivo.",
+          coppie: [
+            ["I", "my"],
+            ["he", "his"],
+            ["she", "her"],
+            ["we", "our"],
+            ["they", "their"],
+          ],
+          rivedi: "GLI AGGETTIVI POSSESSIVI",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"i miei libri\"?",
+          opzioni: ["mys books", "my books", "the my books"],
+          giusta: 1,
+          spiegazione:
+            "Il possessivo non cambia mai (my vale per mio, mia, miei, mie) e non vuole l'articolo.",
+          rivedi: "NON CAMBIANO MAI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "His o her?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con his o her.",
+          prima: "Anna lives with",
+          dopo: "father.",
+          risposte: ["her"],
+          spiegazione:
+            "Conta chi possiede, non la cosa posseduta: il padre è di Anna, una donna, quindi her.",
+          rivedi: "HIS O HER?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con his o her.",
+          prima: "Marco calls",
+          dopo: "mother every day.",
+          risposte: ["his"],
+          spiegazione: "La madre è di Marco, un uomo: his, anche se la madre è una donna.",
+          rivedi: "HIS O HER?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["The dog wags it's tail.", "The dog wags its tail.", "The dog wags his' tail."],
+          giusta: 1,
+          spiegazione:
+            "Its è il possessivo; it's significa it is. Il trucco: se puoi dire \"it is\", ci va l'apostrofo.",
+          rivedi: "ITS E IT'S",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con its o it's.",
+          prima: "",
+          dopo: "a nice day today.",
+          risposte: ["It's"],
+          spiegazione: "Qui puoi dire \"It is a nice day\": quindi ci vuole l'apostrofo.",
+          rivedi: "ITS E IT'S",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Mi lavo le mani\"?",
+          opzioni: ["I wash the hands.", "I wash my hands.", "I wash me the hands."],
+          giusta: 1,
+          spiegazione: "Con le parti del corpo e i vestiti l'inglese usa il possessivo, non l'articolo.",
+          rivedi: "PARTI DEL CORPO E VESTITI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Il genitivo sassone",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"la stanza di mia sorella\".",
+          parole: ["room", "sister's", "my"],
+          soluzione: ["my", "sister's", "room"],
+          spiegazione: "Prima chi possiede, con 's, poi la cosa posseduta: l'ordine è il contrario dell'italiano.",
+          rivedi: "IL GENITIVO SASSONE: 'S",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"la casa dei miei genitori\"?",
+          opzioni: ["my parents's house", "my parents' house", "my parent's house"],
+          giusta: 1,
+          spiegazione:
+            "Con un plurale in -s si aggiunge solo l'apostrofo: parents'. My parent's house sarebbe la casa di un genitore solo.",
+          rivedi: "'S O S'?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"i giocattoli dei bambini\"?",
+          opzioni: ["the childrens' toys", "the children's toys", "the toys of the children's"],
+          giusta: 1,
+          spiegazione: "Children è un plurale irregolare, senza -s: si aggiunge 's.",
+          rivedi: "'S O S'?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"la fine del film\"?",
+          opzioni: ["the film's end", "the end of the film", "the end film"],
+          giusta: 1,
+          spiegazione: "Con le cose di solito si usa of. Il 's è per persone e animali (e per il tempo: today's newspaper).",
+          rivedi: "'S O OF?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "In questa frase, che cosa significa 's?",
+          citazione: "Mark's got a new car.",
+          opzioni: ["is", "has", "il possesso"],
+          giusta: 1,
+          spiegazione: "Davanti a got, 's è has: Mark has got a new car.",
+          rivedi: "'S O OF?",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Questa è la macchina di Sara. Suo fratello la usa ogni giorno, ma oggi è a casa dei suoi genitori.",
+          soluzione:
+            "This is Sara's car. Her brother uses it every day, but today it's at her parents' house.",
+          spiegazione:
+            "Controlla: Sara's car (genitivo sassone), her brother (il fratello di una donna), her parents' house (plurale in -s: solo apostrofo).",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

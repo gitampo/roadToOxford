@@ -194,5 +194,154 @@ export const haveGot: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Have o has?",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa con have o has.",
+          prima: "She",
+          dopo: "got a new phone.",
+          risposte: ["has"],
+          spiegazione: "He, she e it vogliono has got; tutti gli altri have got.",
+          rivedi: "A COSA SERVE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "In questa frase, che cosa significa 's?",
+          citazione: "He's got two sisters.",
+          opzioni: ["he is", "he has", "il possesso"],
+          giusta: 1,
+          spiegazione: "Davanti a got, 's è sempre has: he has got. \"He is got\" non esiste.",
+          rivedi: "LE FORME CONTRATTE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Negative e domande",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Hai una penna?\".",
+          parole: ["got", "pen", "you", "have", "a"],
+          soluzione: ["have", "you", "got", "a", "pen"],
+          spiegazione: "Have passa davanti al soggetto, got resta dopo.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa la negativa: \"Non ha tempo\".",
+          prima: "He",
+          dopo: "got time.",
+          risposte: ["hasn't", "has not"],
+          spiegazione: "Not va dopo have/has: he hasn't got.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Qual è la risposta breve corretta?",
+          citazione: "Have you got a car?",
+          opzioni: ["Yes, I have got.", "Yes, I have.", "Yes, I've."],
+          giusta: 1,
+          spiegazione:
+            "Le risposte brevi usano solo have, senza got. E nella risposta breve affermativa non si contrae.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Descrivere",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"Ha i capelli lunghi\"?",
+          opzioni: ["She's got long hairs.", "She's got long hair.", "She has the long hair."],
+          giusta: 1,
+          spiegazione:
+            "Hair, quando indica tutti i capelli, è non numerabile: niente -s. E niente articolo the.",
+          rivedi: "PER DESCRIVERE LE PERSONE",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni frase alla traduzione.",
+          coppie: [
+            ["I've got a headache.", "Ho mal di testa."],
+            ["She's got a cold.", "Ha il raffreddore."],
+            ["We've got a meeting.", "Abbiamo una riunione."],
+            ["He's got blue eyes.", "Ha gli occhi azzurri."],
+          ],
+          rivedi: "FAMIGLIA, MALATTIE, IMPEGNI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Have got o have?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale domanda ha lo stesso significato di \"Have you got a car?\"",
+          opzioni: ["Do you have a car?", "Are you have a car?", "Have you a car got?"],
+          giusta: 0,
+          spiegazione:
+            "Con have da solo, come verbo normale, negativa e domande usano do: Do you have…? I don't have…",
+          rivedi: "HAVE GOT O HAVE?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["I've got breakfast at seven.", "I have breakfast at seven.", "I've breakfast at seven."],
+          giusta: 1,
+          spiegazione:
+            "Qui have è un'azione (fare colazione), non un possesso: got non ci va.",
+          rivedi: "QUANDO NON SI USA",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le frasi in cui si può usare have got.",
+          parole: ["Ho due fratelli.", "Faccio la doccia.", "Ho 20 anni.", "Ho un cane.", "Divertiti!", "Ho il raffreddore."],
+          giuste: [0, 3, 5],
+          spiegazione:
+            "Have got è per il possesso, la famiglia e i disturbi: I've got two brothers, a dog, a cold. Fare la doccia è un'azione (have a shower), l'età si dice con to be (I'm 20).",
+          rivedi: "QUANDO NON SI USA",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Descrivi una persona della tua famiglia in 4–5 frasi, usando have got.",
+          punti: ["chi è", "capelli e occhi", "un oggetto che possiede", "qualcosa che non ha"],
+          modello:
+            "This is my sister, Chiara. She's got long brown hair and green eyes. She's got a small dog called Pippo. She hasn't got a car, so she goes everywhere by bike.",
+          spiegazione:
+            "Controlla: has got con he/she, hair senza -s, hasn't got nella negativa.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

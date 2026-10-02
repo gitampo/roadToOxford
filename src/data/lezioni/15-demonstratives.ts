@@ -144,5 +144,150 @@ export const demonstratives: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "This, that, these, those",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni dimostrativo al suo significato.",
+          coppie: [
+            ["this", "vicino, singolare"],
+            ["these", "vicino, plurale"],
+            ["that", "lontano, singolare"],
+            ["those", "lontano, plurale"],
+          ],
+          rivedi: "VICINO O LONTANO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Hai in mano delle scarpe. Completa: \"Queste scarpe sono nuove\".",
+          prima: "",
+          dopo: "shoes are new.",
+          risposte: ["These"],
+          spiegazione: "Vicino e plurale: these.",
+          rivedi: "VICINO O LONTANO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Indichi delle persone dall'altra parte della strada. Completa.",
+          prima: "",
+          dopo: "people are my friends.",
+          risposte: ["Those"],
+          spiegazione: "Lontano e plurale: those. People è plurale.",
+          rivedi: "VICINO O LONTANO",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale espressione è corretta?",
+          opzioni: ["this books", "these books", "these book"],
+          giusta: 1,
+          spiegazione: "Il dimostrativo si accorda con il numero: this book, these books.",
+          rivedi: "NON CAMBIANO CON IL GENERE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"questa ragazza\"?",
+          opzioni: ["this girl", "thisa girl", "these girl"],
+          giusta: 0,
+          spiegazione: "I dimostrativi non cambiano con il genere: this vale per questo e questa.",
+          rivedi: "NON CAMBIANO CON IL GENERE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Presentare e telefonare",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Presenti il tuo amico Luca a qualcuno. Cosa dici?",
+          opzioni: ["He is my friend Luca.", "This is my friend Luca.", "Here is he, my friend Luca."],
+          giusta: 1,
+          spiegazione: "Per presentare qualcuno si usa this is.",
+          rivedi: "PER PRESENTARE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Rispondi al telefono e dici chi sei. Cosa dici?",
+          opzioni: ["Hello, I'm Anna.", "Hello, this is Anna.", "Hello, here Anna."],
+          giusta: 1,
+          spiegazione: "Al telefono ci si presenta con this is, e si chiede \"Who's calling?\".",
+          rivedi: "PER PRESENTARE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Tempo e risposte",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice \"a quei tempi\"?",
+          opzioni: ["in these days", "in those days", "in that days"],
+          giusta: 1,
+          spiegazione: "That e those indicano il passato; days è plurale, quindi those.",
+          rivedi: "NEL TEMPO",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Un amico ti dice l'orario giusto del treno. Come rispondi \"Giusto!\"?",
+          opzioni: ["This is right!", "That's right!", "These right!"],
+          giusta: 1,
+          spiegazione: "Con that si commenta quello che qualcuno ha appena detto.",
+          rivedi: "NEL TEMPO",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Preferisco quelli rossi\".",
+          prima: "I prefer the red",
+          dopo: ".",
+          risposte: ["ones"],
+          spiegazione: "Ones sostituisce un nome plurale, per non ripeterlo.",
+          rivedi: "THE ONE, THE ONES",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi \"Questa o quella?\" (parlando di una torta).",
+          parole: ["that", "this", "or", "one", "one"],
+          soluzione: ["this", "one", "or", "that", "one"],
+          rivedi: "THE ONE, THE ONES",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Traduci",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi la tua versione e confrontala con quella proposta.",
+        },
+        {
+          tipo: "traduci",
+          consegna: "Traduci in inglese.",
+          testo: "Ti presento mia sorella. Queste foto sono sue, ma quelle sono mie.",
+          soluzione: "This is my sister. These photos are hers, but those are mine.",
+          spiegazione:
+            "Controlla: this is per presentare, these vicino e plurale, those da solo come pronome.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

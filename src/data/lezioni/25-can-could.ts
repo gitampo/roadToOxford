@@ -132,5 +132,147 @@ export const canCould: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Can",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale frase è corretta?",
+          opzioni: ["He cans swim.", "He can to swim.", "He can swim."],
+          giusta: 2,
+          spiegazione: "Can è uguale per tutti (niente -s) e vuole il verbo base, senza to.",
+          rivedi: "CAN: SAPER FARE E POTERE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Che cosa significa \"She can speak three languages\"?",
+          opzioni: ["Può parlare tre lingue (ha il permesso)", "Sa parlare tre lingue"],
+          giusta: 1,
+          spiegazione: "Qui can indica una capacità: saper fare.",
+          rivedi: "CAN: SAPER FARE E POTERE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Quale domanda è corretta?",
+          opzioni: ["Do you can help me?", "Can you help me?", "Can you to help me?"],
+          giusta: 1,
+          spiegazione: "Can fa le domande da solo, senza do.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non so guidare\".",
+          prima: "I",
+          dopo: "drive.",
+          risposte: ["can't", "cannot"],
+          spiegazione: "Can't, oppure cannot scritto tutto attaccato.",
+          rivedi: "NEGATIVA E DOMANDE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Permessi e favori",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Chiedi a uno sconosciuto di usare il suo telefono. Qual è il modo più gentile?",
+          opzioni: ["Can I use your phone?", "Could I use your phone?", "I use your phone?"],
+          giusta: 1,
+          spiegazione: "Could è più gentile di can: meglio con chi non conosci.",
+          rivedi: "CHIEDERE IL PERMESSO",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Chiedi gentilmente \"Potrebbe parlare più lentamente, per favore?\".",
+          parole: ["slowly", "you", "more", "please", "could", "speak"],
+          soluzione: ["could", "you", "speak", "more", "slowly", "please"],
+          spiegazione: "È la frase più utile del tuo primo viaggio in Inghilterra.",
+          rivedi: "CHIEDERE UN FAVORE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "A tavola, con la tua famiglia. Come chiedi \"Mi passi il sale?\"",
+          opzioni: ["Can you pass me the salt?", "Do you pass me the salt?", "You pass me the salt?"],
+          giusta: 0,
+          spiegazione: "Con le persone che conosci can va benissimo.",
+          rivedi: "CHIEDERE UN FAVORE",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Could e i sensi",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Sapevo leggere a quattro anni\".",
+          prima: "I",
+          dopo: "read when I was four.",
+          risposte: ["could"],
+          spiegazione: "Could è il passato di can.",
+          rivedi: "COULD: IL PASSATO DI CAN",
+        },
+        {
+          tipo: "completa",
+          consegna: "Completa: \"Non riuscivamo a dormire\".",
+          prima: "We",
+          dopo: "sleep.",
+          risposte: ["couldn't", "could not"],
+          rivedi: "COULD: IL PASSATO DI CAN",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Al telefono, come chiedi \"Mi senti?\"",
+          opzioni: ["Do you hear me?", "Can you hear me?", "Are you hearing me?"],
+          giusta: 1,
+          spiegazione: "Con see, hear e smell l'inglese usa can dove l'italiano usa il presente.",
+          rivedi: "CAN CON I SENSI",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Vedo il mare\".",
+          parole: ["see", "sea", "can", "the", "I"],
+          soluzione: ["I", "can", "see", "the", "sea"],
+          rivedi: "CAN CON I SENSI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Scrivi",
+        },
+        {
+          tipo: "testo",
+          testo:
+            "Questo esercizio non ha un punteggio: scrivi il tuo testo e confrontalo con il modello.",
+        },
+        {
+          tipo: "scrivi",
+          consegna: "Scrivi 4–5 frasi su cosa sai fare e cosa no, oggi e da bambino.",
+          punti: ["due cose che sai fare", "una cosa che non sai fare", "una cosa che sapevi fare da bambino", "una cosa che non riuscivi a fare"],
+          modello:
+            "I can play the piano and I can cook very well. I can't swim, unfortunately. When I was six, I could ride a bike without hands! But I couldn't read until I was seven.",
+          spiegazione:
+            "Controlla: can e could senza to, niente -s, couldn't per il passato negativo.",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };

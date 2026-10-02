@@ -283,5 +283,156 @@ export const numbersTimeDates: Lezione = {
         },
       ],
     },
+    {
+      titolo: "ESERCIZI",
+      blocchi: [
+        {
+          tipo: "testo",
+          testo:
+            "Ora mettiti alla prova. Ogni esercizio, se sbagli, ti indica il riquadro da rivedere: dopo averlo riletto, torni qui con un tocco. In fondo trovi il tuo risultato.",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "I numeri",
+        },
+        {
+          tipo: "completa",
+          consegna: "Scrivi in lettere il numero 45.",
+          prima: "",
+          dopo: "",
+          risposte: ["forty-five", "forty five"],
+          spiegazione: "Forty si scrive senza u, e tra decine e unità si mette il trattino.",
+          rivedi: "DECINE, CENTINAIA, MIGLIAIA",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si legge 120 in inglese britannico?",
+          opzioni: ["a hundred twenty", "a hundred and twenty", "one hundreds and twenty"],
+          giusta: 1,
+          spiegazione:
+            "In britannico dopo le centinaia si mette and. E hundred non prende mai la -s: two hundred.",
+          rivedi: "DECINE, CENTINAIA, MIGLIAIA",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Senti \"thirTEEN\", con l'accento alla fine. Che numero è?",
+          opzioni: ["13", "30"],
+          giusta: 0,
+          spiegazione: "I numeri in -teen hanno l'accento alla fine, quelli in -ty all'inizio: THIRty.",
+          rivedi: "-TEEN O -TY?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Che numero è 3,500 in inglese?",
+          opzioni: ["tre virgola cinque", "tremilacinquecento"],
+          giusta: 1,
+          spiegazione:
+            "Punti e virgole sono al contrario: la virgola separa le migliaia, il punto i decimali (3.5 = three point five).",
+          rivedi: "-TEEN O -TY?",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni numero all'ordinale.",
+          coppie: [
+            ["1", "first"],
+            ["2", "second"],
+            ["3", "third"],
+            ["5", "fifth"],
+            ["12", "twelfth"],
+          ],
+          spiegazione: "I primi tre sono irregolari; five e twelve perdono la ve: fifth, twelfth.",
+          rivedi: "I NUMERI ORDINALI",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "L'ora",
+        },
+        {
+          tipo: "abbina",
+          consegna: "Abbina ogni orario alla forma britannica tradizionale.",
+          coppie: [
+            ["7:15", "a quarter past seven"],
+            ["7:30", "half past seven"],
+            ["7:45", "a quarter to eight"],
+            ["7:50", "ten to eight"],
+          ],
+          spiegazione: "Past significa \"dopo\" l'ora, to \"prima\" dell'ora successiva.",
+          rivedi: "CHE ORE SONO?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Un amico inglese ti dice: \"See you at half seven\". A che ora vi vedete?",
+          opzioni: ["6:30", "7:30"],
+          giusta: 1,
+          spiegazione: "In britannico half seven è un modo breve per half past seven.",
+          rivedi: "CHE ORE SONO?",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Che ora è \"3 pm\"?",
+          opzioni: ["le 3 di notte", "le 15"],
+          giusta: 1,
+          spiegazione: "Pm va da mezzogiorno a mezzanotte: 3 pm sono le 15.",
+          rivedi: "AM E PM",
+        },
+        {
+          tipo: "sottotitolo",
+          testo: "Date e prezzi",
+        },
+        {
+          tipo: "seleziona",
+          consegna: "Tocca le parole scritte correttamente.",
+          parole: ["Monday", "january", "Wednesday", "august", "December", "friday"],
+          giuste: [0, 2, 4],
+          spiegazione: "Giorni e mesi vogliono sempre la maiuscola: January, August, Friday.",
+          rivedi: "GIORNI E MESI",
+        },
+        {
+          tipo: "riordina",
+          consegna: "Traduci \"Il mio compleanno è il 3 maggio\".",
+          parole: ["May", "of", "my", "on", "the", "is", "birthday", "3rd"],
+          soluzione: ["my", "birthday", "is", "on", "the", "3rd", "of", "May"],
+          spiegazione: "Le date usano l'ordinale e on: on the third of May.",
+          rivedi: "LE DATE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si legge l'anno 1998?",
+          opzioni: ["one thousand nine hundred ninety-eight", "nineteen ninety-eight", "nineteen nine eight"],
+          giusta: 1,
+          spiegazione: "Gli anni si leggono a coppie di cifre: 19 / 98.",
+          rivedi: "LE DATE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Una data americana dice 03/05. Che giorno è?",
+          opzioni: ["3 maggio", "5 marzo"],
+          giusta: 1,
+          spiegazione: "Negli Stati Uniti si scrive prima il mese: 03/05 è il 5 marzo.",
+          rivedi: "LE DATE",
+        },
+        {
+          tipo: "sceltaMultipla",
+          domanda: "Come si dice £3.50 nel parlato?",
+          opzioni: ["three pounds fifty", "three point fifty pounds", "three pound and fifty pences"],
+          giusta: 0,
+          spiegazione: "Nel parlato i pence spesso non si nominano: three pounds fifty.",
+          rivedi: "I PREZZI",
+        },
+      ],
+    },
+    {
+      titolo: "IL TUO RISULTATO",
+      blocchi: [
+        {
+          tipo: "punteggio",
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Tocca un esercizio sbagliato qui sopra per andare al riquadro da rivedere.",
+        },
+      ],
+    },
   ],
 };
