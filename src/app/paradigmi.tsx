@@ -1,6 +1,7 @@
+import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { constants } from "@/constants/theme";
+import { ColoriAttivita, constants } from "@/constants/theme";
 import { PARADIGMI } from "@/data/paradigmi";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,8 +18,9 @@ export default function Paradigmi() {
     <SafeAreaView style={{ flex: 1 }}>
       <ThemedView style={constants.container}>
         <ThemedText type="title" style={constants.title}>
-          Verbi irregolari
+          Paradigmi dei verbi irregolari
         </ThemedText>
+        <LineaTitolo colore={ColoriAttivita.paradigmi} />
         <ThemedText style={constants.subtitle}>
           Ti consiglio di leggere e ripetere ad alta voce tutti questi verbi finchè non li saprai a memoria.
         </ThemedText>

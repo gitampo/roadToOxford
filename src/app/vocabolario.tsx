@@ -13,6 +13,7 @@
 
 import CardParola from "@/components/cardParola";
 import Linguette from "@/components/linguette";
+import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
@@ -81,6 +82,7 @@ export default function Vocabolario() {
         <ThemedText type="title" style={constants.title}>
           Vocabolario
         </ThemedText>
+        <LineaTitolo colore={ROSSO} />
 
         <ThemedView
           style={[styles.barra, { backgroundColor: theme.backgroundElement }]}

@@ -10,6 +10,7 @@
  */
 
 import Linguette from "@/components/linguette";
+import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { constants, Spacing } from "@/constants/theme";
@@ -114,6 +115,7 @@ export default function Lezioni() {
         <ThemedText type="title" style={constants.title}>
           Lezioni
         </ThemedText>
+        <LineaTitolo colore={GIALLO} />
         <ThemedView
           style={[styles.barra, { backgroundColor: theme.backgroundElement }]}
         >

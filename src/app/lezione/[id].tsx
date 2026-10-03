@@ -1,3 +1,4 @@
+import { AreaAnnotazioni } from "@/components/annotazioni";
 import Brano from "@/components/brano";
 import CardApri from "@/components/cardApri";
 import CardEsempi from "@/components/cardEsempi";
@@ -260,226 +261,241 @@ export default function Dettagli() {
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
       <ThemedView style={{ flex: 1 }}>
         <ThemedView style={{ flex: 1 }}>
-          <ScrollView
-            ref={scrollRef}
-            style={{ flex: 1 }}
-            keyboardShouldPersistTaps="handled"
-            scrollEventThrottle={32}
-            onScroll={(e) => {
-              scrollY.current = e.nativeEvent.contentOffset.y;
-            }}
+          {/* Dentro i riquadri il testo si può selezionare per prendere appunti */}
+          <AreaAnnotazioni
+            lezione={{ id: lezione.id, titolo: lezione.titolo }}
+            pagina={pagina}
+            titoloRiquadro={riquadroCorrente?.titolo ?? ""}
           >
-            <ThemedView style={styles.container}>
-              {/* Intestazione: livello, titolo e barra di avanzamento */}
-              <ThemedText
-                style={[styles.etichetta, { color: theme.textSecondary }]}
-              >
-                {lezione.sottotitolo ??
-                  `${lezione.livello} · Lezione ${lezione.id}`}
-              </ThemedText>
-              <ThemedText style={styles.titoloLezione}>
-                {lezione.titolo}
-              </ThemedText>
-              {lezione.descrizione && (
+            <ScrollView
+              ref={scrollRef}
+              style={{ flex: 1 }}
+              keyboardShouldPersistTaps="handled"
+              scrollEventThrottle={32}
+              onScroll={(e) => {
+                scrollY.current = e.nativeEvent.contentOffset.y;
+              }}
+            >
+              <ThemedView style={styles.container}>
+                {/* Intestazione: livello, titolo e barra di avanzamento */}
                 <ThemedText
-                  style={[
-                    styles.descrizioneLezione,
-                    { color: theme.textSecondary },
-                  ]}
+                  style={[styles.etichetta, { color: theme.textSecondary }]}
                 >
-                  {lezione.descrizione}
+                  {lezione.sottotitolo ??
+                    `${lezione.livello} · Lezione ${lezione.id}`}
                 </ThemedText>
-              )}
-              <ThemedView style={styles.avanzamento}>
-                {Array.from({ length: numeroRiquadri }).map((_, i) => (
-                  <ThemedView
-                    key={i}
+                <ThemedText style={styles.titoloLezione}>
+                  {lezione.titolo}
+                </ThemedText>
+                {lezione.descrizione && (
+                  <ThemedText
                     style={[
-                      styles.trattino,
-                      {
-                        backgroundColor:
-                          i < pagina ? GIALLO : theme.backgroundSelected,
-                      },
+                      styles.descrizioneLezione,
+                      { color: theme.textSecondary },
                     ]}
-                  />
-                ))}
-              </ThemedView>
-
-              {pagina === 0 ? (
-                /* Copertina: citazione + elenco dei riquadri */
-                <ThemedView>
-                  <QuoteCard citazione={lezione.citazione} />
-
-                  {/* Il risultato degli esercizi: solo se sono iniziati.
-                    Finiti: spunta verde e niente pulsanti */}
-                  {riepilogo.totale > 0 && riepilogo.risposte > 0 && (
+                  >
+                    {lezione.descrizione}
+                  </ThemedText>
+                )}
+                <ThemedView style={styles.avanzamento}>
+                  {Array.from({ length: numeroRiquadri }).map((_, i) => (
                     <ThemedView
-                      type="backgroundElement"
-                      style={styles.riepilogo}
-                    >
-                      {riepilogo.risposte >= riepilogo.totale && (
-                        <ThemedView
-                          type="backgroundElement"
-                          style={styles.completati}
-                        >
-                          <SymbolView
-                            name={{
-                              ios: "checkmark.circle.fill",
-                              android: "check_circle",
-                              web: "check_circle",
-                            }}
-                            size={24}
-                            tintColor={VERDE}
-                          />
-                          <ThemedText style={styles.titoloRiepilogo}>
-                            Hai completato gli esercizi
-                          </ThemedText>
-                        </ThemedView>
-                      )}
-                      <BarraRisultato risultato={riepilogo} />
-                      {riepilogo.risposte < riepilogo.totale && (
-                        <ThemedText style={styles.testoRiepilogo}>
-                          {consiglio(riepilogo)}
-                        </ThemedText>
-                      )}
-                      {riepilogo.daRivedere.length > 0 && (
-                        <ThemedView
-                          type="backgroundElement"
-                          style={styles.daRivedere}
-                        >
-                          <ThemedText
-                            style={[
-                              styles.etichetta,
-                              { color: theme.textSecondary },
-                            ]}
+                      key={i}
+                      style={[
+                        styles.trattino,
+                        {
+                          backgroundColor:
+                            i < pagina ? GIALLO : theme.backgroundSelected,
+                        },
+                      ]}
+                    />
+                  ))}
+                </ThemedView>
+
+                {pagina === 0 ? (
+                  /* Copertina: citazione + elenco dei riquadri */
+                  <ThemedView>
+                    <QuoteCard citazione={lezione.citazione} />
+
+                    {/* Il risultato degli esercizi: solo se sono iniziati.
+                    Finiti: spunta verde e niente pulsanti */}
+                    {riepilogo.totale > 0 && riepilogo.risposte > 0 && (
+                      <ThemedView
+                        type="backgroundElement"
+                        style={styles.riepilogo}
+                      >
+                        {riepilogo.risposte >= riepilogo.totale && (
+                          <ThemedView
+                            type="backgroundElement"
+                            style={styles.completati}
                           >
-                            Da rivedere
+                            <SymbolView
+                              name={{
+                                ios: "checkmark.circle.fill",
+                                android: "check_circle",
+                                web: "check_circle",
+                              }}
+                              size={24}
+                              tintColor={VERDE}
+                            />
+                            <ThemedText style={styles.titoloRiepilogo}>
+                              Hai completato gli esercizi
+                            </ThemedText>
+                          </ThemedView>
+                        )}
+                        <BarraRisultato risultato={riepilogo} />
+                        {riepilogo.risposte < riepilogo.totale && (
+                          <ThemedText style={styles.testoRiepilogo}>
+                            {consiglio(riepilogo)}
                           </ThemedText>
-                          {riepilogo.daRivedere.map((titolo) => (
-                            <Pressable
-                              key={titolo}
-                              onPress={() => apriRiquadro(titolo)}
-                              hitSlop={4}
+                        )}
+                        {riepilogo.daRivedere.length > 0 && (
+                          <ThemedView
+                            type="backgroundElement"
+                            style={styles.daRivedere}
+                          >
+                            <ThemedText
+                              style={[
+                                styles.etichetta,
+                                { color: theme.textSecondary },
+                              ]}
                             >
-                              <ThemedText style={styles.linkRiepilogo}>
-                                → {primaMaiuscola(titolo)}
-                              </ThemedText>
-                            </Pressable>
-                          ))}
-                        </ThemedView>
-                      )}
-                      {riepilogo.risposte < riepilogo.totale && (
-                        <ThemedView
-                          type="backgroundElement"
-                          style={styles.pulsantiRiepilogo}
-                        >
-                          {riepilogo.paginaEsercizi !== undefined && (
+                              Da rivedere
+                            </ThemedText>
+                            {riepilogo.daRivedere.map((titolo) => (
+                              <Pressable
+                                key={titolo}
+                                onPress={() => apriRiquadro(titolo)}
+                                hitSlop={4}
+                              >
+                                <ThemedText style={styles.linkRiepilogo}>
+                                  → {primaMaiuscola(titolo)}
+                                </ThemedText>
+                              </Pressable>
+                            ))}
+                          </ThemedView>
+                        )}
+                        {riepilogo.risposte < riepilogo.totale && (
+                          <ThemedView
+                            type="backgroundElement"
+                            style={styles.pulsantiRiepilogo}
+                          >
+                            {riepilogo.paginaEsercizi !== undefined && (
+                              <Pressable
+                                onPress={() => vaiA(riepilogo.paginaEsercizi!)}
+                                style={({ pressed }) => [
+                                  styles.pulsanteRiepilogo,
+                                  pressed && { opacity: 0.7 },
+                                ]}
+                              >
+                                <ThemedText
+                                  style={styles.testoPulsanteRiepilogo}
+                                >
+                                  Vai agli esercizi
+                                </ThemedText>
+                              </Pressable>
+                            )}
                             <Pressable
-                              onPress={() => vaiA(riepilogo.paginaEsercizi!)}
+                              onPress={ricomincia}
                               style={({ pressed }) => [
                                 styles.pulsanteRiepilogo,
                                 pressed && { opacity: 0.7 },
                               ]}
                             >
                               <ThemedText style={styles.testoPulsanteRiepilogo}>
-                                Vai agli esercizi
+                                Rifai da capo
                               </ThemedText>
                             </Pressable>
-                          )}
-                          <Pressable
-                            onPress={ricomincia}
-                            style={({ pressed }) => [
-                              styles.pulsanteRiepilogo,
-                              pressed && { opacity: 0.7 },
-                            ]}
-                          >
-                            <ThemedText style={styles.testoPulsanteRiepilogo}>
-                              Rifai da capo
-                            </ThemedText>
-                          </Pressable>
-                        </ThemedView>
-                      )}
-                    </ThemedView>
-                  )}
+                          </ThemedView>
+                        )}
+                      </ThemedView>
+                    )}
 
-                  {numeroRiquadri > 0 && (
-                    <ThemedText
-                      style={[styles.etichetta, { color: theme.textSecondary }]}
-                    >
-                      In questa lezione
-                    </ThemedText>
-                  )}
-                  {lezione.riquadri?.map((riquadro, i) => (
-                    <Pressable
-                      key={i}
-                      onPress={() => vaiA(i + 1)}
-                      style={({ pressed }) => [
-                        styles.voceIndice,
-                        i > 0 && {
-                          borderTopWidth: 1,
-                          borderTopColor: theme.backgroundSelected,
-                        },
-                        pressed && { opacity: 0.6 },
-                      ]}
-                    >
-                      <ThemedText style={styles.numeroIndice}>
-                        {i + 1}
+                    {numeroRiquadri > 0 && (
+                      <ThemedText
+                        style={[
+                          styles.etichetta,
+                          { color: theme.textSecondary },
+                        ]}
+                      >
+                        In questa lezione
                       </ThemedText>
-                      <ThemedText style={{ flex: 1 }}>
-                        {primaMaiuscola(riquadro.titolo)}
-                      </ThemedText>
-                      <SymbolView
-                        name={{
-                          ios: "chevron.right",
-                          android: "chevron_right",
-                          web: "chevron_right",
-                        }}
-                        size={14}
-                        tintColor={theme.textSecondary}
-                      />
-                    </Pressable>
-                  ))}
-                </ThemedView>
-              ) : (
-                /* Riquadro */
-                riquadroCorrente && (
-                  <ThemedView>
-                    <ThemedText
-                      style={[styles.etichetta, { color: theme.textSecondary }]}
-                    >
-                      Riquadro {pagina} di {numeroRiquadri}
-                    </ThemedText>
-                    <ThemedText style={styles.titoloRiquadro}>
-                      {riquadroCorrente.titolo}
-                    </ThemedText>
-                    <ThemedView style={styles.lineaGialla} />
-                    <ThemedView style={styles.blocchi}>
-                      {riquadroCorrente.blocchi.map((blocco, i) => (
-                        <MostraBlocco
-                          key={i}
-                          blocco={blocco}
-                          paginaSpiegazione={paginaSpiegazione}
-                          vaiA={vaiA}
-                          stato={stati[`${pagina}-${i}`]}
-                          onStato={(nuovo) =>
-                            setStati((s) => ({
-                              ...s,
-                              [`${pagina}-${i}`]: nuovo,
-                            }))
-                          }
-                          onRivedi={vaiARiquadro}
-                          riepilogo={riepilogo}
-                          onRicomincia={ricomincia}
+                    )}
+                    {lezione.riquadri?.map((riquadro, i) => (
+                      <Pressable
+                        key={i}
+                        onPress={() => vaiA(i + 1)}
+                        style={({ pressed }) => [
+                          styles.voceIndice,
+                          i > 0 && {
+                            borderTopWidth: 1,
+                            borderTopColor: theme.backgroundSelected,
+                          },
+                          pressed && { opacity: 0.6 },
+                        ]}
+                      >
+                        <ThemedText style={styles.numeroIndice}>
+                          {i + 1}
+                        </ThemedText>
+                        <ThemedText style={{ flex: 1 }}>
+                          {primaMaiuscola(riquadro.titolo)}
+                        </ThemedText>
+                        <SymbolView
+                          name={{
+                            ios: "chevron.right",
+                            android: "chevron_right",
+                            web: "chevron_right",
+                          }}
+                          size={14}
+                          tintColor={theme.textSecondary}
                         />
-                      ))}
-                    </ThemedView>
+                      </Pressable>
+                    ))}
                   </ThemedView>
-                )
-              )}
-            </ThemedView>
-          </ScrollView>
+                ) : (
+                  /* Riquadro */
+                  riquadroCorrente && (
+                    <ThemedView>
+                      <ThemedText
+                        style={[
+                          styles.etichetta,
+                          { color: theme.textSecondary },
+                        ]}
+                      >
+                        Riquadro {pagina} di {numeroRiquadri}
+                      </ThemedText>
+                      <ThemedText style={styles.titoloRiquadro}>
+                        {riquadroCorrente.titolo}
+                      </ThemedText>
+                      <ThemedView style={styles.lineaGialla} />
+                      <ThemedView style={styles.blocchi}>
+                        {riquadroCorrente.blocchi.map((blocco, i) => (
+                          <MostraBlocco
+                            key={i}
+                            chiave={String(i)}
+                            blocco={blocco}
+                            paginaSpiegazione={paginaSpiegazione}
+                            vaiA={vaiA}
+                            stato={stati[`${pagina}-${i}`]}
+                            onStato={(nuovo) =>
+                              setStati((s) => ({
+                                ...s,
+                                [`${pagina}-${i}`]: nuovo,
+                              }))
+                            }
+                            onRivedi={vaiARiquadro}
+                            riepilogo={riepilogo}
+                            onRicomincia={ricomincia}
+                          />
+                        ))}
+                      </ThemedView>
+                    </ThemedView>
+                  )
+                )}
+              </ThemedView>
+            </ScrollView>
 
-          {/* Nei riquadri, i bordi dello schermo (il margine vuoto ai lati del
+            {/* Nei riquadri, i bordi dello schermo (il margine vuoto ai lati del
             contenuto) portano al riquadro precedente e al successivo 
           {pagina > 0 && (
             <>
@@ -493,6 +509,7 @@ export default function Dettagli() {
               />
             </>
           )}*/}
+          </AreaAnnotazioni>
         </ThemedView>
 
         {/* Dopo un "Rivedi": pulsante fisso, sopra il contenuto anche quando si scorre,
@@ -598,6 +615,7 @@ export default function Dettagli() {
 
 // Sceglie come disegnare un blocco in base al suo tipo
 function MostraBlocco({
+  chiave,
   blocco,
   paginaSpiegazione,
   vaiA,
@@ -607,6 +625,8 @@ function MostraBlocco({
   riepilogo,
   onRicomincia,
 }: {
+  // Identifica il blocco nel riquadro, per selezionarne il testo
+  chiave: string;
   blocco: Blocco;
   paginaSpiegazione: (righe: string[], riga: number) => number | undefined;
   vaiA: (pagina: number) => void;
@@ -628,7 +648,7 @@ function MostraBlocco({
     return <Tabella righe={blocco.righe} />;
   }
   if (blocco.tipo === "nota") {
-    return <CardNota testo={blocco.testo} />;
+    return <CardNota testo={blocco.testo} chiave={chiave} />;
   }
   if (blocco.tipo === "sottotitolo") {
     return <ThemedText style={styles.sottotitolo}>{blocco.testo}</ThemedText>;
@@ -690,7 +710,13 @@ function MostraBlocco({
       />
     );
   }
-  return <TestoConRimandi testo={blocco.testo} style={styles.testo} />;
+  return (
+    <TestoConRimandi
+      testo={blocco.testo}
+      chiave={chiave}
+      style={styles.testo}
+    />
+  );
 }
 
 const styles = StyleSheet.create({

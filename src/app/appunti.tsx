@@ -1,10 +1,12 @@
+import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { constants } from "@/constants/theme";
+import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
 import { leggiNote, salvaNote } from "@/data/appunti";
 import { Nota } from "@/types/nota";
+import { Link, useFocusEffect } from "expo-router";
 import { SymbolView } from "expo-symbols";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -20,10 +22,15 @@ export default function Appunti() {
   const [titolo, setTitolo] = useState("");
   const [descrizione, setDescrizione] = useState("");
   const [note, setNote] = useState<Nota[]>([]);
-  // All'apertura della pagina, recupera le note salvate sul telefono
-  useEffect(() => {
-    leggiNote().then(setNote); // leggiNote().then(setNote): quando la lettura è finita, il risultato va dritto in setNote, e la lista si riempie con le note salvate.
-  }, []);
+  // Ogni volta che la pagina torna visibile, recupera le note salvate sul
+  // telefono: così compaiono anche quelle appena prese in una lezione.
+  // leggiNote().then(setNote): quando la lettura è finita, il risultato va
+  // dritto in setNote, e la lista si riempie con le note salvate
+  useFocusEffect(
+    useCallback(() => {
+      leggiNote().then(setNote);
+    }, []),
+  );
 
   function salvaNota() {
     // 1. Senza titolo non si salva: trim() toglie gli spazi,
@@ -71,25 +78,48 @@ export default function Appunti() {
             </Pressable>
           </ThemedView>
         </ThemedView>
+        <LineaTitolo colore={ColoriAttivita.appunti} />
         <ThemedText type="subtitle" style={{ marginBottom: 20 }}>
           Lista note
         </ThemedText>
         <FlatList
           data={note}
           keyExtractor={(nota) => nota.id}
-          renderItem={({ item }) => (
-            <View style={styles.nota}>
-              <ThemedText style={styles.titoloNota}>{item.titolo}</ThemedText>
-              {item.descrizione ? (
-                <ThemedText style={styles.descrizioneNota}>
-                  {item.descrizione}
-                </ThemedText>
-              ) : null}
-              <ThemedText style={styles.dataNota}>
-                {new Date(item.data).toLocaleDateString("it-IT")}
-              </ThemedText>
-            </View>
-          )}
+          renderItem={({ item }) => {
+            // L'anteprima: la descrizione; se non c'è, l'appunto scritto o
+            // la porzione evidenziata. Sempre su una riga, poi i puntini
+            const anteprima = item.descrizione || item.testo || item.citazione;
+            return (
+              <Link
+                href={{ pathname: "/appunto/[id]", params: { id: item.id } }}
+                asChild
+              >
+                <Pressable style={({ pressed }) => pressed && { opacity: 0.7 }}>
+                  {/* Lo stile sta su una View interna: sul web Link (asChild)
+                      non passa al Pressable lo stile scritto come funzione */}
+                  <View style={styles.nota}>
+                    <ThemedText style={styles.titoloNota} numberOfLines={1}>
+                      {item.titolo}
+                    </ThemedText>
+                    {anteprima ? (
+                      <ThemedText
+                        style={styles.descrizioneNota}
+                        numberOfLines={1}
+                      >
+                        {anteprima}
+                      </ThemedText>
+                    ) : null}
+                    <ThemedText style={styles.dataNota}>
+                      {new Date(item.data).toLocaleDateString("it-IT")}
+                      {item.lezione ? ` · Lezione ${item.lezione.id}` : ""}
+                    </ThemedText>
+                    {/* La linetta che separa le note, come in Lezioni */}
+                    <View style={styles.lineaArancione} />
+                  </View>
+                </Pressable>
+              </Link>
+            );
+          }}
           ListEmptyComponent={
             <ThemedText>
               Nessuna nota. Tocca la matita per scriverne una.
@@ -200,12 +230,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#cc7717",
   },
   nota: {
-    borderWidth: 1,
-    borderColor: "#cc7717",
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 12,
+    paddingVertical: 10,
+    marginBottom: Spacing.three,
     gap: 4,
+  },
+  // Come la linetta gialla delle lezioni, ma arancione
+  lineaArancione: {
+    width: 40,
+    height: 2,
+    backgroundColor: "#cc7717",
+    marginTop: Spacing.three,
   },
   titoloNota: {
     fontFamily: "Inter_600SemiBold",
