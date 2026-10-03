@@ -10,13 +10,18 @@ const ROSSO = "#ff6b6b";
 
 type Props = {
   esempi: Esempio[];
+  // Il colore della barra a sinistra: giallo nelle lezioni, rosso nel vocabolario
+  colore?: string;
 };
 
-export default function CardEsempi({ esempi }: Props) {
+export default function CardEsempi({ esempi, colore = GIALLO }: Props) {
   const theme = useTheme();
 
   return (
-    <ThemedView type="backgroundElement" style={styles.card}>
+    <ThemedView
+      type="backgroundElement"
+      style={[styles.card, { borderLeftColor: colore }]}
+    >
       {esempi.map((esempio, i) => (
         <ThemedView key={i} type="backgroundElement">
           <ThemedText
@@ -48,7 +53,6 @@ export default function CardEsempi({ esempi }: Props) {
 const styles = StyleSheet.create({
   card: {
     borderLeftWidth: 3,
-    borderLeftColor: GIALLO,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     paddingVertical: 12,

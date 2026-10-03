@@ -22,7 +22,6 @@ import Animated, {
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Flag } from "@/components/flag";
 import { Globo, OXFORD } from "@/components/globo";
 import { Tabellone } from "@/components/tabellone";
 import { ThemedText } from "@/components/themed-text";
@@ -76,7 +75,7 @@ const VOCI = [
   },
   {
     voce: "Vocabolario",
-    href: "/lezioni",
+    href: "/vocabolario",
     colore: ColoriAttivita.vocabolario,
     icona: {
       ios: "character.book.closed.fill",
@@ -102,6 +101,8 @@ const VOCI = [
 const SPAZIO_GRIGLIA = Spacing.three;
 // La distanza tra le due colonne
 const SPAZIO_COLONNE = Spacing.five;
+// L'altezza minima dei riquadri, quando le righe sono tante
+const ALTEZZA_MIN_TASTO = 84;
 // L'altezza della scritta sotto il globo
 const ALTEZZA_SCRITTE = 24;
 // Quanto resta aperta la vignetta con l'inizio della frase, in millisecondi
@@ -125,16 +126,23 @@ export default function HomeScreen() {
   // Lo spazio libero sotto la riga che scorre
   const [zona, setZona] = useState({ larghezza: 0, altezza: 0 });
   const righe = Math.ceil(VOCI.length / 2);
-  // Il lato dei quadrati: due per riga, ma la griglia non prende più di metà altezza
-  const latoTasto = Math.floor(
+  // Due colonne: la larghezza dei riquadri non dipende da quante righe ci sono
+  const larghezzaTasto = Math.floor(
+    Math.min((zona.larghezza - SPAZIO_COLONNE) / 2, 150),
+  );
+  // L'altezza sì: quadrati finché le righe ci stanno in metà dello spazio,
+  // poi si accorciano (mai sotto ALTEZZA_MIN_TASTO, così il nome ci sta sempre)
+  const altezzaTasto = Math.floor(
     Math.min(
-      (zona.larghezza - SPAZIO_COLONNE) / 2,
-      (zona.altezza * 0.5 - (righe - 1) * SPAZIO_GRIGLIA) / righe,
-      150,
+      larghezzaTasto,
+      Math.max(
+        ALTEZZA_MIN_TASTO,
+        (zona.altezza * 0.5 - (righe - 1) * SPAZIO_GRIGLIA) / righe,
+      ),
     ),
   );
-  const larghezzaGriglia = 2 * latoTasto + SPAZIO_COLONNE;
-  const altezzaGriglia = righe * latoTasto + (righe - 1) * SPAZIO_GRIGLIA;
+  const larghezzaGriglia = 2 * larghezzaTasto + SPAZIO_COLONNE;
+  const altezzaGriglia = righe * altezzaTasto + (righe - 1) * SPAZIO_GRIGLIA;
   // Il globo prende quello che resta sopra la griglia
   const latoGlobo = Math.floor(
     Math.min(
@@ -144,8 +152,10 @@ export default function HomeScreen() {
   );
   // Solo l'inizio della frase di oggi, nella vignetta: il resto si scopre toccando il globo
   const inizioFrase =
-    lezioneDelGiorno().citazione.testo.split(" ").slice(0, PAROLE_VIGNETTA).join(" ") +
-    "…";
+    lezioneDelGiorno()
+      .citazione.testo.split(" ")
+      .slice(0, PAROLE_VIGNETTA)
+      .join(" ") + "…";
   // Il pin di Oxford, nelle coordinate della zona (il globo è centrato in alto)
   const pinX =
     zona.larghezza / 2 - latoGlobo / 2 + (latoGlobo * OXFORD.cx) / 200;
@@ -228,14 +238,14 @@ export default function HomeScreen() {
                 </Link>
               </Animated.View>
 
-              {/* Le attività, due per riga, che entrano una dopo l'altra */}
+              {/* Le attività, due per riga, che entrano una dopo l'altra.
+                  Se sono dispari l'ultima prende tutta la riga */}
               <View
                 style={[
                   styles.griglia,
                   {
                     width: larghezzaGriglia,
-                    // Tutto lo spazio tra le due colonne: così sono sempre due per riga
-                    columnGap: larghezzaGriglia - 2 * latoTasto,
+                    columnGap: SPAZIO_COLONNE,
                   },
                 ]}
               >
@@ -246,7 +256,12 @@ export default function HomeScreen() {
                     href={v.href}
                     colore={v.colore}
                     icona={v.icona}
-                    lato={latoTasto}
+                    larghezza={
+                      i === VOCI.length - 1 && VOCI.length % 2 === 1
+                        ? larghezzaGriglia
+                        : larghezzaTasto
+                    }
+                    altezza={altezzaTasto}
                     ritardo={450 + i * 120}
                   />
                 ))}

@@ -18,15 +18,17 @@ type Props = {
   icona: SymbolViewProps["name"];
   // Il colore dell'attività: si usa per l'icona e, leggero, per il bordo
   colore: string;
-  // Lato del quadrato
-  lato?: number;
+  // Le misure del riquadro: se è molto più largo che alto (per esempio l'ultimo
+  // della griglia, quando le voci sono dispari) l'icona va a sinistra del nome
+  larghezza?: number;
+  altezza?: number;
   // Dopo quanti millisecondi compare all'apertura (per farli entrare in sequenza)
   ritardo?: number;
   style?: StyleProp<ViewStyle>;
 };
 
-// Un tasto del menu della home: un quadrato con l'icona colorata al centro e il
-// nome in basso.
+// Un tasto del menu della home: un riquadro con l'icona colorata al centro e il
+// nome in basso (o, se il riquadro è lungo e basso, icona e nome affiancati).
 // Compare con una dissolvenza dal basso; quando lo premi si rimpicciolisce un po'
 // e torna con un piccolo rimbalzo.
 // Lo stile esterno (per esempio la posizione) va sul contenitore animato: il
@@ -37,11 +39,17 @@ export default function VoceMenu({
   href,
   icona,
   colore,
-  lato = 120,
+  larghezza = 120,
+  altezza = 120,
   ritardo = 0,
   style,
 }: Props) {
   const theme = useTheme();
+  const orizzontale = larghezza >= altezza * 1.6;
+  // L'icona segue il lato corto, così non schiaccia il nome
+  const latoIcona = Math.round(
+    Math.min(altezza * (orizzontale ? 0.4 : 0.32), larghezza * 0.32),
+  );
   const scala = useSharedValue(1);
   const stileScala = useAnimatedStyle(() => ({
     transform: [{ scale: scala.value }],
@@ -62,9 +70,10 @@ export default function VoceMenu({
             <View
               style={[
                 styles.quadrato,
+                orizzontale && styles.riquadroLungo,
                 {
-                  width: lato,
-                  height: lato,
+                  width: larghezza,
+                  height: altezza,
                   backgroundColor: theme.backgroundElement,
                   borderColor: colore + "55",
                   // Un alone del colore dell'attività
@@ -72,14 +81,17 @@ export default function VoceMenu({
                 },
               ]}
             >
-              <View style={styles.centro}>
-                <SymbolView
-                  name={icona}
-                  size={Math.round(lato * 0.32)}
-                  tintColor={colore}
-                />
+              <View style={!orizzontale && styles.centro}>
+                <SymbolView name={icona} size={latoIcona} tintColor={colore} />
               </View>
-              <ThemedText style={styles.nome}>{voce}</ThemedText>
+              <ThemedText
+                numberOfLines={2}
+                adjustsFontSizeToFit
+                minimumFontScale={0.8}
+                style={[styles.nome, orizzontale && styles.nomeAffiancato]}
+              >
+                {voce}
+              </ThemedText>
             </View>
           </Animated.View>
         </Pressable>
@@ -100,6 +112,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 16,
     paddingBottom: Spacing.two,
+    paddingHorizontal: Spacing.one,
+  },
+  // Icona e nome sulla stessa riga, al centro
+  riquadroLungo: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: Spacing.three,
+    paddingBottom: 0,
+    paddingHorizontal: Spacing.three,
   },
   // Lo spazio sopra il nome: l'icona ci sta in mezzo
   centro: {
@@ -113,5 +134,11 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_600SemiBold",
     letterSpacing: 0.5,
     textAlign: "center",
+  },
+  nomeAffiancato: {
+    fontSize: 15,
+    lineHeight: 20,
+    textAlign: "left",
+    flexShrink: 1,
   },
 });
