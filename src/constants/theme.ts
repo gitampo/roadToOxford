@@ -60,6 +60,7 @@ export const ColoriAttivita = {
   paradigmi: "#4da3ff", // l'azzurro del globo
   test: "#4ade80", // il verde dei risultati
   vocabolario: "#ff6b6b", // il rosso dei risultati, più morbido
+  appunti: "#cc7717"
 } as const;
 
 export const Spacing = {

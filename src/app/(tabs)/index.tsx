@@ -90,6 +90,12 @@ const VOCI = [
     icona: { ios: "list.bullet", android: "table_chart", web: "table_chart" },
   },
   {
+    voce: "Appunti",
+    href: "/appunti",
+    colore: ColoriAttivita.appunti,
+    icona: { ios: "square.and.pencil", android: "edit", web: "edit" },
+  },
+  {
     voce: "Testa il tuo livello",
     href: "/lezioni",
     colore: ColoriAttivita.test,
