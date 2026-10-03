@@ -5,6 +5,7 @@
 
 import { Nota } from "@/types/nota";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert, Platform } from "react-native";
 
 const CHIAVE = "appunti";
 
@@ -36,6 +37,26 @@ export async function aggiungiNota(nota: Nota) {
 export async function aggiornaNota(nota: Nota) {
   const note = await leggiNote();
   await salvaNote(note.map((n) => (n.id === nota.id ? nota : n)));
+}
+
+// Toglie una nota dall'elenco salvato
+export async function eliminaNota(id: string) {
+  const note = await leggiNote();
+  await salvaNote(note.filter((n) => n.id !== id));
+}
+
+// Chiede conferma prima di eliminare: sul telefono con l'avviso di sistema,
+// sul web con quello del browser (Alert lì non mostra i pulsanti)
+export function confermaEliminazione(titolo: string, onConferma: () => void) {
+  const messaggio = `"${titolo}" verrà eliminata. L'operazione non si può annullare.`;
+  if (Platform.OS === "web") {
+    if (window.confirm(messaggio)) onConferma();
+    return;
+  }
+  Alert.alert("Eliminare la nota?", messaggio, [
+    { text: "Annulla", style: "cancel" },
+    { text: "Elimina", style: "destructive", onPress: onConferma },
+  ]);
 }
 
 // Il titolo di una nota presa da una lezione: le prime tre parole della

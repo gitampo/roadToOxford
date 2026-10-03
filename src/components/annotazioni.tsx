@@ -189,7 +189,7 @@ export function AreaAnnotazioni({
       >
         <KeyboardAvoidingView
           style={styles.velo}
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <ThemedView style={styles.scheda}>
             <ThemedText style={styles.titoloScheda}>Nuova nota</ThemedText>
