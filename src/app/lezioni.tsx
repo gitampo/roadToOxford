@@ -398,8 +398,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 10,
   },
-
-
   sezione: {
     marginBottom: Spacing.three,
   },
