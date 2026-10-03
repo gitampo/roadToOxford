@@ -5,9 +5,9 @@
  * lettera, con la colonna delle lettere a destra per saltare.
  * Le card sono sempre in inglese: cercando in italiano cambia solo quali
  * parole compaiono, e le traduzioni trovate sono in rosso.
- * Sotto la barra, le linguette come in Lezioni: Tutti, Sostantivi, Verbi,
- * Aggettivi, Falsi amici. Una parola che è sia verbo sia sostantivo sta in
- * tutte e due.
+ * Sotto la barra, le linguette come in Lezioni: Tutti, una per ogni
+ * categoria presente (Sostantivi, Verbi, Aggettivi, Avverbi...) e Falsi
+ * amici. Una parola che è sia verbo sia sostantivo sta in tutte e due.
  * Toccando una card si apre il dettaglio della parola (/parola/[id]).
  */
 
@@ -18,9 +18,9 @@ import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
-import { cerca, perLettera } from "@/data/vocabolario";
+import { cerca, perLettera, VOCABOLARIO } from "@/data/vocabolario";
 import { useTheme } from "@/hooks/use-theme";
-import { Voce } from "@/types/vocabolario";
+import { Categoria, Voce } from "@/types/vocabolario";
 import { SymbolView } from "expo-symbols";
 import { useRef, useState } from "react";
 import {
@@ -36,17 +36,31 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const ROSSO = ColoriAttivita.vocabolario;
 const ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-// Le linguette sotto la ricerca ("Tutti" è a parte: nessun filtro)
+// Il nome di ogni categoria sulle linguette, nell'ordine in cui compaiono
+const NOMI_CATEGORIE: Record<Categoria, string> = {
+  sostantivo: "Sostantivi",
+  verbo: "Verbi",
+  aggettivo: "Aggettivi",
+  avverbio: "Avverbi",
+  pronome: "Pronomi",
+  preposizione: "Preposizioni",
+  congiunzione: "Congiunzioni",
+  interiezione: "Interiezioni",
+};
+
+// Le linguette sotto la ricerca ("Tutti" è a parte: nessun filtro).
+// Una per ogni categoria che ha almeno una parola nel vocabolario: quando
+// arriva la prima interiezione, compare da sola la sua linguetta.
+// In fondo i falsi amici
 const FILTRI: { nome: string; vale: (voce: Voce) => boolean }[] = [
-  {
-    nome: "Sostantivi",
-    vale: (v) => v.usi.some((u) => u.categoria === "sostantivo"),
-  },
-  { nome: "Verbi", vale: (v) => v.usi.some((u) => u.categoria === "verbo") },
-  {
-    nome: "Aggettivi",
-    vale: (v) => v.usi.some((u) => u.categoria === "aggettivo"),
-  },
+  ...(Object.keys(NOMI_CATEGORIE) as Categoria[])
+    .filter((c) =>
+      VOCABOLARIO.some((v) => v.usi.some((u) => u.categoria === c)),
+    )
+    .map((c) => ({
+      nome: NOMI_CATEGORIE[c],
+      vale: (v: Voce) => v.usi.some((u) => u.categoria === c),
+    })),
   { nome: "Falsi amici", vale: (v) => v.falsoAmico !== undefined },
 ];
 

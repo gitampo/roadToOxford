@@ -28,7 +28,6 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import VoceMenu from "@/components/voceMenu";
 import {
-  BottomTabInset,
   ColoriAttivita,
   MaxContentWidth,
   Spacing,
@@ -393,7 +392,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     paddingHorizontal: Spacing.one,
-    paddingBottom: BottomTabInset,
+    paddingBottom: Spacing.two,
     maxWidth: MaxContentWidth,
   },
   page: {

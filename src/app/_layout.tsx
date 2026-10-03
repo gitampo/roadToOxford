@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
+export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [caricati] = useFonts({
     PlayfairDisplay_700Bold,
@@ -31,9 +31,7 @@ export default function TabLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <AnimatedSplashOverlay />
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-        </Stack>
+        <Stack screenOptions={{ headerShown: false }} />
       </ThemeProvider>
     </GestureHandlerRootView>
   );

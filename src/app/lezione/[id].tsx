@@ -5,7 +5,7 @@ import CardEsempi from "@/components/cardEsempi";
 import CardNota from "@/components/cardNota";
 import Esercizio, { Punteggio } from "@/components/esercizi";
 import { QuoteCard } from "@/components/quote-card";
-import { BarraRisultato, consiglio, VERDE } from "@/components/risultato";
+import { BarraRisultato, ROSSO, VERDE } from "@/components/risultato";
 import Tabella from "@/components/tabella";
 import TestoConRimandi from "@/components/testoConRimandi";
 import { ThemedText } from "@/components/themed-text";
@@ -77,6 +77,8 @@ function calcolaRiepilogo(
     sbagliati,
     // Il primo riquadro con degli esercizi
     paginaEsercizi: esercizi[0]?.pagina,
+    // Il riquadro del primo esercizio ancora senza risposta (per riprendere)
+    paginaDaFare: esercizi.find((e) => e.corretta === undefined)?.pagina,
     // I riquadri da rivedere, senza doppioni
     daRivedere: [
       ...new Set(sbagliati.flatMap((e) => (e.rivedi ? [e.rivedi] : []))),
@@ -319,12 +321,27 @@ export default function Dettagli() {
 
                     {/* Il risultato degli esercizi: solo se sono iniziati.
                     Finiti: spunta verde e niente pulsanti */}
-                    {riepilogo.totale > 0 && riepilogo.risposte > 0 && (
-                      <ThemedView
-                        type="backgroundElement"
-                        style={styles.riepilogo}
-                      >
-                        {riepilogo.risposte >= riepilogo.totale && (
+                    {riepilogo.totale > 0 &&
+                      riepilogo.risposte > 0 &&
+                      riepilogo.risposte < riepilogo.totale && (
+                        <EserciziInSospeso
+                          riepilogo={riepilogo}
+                          onRiprendi={() =>
+                            vaiA(
+                              riepilogo.paginaDaFare ??
+                                riepilogo.paginaEsercizi!,
+                            )
+                          }
+                          onRicomincia={ricomincia}
+                          onRivedi={apriRiquadro}
+                        />
+                      )}
+                    {riepilogo.totale > 0 &&
+                      riepilogo.risposte >= riepilogo.totale && (
+                        <ThemedView
+                          type="backgroundElement"
+                          style={styles.riepilogo}
+                        >
                           <ThemedView
                             type="backgroundElement"
                             style={styles.completati}
@@ -342,74 +359,15 @@ export default function Dettagli() {
                               Hai completato gli esercizi
                             </ThemedText>
                           </ThemedView>
-                        )}
-                        <BarraRisultato risultato={riepilogo} />
-                        {riepilogo.risposte < riepilogo.totale && (
-                          <ThemedText style={styles.testoRiepilogo}>
-                            {consiglio(riepilogo)}
-                          </ThemedText>
-                        )}
-                        {riepilogo.daRivedere.length > 0 && (
-                          <ThemedView
-                            type="backgroundElement"
-                            style={styles.daRivedere}
-                          >
-                            <ThemedText
-                              style={[
-                                styles.etichetta,
-                                { color: theme.textSecondary },
-                              ]}
-                            >
-                              Da rivedere
-                            </ThemedText>
-                            {riepilogo.daRivedere.map((titolo) => (
-                              <Pressable
-                                key={titolo}
-                                onPress={() => apriRiquadro(titolo)}
-                                hitSlop={4}
-                              >
-                                <ThemedText style={styles.linkRiepilogo}>
-                                  → {primaMaiuscola(titolo)}
-                                </ThemedText>
-                              </Pressable>
-                            ))}
-                          </ThemedView>
-                        )}
-                        {riepilogo.risposte < riepilogo.totale && (
-                          <ThemedView
-                            type="backgroundElement"
-                            style={styles.pulsantiRiepilogo}
-                          >
-                            {riepilogo.paginaEsercizi !== undefined && (
-                              <Pressable
-                                onPress={() => vaiA(riepilogo.paginaEsercizi!)}
-                                style={({ pressed }) => [
-                                  styles.pulsanteRiepilogo,
-                                  pressed && { opacity: 0.7 },
-                                ]}
-                              >
-                                <ThemedText
-                                  style={styles.testoPulsanteRiepilogo}
-                                >
-                                  Vai agli esercizi
-                                </ThemedText>
-                              </Pressable>
-                            )}
-                            <Pressable
-                              onPress={ricomincia}
-                              style={({ pressed }) => [
-                                styles.pulsanteRiepilogo,
-                                pressed && { opacity: 0.7 },
-                              ]}
-                            >
-                              <ThemedText style={styles.testoPulsanteRiepilogo}>
-                                Rifai da capo
-                              </ThemedText>
-                            </Pressable>
-                          </ThemedView>
-                        )}
-                      </ThemedView>
-                    )}
+                          <BarraRisultato risultato={riepilogo} />
+                          {riepilogo.daRivedere.length > 0 && (
+                            <DaRivedere
+                              titoli={riepilogo.daRivedere}
+                              onRivedi={apriRiquadro}
+                            />
+                          )}
+                        </ThemedView>
+                      )}
 
                     {numeroRiquadri > 0 && (
                       <ThemedText
@@ -719,6 +677,170 @@ function MostraBlocco({
   );
 }
 
+// I riquadri con esercizi sbagliati, da rileggere
+function DaRivedere({
+  titoli,
+  onRivedi,
+}: {
+  titoli: string[];
+  onRivedi: (titolo: string) => void;
+}) {
+  const theme = useTheme();
+  return (
+    <ThemedView type="backgroundElement" style={styles.daRivedere}>
+      <ThemedText style={[styles.etichetta, { color: theme.textSecondary }]}>
+        Da rivedere
+      </ThemedText>
+      {titoli.map((titolo) => (
+        <Pressable key={titolo} onPress={() => onRivedi(titolo)} hitSlop={4}>
+          <ThemedText style={styles.linkRiepilogo}>
+            → {primaMaiuscola(titolo)}
+          </ThemedText>
+        </Pressable>
+      ))}
+    </ThemedView>
+  );
+}
+
+// La card in copertina quando gli esercizi sono iniziati ma non finiti:
+// quanti ne mancano, come stanno andando e il pulsante per riprendere
+function EserciziInSospeso({
+  riepilogo,
+  onRiprendi,
+  onRicomincia,
+  onRivedi,
+}: {
+  riepilogo: ReturnType<typeof calcolaRiepilogo>;
+  onRiprendi: () => void;
+  onRicomincia: () => void;
+  onRivedi: (titolo: string) => void;
+}) {
+  const theme = useTheme();
+  const { totale, risposte, giuste } = riepilogo;
+  const mancano = totale - risposte;
+  const sbagliate = risposte - giuste;
+
+  return (
+    <ThemedView type="backgroundElement" style={styles.sospeso}>
+      {/* La striscia gialla a sinistra, come le card degli esempi */}
+      <ThemedView style={styles.strisciaSospeso} />
+
+      <ThemedView type="backgroundElement" style={styles.contenutoSospeso}>
+        <ThemedView type="backgroundElement" style={styles.testataSospeso}>
+          <SymbolView
+            name={{
+              ios: "hourglass",
+              android: "hourglass_empty",
+              web: "hourglass_empty",
+            }}
+            size={20}
+            tintColor={GIALLO}
+          />
+          <ThemedText style={styles.titoloRiepilogo}>
+            Esercizi in sospeso
+          </ThemedText>
+          <ThemedText style={styles.contoSospeso}>
+            {risposte}
+            <ThemedText
+              style={[styles.contoTotale, { color: theme.textSecondary }]}
+            >
+              /{totale}
+            </ThemedText>
+          </ThemedText>
+        </ThemedView>
+
+        <ThemedText style={styles.testoRiepilogo}>
+          {mancano === 1
+            ? "Ti manca un solo esercizio"
+            : `Ti mancano ${mancano} esercizi`}
+          : finiscili per avere il tuo risultato.
+        </ThemedText>
+
+        {/* Un segmento per esercizio: verde giusto, rosso sbagliato,
+            grigio ancora da fare */}
+        <ThemedView type="backgroundElement" style={styles.segmenti}>
+          {Array.from({ length: totale }).map((_, i) => (
+            <ThemedView
+              key={i}
+              style={[
+                styles.segmento,
+                {
+                  backgroundColor:
+                    i < giuste
+                      ? VERDE
+                      : i < risposte
+                        ? ROSSO
+                        : theme.backgroundSelected,
+                },
+              ]}
+            />
+          ))}
+        </ThemedView>
+        <ThemedView type="backgroundElement" style={styles.legenda}>
+          <Voce colore={VERDE} testo={`${giuste} giuste`} />
+          <Voce colore={ROSSO} testo={`${sbagliate} sbagliate`} />
+          <Voce
+            colore={theme.backgroundSelected}
+            testo={`${mancano} da fare`}
+          />
+        </ThemedView>
+
+        {riepilogo.daRivedere.length > 0 && (
+          <DaRivedere titoli={riepilogo.daRivedere} onRivedi={onRivedi} />
+        )}
+
+        <ThemedView type="backgroundElement" style={styles.pulsantiRiepilogo}>
+          <Pressable
+            onPress={onRiprendi}
+            style={({ pressed }) => [
+              styles.riprendi,
+              pressed && { opacity: 0.7 },
+            ]}
+          >
+            <ThemedText style={styles.testoAvanti}>Riprendi</ThemedText>
+            <SymbolView
+              name={{
+                ios: "arrow.right",
+                android: "arrow_forward",
+                web: "arrow_forward",
+              }}
+              size={16}
+              tintColor="#000000"
+            />
+          </Pressable>
+          <Pressable
+            onPress={onRicomincia}
+            style={({ pressed }) => [
+              styles.ricomincia,
+              { borderColor: theme.backgroundSelected },
+              pressed && { opacity: 0.7 },
+            ]}
+          >
+            <ThemedText
+              style={[styles.testoRicomincia, { color: theme.textSecondary }]}
+            >
+              Rifai da capo
+            </ThemedText>
+          </Pressable>
+        </ThemedView>
+      </ThemedView>
+    </ThemedView>
+  );
+}
+
+// Un pallino colorato con la sua spiegazione, sotto i segmenti
+function Voce({ colore, testo }: { colore: string; testo: string }) {
+  const theme = useTheme();
+  return (
+    <ThemedView type="backgroundElement" style={styles.voceLegenda}>
+      <ThemedView style={[styles.pallino, { backgroundColor: colore }]} />
+      <ThemedText style={[styles.testoLegenda, { color: theme.textSecondary }]}>
+        {testo}
+      </ThemedText>
+    </ThemedView>
+  );
+}
+
 const styles = StyleSheet.create({
   riepilogo: {
     borderRadius: 12,
@@ -753,16 +875,86 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
+    marginTop: 4,
   },
-  pulsanteRiepilogo: {
-    borderWidth: 1,
-    borderColor: GIALLO,
-    borderRadius: 999,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
+  sospeso: {
+    flexDirection: "row",
+    borderRadius: 12,
+    overflow: "hidden",
+    marginBottom: Spacing.three,
   },
-  testoPulsanteRiepilogo: {
+  strisciaSospeso: {
+    width: 4,
+    backgroundColor: GIALLO,
+  },
+  contenutoSospeso: {
+    flex: 1,
+    padding: Spacing.three,
+    gap: 12,
+  },
+  testataSospeso: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.two,
+  },
+  // Il conto delle risposte, spinto tutto a destra
+  contoSospeso: {
+    marginLeft: "auto",
     color: GIALLO,
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 18,
+  },
+  contoTotale: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+  },
+  segmenti: {
+    flexDirection: "row",
+    gap: 3,
+  },
+  segmento: {
+    flex: 1,
+    height: 6,
+    borderRadius: 3,
+  },
+  legenda: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    columnGap: Spacing.three,
+    rowGap: 4,
+    marginTop: -4,
+  },
+  voceLegenda: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  pallino: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  testoLegenda: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 12,
+  },
+  // Pieno come il pulsante "Avanti" in fondo alla lezione
+  riprendi: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: GIALLO,
+    borderRadius: 999,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+  },
+  ricomincia: {
+    borderWidth: 1,
+    borderRadius: 999,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+  },
+  testoRicomincia: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 14,
   },

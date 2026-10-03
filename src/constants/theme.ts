@@ -88,5 +88,4 @@ export const constants = StyleSheet.create({
     },
 });
 
-export const BottomTabInset = Platform.select({ ios:10, android: 10 }) ?? 0;
 export const MaxContentWidth = 800;
