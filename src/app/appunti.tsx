@@ -1,9 +1,10 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { constants } from "@/constants/theme";
+import { leggiNote, salvaNote } from "@/data/appunti";
 import { Nota } from "@/types/nota";
 import { SymbolView } from "expo-symbols";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -19,6 +20,10 @@ export default function Appunti() {
   const [titolo, setTitolo] = useState("");
   const [descrizione, setDescrizione] = useState("");
   const [note, setNote] = useState<Nota[]>([]);
+  // All'apertura della pagina, recupera le note salvate sul telefono
+  useEffect(() => {
+    leggiNote().then(setNote); // leggiNote().then(setNote): quando la lettura è finita, il risultato va dritto in setNote, e la lista si riempie con le note salvate.
+  }, []);
 
   function salvaNota() {
     // 1. Senza titolo non si salva: trim() toglie gli spazi,
@@ -37,6 +42,7 @@ export default function Appunti() {
     //    "...note" copia le note che c'erano già dentro il nuovo array
     const nuovoElenco = [nuova, ...note];
     setNote(nuovoElenco);
+    salvaNote(nuovoElenco);
 
     // 4. Campi vuoti per la prossima nota, e il modal si chiude
     setTitolo("");
