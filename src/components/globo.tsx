@@ -22,17 +22,21 @@ const PARALLELI = [
   { cy: 160, rx: 65, ry: 8, w: 0.4 },
 ];
 
-type Props = { style?: StyleProp<ViewStyle> };
+type Props = {
+  // Lato del disegno in punti (il disegno è quadrato)
+  dimensione?: number;
+  style?: StyleProp<ViewStyle>;
+};
 
 // posizione approssimativa di Oxford sulla sagoma
-const OXFORD = { cx: 79, cy:85 };
+export const OXFORD = { cx: 79, cy: 85 };
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-export function Globo({ style }: Props) {
+export function Globo({ dimensione = 200, style }: Props) {
   return (
     <View style={style}>
-      <Svg width={200} height={200} viewBox="0 0 200 200">
+      <Svg width={dimensione} height={dimensione} viewBox="0 0 200 200">
         <Circle
           cx={100}
           cy={100}

@@ -1,12 +1,45 @@
 import * as Device from "expo-device";
-import { Platform, StyleSheet } from "react-native";
+import { Link } from "expo-router";
+import { useEffect, useState } from "react";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import Animated, {
+  Easing,
+  FadeIn,
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withSequence,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Globo } from "@/components/globo";
+import { Flag } from "@/components/flag";
+import { Globo, OXFORD } from "@/components/globo";
+import { Tabellone } from "@/components/tabellone";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import VoceMenu from "@/components/voceMenu";
-import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+import {
+  BottomTabInset,
+  ColoriAttivita,
+  MaxContentWidth,
+  Spacing,
+} from "@/constants/theme";
+import { lezioneDelGiorno } from "@/data/frase-del-giorno";
+import { LEZIONI } from "@/data/lezioni";
+import { prossimaLezione } from "@/data/prossima-lezione";
+import { useRisultati } from "@/hooks/use-risultati";
+import { useTheme } from "@/hooks/use-theme";
+import { useVisti } from "@/hooks/use-visti";
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -27,143 +60,409 @@ function getDevMenuHint() {
   );
 }
 
-const GIALLO = "#ffe100";
-const ROSSO = "#ff3700";
-const VERDE = "#3dc70b";
-const BLU = "#2800f2";
-const BIANCO = "#FFFFFF";
-const COLORI_TRATTINI = [GIALLO, ROSSO, VERDE, BLU, BIANCO];
+// L'azzurro del globo, usato anche per l'alone e la scritta
+const AZZURRO = "#4da3ff";
 
+// Le attività della home, nella griglia sotto il globo.
+// Il colore viene da ColoriAttivita (constants/theme.ts): è lo stesso dell'icona
+// e del trattino sotto il titolo.
+// Icone: nomi SF Symbols per iOS, Material Symbols per Android e web
 const VOCI = [
-  { voce: "Vai alle lezioni", href: "/lezioni", colore: "#ffe100" },
   {
-    voce: "Paradigmi dei verbi irregolari",
-    href: "/paradigmi",
-    colore: "#2800f2",
+    voce: "Lezioni",
+    href: "/lezioni",
+    colore: ColoriAttivita.lezioni,
+    icona: { ios: "book.fill", android: "menu_book", web: "menu_book" },
   },
-  { voce: "Testa il tuo livello", href: "/lezioni", colore: "#ff3700" },
+  {
+    voce: "Vocabolario",
+    href: "/lezioni",
+    colore: ColoriAttivita.vocabolario,
+    icona: {
+      ios: "character.book.closed.fill",
+      android: "dictionary",
+      web: "dictionary",
+    },
+  },
+  {
+    voce: "Paradigmi",
+    href: "/paradigmi",
+    colore: ColoriAttivita.paradigmi,
+    icona: { ios: "list.bullet", android: "table_chart", web: "table_chart" },
+  },
+  {
+    voce: "Testa il tuo livello",
+    href: "/lezioni",
+    colore: ColoriAttivita.test,
+    icona: { ios: "checkmark.seal.fill", android: "verified", web: "verified" },
+  },
 ] as const;
 
+// Lo spazio tra i quadrati della griglia
+const SPAZIO_GRIGLIA = Spacing.three;
+// La distanza tra le due colonne
+const SPAZIO_COLONNE = Spacing.five;
+// L'altezza della scritta sotto il globo
+const ALTEZZA_SCRITTE = 24;
+// Quanto resta aperta la vignetta con l'inizio della frase, in millisecondi
+const DURATA_VIGNETTA = 66000;
+// Quante parole della frase si vedono nella vignetta
+const PAROLE_VIGNETTA = 4;
+// L'altezza dello spazio della vignetta, sopra il pin
+const ALTEZZA_VIGNETTA = 40;
+
+// La home è a tema stazione: in alto il titolo e la riga che scorre con la
+// prossima lezione da fare ("Next stop"); sotto, il globo (apre la frase del
+// giorno) e la griglia delle attività, due per riga.
+// Le misure si calcolano sullo spazio libero, così si vede sempre tutto senza scorrere
+const ID_LEZIONI = LEZIONI.map((l) => l.id);
+
 export default function HomeScreen() {
+  const theme = useTheme();
+  const { height } = useWindowDimensions();
+  // Sugli schermi bassi il titolo si rimpicciolisce
+  const schermoBasso = height < 760;
+  // Lo spazio libero sotto la riga che scorre
+  const [zona, setZona] = useState({ larghezza: 0, altezza: 0 });
+  const righe = Math.ceil(VOCI.length / 2);
+  // Il lato dei quadrati: due per riga, ma la griglia non prende più di metà altezza
+  const latoTasto = Math.floor(
+    Math.min(
+      (zona.larghezza - SPAZIO_COLONNE) / 2,
+      (zona.altezza * 0.5 - (righe - 1) * SPAZIO_GRIGLIA) / righe,
+      150,
+    ),
+  );
+  const larghezzaGriglia = 2 * latoTasto + SPAZIO_COLONNE;
+  const altezzaGriglia = righe * latoTasto + (righe - 1) * SPAZIO_GRIGLIA;
+  // Il globo prende quello che resta sopra la griglia
+  const latoGlobo = Math.floor(
+    Math.min(
+      zona.larghezza * 0.8,
+      zona.altezza - altezzaGriglia - ALTEZZA_SCRITTE - Spacing.five,
+    ),
+  );
+  // Solo l'inizio della frase di oggi, nella vignetta: il resto si scopre toccando il globo
+  const inizioFrase =
+    lezioneDelGiorno().citazione.testo.split(" ").slice(0, PAROLE_VIGNETTA).join(" ") +
+    "…";
+  // Il pin di Oxford, nelle coordinate della zona (il globo è centrato in alto)
+  const pinX =
+    zona.larghezza / 2 - latoGlobo / 2 + (latoGlobo * OXFORD.cx) / 200;
+  const pinY = (latoGlobo * OXFORD.cy) / 200;
+  // La prossima fermata: si aggiorna ogni volta che si torna alla home
+  const visti = useVisti(ID_LEZIONI);
+  const risultati = useRisultati(ID_LEZIONI);
+  const prossima = prossimaLezione(visti, risultati);
+
+  // Il globo si rimpicciolisce un po' quando lo premi, come i tasti
+  const scalaGlobo = useSharedValue(1);
+  const stileGlobo = useAnimatedStyle(() => ({
+    transform: [{ scale: scalaGlobo.value }],
+  }));
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ThemedView style={styles.page}>
-        <ThemedText type="title" style={styles.title}>
-          ROAD{"\n"}TO{"\n"}ENGLAND
-        </ThemedText>
-        <ThemedView style={styles.avanzamento}>
-          {COLORI_TRATTINI.map((colore) => (
-            <ThemedView
-              key={colore}
-              style={[
-                styles.trattino,
-                {
-                  backgroundColor: colore,
-                },
-              ]}
-            />
-          ))}
-        </ThemedView>
-        <ThemedView style={{ flexDirection: "row", alignItems: "center" }}>
-          <ThemedView style={{ width: "50%", borderRadius: 12 }}>
-            <ThemedText style={styles.subtitle}>
-              Learn English from absolute beginner to holding a real
-              conversation in England.
+        <ThemedView style={styles.intestazione}>
+          <Animated.View entering={FadeInDown.duration(600)}>
+            <ThemedText
+              type="title"
+              style={[styles.title, schermoBasso && styles.titoloCompatto]}
+            >
+              ROAD TO ENGLAND
             </ThemedText>
-          </ThemedView>
-          <Globo style={styles.globeStyle}></Globo>
+          </Animated.View>
+
+          {/* Un trattino per attività, con il suo colore: fanno da legenda */}
+          <Animated.View
+            entering={FadeIn.delay(200).duration(600)}
+            style={styles.avanzamento}
+          >
+            {VOCI.map((v) => (
+              <View
+                key={v.voce}
+                style={[styles.trattino, { backgroundColor: v.colore }]}
+              />
+            ))}
+          </Animated.View>
         </ThemedView>
-        <ThemedView style={styles.quadrati}>
-          {VOCI.map((v, i) => (
-            <VoceMenu
-              key={v.voce}
-              voce={v.voce}
-              href={v.href}
-              colore={v.colore}
-              style={[
-                styles.voce,
-                VOCI.length % 2 === 1 &&
-                  i === VOCI.length - 1 && { aspectRatio: 2 },
-              ]}
-            />
-          ))}
-        </ThemedView>
+
+        <Animated.View entering={FadeInDown.delay(150).duration(600)}>
+          <Tabellone lezione={prossima} />
+        </Animated.View>
+
+        {/* Lo spazio che resta: in alto il globo, sotto la griglia */}
+        <View
+          style={styles.zona}
+          onLayout={(e) => {
+            const { width, height } = e.nativeEvent.layout;
+            setZona({ larghezza: width, altezza: height });
+          }}
+        >
+          {zona.altezza > 0 && (
+            <>
+              {/* Il globo: apre la frase del giorno */}
+              <Animated.View
+                entering={FadeIn.delay(300).duration(800)}
+                style={[styles.globo, { width: larghezzaGriglia }]}
+              >
+                <Alone
+                  centroX={larghezzaGriglia / 2}
+                  centroY={latoGlobo / 2}
+                  diametro={latoGlobo * 0.9}
+                />
+                <Link href="/frase-del-giorno" asChild>
+                  <Pressable
+                    style={styles.premibileGlobo}
+                    onPressIn={() => (scalaGlobo.value = withSpring(0.95))}
+                    onPressOut={() => (scalaGlobo.value = withSpring(1))}
+                  >
+                    <Animated.View style={[styles.premibileGlobo, stileGlobo]}>
+                      <Globo dimensione={latoGlobo} />
+                      <ThemedText style={styles.etichettaGlobo}>
+                        Scopri la frase del giorno
+                      </ThemedText>
+                    </Animated.View>
+                  </Pressable>
+                </Link>
+              </Animated.View>
+
+              {/* Le attività, due per riga, che entrano una dopo l'altra */}
+              <View
+                style={[
+                  styles.griglia,
+                  {
+                    width: larghezzaGriglia,
+                    // Tutto lo spazio tra le due colonne: così sono sempre due per riga
+                    columnGap: larghezzaGriglia - 2 * latoTasto,
+                  },
+                ]}
+              >
+                {VOCI.map((v, i) => (
+                  <VoceMenu
+                    key={v.voce}
+                    voce={v.voce}
+                    href={v.href}
+                    colore={v.colore}
+                    icona={v.icona}
+                    lato={latoTasto}
+                    ritardo={450 + i * 120}
+                  />
+                ))}
+              </View>
+
+              <Vignetta testo={inizioFrase} pinX={pinX} pinY={pinY} />
+            </>
+          )}
+        </View>
       </ThemedView>
     </SafeAreaView>
   );
 }
 
+// La vignetta con l'inizio della frase del giorno: all'apertura dell'app esce
+// dal pin di Oxford e si allarga verso sinistra, fuori dal globo; dopo
+// DURATA_VIGNETTA si richiude nel pin. Il suo angolo in basso a destra è sul pin
+function Vignetta({
+  testo,
+  pinX,
+  pinY,
+}: {
+  testo: string;
+  pinX: number;
+  pinY: number;
+}) {
+  const p = useSharedValue(0);
+
+  useEffect(() => {
+    p.value = withSequence(
+      // Aspetta che il globo sia comparso, poi si apre veloce con un rimbalzo appena accennato
+      withDelay(
+        700,
+        withTiming(1, { duration: 260, easing: Easing.out(Easing.back(0.6)) }),
+      ),
+      // E si richiude nel pin
+      withDelay(
+        DURATA_VIGNETTA,
+        withTiming(0, { duration: 220, easing: Easing.in(Easing.cubic) }),
+      ),
+    );
+  }, [p]);
+
+  const stile = useAnimatedStyle(() => ({
+    opacity: Math.min(1, p.value * 1.5),
+    transform: [{ scale: p.value }],
+  }));
+
+  return (
+    <Animated.View
+      style={[
+        styles.livello,
+        styles.vignetta,
+        // Dal bordo sinistro fino al pin, appoggiata sopra di lui
+        {
+          left: Spacing.two,
+          width: pinX - Spacing.two,
+          top: pinY - ALTEZZA_VIGNETTA,
+          height: ALTEZZA_VIGNETTA,
+        },
+        stile,
+      ]}
+    >
+      <View style={styles.nuvoletta}>
+        <ThemedText numberOfLines={1} style={styles.testoVignetta}>
+          “{testo}”
+        </ThemedText>
+      </View>
+    </Animated.View>
+  );
+}
+
+// Un anello azzurro che si allarga e svanisce intorno al globo, di continuo:
+// invita a toccarlo
+function Alone({
+  centroX,
+  centroY,
+  diametro,
+}: {
+  centroX: number;
+  centroY: number;
+  diametro: number;
+}) {
+  const p = useSharedValue(0);
+
+  useEffect(() => {
+    p.value = withRepeat(
+      withTiming(1, { duration: 2400, easing: Easing.out(Easing.ease) }),
+      -1,
+      false,
+    );
+  }, [p]);
+
+  const stile = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 + 0.18 * p.value }],
+    opacity: 0.5 * (1 - p.value),
+  }));
+
+  return (
+    <Animated.View
+      style={[
+        styles.livello,
+        styles.alone,
+        {
+          width: diametro,
+          height: diametro,
+          borderRadius: diametro / 2,
+          top: centroY - diametro / 2,
+          left: centroX - diametro / 2,
+        },
+        stile,
+      ]}
+    />
+  );
+}
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    flexDirection: "row",
-  },
   safeArea: {
     flex: 1,
     paddingHorizontal: Spacing.one,
-    gap: Spacing.three,
     paddingBottom: BottomTabInset,
     maxWidth: MaxContentWidth,
   },
   page: {
     flex: 1,
     paddingTop: Spacing.six,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.three,
-    backgroundColor: "#000000",
-  },
-  heroSection: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-    paddingHorizontal: Spacing.four,
+    paddingBottom: Spacing.three,
+    paddingHorizontal: Spacing.one,
     gap: Spacing.four,
+    backgroundColor: "#000000",
+    // L'alone del globo, quando si allarga, non deve far scorrere la pagina
+    overflow: "hidden",
+  },
+  intestazione: {
+    alignItems: "center",
+    gap: Spacing.three,
   },
   title: {
-    textAlign: "left",
-    marginBottom: 10,
+    fontSize: 34,
+    lineHeight: 40,
+    textAlign: "center",
     fontFamily: "PlayfairDisplay_700Bold",
     color: "#ffffff",
   },
-  subtitle: {
-    alignItems: "flex-start",
-    fontFamily: "Inter_400Regular",
-    letterSpacing: 2,
-    opacity: 1,
-  },
-  code: {
-    textTransform: "uppercase",
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: "stretch",
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-  globeStyle: {
-    marginBottom: 10,
+  titoloCompatto: {
+    fontSize: 28,
+    lineHeight: 34,
   },
   avanzamento: {
     flexDirection: "row",
     gap: 4,
-    marginBottom: Spacing.three,
-    width: 150,
+    width: 120,
   },
   trattino: {
     flex: 1,
     height: 3,
     borderRadius: 2,
   },
-  quadrati: {
+  // Prende tutto lo spazio libero: globo in alto, griglia in fondo
+  zona: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  // L'alone: dietro a tutto, non toccabile
+  livello: {
+    position: "absolute",
+    pointerEvents: "none",
+  },
+  alone: {
+    borderWidth: 1,
+    borderColor: AZZURRO,
+  },
+  globo: {
+    alignItems: "center",
+  },
+  premibileGlobo: {
+    alignItems: "center",
+  },
+  etichettaGlobo: {
+    marginTop: Spacing.one,
+    lineHeight: 20,
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 11,
+    letterSpacing: 2,
+    textTransform: "uppercase",
+    color: AZZURRO,
+  },
+  // Si apre e si richiude dall'angolo in basso a destra, cioè dal pin
+  vignetta: {
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    transformOrigin: "right bottom",
+  },
+  nuvoletta: {
+    maxWidth: "100%",
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    backgroundColor: "#0d0d0f",
+    borderColor: AZZURRO,
+    borderWidth: 1,
+    borderRadius: 14,
+    // L'angolo a punta, quello che indica il pin
+    borderBottomRightRadius: 2,
+    boxShadow: `0 0 14px ${AZZURRO}55`,
+  },
+  testoVignetta: {
+    fontFamily: "Inter_400Regular",
+    fontStyle: "italic",
+    fontSize: 13,
+    lineHeight: 18,
+    color: "#ffffff",
+  },
+  griglia: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: Spacing.three,
-  },
-  voce: {
-    flexBasis: "40%", // larghezza minima di partenza
-    flexGrow: 1,
-    aspectRatio: 1, // poi si allarga per riempire la riga
+    rowGap: SPAZIO_GRIGLIA,
   },
 });

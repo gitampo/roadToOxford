@@ -34,3 +34,5 @@ Vocabolario / WordReference
 False Friends
 
 Possibilita di analizzare testi di canzoni
+
+Opzione per salvare la frase del giorno

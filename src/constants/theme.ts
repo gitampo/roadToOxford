@@ -53,6 +53,15 @@ export const Fonts = Platform.select({
   },
 });
 
+// Un colore per ogni attività della home. Si usano solo per l'icona e la
+// linetta dei tasti e per i trattini sotto il titolo, che fanno da legenda
+export const ColoriAttivita = {
+  lezioni: "#ffe100", // il giallo delle lezioni (titoli, linette)
+  paradigmi: "#4da3ff", // l'azzurro del globo
+  test: "#4ade80", // il verde dei risultati
+  vocabolario: "#ff6b6b", // il rosso dei risultati, più morbido
+} as const;
+
 export const Spacing = {
   half: 2,
   one: 4,
