@@ -12,6 +12,7 @@
  */
 
 import CardParola from "@/components/cardParola";
+import BarraRicerca from "@/components/barraRicerca";
 import Linguette from "@/components/linguette";
 import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
@@ -84,46 +85,29 @@ export default function Vocabolario() {
         </ThemedText>
         <LineaTitolo colore={ROSSO} />
 
-        <ThemedView
-          style={[styles.barra, { backgroundColor: theme.backgroundElement }]}
+        <BarraRicerca
+          valore={query}
+          onCambia={setQuery}
+          placeholder={
+            lingua === "en"
+              ? "Cerca una parola inglese"
+              : "Cerca una parola italiana"
+          }
         >
-          <TextInput
-            style={[styles.ricerca, { color: theme.text }]}
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholderTextColor={theme.textSecondary}
-            value={query}
-            onChangeText={setQuery}
-            placeholder={
-              lingua === "en"
-                ? "Cerca una parola inglese"
-                : "Cerca una parola italiana"
-            }
-          />
-          {cercando && (
-            <Pressable onPress={() => setQuery("")} hitSlop={10}>
-              <SymbolView
-                name={{
-                  ios: "xmark.circle.fill",
-                  android: "close",
-                  web: "close",
-                }}
-                size={18}
-                tintColor={theme.textSecondary}
-              />
-            </Pressable>
-          )}
           {/* Il tasto della lingua: dice da quale lingua si cerca */}
           <Pressable
             onPress={() => setLingua((l) => (l === "en" ? "it" : "en"))}
             hitSlop={6}
-            style={({ pressed }) => [styles.lingua, pressed && { opacity: 0.6 }]}
+            style={({ pressed }) => [
+              styles.lingua,
+              pressed && { opacity: 0.6 },
+            ]}
           >
             <Text style={styles.testoLingua}>
               {lingua === "en" ? "EN → IT" : "IT → EN"}
             </Text>
           </Pressable>
-        </ThemedView>
+        </BarraRicerca>
 
         <Linguette
           voci={FILTRI.map((f) => f.nome)}
@@ -214,21 +198,6 @@ export default function Vocabolario() {
 }
 
 const styles = StyleSheet.create({
-  barra: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.two,
-    borderRadius: 10,
-    paddingLeft: 12,
-    paddingRight: 6,
-    marginBottom: Spacing.three,
-  },
-  ricerca: {
-    flex: 1,
-    fontFamily: "Inter_400Regular",
-    fontSize: 16,
-    paddingVertical: 10,
-  },
   lingua: {
     borderWidth: 1,
     borderColor: ROSSO,

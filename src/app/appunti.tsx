@@ -1,3 +1,4 @@
+import BarraRicerca from "@/components/barraRicerca";
 import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -8,11 +9,11 @@ import {
   leggiNote,
   salvaNote,
 } from "@/data/appunti";
+import { useTheme } from "@/hooks/use-theme";
 import { Nota } from "@/types/nota";
 import { Link, useFocusEffect } from "expo-router";
 import { SymbolView } from "expo-symbols";
 import { useCallback, useState } from "react";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -24,6 +25,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // Il rosso per eliminare (lo stesso delle risposte sbagliate)
@@ -36,6 +38,8 @@ export default function Appunti() {
   // Il testo è l'appunto vero e proprio; la descrizione un riassunto breve
   const [testo, setTesto] = useState("");
   const [note, setNote] = useState<Nota[]>([]);
+  const [query, setQuery] = useState("");
+  const theme = useTheme();
   // Ogni volta che la pagina torna visibile, recupera le note salvate sul
   // telefono: così compaiono anche quelle appena prese in una lezione.
   // leggiNote().then(setNote): quando la lettura è finita, il risultato va
@@ -84,11 +88,28 @@ export default function Appunti() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ThemedView style={constants.container}>
-        <ThemedView style={{ flexDirection: "row" }}>
+        <ThemedView>
           <ThemedText type="title" style={constants.title}>
             Appunti
           </ThemedText>
-          <ThemedView style={{ flex: 1, marginLeft: 90 }}>
+        </ThemedView>
+        <LineaTitolo colore={ColoriAttivita.appunti} />
+        <ThemedView>
+          <BarraRicerca
+            valore={query}
+            onCambia={setQuery}
+            placeholder="Cerca tra gli appunti..."
+          ></BarraRicerca>
+        </ThemedView>
+        <ThemedView style={{paddingHorizontal: 12}}>
+        <ThemedView style={{ flexDirection: "row", gap: 120 }}>
+          <ThemedText
+            type="subtitle"
+            style={{ marginBottom: 20 }}
+          >
+            Lista note
+          </ThemedText>
+          <ThemedView style={{ flex: 1 }}>
             <Pressable onPress={() => setAperto(true)}>
               <SymbolView
                 name={{
@@ -96,16 +117,12 @@ export default function Appunti() {
                   android: "edit",
                   web: "edit",
                 }}
-                size={50}
+                size={40}
                 tintColor={"#cc7717"}
               />
             </Pressable>
           </ThemedView>
         </ThemedView>
-        <LineaTitolo colore={ColoriAttivita.appunti} />
-        <ThemedText type="subtitle" style={{ marginBottom: 20 }}>
-          Lista note
-        </ThemedText>
         <FlatList
           data={note}
           keyExtractor={(nota) => nota.id}
@@ -114,12 +131,12 @@ export default function Appunti() {
             // la porzione evidenziata. Sempre su una riga, poi i puntini
             const anteprima = item.descrizione || item.testo || item.citazione;
             return (
-              // Swipe a sinistra: compare "Elimina" sulla destra
+              // Swipe a destra: compare "Elimina" sulla sinistra
               <Swipeable
                 friction={2}
-                rightThreshold={40}
-                overshootRight={false}
-                renderRightActions={(_progresso, _spostamento, metodi) => (
+                leftThreshold={40}
+                overshootLeft={false}
+                renderLeftActions={(_progresso, _spostamento, metodi) => (
                   <Pressable
                     onPress={() => {
                       metodi.close();
@@ -169,9 +186,13 @@ export default function Appunti() {
                       {/* La linetta che separa le note, come in Lezioni */}
                       <View style={styles.lineaArancione} />
                     </View>
+                    
                   </Pressable>
+                  
                 </Link>
+                
               </Swipeable>
+              
             );
           }}
           ListEmptyComponent={
@@ -179,7 +200,9 @@ export default function Appunti() {
               Nessuna nota. Tocca la matita per scriverne una.
             </ThemedText>
           }
+
         />
+        </ThemedView>
         <Modal
           visible={aperto}
           transparent
@@ -230,7 +253,7 @@ export default function Appunti() {
                 </ThemedView>
                 <ThemedView style={styles.finestra}>
                   <TextInput
-                    placeholder="Descrizione"
+                    placeholder="Descrizione (facoltativa)"
                     value={descrizione}
                     onChangeText={setDescrizione}
                     multiline
@@ -355,5 +378,11 @@ const styles = StyleSheet.create({
   dataNota: {
     fontSize: 12,
     opacity: 0.6,
+  },
+  ricerca: {
+    flex: 1,
+    fontFamily: "Inter_400Regular",
+    fontSize: 16,
+    paddingVertical: 10,
   },
 });

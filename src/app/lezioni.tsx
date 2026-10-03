@@ -9,6 +9,7 @@
  * (compresi quelli dei testi che la lezione apre).
  */
 
+import BarraRicerca from "@/components/barraRicerca";
 import Linguette from "@/components/linguette";
 import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
@@ -72,11 +73,7 @@ function idCollegati(lezione: Lezione) {
 
 // Minuscole, senza accenti e senza spazi ai lati, per confrontare i testi
 function normalizza(s: string) {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .trim();
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
 }
 
 // Vero se la lezione contiene il testo cercato
@@ -116,32 +113,12 @@ export default function Lezioni() {
           Lezioni
         </ThemedText>
         <LineaTitolo colore={GIALLO} />
-        <ThemedView
-          style={[styles.barra, { backgroundColor: theme.backgroundElement }]}
-        >
-          <TextInput
-            style={[styles.ricerca, { color: theme.text }]}
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholderTextColor={theme.textSecondary}
-            value={query}
-            onChangeText={setQuery}
-            placeholder="Ricerca per parola..."
-          />
-          {query.length > 0 && (
-            <Pressable onPress={() => setQuery("")} hitSlop={10}>
-              <SymbolView
-                name={{
-                  ios: "xmark.circle.fill",
-                  android: "close",
-                  web: "close",
-                }}
-                size={18}
-                tintColor={theme.textSecondary}
-              />
-            </Pressable>
-          )}
-        </ThemedView>
+        <BarraRicerca
+          valore={query}
+          onCambia={setQuery}
+          placeholder="Ricerca per parola..."
+          style={{ marginBottom: Spacing.four }}
+        />
 
         <Linguette
           voci={LIVELLI}
@@ -227,10 +204,7 @@ function CardLezione({
   );
 
   // Esercizi: somma gli esercizi della lezione e dei suoi testi
-  const totale = ids.reduce(
-    (somma, id) => somma + contaEsercizi(trova(id)),
-    0,
-  );
+  const totale = ids.reduce((somma, id) => somma + contaEsercizi(trova(id)), 0);
   const giuste = ids.reduce(
     (somma, id) => somma + (risultati[id]?.giuste ?? 0),
     0,
@@ -259,7 +233,9 @@ function CardLezione({
               </ThemedText>
             )}
             {lezione.chiavi && (
-              <ThemedText style={[styles.chiavi, { color: theme.textSecondary }]}>
+              <ThemedText
+                style={[styles.chiavi, { color: theme.textSecondary }]}
+              >
                 {lezione.chiavi}
               </ThemedText>
             )}
@@ -387,19 +363,6 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
 
-  barra: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    marginBottom: Spacing.four,
-  },
-  ricerca: {
-    flex: 1,
-    fontFamily: "Inter_400Regular",
-    fontSize: 16,
-    paddingVertical: 10,
-  },
   sezione: {
     marginBottom: Spacing.three,
   },
