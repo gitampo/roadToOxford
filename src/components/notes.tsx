@@ -1,4 +1,5 @@
 import { ColoriAttivita } from "@/constants/theme";
+import { StyleProp, ViewStyle } from "react-native";
 import Svg, { G, Path } from "react-native-svg";
 
 type Props = {
@@ -6,6 +7,7 @@ type Props = {
   dimensione?: number;
   // Il colore di riempimento di tutto il disegno
   colore?: string;
+  style?: StyleProp<ViewStyle>;
 };
 
 // L'icona degli appunti: un foglio con le righe e la matita.

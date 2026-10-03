@@ -1,5 +1,9 @@
 import BarraRicerca from "@/components/barraRicerca";
 import LineaTitolo from "@/components/lineaTitolo";
+import TestoEvidenziato, {
+  contiene,
+  estratto,
+} from "@/components/testoEvidenziato";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
@@ -58,6 +62,14 @@ export default function Appunti() {
     });
   }
 
+  // Solo le note con la parola cercata nel titolo, nella descrizione, nel
+  // testo o nella porzione evidenziata
+  const noteFiltrate = note.filter((n) =>
+    [n.titolo, n.descrizione, n.testo, n.citazione].some((c) =>
+      contiene(c, query),
+    ),
+  );
+
   function salvaNota() {
     // 1. Senza titolo non si salva: trim() toglie gli spazi,
     //    così anche un titolo fatto solo di spazi conta come vuoto
@@ -88,48 +100,68 @@ export default function Appunti() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ThemedView style={constants.container}>
-        <ThemedView>
-          <ThemedText type="title" style={constants.title}>
-            Appunti
-          </ThemedText>
-        </ThemedView>
+        <ThemedText type="title" style={constants.title}>
+          Appunti
+        </ThemedText>
         <LineaTitolo colore={ColoriAttivita.appunti} />
-        <ThemedView>
-          <BarraRicerca
-            valore={query}
-            onCambia={setQuery}
-            placeholder="Cerca tra gli appunti..."
-          ></BarraRicerca>
-        </ThemedView>
-        <ThemedView style={{paddingHorizontal: 12}}>
-        <ThemedView style={{ flexDirection: "row", gap: 120 }}>
+        <BarraRicerca
+          valore={query}
+          onCambia={setQuery}
+          placeholder="Cerca tra gli appunti..."
+          style={{ marginBottom: Spacing.four }}
+        />
+
+        {/* L'intestazione della lista, come quelle dei livelli in Lezioni:
+            titolo, quante sono e, a destra, la matita per una nota nuova */}
+        <View style={styles.intestazione}>
+          <ThemedText style={styles.intestazioneTitolo}>Lista note</ThemedText>
           <ThemedText
-            type="subtitle"
-            style={{ marginBottom: 20 }}
+            style={[
+              styles.intestazioneConteggio,
+              { color: theme.textSecondary },
+            ]}
           >
-            Lista note
+            {noteFiltrate.length} {noteFiltrate.length === 1 ? "nota" : "note"}
           </ThemedText>
-          <ThemedView style={{ flex: 1 }}>
-            <Pressable onPress={() => setAperto(true)}>
-              <SymbolView
-                name={{
-                  ios: "square.and.pencil",
-                  android: "edit",
-                  web: "edit",
-                }}
-                size={40}
-                tintColor={"#cc7717"}
-              />
-            </Pressable>
-          </ThemedView>
-        </ThemedView>
+          <Pressable
+            onPress={() => setAperto(true)}
+            hitSlop={10}
+            style={({ pressed }) => [
+              styles.nuovaNota,
+              pressed && { opacity: 0.6 },
+            ]}
+          >
+            <SymbolView
+              name={{
+                ios: "square.and.pencil",
+                android: "edit",
+                web: "edit",
+              }}
+              size={26}
+              tintColor={ColoriAttivita.appunti}
+            />
+          </Pressable>
+        </View>
+
         <FlatList
-          data={note}
+          style={{ flex: 1 }}
+          contentContainerStyle={{ paddingBottom: Spacing.five }}
+          keyboardDismissMode="on-drag"
+          data={noteFiltrate}
           keyExtractor={(nota) => nota.id}
           renderItem={({ item }) => {
             // L'anteprima: la descrizione; se non c'è, l'appunto scritto o
-            // la porzione evidenziata. Sempre su una riga, poi i puntini
-            const anteprima = item.descrizione || item.testo || item.citazione;
+            // la porzione evidenziata. Sempre su una riga, poi i puntini.
+            // Mentre si cerca, il primo campo che contiene la parola, a
+            // partire da poco prima della parola, così si vede evidenziata
+            const campi = [item.descrizione, item.testo, item.citazione];
+            const conParola =
+              query.trim() !== ""
+                ? campi.find((c) => c && contiene(c, query))
+                : undefined;
+            const anteprima = conParola
+              ? estratto(conParola, query)
+              : item.descrizione || item.testo || item.citazione;
             return (
               // Swipe a destra: compare "Elimina" sulla sinistra
               <Swipeable
@@ -148,7 +180,11 @@ export default function Appunti() {
                     ]}
                   >
                     <SymbolView
-                      name={{ ios: "trash", android: "delete", web: "delete" }}
+                      name={{
+                        ios: "trash",
+                        android: "delete",
+                        web: "delete",
+                      }}
                       size={22}
                       tintColor="#ffffff"
                     />
@@ -157,7 +193,10 @@ export default function Appunti() {
                 )}
               >
                 <Link
-                  href={{ pathname: "/appunto/[id]", params: { id: item.id } }}
+                  href={{
+                    pathname: "/appunto/[id]",
+                    params: { id: item.id },
+                  }}
                   asChild
                 >
                   <Pressable
@@ -168,16 +207,21 @@ export default function Appunti() {
                     {/* Lo stile sta su una View interna: sul web Link (asChild)
                       non passa al Pressable lo stile scritto come funzione */}
                     <View style={styles.nota}>
-                      <ThemedText style={styles.titoloNota} numberOfLines={1}>
-                        {item.titolo}
-                      </ThemedText>
+                      <TestoEvidenziato
+                        testo={item.titolo}
+                        cerca={query}
+                        colore={ColoriAttivita.appunti}
+                        style={styles.titoloNota}
+                        numberOfLines={1}
+                      />
                       {anteprima ? (
-                        <ThemedText
+                        <TestoEvidenziato
+                          testo={anteprima}
+                          cerca={query}
+                          colore={ColoriAttivita.appunti}
                           style={styles.descrizioneNota}
                           numberOfLines={1}
-                        >
-                          {anteprima}
-                        </ThemedText>
+                        />
                       ) : null}
                       <ThemedText style={styles.dataNota}>
                         {new Date(item.data).toLocaleDateString("it-IT")}
@@ -186,23 +230,19 @@ export default function Appunti() {
                       {/* La linetta che separa le note, come in Lezioni */}
                       <View style={styles.lineaArancione} />
                     </View>
-                    
                   </Pressable>
-                  
                 </Link>
-                
               </Swipeable>
-              
             );
           }}
           ListEmptyComponent={
             <ThemedText>
-              Nessuna nota. Tocca la matita per scriverne una.
+              {query.trim() !== ""
+                ? "Nessuna nota trovata"
+                : "Nessuna nota. Tocca la matita per scriverne una."}
             </ThemedText>
           }
-
         />
-        </ThemedView>
         <Modal
           visible={aperto}
           transparent
@@ -339,6 +379,26 @@ const styles = StyleSheet.create({
     padding: 5,
     borderColor: "#cc7717",
     backgroundColor: "#cc7717",
+  },
+  // Come le intestazioni dei livelli in Lezioni
+  intestazione: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.two,
+    marginBottom: Spacing.two,
+  },
+  intestazioneTitolo: {
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 22,
+    lineHeight: 28,
+  },
+  intestazioneConteggio: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+  },
+  // La matita, spinta tutta a destra
+  nuovaNota: {
+    marginLeft: "auto",
   },
   nota: {
     paddingVertical: 10,

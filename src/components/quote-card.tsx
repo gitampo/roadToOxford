@@ -1,6 +1,6 @@
 import { Spacing } from "@/constants/theme";
 import { Citazione } from "@/types/citazione";
-import { ImageBackground, StyleSheet } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import { ThemedText } from "./themed-text";
 
 type Props = {
@@ -15,8 +15,16 @@ export function QuoteCard({ citazione }: Props) {
       style={styles.card}
       imageStyle={styles.texture}
     >
-      <ThemedText style={styles.testo}>"{citazione.testo}"</ThemedText>
-      <ThemedText style={styles.traduzione}>{citazione.traduzione}</ThemedText>
+      {/* Inglese e traduzione in un blocco solo, con uno spazio fisso tra i
+          due: restano vicini senza mai sovrapporsi, anche su più righe */}
+      <View style={styles.frasi}>
+        <ThemedText style={styles.testo}>"{citazione.testo}"</ThemedText>
+        {citazione.traduzione ? (
+          <ThemedText style={styles.traduzione}>
+            {citazione.traduzione}
+          </ThemedText>
+        ) : null}
+      </View>
       <ThemedText style={styles.fonte}>- {citazione.fonte}</ThemedText>
     </ImageBackground>
   );
@@ -30,15 +38,19 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     minHeight: 170,
+    // Le frasi in alto, la fonte in fondo
     justifyContent: "space-between",
+    gap: Spacing.three,
     marginBottom: Spacing.five,
+  },
+  frasi: {
+    gap: Spacing.two,
   },
   testo: {
     fontStyle: "italic",
     fontSize: 16,
+    lineHeight: 23,
     color: "#ffe100",
-    marginBottom: -Spacing.five,
-    alignSelf: 'flex-start'
   },
   fonte: {
     fontSize: 13,
@@ -53,5 +65,6 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontStyle: "italic",
     fontSize: 16,
+    lineHeight: 23,
   },
 });

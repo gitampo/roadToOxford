@@ -16,13 +16,13 @@ import Animated, {
   useSharedValue,
   withDelay,
   withRepeat,
-  withSequence,
   withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Globo, OXFORD } from "@/components/globo";
+import Notes from "@/components/notes";
 import { Tabellone } from "@/components/tabellone";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -90,12 +90,6 @@ const VOCI = [
     icona: { ios: "list.bullet", android: "table_chart", web: "table_chart" },
   },
   {
-    voce: "Appunti",
-    href: "/appunti",
-    colore: ColoriAttivita.appunti,
-    icona: { ios: "square.and.pencil", android: "edit", web: "edit" },
-  },
-  {
     voce: "Testa il tuo livello",
     href: "/lezioni",
     colore: ColoriAttivita.test,
@@ -111,8 +105,6 @@ const SPAZIO_COLONNE = Spacing.five;
 const ALTEZZA_MIN_TASTO = 84;
 // L'altezza della scritta sotto il globo
 const ALTEZZA_SCRITTE = 24;
-// Quanto resta aperta la vignetta con l'inizio della frase, in millisecondi
-const DURATA_VIGNETTA = 66000;
 // Quante parole della frase si vedono nella vignetta
 const PAROLE_VIGNETTA = 4;
 // L'altezza dello spazio della vignetta, sopra il pin
@@ -190,17 +182,21 @@ export default function HomeScreen() {
             </ThemedText>
           </Animated.View>
 
-          {/* Un trattino per attività, con il suo colore: fanno da legenda */}
+          {/* Un trattino per attività, con il suo colore: fanno da legenda.
+              Agli Appunti, che non sono nella griglia ma hanno l'icona
+              accanto al globo, spetta l'ultimo */}
           <Animated.View
             entering={FadeIn.delay(200).duration(600)}
             style={styles.avanzamento}
           >
-            {VOCI.map((v) => (
-              <View
-                key={v.voce}
-                style={[styles.trattino, { backgroundColor: v.colore }]}
-              />
-            ))}
+            {[...VOCI.map((v) => v.colore), ColoriAttivita.appunti].map(
+              (colore, i) => (
+                <View
+                  key={i}
+                  style={[styles.trattino, { backgroundColor: colore }]}
+                />
+              ),
+            )}
           </Animated.View>
         </ThemedView>
 
@@ -274,6 +270,21 @@ export default function HomeScreen() {
               </View>
 
               <Vignetta testo={inizioFrase} pinX={pinX} pinY={pinY} />
+
+              {/* Gli appunti: in alto a destra, accanto al globo */}
+              <Animated.View
+                entering={FadeIn.delay(400).duration(800)}
+                style={styles.appunti}
+              >
+                <Link href="/appunti" asChild>
+                  <Pressable
+                    hitSlop={10}
+                    style={({ pressed }) => pressed && { opacity: 0.6 }}
+                  >
+                    <Notes dimensione={34} />
+                  </Pressable>
+                </Link>
+              </Animated.View>
             </>
           )}
         </View>
@@ -283,8 +294,8 @@ export default function HomeScreen() {
 }
 
 // La vignetta con l'inizio della frase del giorno: all'apertura dell'app esce
-// dal pin di Oxford e si allarga verso sinistra, fuori dal globo; dopo
-// DURATA_VIGNETTA si richiude nel pin. Il suo angolo in basso a destra è sul pin
+// dal pin di Oxford e si allarga verso sinistra, fuori dal globo, e resta
+// aperta. Il suo angolo in basso a destra è sul pin
 function Vignetta({
   testo,
   pinX,
@@ -297,17 +308,11 @@ function Vignetta({
   const p = useSharedValue(0);
 
   useEffect(() => {
-    p.value = withSequence(
-      // Aspetta che il globo sia comparso, poi si apre veloce con un rimbalzo appena accennato
-      withDelay(
-        700,
-        withTiming(1, { duration: 260, easing: Easing.out(Easing.back(0.6)) }),
-      ),
-      // E si richiude nel pin
-      withDelay(
-        DURATA_VIGNETTA,
-        withTiming(0, { duration: 220, easing: Easing.in(Easing.cubic) }),
-      ),
+    // Aspetta che il globo sia comparso, poi si apre veloce con un rimbalzo
+    // appena accennato, e non si richiude più
+    p.value = withDelay(
+      700,
+      withTiming(1, { duration: 260, easing: Easing.out(Easing.back(0.6)) }),
     );
   }, [p]);
 
@@ -416,13 +421,14 @@ const styles = StyleSheet.create({
     fontSize: 28,
     lineHeight: 34,
   },
+  // Niente larghezza fissa: ogni trattino è largo uguale, e la riga si
+  // allunga o si accorcia con il numero delle attività
   avanzamento: {
     flexDirection: "row",
     gap: 4,
-    width: 120,
   },
   trattino: {
-    flex: 1,
+    width: 26,
     height: 3,
     borderRadius: 2,
   },
@@ -443,6 +449,12 @@ const styles = StyleSheet.create({
   },
   globo: {
     alignItems: "center",
+  },
+  // L'icona degli appunti, nell'angolo in alto a destra della zona del globo
+  appunti: {
+    position: "absolute",
+    top: 0,
+    right: Spacing.two,
   },
   premibileGlobo: {
     alignItems: "center",
