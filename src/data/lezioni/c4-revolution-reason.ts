@@ -5,7 +5,7 @@ export const revolutionReason: Lezione = {
   titolo: "Rivoluzione e Ragione",
   descrizione: "Guerra civile, Cromwell, Restaurazione, coffee houses",
   chiavi: "Defoe (Robinson Crusoe), Swift (Gulliver's Travels)",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
     testo: "When a man is tired of London, he is tired of life.",
     fonte: "Samuel Johnson, 1777",
@@ -108,13 +108,16 @@ export const revolutionReason: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "It happened one day, about noon, going towards my boat, I was exceedingly surprised with the print of a man's naked foot on the shore.", it: "Un giorno, verso mezzogiorno, andando verso la mia barca, fui estremamente sorpreso dall'impronta di un piede nudo di uomo sulla spiaggia." },
+            {
+              en: "It happened one day, about noon, going towards my boat, I was exceedingly surprised with the print of a man's naked foot on the shore.",
+              it: "Un giorno, verso mezzogiorno, andando verso la mia barca, fui estremamente sorpreso dall'impronta di un piede nudo di uomo sulla spiaggia.",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Crusoe salva un indigeno e lo chiama Friday (Venerdì), dal giorno in cui l'ha incontrato. Gli insegna a chiamarlo \"Master\": un rapporto che oggi si legge come ritratto del colonialismo.",
+            'Crusoe salva un indigeno e lo chiama Friday (Venerdì), dal giorno in cui l\'ha incontrato. Gli insegna a chiamarlo "Master": un rapporto che oggi si legge come ritratto del colonialismo.',
         },
       ],
     },

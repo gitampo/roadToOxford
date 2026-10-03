@@ -132,8 +132,9 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
     gap: Spacing.two,
   },
+  // Larga abbastanza per l'etichetta più lunga (PREPOSIZIONE, CONGIUNZIONE)
   categoria: {
-    width: 92,
+    width: 104,
     color: ROSSO,
     fontFamily: "Inter_600SemiBold",
     fontSize: 10,

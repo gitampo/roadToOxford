@@ -180,7 +180,7 @@ export default function HomeScreen() {
               type="title"
               style={[styles.title, schermoBasso && styles.titoloCompatto]}
             >
-              ROAD TO ENGLAND
+              ROAD TO OXFORD
             </ThemedText>
           </Animated.View>
 

@@ -4,7 +4,7 @@ export const invasions: Lezione = {
   id: "C1",
   titolo: "Invasioni e migrazioni",
   descrizione: "Celti, Romani, Anglosassoni, Vichinghi, Normanni",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
     testo: "They make a desert and call it peace.",
     fonte: "Tacito, Agricola (parole attribuite al capo britannico Calgaco)",

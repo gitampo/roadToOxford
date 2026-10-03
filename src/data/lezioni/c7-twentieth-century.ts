@@ -5,7 +5,7 @@ export const twentiethCentury: Lezione = {
   titolo: "Il Novecento",
   descrizione: "Le due guerre, il modernismo",
   chiavi: "McCrae, Joyce, Woolf, Beckett (solo riassunto)",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
     testo: "yes I said yes I will Yes.",
     fonte: "James Joyce, Ulisse",
@@ -29,8 +29,14 @@ export const twentiethCentury: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "In Flanders fields the poppies blow", it: "Nei campi delle Fiandre sbocciano i papaveri" },
-            { en: "Between the crosses, row on row,", it: "tra le croci, fila dopo fila," },
+            {
+              en: "In Flanders fields the poppies blow",
+              it: "Nei campi delle Fiandre sbocciano i papaveri",
+            },
+            {
+              en: "Between the crosses, row on row,",
+              it: "tra le croci, fila dopo fila,",
+            },
           ],
         },
         {
@@ -69,13 +75,16 @@ export const twentiethCentury: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "His soul swooned slowly as he heard the snow falling faintly through the universe", it: "La sua anima svenne lentamente mentre udiva la neve cadere lieve attraverso l'universo" },
+            {
+              en: "His soul swooned slowly as he heard the snow falling faintly through the universe",
+              it: "La sua anima svenne lentamente mentre udiva la neve cadere lieve attraverso l'universo",
+            },
           ],
         },
         {
           tipo: "testo",
           testo:
-            "Ulysses (1922) racconta un solo giorno, il 16 giugno 1904, nella vita del dublinese Leopold Bloom, come un'Odissea moderna. Si chiude con il monologo di sua moglie Molly: pagine senza punteggiatura, fino al celebre \"yes\" finale.",
+            'Ulysses (1922) racconta un solo giorno, il 16 giugno 1904, nella vita del dublinese Leopold Bloom, come un\'Odissea moderna. Si chiude con il monologo di sua moglie Molly: pagine senza punteggiatura, fino al celebre "yes" finale.',
         },
       ],
     },
@@ -90,7 +99,10 @@ export const twentiethCentury: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Mrs Dalloway said she would buy the flowers herself.", it: "La signora Dalloway disse che i fiori li avrebbe comprati lei." },
+            {
+              en: "Mrs Dalloway said she would buy the flowers herself.",
+              it: "La signora Dalloway disse che i fiori li avrebbe comprati lei.",
+            },
           ],
         },
         {

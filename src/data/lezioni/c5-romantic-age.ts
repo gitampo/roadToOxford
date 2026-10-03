@@ -5,7 +5,7 @@ export const romanticAge: Lezione = {
   titolo: "Il Romanticismo",
   descrizione: "Rivoluzione industriale, francese e americana",
   chiavi: "Blake, Wordsworth, Coleridge, Byron",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
     testo: "Poetry is the spontaneous overflow of powerful feelings.",
     fonte: "William Wordsworth, Prefazione alle Lyrical Ballads",
@@ -83,9 +83,18 @@ export const romanticAge: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Little Lamb, who made thee?", it: "Agnellino, chi ti ha creato? (The Lamb, Innocence)" },
-            { en: "Tyger Tyger, burning bright,", it: "Tigre, tigre, che bruci luminosa" },
-            { en: "In the forests of the night;", it: "nelle foreste della notte (The Tyger, Experience)" },
+            {
+              en: "Little Lamb, who made thee?",
+              it: "Agnellino, chi ti ha creato? (The Lamb, Innocence)",
+            },
+            {
+              en: "Tyger Tyger, burning bright,",
+              it: "Tigre, tigre, che bruci luminosa",
+            },
+            {
+              en: "In the forests of the night;",
+              it: "nelle foreste della notte (The Tyger, Experience)",
+            },
           ],
         },
         {
@@ -101,22 +110,40 @@ export const romanticAge: Lezione = {
         {
           tipo: "testo",
           testo:
-            "William Wordsworth (1770–1850) visse nel Lake District, nel nord dell'Inghilterra. Voleva scrivere di vita semplice con \"la lingua realmente usata dagli uomini\". Nella poesia più famosa ricorda un campo di narcisi, che torna a dargli gioia nella memoria:",
+            'William Wordsworth (1770–1850) visse nel Lake District, nel nord dell\'Inghilterra. Voleva scrivere di vita semplice con "la lingua realmente usata dagli uomini". Nella poesia più famosa ricorda un campo di narcisi, che torna a dargli gioia nella memoria:',
         },
         {
           tipo: "esempi",
           esempi: [
-            { en: "I wandered lonely as a cloud", it: "Vagavo solitario come una nuvola" },
-            { en: "That floats on high o'er vales and hills,", it: "che fluttua alta sopra valli e colline," },
-            { en: "When all at once I saw a crowd,", it: "quando all'improvviso vidi una folla," },
-            { en: "A host, of golden daffodils;", it: "una schiera di narcisi dorati;" },
+            {
+              en: "I wandered lonely as a cloud",
+              it: "Vagavo solitario come una nuvola",
+            },
+            {
+              en: "That floats on high o'er vales and hills,",
+              it: "che fluttua alta sopra valli e colline,",
+            },
+            {
+              en: "When all at once I saw a crowd,",
+              it: "quando all'improvviso vidi una folla,",
+            },
+            {
+              en: "A host, of golden daffodils;",
+              it: "una schiera di narcisi dorati;",
+            },
           ],
         },
         {
           tipo: "esempi",
           esempi: [
-            { en: "My heart leaps up when I behold / A rainbow in the sky:", it: "Il mio cuore sussulta quando vedo / un arcobaleno nel cielo:" },
-            { en: "The Child is father of the Man;", it: "il bambino è padre dell'uomo;" },
+            {
+              en: "My heart leaps up when I behold / A rainbow in the sky:",
+              it: "Il mio cuore sussulta quando vedo / un arcobaleno nel cielo:",
+            },
+            {
+              en: "The Child is father of the Man;",
+              it: "il bambino è padre dell'uomo;",
+            },
           ],
         },
       ],
@@ -133,7 +160,10 @@ export const romanticAge: Lezione = {
           tipo: "esempi",
           esempi: [
             { en: "Water, water, every where,", it: "Acqua, acqua, ovunque," },
-            { en: "Nor any drop to drink.", it: "e neanche una goccia da bere." },
+            {
+              en: "Nor any drop to drink.",
+              it: "e neanche una goccia da bere.",
+            },
           ],
         },
         {
@@ -159,7 +189,10 @@ export const romanticAge: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "She walks in beauty, like the night", it: "Lei cammina nella bellezza, come la notte" },
+            {
+              en: "She walks in beauty, like the night",
+              it: "Lei cammina nella bellezza, come la notte",
+            },
           ],
         },
       ],

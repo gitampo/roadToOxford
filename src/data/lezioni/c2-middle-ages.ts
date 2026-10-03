@@ -5,11 +5,13 @@ export const middleAges: Lezione = {
   titolo: "Il Medioevo",
   descrizione: "Feudalesimo, Plantageneti, Magna Carta, peste nera",
   chiavi: "Beowulf, Lord Randal, Chaucer (The Canterbury Tales)",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
-    testo: "No free man shall be seized or imprisoned… except by the lawful judgement of his equals or by the law of the land.",
+    testo:
+      "No free man shall be seized or imprisoned… except by the lawful judgement of his equals or by the law of the land.",
     fonte: "Magna Carta, 1215",
-    traduzione: "Nessun uomo libero sarà arrestato o imprigionato… se non per giudizio legale dei suoi pari o per la legge del paese.",
+    traduzione:
+      "Nessun uomo libero sarà arrestato o imprigionato… se non per giudizio legale dei suoi pari o per la legge del paese.",
     immagine: require("@/assets/images/textures/quadretti.jpg"),
   },
   riquadri: [
@@ -93,7 +95,10 @@ export const middleAges: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Hwæt! We Gardena in geardagum…", it: "Ascoltate! Noi dei Danesi dalle lance, nei giorni antichi…" },
+            {
+              en: "Hwæt! We Gardena in geardagum…",
+              it: "Ascoltate! Noi dei Danesi dalle lance, nei giorni antichi…",
+            },
           ],
         },
         {
@@ -114,8 +119,14 @@ export const middleAges: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "O where have you been, Lord Randal, my son?", it: "Oh, dove sei stato, Lord Randal, figlio mio?" },
-            { en: "I'm weary wi' hunting, and fain wald lie down.", it: "Sono stanco della caccia, e vorrei sdraiarmi." },
+            {
+              en: "O where have you been, Lord Randal, my son?",
+              it: "Oh, dove sei stato, Lord Randal, figlio mio?",
+            },
+            {
+              en: "I'm weary wi' hunting, and fain wald lie down.",
+              it: "Sono stanco della caccia, e vorrei sdraiarmi.",
+            },
           ],
         },
         {
@@ -136,8 +147,14 @@ export const middleAges: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Whan that Aprill with his shoures soote", it: "Quando aprile con le sue dolci piogge" },
-            { en: "The droghte of March hath perced to the roote", it: "ha penetrato fino alla radice la siccità di marzo" },
+            {
+              en: "Whan that Aprill with his shoures soote",
+              it: "Quando aprile con le sue dolci piogge",
+            },
+            {
+              en: "The droghte of March hath perced to the roote",
+              it: "ha penetrato fino alla radice la siccità di marzo",
+            },
           ],
         },
         {

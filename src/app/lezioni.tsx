@@ -9,6 +9,7 @@
  * (compresi quelli dei testi che la lezione apre).
  */
 
+import Linguette from "@/components/linguette";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { constants, Spacing } from "@/constants/theme";
@@ -140,44 +141,12 @@ export default function Lezioni() {
           )}
         </ThemedView>
 
-        {/* Le linguette dei livelli: quella attiva ha la linetta gialla sotto.
-            Toccare quella già attiva torna a "Tutti" */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          style={styles.linguetteScroll}
-          contentContainerStyle={styles.linguetteRiga}
-        >
-          {[null, ...LIVELLI].map((l) => {
-            const attivo = livello === l;
-            return (
-              <Pressable
-                key={l ?? "tutti"}
-                onPress={() => setLivello(attivo ? null : l)}
-                hitSlop={8}
-                style={styles.linguetta}
-              >
-                <Text
-                  style={[
-                    styles.linguettaTesto,
-                    { color: attivo ? theme.text : theme.textSecondary },
-                  ]}
-                >
-                  {l ?? "Tutti"}
-                </Text>
-                {/* Sempre presente, trasparente se non attiva:
-                    così l'altezza non cambia quando si seleziona */}
-                <ThemedView
-                  style={[
-                    styles.linguettaLinea,
-                    { backgroundColor: attivo ? GIALLO : "transparent" },
-                  ]}
-                />
-              </Pressable>
-            );
-          })}
-        </ScrollView>
+        <Linguette
+          voci={LIVELLI}
+          attiva={livello}
+          onCambia={setLivello}
+          colore={GIALLO}
+        />
 
         <ScrollView keyboardDismissMode="on-drag">
           {sezioni.map((sezione) => (
@@ -430,32 +399,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-  linguetteScroll: {
-    // Senza flexGrow: 0 la riga si allungherebbe in verticale; senza
-    // flexShrink: 0 la lista sotto la "schiaccerebbe" tagliandone il fondo
-    flexGrow: 0,
-    flexShrink: 0,
-    marginBottom: Spacing.four,
-  },
-  linguetteRiga: {
-    gap: Spacing.four,
-    paddingHorizontal: 12,
-  },
-  linguetta: {
-    alignItems: "center",
-  },
-  // Text semplice e non ThemedText, che aggiunge lineHeight: 24
-  linguettaTesto: {
-    fontFamily: "Inter_600SemiBold",
-    fontSize: 15,
-    includeFontPadding: false,
-  },
-  // La linetta gialla, larga quanto la parola
-  linguettaLinea: {
-    alignSelf: "stretch",
-    height: 2,
-    marginTop: 6,
-  },
 
   sezione: {
     marginBottom: Spacing.three,

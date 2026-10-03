@@ -193,4 +193,353 @@ export const G: Voce[] = [
       { id: "53", riquadro: 1 },
     ],
   },
+  {
+    id: "give",
+    parola: "give",
+    fonetica: "/ɡɪv/",
+    descrizione: "Dare qualcosa a qualcuno.",
+    usi: [
+      {
+        categoria: "verbo",
+        dettaglio: "transitivo",
+        forme: "gives · gave · given · giving",
+        significati: [
+          {
+            indicazione: "passare una cosa a qualcuno",
+            traduzioni: ["dare"],
+            esempi: [
+              { en: "Give me your hand.", it: "Dammi la mano." },
+              { en: "Can you give this book to Sarah?", it: "Puoi dare questo libro a Sarah?" },
+            ],
+          },
+          {
+            indicazione: "come regalo",
+            traduzioni: ["regalare"],
+            esempi: [{ en: "What did they give you for your birthday?", it: "Cosa ti hanno regalato per il compleanno?" }],
+          },
+          {
+            indicazione: "con nomi di azione",
+            traduzioni: ["fare", "tenere"],
+            esempi: [
+              { en: "She gave a speech at the ceremony.", it: "Ha tenuto un discorso alla cerimonia." },
+              { en: "Give me a call.", it: "Fammi una telefonata." },
+            ],
+          },
+        ],
+      },
+    ],
+    phrasalVerbs: [
+      {
+        testo: "give up",
+        significati: [
+          {
+            indicazione: "+ -ing: un'abitudine",
+            traduzioni: ["smettere di"],
+            esempi: [{ en: "I gave up smoking last year.", it: "Ho smesso di fumare l'anno scorso." }],
+          },
+          {
+            indicazione: "senza oggetto",
+            traduzioni: ["arrendersi", "rinunciare"],
+            esempi: [{ en: "Don't give up!", it: "Non arrenderti!" }],
+          },
+        ],
+      },
+      {
+        testo: "give back",
+        significati: [
+          {
+            traduzioni: ["restituire", "ridare"],
+            esempi: [{ en: "Give me back my phone!", it: "Ridammi il telefono!" }],
+          },
+        ],
+      },
+      {
+        testo: "give away",
+        significati: [
+          {
+            indicazione: "un oggetto",
+            traduzioni: ["regalare", "dare via"],
+            esempi: [{ en: "I gave away all my old clothes.", it: "Ho dato via tutti i miei vestiti vecchi." }],
+          },
+          {
+            indicazione: "un segreto",
+            traduzioni: ["rivelare", "tradire"],
+            esempi: [{ en: "Don't give away the ending!", it: "Non svelare il finale!" }],
+          },
+        ],
+      },
+    ],
+    attenzione: [
+      "Con due oggetti l'ordine è persona + cosa (give me the book) oppure cosa + to + persona (give the book to me). Mai give to me the book.",
+      "Dopo give up si usa -ing: give up smoking, non give up to smoke.",
+    ],
+    lezioni: [
+      { id: "46", riquadro: 1 },
+      { id: "46", riquadro: 6 },
+    ],
+  },
+  {
+    id: "go",
+    parola: "go",
+    fonetica: "/ɡəʊ/",
+    descrizione: "Spostarsi da un posto a un altro: andare.",
+    usi: [
+      {
+        categoria: "verbo",
+        dettaglio: "intransitivo",
+        forme: "goes · went · gone · going",
+        significati: [
+          {
+            indicazione: "spostarsi",
+            traduzioni: ["andare"],
+            esempi: [
+              { en: "I go to school by bus.", it: "Vado a scuola in autobus." },
+              { en: "Let's go home.", it: "Andiamo a casa." },
+            ],
+          },
+          {
+            indicazione: "lasciare un posto",
+            traduzioni: ["andarsene", "partire"],
+            esempi: [{ en: "I have to go now.", it: "Ora devo andare." }],
+          },
+          {
+            indicazione: "come procede una cosa",
+            traduzioni: ["andare"],
+            esempi: [{ en: "How did the exam go?", it: "Com'è andato l'esame?" }],
+          },
+          {
+            indicazione: "+ aggettivo: cambiare stato",
+            traduzioni: ["diventare"],
+            esempi: [
+              { en: "Her hair went grey.", it: "Le sono diventati grigi i capelli." },
+              { en: "He went red.", it: "È diventato rosso." },
+            ],
+          },
+        ],
+      },
+      {
+        categoria: "sostantivo",
+        dettaglio: "numerabile",
+        significati: [
+          {
+            indicazione: "un tentativo",
+            traduzioni: ["prova", "tentativo"],
+            etichette: ["informale"],
+            esempi: [{ en: "Can I have a go?", it: "Posso provare?" }],
+          },
+          {
+            indicazione: "in un gioco",
+            traduzioni: ["turno"],
+            etichette: ["UK"],
+            esempi: [{ en: "It's your go.", it: "Tocca a te." }],
+          },
+        ],
+      },
+    ],
+    phrasalVerbs: [
+      {
+        testo: "go out",
+        significati: [
+          {
+            traduzioni: ["uscire"],
+            esempi: [{ en: "Are you going out tonight?", it: "Esci stasera?" }],
+          },
+        ],
+      },
+      {
+        testo: "go on",
+        significati: [
+          {
+            indicazione: "continuare",
+            traduzioni: ["continuare", "andare avanti"],
+            esempi: [{ en: "Go on, I'm listening.", it: "Vai avanti, ti ascolto." }],
+          },
+          {
+            indicazione: "succedere",
+            traduzioni: ["succedere"],
+            esempi: [{ en: "What's going on?", it: "Cosa succede?" }],
+          },
+        ],
+      },
+      {
+        testo: "go off",
+        significati: [
+          {
+            indicazione: "una sveglia, un allarme",
+            traduzioni: ["suonare"],
+            esempi: [{ en: "My alarm didn't go off.", it: "La sveglia non ha suonato." }],
+          },
+          {
+            indicazione: "il cibo",
+            traduzioni: ["andare a male"],
+            etichette: ["UK"],
+            esempi: [{ en: "The milk has gone off.", it: "Il latte è andato a male." }],
+          },
+        ],
+      },
+    ],
+    espressioni: [
+      {
+        testo: "be going to",
+        significati: [
+          {
+            traduzioni: ["avere intenzione di", "stare per"],
+            esempi: [
+              { en: "I'm going to study medicine.", it: "Studierò medicina (ho deciso)." },
+              { en: "Look at the sky, it's going to rain.", it: "Guarda il cielo, sta per piovere." },
+            ],
+          },
+        ],
+      },
+    ],
+    attenzione: [
+      "Been o gone? She has gone to London = è andata e non è ancora tornata; She has been to London = c'è stata ed è tornata.",
+      "Con home niente to: go home, non go to home.",
+      "Per le attività in -ing si usa go senza preposizioni: go swimming, go shopping, go running.",
+    ],
+    lezioni: [
+      { id: "27", riquadro: 2 },
+      { id: "29", riquadro: 4 },
+      { id: "46", riquadro: 2 },
+    ],
+  },
+  {
+    id: "gentle",
+    parola: "gentle",
+    fonetica: "/ˈdʒentl/",
+    descrizione: "Falso amico: significa \"delicato, mite\", non \"gentile\".",
+    usi: [
+      {
+        categoria: "aggettivo",
+        significati: [
+          {
+            indicazione: "una persona, un gesto",
+            traduzioni: ["delicato", "dolce", "mite"],
+            esempi: [{ en: "Be gentle with the baby.", it: "Sii delicato con il bambino." }],
+          },
+          {
+            indicazione: "vento, pendio, esercizio",
+            traduzioni: ["leggero", "lieve", "dolce"],
+            esempi: [
+              { en: "a gentle breeze", it: "una brezza leggera" },
+              { en: "a gentle slope", it: "un pendio dolce" },
+            ],
+          },
+        ],
+      },
+    ],
+    falsoAmico: {
+      parola: "gentile",
+      spiegazione: "Gentile si dice kind o nice: That's very kind of you = è molto gentile da parte tua.",
+    },
+    attenzione: ["Gentleman (signore, gentiluomo) viene da qui: un uomo dai modi delicati ed educati."],
+  },
+  {
+    id: "grow",
+    parola: "grow",
+    fonetica: "/ɡrəʊ/",
+    descrizione: "Diventare più grande: crescere.",
+    usi: [
+      {
+        categoria: "verbo",
+        dettaglio: "intransitivo",
+        forme: "grows · grew · grown · growing",
+        significati: [
+          {
+            indicazione: "persone, piante",
+            traduzioni: ["crescere"],
+            esempi: [{ en: "Children grow so fast!", it: "I bambini crescono così in fretta!" }],
+          },
+          {
+            indicazione: "aumentare",
+            traduzioni: ["aumentare", "crescere"],
+            esempi: [{ en: "The population is growing.", it: "La popolazione sta aumentando." }],
+          },
+          {
+            indicazione: "+ aggettivo: diventare",
+            traduzioni: ["diventare", "farsi"],
+            etichette: ["formale"],
+            esempi: [{ en: "It was growing dark.", it: "Si stava facendo buio." }],
+          },
+        ],
+      },
+      {
+        categoria: "verbo",
+        dettaglio: "transitivo",
+        significati: [
+          {
+            indicazione: "piante",
+            traduzioni: ["coltivare"],
+            esempi: [{ en: "We grow tomatoes in the garden.", it: "Coltiviamo pomodori nell'orto." }],
+          },
+          {
+            indicazione: "barba, capelli",
+            traduzioni: ["farsi crescere"],
+            esempi: [{ en: "He's growing a beard.", it: "Si sta facendo crescere la barba." }],
+          },
+        ],
+      },
+    ],
+    phrasalVerbs: [
+      {
+        testo: "grow up",
+        significati: [
+          {
+            traduzioni: ["crescere", "diventare adulto"],
+            esempi: [
+              { en: "I grew up in Naples.", it: "Sono cresciuto a Napoli." },
+              { en: "What do you want to be when you grow up?", it: "Cosa vuoi fare da grande?" },
+            ],
+          },
+        ],
+      },
+    ],
+    attenzione: [
+      "Crescere un figlio non è grow ma bring up o raise: She was brought up by her aunt.",
+    ],
+    lezioni: [{ id: "46", riquadro: 5 }],
+  },
+  {
+    id: "guess",
+    parola: "guess",
+    fonetica: "/ɡes/",
+    descrizione: "Dire una cosa senza saperla per certo: indovinare.",
+    usi: [
+      {
+        categoria: "verbo",
+        dettaglio: "transitivo e intransitivo",
+        forme: "guesses · guessed · guessed · guessing",
+        significati: [
+          {
+            indicazione: "provare a indovinare",
+            traduzioni: ["indovinare", "tirare a indovinare"],
+            esempi: [
+              { en: "Guess who I saw today!", it: "Indovina chi ho visto oggi!" },
+              { en: "If you don't know, just guess.", it: "Se non lo sai, tira a indovinare." },
+            ],
+          },
+          {
+            indicazione: "I guess: supporre",
+            traduzioni: ["supporre", "credere"],
+            etichette: ["informale"],
+            esempi: [{ en: "I guess you're right.", it: "Credo che tu abbia ragione." }],
+          },
+        ],
+      },
+      {
+        categoria: "sostantivo",
+        dettaglio: "numerabile",
+        significati: [
+          {
+            traduzioni: ["ipotesi", "tentativo"],
+            esempi: [{ en: "Have a guess!", it: "Prova a indovinare!" }],
+          },
+        ],
+      },
+    ],
+    attenzione: [
+      "Si pronuncia /ɡes/: la u è muta, come in guitar e guest.",
+      "I guess so (credo di sì) è molto americano; in Gran Bretagna si dice più spesso I suppose so.",
+    ],
+  },
 ];

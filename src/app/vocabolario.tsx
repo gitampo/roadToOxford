@@ -12,6 +12,7 @@
  */
 
 import CardParola from "@/components/cardParola";
+import Linguette from "@/components/linguette";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
@@ -22,7 +23,6 @@ import { SymbolView } from "expo-symbols";
 import { useRef, useState } from "react";
 import {
   Pressable,
-  ScrollView,
   SectionList,
   StyleSheet,
   Text,
@@ -123,44 +123,12 @@ export default function Vocabolario() {
           </Pressable>
         </ThemedView>
 
-        {/* Le linguette: quella attiva ha la linetta rossa sotto.
-            Toccare quella già attiva torna a "Tutti" */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          style={styles.linguetteScroll}
-          contentContainerStyle={styles.linguetteRiga}
-        >
-          {[null, ...FILTRI.map((f) => f.nome)].map((f) => {
-            const attivo = filtro === f;
-            return (
-              <Pressable
-                key={f ?? "tutti"}
-                onPress={() => setFiltro(attivo ? null : f)}
-                hitSlop={8}
-                style={styles.linguetta}
-              >
-                <Text
-                  style={[
-                    styles.linguettaTesto,
-                    { color: attivo ? theme.text : theme.textSecondary },
-                  ]}
-                >
-                  {f ?? "Tutti"}
-                </Text>
-                {/* Sempre presente, trasparente se non attiva:
-                    così l'altezza non cambia quando si seleziona */}
-                <View
-                  style={[
-                    styles.linguettaLinea,
-                    { backgroundColor: attivo ? ROSSO : "transparent" },
-                  ]}
-                />
-              </Pressable>
-            );
-          })}
-        </ScrollView>
+        <Linguette
+          voci={FILTRI.map((f) => f.nome)}
+          attiva={filtro}
+          onCambia={setFiltro}
+          colore={ROSSO}
+        />
 
         <View style={styles.corpo}>
           <SectionList
@@ -271,31 +239,6 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_600SemiBold",
     fontSize: 12,
     letterSpacing: 0.5,
-  },
-  linguetteScroll: {
-    // Senza flexGrow: 0 la riga si allungherebbe in verticale; senza
-    // flexShrink: 0 la lista sotto la "schiaccerebbe" tagliandone il fondo
-    flexGrow: 0,
-    flexShrink: 0,
-    marginBottom: Spacing.four,
-  },
-  linguetteRiga: {
-    gap: Spacing.four,
-    paddingHorizontal: 12,
-  },
-  linguetta: {
-    alignItems: "center",
-  },
-  linguettaTesto: {
-    fontFamily: "Inter_600SemiBold",
-    fontSize: 15,
-    includeFontPadding: false,
-  },
-  // La linetta rossa, larga quanto la parola
-  linguettaLinea: {
-    alignSelf: "stretch",
-    height: 2,
-    marginTop: 6,
   },
   // La lista e, a destra, la colonna delle lettere
   corpo: {

@@ -5,11 +5,12 @@ export const renaissance: Lezione = {
   titolo: "Il Rinascimento",
   descrizione: "Tudor, Enrico VIII, Elisabetta I, l'Impero",
   chiavi: "Shakespeare (Sonetto 18, Romeo and Juliet, Hamlet), Donne",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
     testo: "All the world's a stage, and all the men and women merely players.",
     fonte: "William Shakespeare, Come vi piace",
-    traduzione: "Il mondo intero è un palcoscenico, e tutti gli uomini e le donne non sono che attori.",
+    traduzione:
+      "Il mondo intero è un palcoscenico, e tutti gli uomini e le donne non sono che attori.",
     immagine: require("@/assets/images/textures/quadretti.jpg"),
   },
   riquadri: [
@@ -44,7 +45,7 @@ export const renaissance: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Thomas More, umanista e suo cancelliere, rifiutò di riconoscerlo e fu giustiziato nel 1535. Nel 1516 aveva scritto Utopia, la descrizione di un'isola con una società perfetta. La parola \"utopia\" viene da lì.",
+            'Thomas More, umanista e suo cancelliere, rifiutò di riconoscerlo e fu giustiziato nel 1535. Nel 1516 aveva scritto Utopia, la descrizione di un\'isola con una società perfetta. La parola "utopia" viene da lì.',
         },
         {
           tipo: "nota",
@@ -101,14 +102,20 @@ export const renaissance: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "O Romeo, Romeo, wherefore art thou Romeo?", it: "O Romeo, Romeo, perché sei tu Romeo? (Romeo and Juliet)" },
-            { en: "To be, or not to be, that is the question.", it: "Essere o non essere, questo è il problema. (Hamlet)" },
+            {
+              en: "O Romeo, Romeo, wherefore art thou Romeo?",
+              it: "O Romeo, Romeo, perché sei tu Romeo? (Romeo and Juliet)",
+            },
+            {
+              en: "To be, or not to be, that is the question.",
+              it: "Essere o non essere, questo è il problema. (Hamlet)",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Wherefore non significa \"dove\" ma \"perché\": Giulietta si chiede perché Romeo debba appartenere proprio alla famiglia nemica.",
+            'Wherefore non significa "dove" ma "perché": Giulietta si chiede perché Romeo debba appartenere proprio alla famiglia nemica.',
         },
       ],
     },
@@ -154,15 +161,21 @@ export const renaissance: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Busy old fool, unruly sun,", it: "Vecchio sciocco affaccendato, sole indisciplinato," },
+            {
+              en: "Busy old fool, unruly sun,",
+              it: "Vecchio sciocco affaccendato, sole indisciplinato,",
+            },
             { en: "Why dost thou thus,", it: "perché mai" },
-            { en: "Through windows, and through curtains call on us?", it: "attraverso finestre e tende vieni a chiamarci?" },
+            {
+              en: "Through windows, and through curtains call on us?",
+              it: "attraverso finestre e tende vieni a chiamarci?",
+            },
           ],
         },
         {
           tipo: "testo",
           testo:
-            "Nelle poesie religiose, come Batter my heart, il tono è altrettanto intenso: il poeta chiede a Dio di \"colpirgli il cuore\" con violenza per poter rinascere.",
+            'Nelle poesie religiose, come Batter my heart, il tono è altrettanto intenso: il poeta chiede a Dio di "colpirgli il cuore" con violenza per poter rinascere.',
         },
       ],
     },

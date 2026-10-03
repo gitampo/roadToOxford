@@ -5,7 +5,7 @@ export const victorianAge: Lezione = {
   titolo: "L'età vittoriana",
   descrizione: "La società vittoriana, il colonialismo, il cartismo",
   chiavi: "Dickens, Stevenson, Wilde",
-  livello: "Cultura",
+  livello: "Letteratura",
   citazione: {
     testo: "We are all in the gutter, but some of us are looking at the stars.",
     fonte: "Oscar Wilde, Il ventaglio di Lady Windermere",
@@ -19,7 +19,7 @@ export const victorianAge: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Vittoria regnò dal 1837 al 1901, per 63 anni. Fu un periodo di ottimismo e progresso: ferrovie, telegrafo, fabbriche, e un impero che copriva un quarto delle terre emerse, \"l'impero su cui non tramonta mai il sole\".",
+            'Vittoria regnò dal 1837 al 1901, per 63 anni. Fu un periodo di ottimismo e progresso: ferrovie, telegrafo, fabbriche, e un impero che copriva un quarto delle terre emerse, "l\'impero su cui non tramonta mai il sole".',
         },
         {
           tipo: "nota",
@@ -69,7 +69,10 @@ export const victorianAge: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Please, sir, I want some more.", it: "Per favore, signore, ne vorrei ancora un po'." },
+            {
+              en: "Please, sir, I want some more.",
+              it: "Per favore, signore, ne vorrei ancora un po'.",
+            },
           ],
         },
         {
@@ -80,7 +83,10 @@ export const victorianAge: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "It was a town of red brick, or of brick that would have been red if the smoke and ashes had allowed it.", it: "Era una città di mattoni rossi, o di mattoni che sarebbero stati rossi se il fumo e la cenere l'avessero permesso." },
+            {
+              en: "It was a town of red brick, or of brick that would have been red if the smoke and ashes had allowed it.",
+              it: "Era una città di mattoni rossi, o di mattoni che sarebbero stati rossi se il fumo e la cenere l'avessero permesso.",
+            },
           ],
         },
         {
@@ -101,7 +107,10 @@ export const victorianAge: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Man is not truly one, but truly two.", it: "L'uomo non è veramente uno, ma veramente due." },
+            {
+              en: "Man is not truly one, but truly two.",
+              it: "L'uomo non è veramente uno, ma veramente due.",
+            },
           ],
         },
         {
@@ -122,8 +131,14 @@ export const victorianAge: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "All art is quite useless.", it: "Tutta l'arte è del tutto inutile. (Prefazione a Dorian Gray)" },
-            { en: "The truth is rarely pure and never simple.", it: "La verità è raramente pura e mai semplice. (The Importance of Being Earnest)" },
+            {
+              en: "All art is quite useless.",
+              it: "Tutta l'arte è del tutto inutile. (Prefazione a Dorian Gray)",
+            },
+            {
+              en: "The truth is rarely pure and never simple.",
+              it: "La verità è raramente pura e mai semplice. (The Importance of Being Earnest)",
+            },
           ],
         },
         {

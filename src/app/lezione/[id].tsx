@@ -4,9 +4,9 @@ import CardEsempi from "@/components/cardEsempi";
 import CardNota from "@/components/cardNota";
 import Esercizio, { Punteggio } from "@/components/esercizi";
 import { QuoteCard } from "@/components/quote-card";
+import { BarraRisultato, consiglio, VERDE } from "@/components/risultato";
 import Tabella from "@/components/tabella";
 import TestoConRimandi from "@/components/testoConRimandi";
-import { BarraRisultato, consiglio, VERDE } from "@/components/risultato";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/constants/theme";
@@ -89,7 +89,7 @@ export default function Dettagli() {
     id: string;
     pagina?: string;
   }>();
-  // Cerca tra le lezioni e tra i testi analizzati dei moduli di cultura
+  // Cerca tra le lezioni e tra i testi analizzati dei moduli di Letteratura
   const lezione = [...LEZIONI, ...TESTI].find((l) => l.id === id);
   const indice = LEZIONI.findIndex((l) => l.id === id);
   const [pagina, setPagina] = useState(Number(paginaIniziale) || 0);
@@ -564,7 +564,9 @@ export default function Dettagli() {
               size={16}
               tintColor={theme.textSecondary}
             />
-            <ThemedText style={{ color: theme.textSecondary }}>Indice</ThemedText>
+            <ThemedText style={{ color: theme.textSecondary }}>
+              Indice
+            </ThemedText>
           </Pressable>
         )}
 
