@@ -26,14 +26,31 @@ import {
   Lezione,
   StatoEsercizio,
 } from "@/types/lezione";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { usePreventRemove } from "expo-router/react-navigation";
 import { SymbolView } from "expo-symbols";
 import { useEffect, useRef, useState } from "react";
-import { Keyboard, Pressable, ScrollView, StyleSheet } from "react-native";
+import {
+  Keyboard,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+} from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  Easing,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
+import { scheduleOnRN } from "react-native-worklets";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const GIALLO = "#ffe100";
+// La curva delle animazioni di iOS: parte veloce e rallenta dolcemente
+const curva = Easing.bezier(0.2, 0.9, 0.3, 1);
 
 // "I PRONOMI PERSONALI" → "I pronomi personali"
 function primaMaiuscola(testo: string) {
@@ -123,6 +140,86 @@ export default function Dettagli() {
     setPagina(0);
     scrollRef.current?.scrollTo({ y: 0, animated: false });
   }
+  // Lo swipe indietro nativo di iOS, dentro un riquadro, faceva prima vedere
+  // la lista delle lezioni (la schermata scorreva via) e solo dopo tornava
+  // all'indice. Dentro i riquadri quel gesto è spento (gestureEnabled più
+  // sotto) e lo sostituisce questo: dal bordo sinistro, il riquadro segue il
+  // dito e, lasciato abbastanza a destra, si torna all'indice
+  const { width: larghezzaSchermo } = useWindowDimensions();
+  const spostamento = useSharedValue(0);
+  const opacita = useSharedValue(1);
+  // Vero quando l'indice compare dopo uno swipe: entra con l'animazione
+  const entrataDaSwipe = useRef(false);
+
+  const swipeIndietro = Gesture.Pan()
+    .enabled(pagina > 0)
+    // Parte solo dai primi 30 punti a sinistra, come lo swipe di sistema
+    .hitSlop({ left: 0, width: 30 })
+    .activeOffsetX(10)
+    // Se il dito va in verticale è uno scroll, non uno swipe
+    .failOffsetY([-20, 20])
+    .onUpdate((e) => {
+      spostamento.value = Math.max(0, e.translationX);
+    })
+    .onEnd((e) => {
+      const basta =
+        e.translationX > larghezzaSchermo * 0.35 || e.velocityX > 500;
+      if (!basta) {
+        // Torna al suo posto, ripartendo dalla velocità del dito
+        spostamento.value = withSpring(0, {
+          damping: 26,
+          stiffness: 260,
+          velocity: e.velocityX,
+        });
+        return;
+      }
+      // Esce a destra: più il dito era veloce, più è breve (tra 100 e 200 ms)
+      const resto = larghezzaSchermo - e.translationX;
+      const durata = Math.min(
+        200,
+        Math.max(100, (resto / Math.max(e.velocityX, 1)) * 1000),
+      );
+      spostamento.value = withTiming(
+        larghezzaSchermo,
+        { duration: durata, easing: curva },
+        (finito) => {
+          if (!finito) return;
+          // Nascosto prima di cambiare pagina: il riquadro vecchio non deve
+          // ricomparire nemmeno per un attimo
+          opacita.value = 0;
+          scheduleOnRN(fineSwipe);
+        },
+      );
+    });
+  function fineSwipe() {
+    entrataDaSwipe.current = true;
+    tornaAllIndice();
+  }
+  // L'indice entra da sinistra con un leggero spostamento e una dissolvenza,
+  // come la pagina sotto nello swipe di iOS. Parte dopo che React l'ha
+  // disegnato, così non si vede mai il contenuto sbagliato
+  useEffect(() => {
+    if (pagina !== 0 || !entrataDaSwipe.current) return;
+    entrataDaSwipe.current = false;
+    spostamento.value = -larghezzaSchermo * 0.15;
+    opacita.value = 0.3;
+    spostamento.value = withTiming(0, { duration: 180, easing: curva });
+    opacita.value = withTiming(1, { duration: 180, easing: curva });
+  }, [pagina, larghezzaSchermo, spostamento, opacita]);
+
+  const stileSwipe = useAnimatedStyle(() => ({
+    opacity: opacita.value,
+    transform: [{ translateX: spostamento.value }],
+  }));
+  // Sotto il riquadro che scorre: un velo scuro che si schiarisce man mano
+  // che il riquadro esce, come l'ombra della pagina di sotto in iOS
+  const stileVelo = useAnimatedStyle(() => ({
+    opacity:
+      spostamento.value > 0
+        ? 0.35 * (1 - spostamento.value / larghezzaSchermo)
+        : 0,
+  }));
+
   useEffect(() => {
     if (!esci) return;
     // Aspetta che il blocco sia stato tolto, poi chiude la lezione
@@ -261,199 +358,213 @@ export default function Dettagli() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
+      {/* Lo swipe di sistema solo sull'indice, dove deve chiudere la lezione */}
+      <Stack.Screen options={{ gestureEnabled: pagina === 0 }} />
       <ThemedView style={{ flex: 1 }}>
-        <ThemedView style={{ flex: 1 }}>
-          {/* Dentro i riquadri il testo si può selezionare per prendere appunti */}
-          <AreaAnnotazioni
-            lezione={{ id: lezione.id, titolo: lezione.titolo }}
-            pagina={pagina}
-            titoloRiquadro={riquadroCorrente?.titolo ?? ""}
+        {/* Il velo sta fuori dal GestureDetector, che vuole un solo figlio */}
+        <Animated.View
+          pointerEvents="none"
+          style={[StyleSheet.absoluteFill, styles.veloSwipe, stileVelo]}
+        />
+        <GestureDetector gesture={swipeIndietro}>
+          <Animated.View
+            style={[
+              { flex: 1, backgroundColor: theme.background },
+              styles.paginaSwipe,
+              stileSwipe,
+            ]}
           >
-            <ScrollView
-              ref={scrollRef}
-              style={{ flex: 1 }}
-              keyboardShouldPersistTaps="handled"
-              scrollEventThrottle={32}
-              onScroll={(e) => {
-                scrollY.current = e.nativeEvent.contentOffset.y;
-              }}
+            {/* Dentro i riquadri il testo si può selezionare per prendere appunti */}
+            <AreaAnnotazioni
+              lezione={{ id: lezione.id, titolo: lezione.titolo }}
+              pagina={pagina}
+              titoloRiquadro={riquadroCorrente?.titolo ?? ""}
             >
-              <ThemedView style={styles.container}>
-                {/* Intestazione: livello, titolo e barra di avanzamento */}
-                <ThemedText
-                  style={[styles.etichetta, { color: theme.textSecondary }]}
-                >
-                  {lezione.sottotitolo ??
-                    `${lezione.livello} · Lezione ${lezione.id}`}
-                </ThemedText>
-                <ThemedText style={styles.titoloLezione}>
-                  {lezione.titolo}
-                </ThemedText>
-                {lezione.descrizione && (
+              <ScrollView
+                ref={scrollRef}
+                style={{ flex: 1 }}
+                keyboardShouldPersistTaps="handled"
+                scrollEventThrottle={32}
+                onScroll={(e) => {
+                  scrollY.current = e.nativeEvent.contentOffset.y;
+                }}
+              >
+                <ThemedView style={styles.container}>
+                  {/* Intestazione: livello, titolo e barra di avanzamento */}
                   <ThemedText
-                    style={[
-                      styles.descrizioneLezione,
-                      { color: theme.textSecondary },
-                    ]}
+                    style={[styles.etichetta, { color: theme.textSecondary }]}
                   >
-                    {lezione.descrizione}
+                    {lezione.sottotitolo ??
+                      `${lezione.livello} · Lezione ${lezione.id}`}
                   </ThemedText>
-                )}
-                <ThemedView style={styles.avanzamento}>
-                  {Array.from({ length: numeroRiquadri }).map((_, i) => (
-                    <ThemedView
-                      key={i}
+                  <ThemedText style={styles.titoloLezione}>
+                    {lezione.titolo}
+                  </ThemedText>
+                  {lezione.descrizione && (
+                    <ThemedText
                       style={[
-                        styles.trattino,
-                        {
-                          backgroundColor:
-                            i < pagina ? GIALLO : theme.backgroundSelected,
-                        },
+                        styles.descrizioneLezione,
+                        { color: theme.textSecondary },
                       ]}
-                    />
-                  ))}
-                </ThemedView>
-
-                {pagina === 0 ? (
-                  /* Copertina: citazione + elenco dei riquadri */
-                  <ThemedView>
-                    <QuoteCard citazione={lezione.citazione} />
-
-                    {/* Il risultato degli esercizi: solo se sono iniziati.
-                    Finiti: spunta verde e niente pulsanti */}
-                    {riepilogo.totale > 0 &&
-                      riepilogo.risposte > 0 &&
-                      riepilogo.risposte < riepilogo.totale && (
-                        <EserciziInSospeso
-                          riepilogo={riepilogo}
-                          onRiprendi={() =>
-                            vaiA(
-                              riepilogo.paginaDaFare ??
-                                riepilogo.paginaEsercizi!,
-                            )
-                          }
-                          onRicomincia={ricomincia}
-                          onRivedi={apriRiquadro}
-                        />
-                      )}
-                    {riepilogo.totale > 0 &&
-                      riepilogo.risposte >= riepilogo.totale && (
-                        <ThemedView
-                          type="backgroundElement"
-                          style={styles.riepilogo}
-                        >
-                          <ThemedView
-                            type="backgroundElement"
-                            style={styles.completati}
-                          >
-                            <SymbolView
-                              name={{
-                                ios: "checkmark.circle.fill",
-                                android: "check_circle",
-                                web: "check_circle",
-                              }}
-                              size={24}
-                              tintColor={VERDE}
-                            />
-                            <ThemedText style={styles.titoloRiepilogo}>
-                              Hai completato gli esercizi
-                            </ThemedText>
-                          </ThemedView>
-                          <BarraRisultato risultato={riepilogo} />
-                          {riepilogo.daRivedere.length > 0 && (
-                            <DaRivedere
-                              titoli={riepilogo.daRivedere}
-                              onRivedi={apriRiquadro}
-                            />
-                          )}
-                        </ThemedView>
-                      )}
-
-                    {numeroRiquadri > 0 && (
-                      <ThemedText
-                        style={[
-                          styles.etichetta,
-                          { color: theme.textSecondary },
-                        ]}
-                      >
-                        In questa lezione
-                      </ThemedText>
-                    )}
-                    {lezione.riquadri?.map((riquadro, i) => (
-                      <Pressable
+                    >
+                      {lezione.descrizione}
+                    </ThemedText>
+                  )}
+                  <ThemedView style={styles.avanzamento}>
+                    {Array.from({ length: numeroRiquadri }).map((_, i) => (
+                      <ThemedView
                         key={i}
-                        onPress={() => vaiA(i + 1)}
-                        style={({ pressed }) => [
-                          styles.voceIndice,
-                          i > 0 && {
-                            borderTopWidth: 1,
-                            borderTopColor: theme.backgroundSelected,
+                        style={[
+                          styles.trattino,
+                          {
+                            backgroundColor:
+                              i < pagina ? GIALLO : theme.backgroundSelected,
                           },
-                          pressed && { opacity: 0.6 },
                         ]}
-                      >
-                        <ThemedText style={styles.numeroIndice}>
-                          {i + 1}
-                        </ThemedText>
-                        <ThemedText style={{ flex: 1 }}>
-                          {primaMaiuscola(riquadro.titolo)}
-                        </ThemedText>
-                        <SymbolView
-                          name={{
-                            ios: "chevron.right",
-                            android: "chevron_right",
-                            web: "chevron_right",
-                          }}
-                          size={14}
-                          tintColor={theme.textSecondary}
-                        />
-                      </Pressable>
+                      />
                     ))}
                   </ThemedView>
-                ) : (
-                  /* Riquadro */
-                  riquadroCorrente && (
-                    <ThemedView>
-                      <ThemedText
-                        style={[
-                          styles.etichetta,
-                          { color: theme.textSecondary },
-                        ]}
-                      >
-                        Riquadro {pagina} di {numeroRiquadri}
-                      </ThemedText>
-                      <ThemedText style={styles.titoloRiquadro}>
-                        {riquadroCorrente.titolo}
-                      </ThemedText>
-                      <ThemedView style={styles.lineaGialla} />
-                      <ThemedView style={styles.blocchi}>
-                        {riquadroCorrente.blocchi.map((blocco, i) => (
-                          <MostraBlocco
-                            key={i}
-                            chiave={String(i)}
-                            blocco={blocco}
-                            paginaSpiegazione={paginaSpiegazione}
-                            vaiA={vaiA}
-                            stato={stati[`${pagina}-${i}`]}
-                            onStato={(nuovo) =>
-                              setStati((s) => ({
-                                ...s,
-                                [`${pagina}-${i}`]: nuovo,
-                              }))
-                            }
-                            onRivedi={vaiARiquadro}
-                            riepilogo={riepilogo}
-                            onRicomincia={ricomincia}
-                          />
-                        ))}
-                      </ThemedView>
-                    </ThemedView>
-                  )
-                )}
-              </ThemedView>
-            </ScrollView>
 
-            {/* Nei riquadri, i bordi dello schermo (il margine vuoto ai lati del
+                  {pagina === 0 ? (
+                    /* Copertina: citazione + elenco dei riquadri */
+                    <ThemedView>
+                      <QuoteCard citazione={lezione.citazione} />
+
+                      {/* Il risultato degli esercizi: solo se sono iniziati.
+                    Finiti: spunta verde e niente pulsanti */}
+                      {riepilogo.totale > 0 &&
+                        riepilogo.risposte > 0 &&
+                        riepilogo.risposte < riepilogo.totale && (
+                          <EserciziInSospeso
+                            riepilogo={riepilogo}
+                            onRiprendi={() =>
+                              vaiA(
+                                riepilogo.paginaDaFare ??
+                                  riepilogo.paginaEsercizi!,
+                              )
+                            }
+                            onRicomincia={ricomincia}
+                            onRivedi={apriRiquadro}
+                          />
+                        )}
+                      {riepilogo.totale > 0 &&
+                        riepilogo.risposte >= riepilogo.totale && (
+                          <ThemedView
+                            type="backgroundElement"
+                            style={styles.riepilogo}
+                          >
+                            <ThemedView
+                              type="backgroundElement"
+                              style={styles.completati}
+                            >
+                              <SymbolView
+                                name={{
+                                  ios: "checkmark.circle.fill",
+                                  android: "check_circle",
+                                  web: "check_circle",
+                                }}
+                                size={24}
+                                tintColor={VERDE}
+                              />
+                              <ThemedText style={styles.titoloRiepilogo}>
+                                Hai completato gli esercizi
+                              </ThemedText>
+                            </ThemedView>
+                            <BarraRisultato risultato={riepilogo} />
+                            {riepilogo.daRivedere.length > 0 && (
+                              <DaRivedere
+                                titoli={riepilogo.daRivedere}
+                                onRivedi={apriRiquadro}
+                              />
+                            )}
+                          </ThemedView>
+                        )}
+
+                      {numeroRiquadri > 0 && (
+                        <ThemedText
+                          style={[
+                            styles.etichetta,
+                            { color: theme.textSecondary },
+                          ]}
+                        >
+                          In questa lezione
+                        </ThemedText>
+                      )}
+                      {lezione.riquadri?.map((riquadro, i) => (
+                        <Pressable
+                          key={i}
+                          onPress={() => vaiA(i + 1)}
+                          style={({ pressed }) => [
+                            styles.voceIndice,
+                            i > 0 && {
+                              borderTopWidth: 1,
+                              borderTopColor: theme.backgroundSelected,
+                            },
+                            pressed && { opacity: 0.6 },
+                          ]}
+                        >
+                          <ThemedText style={styles.numeroIndice}>
+                            {i + 1}
+                          </ThemedText>
+                          <ThemedText style={{ flex: 1 }}>
+                            {primaMaiuscola(riquadro.titolo)}
+                          </ThemedText>
+                          <SymbolView
+                            name={{
+                              ios: "chevron.right",
+                              android: "chevron_right",
+                              web: "chevron_right",
+                            }}
+                            size={14}
+                            tintColor={theme.textSecondary}
+                          />
+                        </Pressable>
+                      ))}
+                    </ThemedView>
+                  ) : (
+                    /* Riquadro */
+                    riquadroCorrente && (
+                      <ThemedView>
+                        <ThemedText
+                          style={[
+                            styles.etichetta,
+                            { color: theme.textSecondary },
+                          ]}
+                        >
+                          Riquadro {pagina} di {numeroRiquadri}
+                        </ThemedText>
+                        <ThemedText style={styles.titoloRiquadro}>
+                          {riquadroCorrente.titolo}
+                        </ThemedText>
+                        <ThemedView style={styles.lineaGialla} />
+                        <ThemedView style={styles.blocchi}>
+                          {riquadroCorrente.blocchi.map((blocco, i) => (
+                            <MostraBlocco
+                              key={i}
+                              chiave={String(i)}
+                              blocco={blocco}
+                              paginaSpiegazione={paginaSpiegazione}
+                              vaiA={vaiA}
+                              stato={stati[`${pagina}-${i}`]}
+                              onStato={(nuovo) =>
+                                setStati((s) => ({
+                                  ...s,
+                                  [`${pagina}-${i}`]: nuovo,
+                                }))
+                              }
+                              onRivedi={vaiARiquadro}
+                              riepilogo={riepilogo}
+                              onRicomincia={ricomincia}
+                            />
+                          ))}
+                        </ThemedView>
+                      </ThemedView>
+                    )
+                  )}
+                </ThemedView>
+              </ScrollView>
+
+              {/* Nei riquadri, i bordi dello schermo (il margine vuoto ai lati del
             contenuto) portano al riquadro precedente e al successivo 
           {pagina > 0 && (
             <>
@@ -467,8 +578,9 @@ export default function Dettagli() {
               />
             </>
           )}*/}
-          </AreaAnnotazioni>
-        </ThemedView>
+            </AreaAnnotazioni>
+          </Animated.View>
+        </GestureDetector>
 
         {/* Dopo un "Rivedi": pulsante fisso, sopra il contenuto anche quando si scorre,
             per tornare al punto esatto da cui si è partiti */}
@@ -957,6 +1069,14 @@ const styles = StyleSheet.create({
   testoRicomincia: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 14,
+  },
+  veloSwipe: {
+    backgroundColor: "#000000",
+  },
+  // L'ombra sul bordo sinistro del riquadro mentre scorre: sembra un foglio
+  // che si solleva. A riposo il bordo è fuori schermo e non si vede
+  paginaSwipe: {
+    boxShadow: "-8px 0 24px rgba(0, 0, 0, 0.35)",
   },
   // Larga quanto il margine laterale del contenuto, così non lo copre
   bordo: {

@@ -70,6 +70,8 @@ import { guaiProblemi } from "./m3-guai-problemi";
 import { personeRapporti } from "./m4-persone-rapporti";
 import { tempoDenaro } from "./m5-tempo-denaro";
 import { emozioni } from "./m6-emozioni";
+import { credercioNo } from "./m7-crederci-o-no";
+import { reazioni } from "./m8-reazioni";
 
 export const LEZIONI: Lezione [] = [
     pronouns,
@@ -144,4 +146,6 @@ export const LEZIONI: Lezione [] = [
     personeRapporti,
     tempoDenaro,
     emozioni,
+    credercioNo,
+    reazioni,
 ];

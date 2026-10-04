@@ -3,9 +3,9 @@ import { Lezione } from "@/types/lezione";
 export const personeRapporti: Lezione = {
   id: "M4",
   titolo: "Persone e rapporti",
-  descrizione: "Fiducia, amicizia, litigi e pettegolezzi",
+  descrizione: "Lealtà, amicizia, litigi e pettegolezzi",
   chiavi:
-    "benefit of the doubt, I've got your back, pull someone's leg, bury the hatchet",
+    "I've got your back, thick as thieves, pull someone's leg, bury the hatchet",
   livello: "Modi di dire",
   citazione: {
     testo: "Don't worry, I've got your back.",
@@ -15,22 +15,8 @@ export const personeRapporti: Lezione = {
   },
   riquadri: [
     {
-      titolo: "THE BENEFIT OF THE DOUBT",
+      titolo: "I'VE GOT YOUR BACK",
       blocchi: [
-        {
-          tipo: "testo",
-          testo:
-            'Give someone the benefit of the doubt vuol dire fidarsi di qualcuno anche senza prove, credere alla sua versione finché non si dimostra il contrario. Viene dal linguaggio dei tribunali ed è uguale al nostro "concedere il beneficio del dubbio".',
-        },
-        {
-          tipo: "esempi",
-          esempi: [
-            {
-              en: "He says he was ill. Let's give him the benefit of the doubt.",
-              it: "Dice che stava male. Concediamogli il beneficio del dubbio.",
-            },
-          ],
-        },
         {
           tipo: "testo",
           testo:
@@ -44,6 +30,25 @@ export const personeRapporti: Lezione = {
               it: "Vai a parlargli. Ci sono io dietro di te.",
             },
           ],
+        },
+        {
+          tipo: "testo",
+          testo:
+            'Due amici inseparabili sono (as) thick as thieves: uniti come i complici di un furto, che condividono segreti e si coprono a vicenda. In italiano diciamo "culo e camicia" o "pappa e ciccia". Thick qui vuol dire stretti, molto vicini, non spessi.',
+        },
+        {
+          tipo: "esempi",
+          esempi: [
+            {
+              en: "Those two have been as thick as thieves since primary school.",
+              it: "Quei due sono culo e camicia dalle elementari.",
+            },
+          ],
+        },
+        {
+          tipo: "nota",
+          testo:
+            "Il paragone si usa solo per due o più persone insieme: they are thick as thieves. Non si dice di una persona sola.",
         },
       ],
     },
@@ -315,12 +320,12 @@ export const personeRapporti: Lezione = {
         },
         {
           tipo: "completa",
-          consegna: 'Completa: "concedergli il beneficio del dubbio".',
-          prima: "Let's give him the benefit of the",
+          consegna: 'Completa: "Sono culo e camicia".',
+          prima: "They're as thick as",
           dopo: ".",
-          risposte: ["doubt"],
-          spiegazione: "The benefit of the doubt: come in italiano.",
-          rivedi: "THE BENEFIT OF THE DOUBT",
+          risposte: ["thieves"],
+          spiegazione: "Thick as thieves: uniti come complici.",
+          rivedi: "I'VE GOT YOUR BACK",
         },
         {
           tipo: "riordina",
@@ -328,7 +333,7 @@ export const personeRapporti: Lezione = {
           parole: ["back", "got", "I've", "your"],
           soluzione: ["I've", "got", "your", "back"],
           spiegazione: "I've got your back: sono dalla tua parte.",
-          rivedi: "THE BENEFIT OF THE DOUBT",
+          rivedi: "I'VE GOT YOUR BACK",
         },
         { tipo: "sottotitolo", testo: "Traduci" },
         {
