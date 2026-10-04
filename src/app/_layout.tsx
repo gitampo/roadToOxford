@@ -4,6 +4,7 @@ import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
+import { Doto_900Black } from "@expo-google-fonts/doto";
 import { Inter_400Regular, Inter_600SemiBold } from "@expo-google-fonts/inter";
 import {
   PlayfairDisplay_700Bold,
@@ -21,6 +22,8 @@ export default function RootLayout() {
     Inter_400Regular,
     Inter_600SemiBold,
     PlayfairDisplay_600SemiBold,
+    // Il font a puntini del tabellone in home
+    Doto_900Black,
   });
 
   useEffect(() => {

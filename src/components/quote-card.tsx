@@ -5,20 +5,31 @@ import { ThemedText } from "./themed-text";
 
 type Props = {
   citazione: Citazione;
+  // Il colore della frase inglese, dello sfondo e del bordo. Senza, il
+  // giallo delle lezioni
+  colore?: string;
 };
 
-export function QuoteCard({ citazione }: Props) {
+export function QuoteCard({ citazione, colore }: Props) {
   return (
     <ImageBackground
       source={citazione.immagine}
       resizeMode="cover"
-      style={styles.card}
+      style={[
+        styles.card,
+        colore && {
+          backgroundColor: colore + "1f",
+          borderColor: colore + "40",
+        },
+      ]}
       imageStyle={styles.texture}
     >
       {/* Inglese e traduzione in un blocco solo, con uno spazio fisso tra i
           due: restano vicini senza mai sovrapporsi, anche su più righe */}
       <View style={styles.frasi}>
-        <ThemedText style={styles.testo}>"{citazione.testo}"</ThemedText>
+        <ThemedText style={[styles.testo, colore && { color: colore }]}>
+          "{citazione.testo}"
+        </ThemedText>
         {citazione.traduzione ? (
           <ThemedText style={styles.traduzione}>
             {citazione.traduzione}

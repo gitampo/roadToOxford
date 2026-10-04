@@ -1,3 +1,4 @@
+import { ColoriAttivita } from "@/constants/theme";
 import { StyleProp, View, ViewStyle } from "react-native";
 import Svg, { ClipPath, Defs, G, Path } from "react-native-svg";
 
@@ -5,7 +6,7 @@ import Svg, { ClipPath, Defs, G, Path } from "react-native-svg";
 // Il disegno è in un riquadro 60 × 30 (proporzioni 2:1)
 
 // Lo stesso azzurro del globo (components/globo.tsx); il resto è nero come lo sfondo
-const COLORE = "#4da3ff";
+const COLORE = ColoriAttivita.globo;
 
 type Props = {
   // Larghezza in punti; l'altezza è sempre la metà

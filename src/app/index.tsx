@@ -59,7 +59,7 @@ function getDevMenuHint() {
 }
 
 // L'azzurro del globo, usato anche per l'alone e la scritta
-const AZZURRO = "#4da3ff";
+const AZZURRO = ColoriAttivita.globo;
 
 // Le attività della home, nella griglia sotto il globo.
 // Il colore viene da ColoriAttivita (constants/theme.ts): è lo stesso dell'icona

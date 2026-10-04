@@ -1,3 +1,4 @@
+import { ColoriAttivita } from "@/constants/theme";
 import { useEffect } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import Animated, {
@@ -10,7 +11,7 @@ import Animated, {
 import Svg, { Circle, Ellipse, G, Path } from "react-native-svg";
 
 const R = 90;
-const COLORE = "#4da3ff";
+const COLORE = ColoriAttivita.globo;
 
 const MERIDIANI = [5, 15, 30, 45, 60, 75];
 

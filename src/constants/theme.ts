@@ -57,7 +57,8 @@ export const Fonts = Platform.select({
 // linetta dei tasti e per i trattini sotto il titolo, che fanno da legenda
 export const ColoriAttivita = {
   lezioni: "#ffe100", // il giallo delle lezioni (titoli, linette)
-  paradigmi: "#4da3ff", // l'azzurro del globo
+  paradigmi: "#a78bfa", // il viola dei paradigmi
+  globo: "#4da3ff", // l'azzurro del globo e della frase del giorno
   test: "#4ade80", // il verde dei risultati
   vocabolario: "#ff6b6b", // il rosso dei risultati, più morbido
   appunti: "#cc7717"

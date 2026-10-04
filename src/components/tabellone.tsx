@@ -18,13 +18,14 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-const GIALLO = "#ffe100";
+// Il giallo ambra dei LED dei treni
+const GIALLO = "#ffb800";
 // Velocità di scorrimento, in punti al secondo
 const VELOCITA = 40;
 // Lo spazio tra una frase e la successiva
 const SPAZIO = 48;
 const SOTTOTITOLO =
-  "Impara l'inglese da zero fino a sostenere una vera conversazione in Inghilterra.";
+  "Impara l'inglese da zero fino a sostenere una vera conversazione a Oxford.";
 
 type Props = {
   // undefined = corso finito
@@ -99,14 +100,15 @@ function Giro({ scritta }: { scritta: string }) {
 }
 
 const styles = StyleSheet.create({
+  // Il pannello: nero, con la cornice scura come i display dei treni
   striscia: {
-    height: 36,
+    height: 40,
     justifyContent: "center",
     overflow: "hidden",
-    backgroundColor: "#0d0d0f",
-    borderColor: "#26272b",
-    borderWidth: 1,
-    borderRadius: 8,
+    backgroundColor: "#050505",
+    borderColor: "#1f1f22",
+    borderWidth: 2,
+    borderRadius: 6,
   },
   // Più largo della striscia: la scritta non va mai a capo
   scorrimento: {
@@ -119,15 +121,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  // Doto è fatto di puntini tondi, come le matrici di LED. Il peso Black ha
+  // i puntini più grossi: si legge bene anche piccolo. L'alone dello stesso
+  // colore fa sembrare i LED accesi
   scritta: {
     flexShrink: 0,
-    fontFamily: "Inter_600SemiBold",
-    fontSize: 14,
-    letterSpacing: 1,
+    fontFamily: "Doto_900Black",
+    fontSize: 18,
+    lineHeight: 22,
+    letterSpacing: 0.5,
     color: GIALLO,
+    textShadowColor: GIALLO + "99",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 6,
   },
   bianco: {
-    fontFamily: "Inter_400Regular",
     color: "#ffffff",
+    textShadowColor: "#ffffff80",
   },
 });

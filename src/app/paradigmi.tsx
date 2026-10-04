@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-const AZZURRO = ColoriAttivita.paradigmi;
+const VIOLA = ColoriAttivita.paradigmi;
 
 const COLONNE = [
   { titolo: "Italiano", flex: 2, campo: "traduzione" },
@@ -37,7 +37,7 @@ export default function Paradigmi() {
         <ThemedText type="title" style={constants.title}>
           Paradigmi dei verbi irregolari
         </ThemedText>
-        <LineaTitolo colore={AZZURRO} />
+        <LineaTitolo colore={VIOLA} />
         <ThemedText style={constants.subtitle}>
           Ti consiglio di leggere e ripetere ad alta voce tutti questi verbi
           finché non li saprai a memoria.
@@ -143,7 +143,7 @@ function Tabella({ verbi, query }: { verbi: Paradigma[]; query: string }) {
                 key={c.campo}
                 testo={p[c.campo]}
                 cerca={query}
-                colore={AZZURRO}
+                colore={VIOLA}
                 style={[
                   styles.cella,
                   STILI_COLONNA[c.campo],
@@ -193,7 +193,7 @@ function Pulsante({
               }
         }
         size={22}
-        tintColor={AZZURRO}
+        tintColor={VIOLA}
       />
     </Pressable>
   );
@@ -230,10 +230,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
     paddingBottom: Spacing.two,
     borderBottomWidth: 2,
-    borderBottomColor: AZZURRO,
+    borderBottomColor: VIOLA,
   },
   etichetta: {
-    color: AZZURRO,
+    color: VIOLA,
     fontFamily: "Inter_600SemiBold",
     fontSize: 10,
     lineHeight: 14,

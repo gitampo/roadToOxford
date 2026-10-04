@@ -64,6 +64,12 @@ import { romanticAge } from "./c5-romantic-age";
 import { victorianAge } from "./c6-victorian-age";
 import { twentiethCentury } from "./c7-twentieth-century";
 import { oxford } from "./c8-oxford";
+import { pensareDecidere } from "./m1-pensare-decidere";
+import { lavoroAffari } from "./m2-lavoro-affari";
+import { guaiProblemi } from "./m3-guai-problemi";
+import { personeRapporti } from "./m4-persone-rapporti";
+import { tempoDenaro } from "./m5-tempo-denaro";
+import { emozioni } from "./m6-emozioni";
 
 export const LEZIONI: Lezione [] = [
     pronouns,
@@ -131,4 +137,11 @@ export const LEZIONI: Lezione [] = [
     victorianAge,
     twentiethCentury,
     oxford,
+    // Modi di dire: una sezione a parte, per tema
+    pensareDecidere,
+    lavoroAffari,
+    guaiProblemi,
+    personeRapporti,
+    tempoDenaro,
+    emozioni,
 ];

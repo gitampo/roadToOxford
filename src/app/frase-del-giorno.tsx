@@ -5,10 +5,11 @@
  * in cui si impara quello che serve per capirla.
  */
 
+import LineaTitolo from "@/components/lineaTitolo";
 import { QuoteCard } from "@/components/quote-card";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { constants, Spacing } from "@/constants/theme";
+import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
 import { lezioneDelGiorno } from "@/data/frase-del-giorno";
 import { useTheme } from "@/hooks/use-theme";
 import { Link } from "expo-router";
@@ -16,7 +17,10 @@ import { SymbolView } from "expo-symbols";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// Il giallo delle lezioni, per il rimando alla lezione
 const GIALLO = "#ffe100";
+// L'azzurro del globo, da cui si arriva qui
+const AZZURRO = ColoriAttivita.globo;
 
 export default function FraseDelGiorno() {
   const theme = useTheme();
@@ -35,8 +39,9 @@ export default function FraseDelGiorno() {
         <ThemedText type="title" style={constants.title}>
           Frase del giorno
         </ThemedText>
+        <LineaTitolo colore={AZZURRO} />
 
-        <QuoteCard citazione={lezione.citazione} />
+        <QuoteCard citazione={lezione.citazione} colore={AZZURRO} />
 
         {/* La lezione dove si impara quello che serve per capire la frase */}
         <ThemedView
