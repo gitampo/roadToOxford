@@ -8,21 +8,36 @@
  * Sul web (dove le scritte non hanno il "tieni premuto") si seleziona come
  * sempre col mouse: la barra compare appena si lascia il tasto.
  *
+ * Dopo il salvataggio la porzione resta evidenziata: toccandola compare la
+ * card con l'appunto e il pulsante "Vai alla nota".
+ *
  * AreaAnnotazioni avvolge il contenuto della lezione e tiene la selezione;
- * i testi la leggono con useSelezione (vedi TestoConRimandi).
+ * i testi la leggono con useSelezione e le note già prese con useNoteSalvate
+ * (vedi TestoConRimandi).
  */
 
-import { aggiungiNota, titoloDaCitazione } from "@/data/appunti";
+import { aggiungiNota, leggiNote, titoloDaCitazione } from "@/data/appunti";
 import { ColoriAttivita, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { Nota } from "@/types/nota";
+import { useFocusEffect, useRouter } from "expo-router";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   KeyboardAvoidingView,
   Modal,
   Platform,
   Pressable,
+  ScrollView,
   StyleSheet,
   TextInput,
+  useWindowDimensions,
   View,
 } from "react-native";
 import { ThemedText } from "./themed-text";
@@ -44,6 +59,10 @@ export type Selezione = {
 type Contesto = {
   selezione: Selezione | null;
   seleziona: (s: Selezione) => void;
+  // Le note già prese in questo riquadro
+  note: Nota[];
+  // Mostra la card di una nota; y: dove l'utente ha toccato
+  apriNota: (nota: Nota, y: number) => void;
 };
 
 const ContestoSelezione = createContext<Contesto | null>(null);
@@ -53,6 +72,12 @@ const ContestoSelezione = createContext<Contesto | null>(null);
 export function useSelezione() {
   const contesto = useContext(ContestoSelezione);
   return Platform.OS === "web" ? null : contesto;
+}
+
+// Le note del riquadro, da evidenziare nei testi (anche sul web).
+// null fuori da una lezione
+export function useNoteSalvate() {
+  return useContext(ContestoSelezione);
 }
 
 type Props = {
@@ -77,6 +102,31 @@ export function AreaAnnotazioni({
   // Il contenuto della lezione (sul web, per sapere se il testo selezionato
   // col mouse sta lì dentro)
   const contenuto = useRef<View>(null);
+  // Le note prese in questo riquadro, e quella di cui si vede la card
+  const [note, setNote] = useState<Nota[]>([]);
+  const [aperta, setAperta] = useState<{ nota: Nota; y: number } | null>(null);
+
+  // Rilette ogni volta che si torna sulla lezione: dalla pagina della nota
+  // si può modificarla o eliminarla
+  useFocusEffect(
+    useCallback(() => {
+      let attivo = true;
+      leggiNote().then((tutte) => {
+        if (!attivo) return;
+        setNote(
+          tutte.filter(
+            (n) =>
+              n.citazione &&
+              n.lezione?.id === lezione.id &&
+              n.lezione.pagina === pagina,
+          ),
+        );
+      });
+      return () => {
+        attivo = false;
+      };
+    }, [lezione.id, pagina]),
+  );
 
   // Sul web: quando si lascia il mouse dopo aver selezionato del testo nella
   // lezione, quel testo diventa la selezione per l'appunto
@@ -112,7 +162,7 @@ export function AreaAnnotazioni({
   async function salva() {
     if (!selezione) return;
     const ora = Date.now();
-    await aggiungiNota({
+    const nota: Nota = {
       id: String(ora),
       titolo: titoloDaCitazione(selezione.testo),
       citazione: selezione.testo,
@@ -123,15 +173,34 @@ export function AreaAnnotazioni({
         pagina,
         riquadro: titoloRiquadro,
       },
+      // Sul web la selezione è del browser: non si sa in quali parole sta
+      posizione:
+        selezione.chiave === "web"
+          ? undefined
+          : {
+              chiave: selezione.chiave,
+              da: Math.min(selezione.ancora, selezione.fine),
+              a: Math.max(selezione.ancora, selezione.fine),
+            },
       data: ora,
-    });
+    };
+    await aggiungiNota(nota);
+    setNote((n) => [nota, ...n]);
     chiudiModulo();
     setSelezione(null);
+    if (Platform.OS === "web") window.getSelection()?.removeAllRanges();
     setSalvata(true);
   }
 
   return (
-    <ContestoSelezione.Provider value={{ selezione, seleziona: setSelezione }}>
+    <ContestoSelezione.Provider
+      value={{
+        selezione,
+        seleziona: setSelezione,
+        note,
+        apriNota: (nota, y) => setAperta({ nota, y }),
+      }}
+    >
       <View ref={contenuto} style={{ flex: 1 }}>
         {children}
       </View>
@@ -233,7 +302,83 @@ export function AreaAnnotazioni({
           </ThemedView>
         </KeyboardAvoidingView>
       </Modal>
+
+      {aperta && (
+        <CardAppunto
+          nota={aperta.nota}
+          y={aperta.y}
+          onChiudi={() => setAperta(null)}
+        />
+      )}
     </ContestoSelezione.Provider>
+  );
+}
+
+// La card che compare toccando una porzione evidenziata: come l'anteprima
+// dei rimandi, sopra o sotto il punto toccato
+function CardAppunto({
+  nota,
+  y,
+  onChiudi,
+}: {
+  nota: Nota;
+  y: number;
+  onChiudi: () => void;
+}) {
+  const theme = useTheme();
+  const router = useRouter();
+  const { height } = useWindowDimensions();
+
+  // Se il tocco è nella metà bassa dello schermo, la card va sopra
+  const posizione =
+    y > height / 2 ? { bottom: height - y + 16 } : { top: y + 28 };
+
+  function vaiAllaNota() {
+    onChiudi();
+    router.push({ pathname: "/appunto/[id]", params: { id: nota.id } });
+  }
+
+  return (
+    <Modal transparent animationType="fade" onRequestClose={onChiudi}>
+      {/* Toccando fuori dalla card si chiude */}
+      <Pressable style={styles.sfondoCard} onPress={onChiudi} />
+      <ThemedView type="backgroundElement" style={[styles.card, posizione]}>
+        <ThemedText style={[styles.etichetta, { color: theme.textSecondary }]}>
+          Il tuo appunto
+        </ThemedText>
+        <ThemedText style={styles.titoloCard}>{nota.titolo}</ThemedText>
+        <ScrollView style={styles.contenutoCard}>
+          <View style={{ gap: 8 }}>
+            <ThemedText
+              style={[styles.citazione, { color: theme.textSecondary }]}
+            >
+              {nota.citazione}
+            </ThemedText>
+            <ThemedText
+              style={[
+                styles.testoCard,
+                !nota.testo && {
+                  color: theme.textSecondary,
+                  fontStyle: "italic",
+                },
+              ]}
+            >
+              {nota.testo ?? "Nessun appunto scritto."}
+            </ThemedText>
+          </View>
+        </ScrollView>
+        <Pressable
+          onPress={vaiAllaNota}
+          style={({ pressed }) => [
+            styles.aggiungi,
+            styles.vaiAllaNota,
+            pressed && { opacity: 0.8 },
+          ]}
+        >
+          <ThemedText style={styles.testoAggiungi}>Vai alla nota →</ThemedText>
+        </Pressable>
+      </ThemedView>
+    </Modal>
   );
 }
 
@@ -309,6 +454,44 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderLeftColor: ARANCIONE,
     paddingLeft: 10,
+  },
+  sfondoCard: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  card: {
+    position: "absolute",
+    left: 16,
+    right: 16,
+    borderWidth: 1,
+    borderColor: ARANCIONE,
+    borderRadius: 12,
+    padding: 14,
+    gap: 8,
+  },
+  etichetta: {
+    fontSize: 11,
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+    fontFamily: "Inter_600SemiBold",
+  },
+  titoloCard: {
+    fontFamily: "PlayfairDisplay_700Bold",
+    fontSize: 17,
+    lineHeight: 22,
+  },
+  contenutoCard: {
+    maxHeight: 220,
+  },
+  testoCard: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  vaiAllaNota: {
+    alignSelf: "flex-end",
+    paddingVertical: 8,
+    marginTop: 4,
   },
   campo: {
     minHeight: 110,

@@ -15,5 +15,9 @@ export type Nota = {
   citazione?: string;
   // Da dove viene, per poterci tornare: lezione e riquadro (da 1)
   lezione?: { id: string; titolo: string; pagina: number; riquadro: string };
+  // Dove sta la porzione evidenziata nel riquadro, per continuare a
+  // mostrarla: il testo (chiave del blocco) e le parole, da 0 (vedi
+  // TestoConRimandi). Manca nelle note prese sul web: lì si cerca la citazione
+  posizione?: { chiave: string; da: number; a: number };
   data: number;
 };

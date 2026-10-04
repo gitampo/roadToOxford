@@ -41,12 +41,12 @@ export default function Paradigmi() {
         {/*<ThemedText style={constants.subtitle}>
           Ti consiglio di leggere e ripetere ad alta voce tutti questi verbi
           finché non li saprai a memoria.
-        </ThemedText>
+        </ThemedText>*/}
         <BarraRicerca
           valore={query}
           onCambia={setQuery}
           placeholder="Cerca tra i verbi..."
-        />*/}
+        />
 
         {/* Come l'intestazione della lista in Appunti: titolo e quanti sono */}
         <View style={styles.titoloLista}>

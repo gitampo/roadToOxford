@@ -1,11 +1,13 @@
 import { LEZIONI } from "@/data/lezioni";
 import { useTheme } from "@/hooks/use-theme";
 import { Blocco } from "@/types/lezione";
+import { Nota } from "@/types/nota";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   GestureResponderEvent,
   Modal,
+  Platform,
   Pressable,
   ScrollView,
   StyleProp,
@@ -14,7 +16,7 @@ import {
   TextStyle,
   useWindowDimensions,
 } from "react-native";
-import { ARANCIONE, useSelezione } from "./annotazioni";
+import { ARANCIONE, useNoteSalvate, useSelezione } from "./annotazioni";
 import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
 
@@ -84,6 +86,43 @@ function testoTra(pezzi: Pezzo[], da: number, a: number) {
     .join("");
 }
 
+// Le note già prese che stanno in questo testo, con le parole che coprono.
+// Se la nota sa in quali parole sta (ed è ancora lo stesso testo) si usa
+// quello; altrimenti (note prese sul web) si cerca la citazione tra le parole
+function noteNelTesto(pezzi: Pezzo[], note: Nota[], chiave?: string) {
+  const unita = pezzi.flatMap((p) =>
+    p.tipo === "spazio" ? [] : [p.testo.replace(/\s+/g, " ")],
+  );
+  const trovate: { nota: Nota; da: number; a: number }[] = [];
+  for (const nota of note) {
+    const citazione = nota.citazione?.replace(/\s+/g, " ").trim();
+    if (!citazione) continue;
+    const pos = nota.posizione;
+    if (pos) {
+      if (pos.chiave !== chiave) continue;
+      if (
+        pos.a < unita.length &&
+        testoTra(pezzi, pos.da, pos.a) === nota.citazione
+      ) {
+        trovate.push({ nota, da: pos.da, a: pos.a });
+        continue;
+      }
+    }
+    cerca: for (let da = 0; da < unita.length; da++) {
+      let tratto = "";
+      for (let a = da; a < unita.length; a++) {
+        tratto = a === da ? unita[a] : tratto + " " + unita[a];
+        if (tratto === citazione) {
+          trovate.push({ nota, da, a });
+          break cerca;
+        }
+        if (tratto.length >= citazione.length) break;
+      }
+    }
+  }
+  return trovate;
+}
+
 type Aperto = {
   lezione: string;
   riquadro: number;
@@ -103,6 +142,19 @@ export default function TestoConRimandi({ testo, style, chiave }: Props) {
   const a = selezione ? Math.max(selezione.ancora, selezione.fine) : -1;
 
   const pezzi = dividi(testo);
+
+  // Le note salvate in questo testo restano evidenziate: toccandole si
+  // apre la card dell'appunto
+  const salvate = useNoteSalvate();
+  const noteQui = salvate ? noteNelTesto(pezzi, salvate.note, chiave) : [];
+  const notaDi = (n: number) =>
+    noteQui.find((r) => n >= r.da && n <= r.a)?.nota;
+
+  function apriNota(nota: Nota, e: GestureResponderEvent) {
+    // Sul web un clic alla fine di una selezione col mouse non apre la card
+    if (Platform.OS === "web" && window.getSelection()?.toString()) return;
+    salvate?.apriNota(nota, e.nativeEvent.pageY);
+  }
 
   // Tenere premuto: la selezione ricomincia da questa parola
   function inizia(n: number) {
@@ -129,13 +181,17 @@ export default function TestoConRimandi({ testo, style, chiave }: Props) {
     });
   }
 
-  // Uno spazio è evidenziato se sta tra due parole selezionate
+  // Uno spazio è evidenziato se sta tra due parole selezionate (o della
+  // stessa nota)
   let precedente = -1;
   const figli = pezzi.map((p, i) => {
     if (p.tipo === "spazio") {
       const dentro = precedente >= da && precedente < a;
-      return dentro ? (
-        <Text key={i} style={styles.evidenziato}>
+      const inNota = noteQui.some(
+        (r) => precedente >= r.da && precedente < r.a,
+      );
+      return dentro || inNota ? (
+        <Text key={i} style={dentro ? styles.evidenziato : styles.annotato}>
           {p.testo}
         </Text>
       ) : (
@@ -144,11 +200,16 @@ export default function TestoConRimandi({ testo, style, chiave }: Props) {
     }
     precedente = p.n;
     const evidenziato = p.n >= da && p.n <= a;
+    const nota = notaDi(p.n);
     if (p.tipo === "rimando") {
       return (
         <Text
           key={i}
-          style={[styles.link, evidenziato && styles.evidenziato]}
+          style={[
+            styles.link,
+            nota && styles.annotato,
+            evidenziato && styles.evidenziato,
+          ]}
           onPress={(e: GestureResponderEvent) =>
             selezione
               ? estendi(p.n)
@@ -165,13 +226,21 @@ export default function TestoConRimandi({ testo, style, chiave }: Props) {
       );
     }
     // Una parola normale: diventa un pezzo a sé solo se si può selezionare
-    if (!selezionabile) return p.testo;
+    // o se sta in una nota
+    if (!selezionabile && !nota) return p.testo;
+    // Mentre si seleziona, toccare allunga la selezione; altrimenti su una
+    // parola annotata apre la card della nota
+    const onPress = selezione
+      ? () => estendi(p.n)
+      : nota && !salvate?.selezione
+        ? (e: GestureResponderEvent) => apriNota(nota, e)
+        : undefined;
     return (
       <Text
         key={i}
-        style={evidenziato && styles.evidenziato}
-        onLongPress={() => inizia(p.n)}
-        onPress={selezione ? () => estendi(p.n) : undefined}
+        style={[nota && styles.annotato, evidenziato && styles.evidenziato]}
+        onLongPress={selezionabile ? () => inizia(p.n) : undefined}
+        onPress={onPress}
       >
         {p.testo}
       </Text>
@@ -317,6 +386,10 @@ const styles = StyleSheet.create({
   // Le parole selezionate per un appunto, come un evidenziatore arancione
   evidenziato: {
     backgroundColor: ARANCIONE + "59",
+  },
+  // Le parole di una nota già salvata: lo stesso evidenziatore, più tenue
+  annotato: {
+    backgroundColor: ARANCIONE + "33",
   },
   sfondo: {
     ...StyleSheet.absoluteFill,

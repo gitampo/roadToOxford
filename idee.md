@@ -27,7 +27,7 @@ Meglio ancora se il livello segue le lezioni completate: se hai fatto fino al Pr
 
 Modi di dire
 
-Suono delle parole
+Fonetica
 
 Vocabolario / WordReference
 
@@ -36,3 +36,7 @@ False Friends
 Possibilita di analizzare testi di canzoni
 
 Opzione per salvare la frase del giorno
+
+Funzione in cui data una frase, viene fatta l'analisi  logica, grammaticale e semantica
+Esercizi che aiutino all'analisi logica e grammaticale
+Grafico miglioramenti

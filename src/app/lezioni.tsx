@@ -40,6 +40,42 @@ const LARGHEZZA_COLONNA = 32;
 // I livelli, nell'ordine in cui compaiono le lezioni (A1, A2, B1, ...)
 const LIVELLI = [...new Set(LEZIONI.map((l) => l.livello))];
 
+// "Tempi verbali" non è un livello: è un filtro che raccoglie le lezioni sui
+// tempi sparse nei vari livelli (restano divise per livello sotto)
+const TEMPI_VERBALI = "Tempi verbali";
+const LEZIONI_TEMPI = [
+  "10",
+  "12",
+  "13",
+  "21",
+  "22",
+  "23",
+  "24",
+  "27",
+  "28",
+  "29",
+  "30",
+  "31",
+  "35",
+  "37",
+  "38",
+  "39",
+];
+
+// Le linguette: i livelli, con "Tempi verbali" subito dopo B2-C1
+const VOCI = LIVELLI.flatMap((l) => (l === "B2-C1" ? [l, TEMPI_VERBALI] : [l]));
+
+// Il numero di ogni lezione: la sua posizione nell'elenco completo ("Tutti"),
+// lo stesso anche quando si filtra per livello o si cerca
+const NUMERO = new Map(LEZIONI.map((l, i) => [l.id, i + 1]));
+
+// Vero se la lezione rientra nella linguetta scelta (null = tutte)
+function nelFiltro(lezione: Lezione, voce: string | null) {
+  if (voce === null) return true;
+  if (voce === TEMPI_VERBALI) return LEZIONI_TEMPI.includes(lezione.id);
+  return lezione.livello === voce;
+}
+
 // Quanti esercizi con punteggio ha una lezione (senza contare i testi)
 function contaEsercizi(lezione: Lezione | undefined) {
   return (lezione?.riquadri ?? []).reduce(
@@ -76,8 +112,11 @@ function normalizza(s: string) {
   return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
 }
 
-// Vero se la lezione contiene il testo cercato
+// Vero se la lezione contiene il testo cercato. Un numero da solo cerca la
+// lezione con quel numero (così "2" trova la 2 e non anche la 12 o la 21)
 function corrisponde(lezione: Lezione, query: string) {
+  const numero = query.trim().replace(/\.$/, "");
+  if (/^\d+$/.test(numero)) return NUMERO.get(lezione.id) === Number(numero);
   const testo = normalizza(
     [lezione.livello, lezione.titolo, lezione.descrizione, lezione.chiavi].join(
       " ",
@@ -91,13 +130,11 @@ export default function Lezioni() {
   const visti = useVisti(LEZIONI.flatMap(idCollegati));
   const theme = useTheme();
   const [query, setQuery] = useState("");
-  // null = tutti i livelli
+  // La linguetta scelta (un livello o "Tempi verbali"); null = tutte
   const [livello, setLivello] = useState<string | null>(null);
 
   const lezioniFiltrate = LEZIONI.filter(
-    (lezione) =>
-      (livello === null || lezione.livello === livello) &&
-      corrisponde(lezione, query),
+    (lezione) => nelFiltro(lezione, livello) && corrisponde(lezione, query),
   );
 
   // Una sezione per livello, saltando quelli senza lezioni dopo il filtro
@@ -116,12 +153,12 @@ export default function Lezioni() {
         <BarraRicerca
           valore={query}
           onCambia={setQuery}
-          placeholder="Ricerca per parola..."
+          placeholder="Ricerca per parola o numero..."
           style={{ marginBottom: Spacing.four }}
         />
 
         <Linguette
-          voci={LIVELLI}
+          voci={VOCI}
           attiva={livello}
           onCambia={setLivello}
           colore={GIALLO}
@@ -224,7 +261,10 @@ function CardLezione({
             al Pressable lo stile scritto come funzione, e la riga si perdeva */}
         <View style={styles.voce}>
           <ThemedView style={styles.testi}>
-            <ThemedText style={styles.titolo}>{lezione.titolo}</ThemedText>
+            <ThemedText style={styles.titolo}>
+              <Text style={{ color: GIALLO }}>{NUMERO.get(lezione.id)}. </Text>
+              {lezione.titolo}
+            </ThemedText>
             {lezione.descrizione && (
               <ThemedText
                 style={[styles.descrizione, { color: theme.textSecondary }]}

@@ -90,7 +90,7 @@ const VOCI = [
   },
   {
     voce: "Testa il tuo livello",
-    href: "/lezioni",
+    href: "/test",
     colore: ColoriAttivita.test,
     icona: { ios: "checkmark.seal.fill", android: "verified", web: "verified" },
   },
