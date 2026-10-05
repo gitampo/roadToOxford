@@ -104,7 +104,7 @@ export const P: Voce[] = [
       "Si paga una cosa con for: pay for the meal, non pay the meal. Ma si paga direttamente il conto o la persona: pay the bill, pay the waiter.",
       "Il passato è paid, non payed.",
     ],
-    lezioni: [{ id: "45", riquadro: 6 }],
+    lezioni: [{ id: "46", riquadro: 6 }],
   },
   {
     id: "preservative",
@@ -223,8 +223,8 @@ export const P: Voce[] = [
       "Si pronuncia /pʊt/, con la u breve di good, non con quella di but.",
     ],
     lezioni: [
-      { id: "46", riquadro: 3 },
-      { id: "56", riquadro: 2 },
+      { id: "47", riquadro: 3 },
+      { id: "57", riquadro: 2 },
     ],
   },
   {
@@ -391,7 +391,7 @@ export const P: Voce[] = [
       },
     ],
     attenzione: ["Pick e choose sono simili, ma pick è più informale e si usa per scelte veloci."],
-    lezioni: [{ id: "46", riquadro: 3 }],
+    lezioni: [{ id: "47", riquadro: 3 }],
   },
   {
     id: "place",
@@ -541,7 +541,7 @@ export const P: Voce[] = [
       "Nei numeri inglesi la virgola decimale è un punto (3.5) e il separatore delle migliaia è una virgola (1,000): l'opposto dell'italiano.",
       "Il punto alla fine della frase è full stop (UK) o period (US), non point.",
     ],
-    lezioni: [{ id: "56", riquadro: 4 }],
+    lezioni: [{ id: "57", riquadro: 4 }],
   },
   {
     id: "prevent",

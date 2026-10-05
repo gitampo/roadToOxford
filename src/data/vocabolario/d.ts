@@ -129,8 +129,8 @@ export const D: Voce[] = [
     lezioni: [
       { id: "10", riquadro: 4 },
       { id: "10", riquadro: 5 },
-      { id: "45", riquadro: 1 },
-      { id: "45", riquadro: 2 },
+      { id: "46", riquadro: 1 },
+      { id: "46", riquadro: 2 },
     ],
   },
   {
@@ -302,7 +302,7 @@ export const D: Voce[] = [
       "Dopo decide si usa to + verbo: decide to go, non decide going.",
       "Il nome è decision. Prendere una decisione si dice make a decision; take a decision esiste nell'inglese britannico, ma è meno comune.",
     ],
-    lezioni: [{ id: "47", riquadro: 3 }],
+    lezioni: [{ id: "48", riquadro: 3 }],
   },
   {
     id: "delusion",
@@ -360,7 +360,7 @@ export const D: Voce[] = [
       "Dipendere da è depend on, non depend from o depend of.",
       "L'aggettivo è dependent on (dipendente da); il dipendente di un'azienda però è employee.",
     ],
-    lezioni: [{ id: "48", riquadro: 2 }],
+    lezioni: [{ id: "49", riquadro: 2 }],
   },
   {
     id: "develop",

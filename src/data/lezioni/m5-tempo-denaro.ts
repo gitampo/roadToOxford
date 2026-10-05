@@ -197,7 +197,7 @@ export const tempoDenaro: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Il sostantivo ha il trattino (a rip-off), il verbo no (to rip off). Succede con molti phrasal verbs: a check-in, to check in (lezione 56{6}).",
+            "Il sostantivo ha il trattino (a rip-off), il verbo no (to rip off). Succede con molti phrasal verbs: a check-in, to check in (lezione 57{6}).",
         },
       ],
     },
@@ -207,7 +207,7 @@ export const tempoDenaro: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Pay through the nose vuol dire pagare un prezzo esagerato, spesso perché non c'era scelta. In italiano diciamo \"pagare un occhio della testa\": cambia la parte del corpo, ma l'idea è la stessa. Simile è cost an arm and a leg (lezione 55{3}).",
+            "Pay through the nose vuol dire pagare un prezzo esagerato, spesso perché non c'era scelta. In italiano diciamo \"pagare un occhio della testa\": cambia la parte del corpo, ma l'idea è la stessa. Simile è cost an arm and a leg (lezione 56{3}).",
         },
         {
           tipo: "esempi",

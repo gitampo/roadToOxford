@@ -119,6 +119,12 @@ export const revolutionReason: Lezione = {
           testo:
             'Crusoe salva un indigeno e lo chiama Friday (Venerdì), dal giorno in cui l\'ha incontrato. Gli insegna a chiamarlo "Master": un rapporto che oggi si legge come ritratto del colonialismo.',
         },
+        {
+          tipo: "apri",
+          id: "robinson-crusoe",
+          titolo: "Robinson Crusoe: l'impronta",
+          descrizione: "Daniel Defoe, 1719 · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -138,6 +144,12 @@ export const revolutionReason: Lezione = {
           tipo: "nota",
           testo:
             "I termini big-endian e little-endian si usano ancora oggi in informatica, per indicare l'ordine in cui vengono memorizzati i byte.",
+        },
+        {
+          tipo: "apri",
+          id: "gulliver",
+          titolo: "Gulliver a Lilliput",
+          descrizione: "Jonathan Swift, 1726 · lettura e analisi completa",
         },
       ],
     },

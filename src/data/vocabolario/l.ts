@@ -235,7 +235,7 @@ export const L: Voce[] = [
     ],
     lezioni: [
       { id: "19", riquadro: 3 },
-      { id: "46", riquadro: 5 },
+      { id: "47", riquadro: 5 },
     ],
   },
   {
@@ -408,8 +408,8 @@ export const L: Voce[] = [
     ],
     lezioni: [
       { id: "33", riquadro: 6 },
-      { id: "46", riquadro: 5 },
-      { id: "46", riquadro: 6 },
+      { id: "47", riquadro: 5 },
+      { id: "47", riquadro: 6 },
     ],
   },
   {
@@ -570,7 +570,7 @@ export const L: Voce[] = [
       "Learn è imparare, teach è insegnare: She taught me English, non She learned me English.",
       "Imparare a fare qualcosa è learn to + verbo, senza preposizioni: learn to drive.",
     ],
-    lezioni: [{ id: "47", riquadro: 3 }],
+    lezioni: [{ id: "48", riquadro: 3 }],
   },
   {
     id: "lie",
@@ -636,7 +636,7 @@ export const L: Voce[] = [
       "Lay (lay, laid, laid) è un altro verbo ancora e vuol dire posare, stendere qualcosa: lay the table = apparecchiare. Il passato di lie (stare sdraiato) è proprio lay: è l'errore più comune anche tra i madrelingua.",
       "Dire una bugia è tell a lie, non say a lie.",
     ],
-    lezioni: [{ id: "46", riquadro: 2 }],
+    lezioni: [{ id: "47", riquadro: 2 }],
   },
   {
     id: "light",
@@ -808,6 +808,6 @@ export const L: Voce[] = [
       "Perdere un treno o un'occasione non è lose ma miss: I missed the bus.",
       "Perdere tempo è waste time: Don't waste your time.",
     ],
-    lezioni: [{ id: "55", riquadro: 2 }],
+    lezioni: [{ id: "56", riquadro: 2 }],
   },
 ];

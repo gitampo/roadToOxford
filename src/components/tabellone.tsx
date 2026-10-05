@@ -34,8 +34,8 @@ type Props = {
 
 export function Tabellone({ lezione }: Props) {
   const scritta = lezione
-    ? `Next stop: Lezione ${lezione.id}: ${lezione.titolo}`
-    : "Next stop: Oxford. Hai completato il corso!";
+    ? `NEXT STOP: Lezione ${lezione.id}: ${lezione.titolo}`
+    : "NEXT STOP: Oxford. Hai completato il corso!";
 
   // La larghezza di un giro (le due frasi), misurata: serve per farla ripartire senza scatti
   const [larghezza, setLarghezza] = useState(0);

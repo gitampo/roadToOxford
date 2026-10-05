@@ -228,7 +228,7 @@ export const emozioni: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Simili: drive someone crazy, drive someone mad. Per l'ultima goccia che fa traboccare il vaso c'è the last straw (lezione 55{4}).",
+            "Simili: drive someone crazy, drive someone mad. Per l'ultima goccia che fa traboccare il vaso c'è the last straw (lezione 56{4}).",
         },
       ],
     },

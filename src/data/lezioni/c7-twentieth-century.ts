@@ -44,6 +44,12 @@ export const twentiethCentury: Lezione = {
           testo:
             "Da questa poesia viene il papavero rosso che i britannici portano sul petto a novembre per ricordare i caduti. È un confronto classico con Ungaretti e con La guerra di Piero di De André.",
         },
+        {
+          tipo: "apri",
+          id: "flanders-fields",
+          titolo: "In Flanders Fields",
+          descrizione: "John McCrae, 1915 · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -86,6 +92,12 @@ export const twentiethCentury: Lezione = {
           testo:
             'Ulysses (1922) racconta un solo giorno, il 16 giugno 1904, nella vita del dublinese Leopold Bloom, come un\'Odissea moderna. Si chiude con il monologo di sua moglie Molly: pagine senza punteggiatura, fino al celebre "yes" finale.',
         },
+        {
+          tipo: "apri",
+          id: "the-dead",
+          titolo: "The Dead: la neve",
+          descrizione: "James Joyce, 1914 · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -109,6 +121,12 @@ export const twentiethCentury: Lezione = {
           tipo: "nota",
           testo:
             "In A Room of One's Own sostenne che una donna, per scrivere, ha bisogno di soldi e di una stanza tutta per sé. È un testo fondamentale del femminismo.",
+        },
+        {
+          tipo: "apri",
+          id: "mrs-dalloway",
+          titolo: "Mrs Dalloway: l'inizio",
+          descrizione: "Virginia Woolf, 1925 · lettura e analisi completa",
         },
       ],
     },

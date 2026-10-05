@@ -258,7 +258,9 @@ export function AreaAnnotazioni({
       >
         <KeyboardAvoidingView
           style={styles.velo}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          // "padding" anche su Android: con l'app da bordo a bordo la
+          // finestra non si restringe più, e "height" non basterebbe
+          behavior="padding"
         >
           <ThemedView style={styles.scheda}>
             <ThemedText style={styles.titoloScheda}>Nuova nota</ThemedText>

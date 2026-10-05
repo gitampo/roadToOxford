@@ -15,10 +15,12 @@ import { LEZIONI } from "@/data/lezioni";
 import {
   cancellaProgressi,
   leggiProgressi,
+  registraAttivita,
   salvaProgressi,
   segnaVisto,
 } from "@/data/progressi";
 import { TESTI } from "@/data/testi";
+import { useTastiera } from "@/hooks/use-tastiera";
 import { useTheme } from "@/hooks/use-theme";
 import {
   Blocco,
@@ -36,6 +38,7 @@ import {
   ScrollView,
   StyleSheet,
   useWindowDimensions,
+  View,
 } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
@@ -116,6 +119,8 @@ export default function Dettagli() {
   const theme = useTheme();
   const router = useRouter();
   const scrollRef = useRef<ScrollView>(null);
+  // Negli esercizi da scrivere la tastiera non copre mai il campo
+  const tastiera = useTastiera(scrollRef);
   // Le risposte agli esercizi, per riquadro e blocco ("7-2" = riquadro 7, blocco 2)
   const [stati, setStati] = useState<Record<string, StatoEsercizio>>({});
   // Quanto è stata scorsa la pagina, e dove tornare dopo un "Rivedi"
@@ -384,23 +389,37 @@ export default function Dettagli() {
                 ref={scrollRef}
                 style={{ flex: 1 }}
                 keyboardShouldPersistTaps="handled"
-                scrollEventThrottle={32}
+                scrollEventThrottle={16}
                 onScroll={(e) => {
                   scrollY.current = e.nativeEvent.contentOffset.y;
+                  tastiera.onScroll(e);
                 }}
               >
                 <ThemedView style={styles.container}>
-                  {/* Intestazione: livello, titolo e barra di avanzamento */}
+                  {/* Intestazione: livello, titolo e barra di avanzamento.
+                      Dentro un riquadro il titolo della lezione sale al posto
+                      del livello, e sopra i trattini va quello del riquadro */}
                   <ThemedText
                     style={[styles.etichetta, { color: theme.textSecondary }]}
                   >
-                    {lezione.sottotitolo ??
-                      `${lezione.livello} · Lezione ${lezione.id}`}
+                    {pagina > 0 && riquadroCorrente
+                      ? `${lezione.titolo} · Riquadro ${pagina} di ${numeroRiquadri}`
+                      : (lezione.sottotitolo ??
+                        `${lezione.livello} · Lezione ${lezione.id}`)}
                   </ThemedText>
-                  <ThemedText style={styles.titoloLezione}>
-                    {lezione.titolo}
-                  </ThemedText>
-                  {lezione.descrizione && (
+                  {pagina > 0 && riquadroCorrente ? (
+                    <ThemedText style={[styles.titoloRiquadro, styles.vicino]}>
+                      {riquadroCorrente.titolo}
+                    </ThemedText>
+                  ) : (
+                    <ThemedText style={styles.titoloLezione}>
+                      {lezione.titolo}
+                    </ThemedText>
+                  )}
+                  {/* La linea gialla sotto il titolo, in copertina e nei
+                      riquadri */}
+                  <ThemedView style={styles.lineaGialla} />
+                  {pagina === 0 && lezione.descrizione && (
                     <ThemedText
                       style={[
                         styles.descrizioneLezione,
@@ -525,18 +544,6 @@ export default function Dettagli() {
                     /* Riquadro */
                     riquadroCorrente && (
                       <ThemedView>
-                        <ThemedText
-                          style={[
-                            styles.etichetta,
-                            { color: theme.textSecondary },
-                          ]}
-                        >
-                          Riquadro {pagina} di {numeroRiquadri}
-                        </ThemedText>
-                        <ThemedText style={styles.titoloRiquadro}>
-                          {riquadroCorrente.titolo}
-                        </ThemedText>
-                        <ThemedView style={styles.lineaGialla} />
                         <ThemedView style={styles.blocchi}>
                           {riquadroCorrente.blocchi.map((blocco, i) => (
                             <MostraBlocco
@@ -546,12 +553,23 @@ export default function Dettagli() {
                               paginaSpiegazione={paginaSpiegazione}
                               vaiA={vaiA}
                               stato={stati[`${pagina}-${i}`]}
-                              onStato={(nuovo) =>
-                                setStati((s) => ({
-                                  ...s,
-                                  [`${pagina}-${i}`]: nuovo,
-                                }))
-                              }
+                              onStato={(nuovo) => {
+                                const k = `${pagina}-${i}`;
+                                // Una risposta conta nello storico solo quando
+                                // l'esercizio si chiude (corretta passa da
+                                // vuota a vero o falso): l'abbina, per
+                                // esempio, chiama onStato a ogni coppia
+                                if (
+                                  nuovo.corretta !== undefined &&
+                                  stati[k]?.corretta === undefined
+                                ) {
+                                  registraAttivita({
+                                    risposte: 1,
+                                    giuste: nuovo.corretta ? 1 : 0,
+                                  });
+                                }
+                                setStati((s) => ({ ...s, [k]: nuovo }));
+                              }}
                               onRivedi={vaiARiquadro}
                               riepilogo={riepilogo}
                               onRicomincia={ricomincia}
@@ -562,6 +580,7 @@ export default function Dettagli() {
                     )
                   )}
                 </ThemedView>
+                <View style={{ height: tastiera.spazio }} />
               </ScrollView>
 
               {/* Nei riquadri, i bordi dello schermo (il margine vuoto ai lati del
@@ -1110,6 +1129,16 @@ const styles = StyleSheet.create({
     fontSize: 28,
     lineHeight: 34,
   },
+  // Il titolo del riquadro, attaccato all'etichetta sopra
+  vicino: {
+    marginTop: -Spacing.two,
+  },
+  lineaGialla: {
+    width: 40,
+    height: 2,
+    backgroundColor: GIALLO,
+    marginTop: -Spacing.two,
+  },
   avanzamento: {
     flexDirection: "row",
     gap: 4,
@@ -1161,13 +1190,6 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     letterSpacing: 0.5,
     marginTop: Spacing.one,
-  },
-  lineaGialla: {
-    width: 40,
-    height: 2,
-    backgroundColor: GIALLO,
-    marginTop: Spacing.three,
-    marginBottom: Spacing.four,
   },
   blocchi: {
     gap: Spacing.three,

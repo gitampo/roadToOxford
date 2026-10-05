@@ -92,7 +92,13 @@ export const victorianAge: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Riconosci la struttura? Would have been… if… had allowed: è un third conditional (lezione 40{1}).",
+            "Riconosci la struttura? Would have been… if… had allowed: è un third conditional (lezione 41{1}).",
+        },
+        {
+          tipo: "apri",
+          id: "coketown",
+          titolo: "Hard Times: Coketown",
+          descrizione: "Charles Dickens, 1854 · lettura e analisi completa",
         },
       ],
     },
@@ -117,6 +123,13 @@ export const victorianAge: Lezione = {
           tipo: "nota",
           testo:
             "È il perfetto simbolo del compromesso vittoriano: una faccia rispettabile di giorno, un'altra nascosta di notte.",
+        },
+        {
+          tipo: "apri",
+          id: "jekyll-hyde",
+          titolo: "Dr Jekyll and Mr Hyde",
+          descrizione:
+            "Robert Louis Stevenson, 1886 · lettura e analisi completa",
         },
       ],
     },
@@ -150,6 +163,12 @@ export const victorianAge: Lezione = {
           tipo: "nota",
           testo:
             "Nel 1895 Wilde fu condannato a due anni di lavori forzati per omosessualità. Morì povero a Parigi nel 1900.",
+        },
+        {
+          tipo: "apri",
+          id: "dorian-gray",
+          titolo: "The Picture of Dorian Gray: la prefazione",
+          descrizione: "Oscar Wilde, 1891 · lettura e analisi completa",
         },
       ],
     },

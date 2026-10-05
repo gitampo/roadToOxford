@@ -113,16 +113,17 @@ Legenda:
 | 37  | Past Perfect               | Raccontare fatti in sequenza, come nelle storie di vita | trapassato prossimo, had + participio | 4°    |
 | 38  | Used to and would          | Parlare di abitudini passate                            | abitudini passate, solevo             | —     |
 | 39  | Present Perfect Continuous | Parlare di attività in corso da tempo                   | how long, been + -ing                 | 3°    |
-| 40  | Third conditional          | Fare ipotesi sul passato, esprimere rimpianti           | periodo ipotetico, terzo tipo         | 3°    |
-| 41  | Reported speech            | Riferire cosa ha detto qualcuno; say vs tell            | discorso indiretto                    | 3°    |
-| 42  | The passive voice          | Descrivere notizie e processi                           | forma passiva                         | —     |
-| 43  | Relative clauses           | Definire persone e cose                                 | pronomi relativi, who, which, that    | —     |
-| 44  | Modals of deduction        | Fare supposizioni                                       | must be, can't be, deduzione          | —     |
-| 45  | Make vs do                 | Parlare di impegni e faccende                           | fare, collocazioni                    | —     |
-| 46  | Basic phrasal verbs        | Parlare in modo naturale nella vita quotidiana          | verbi frasali                         | —     |
-| 47  | Infinitive vs gerund       | Esprimere scelte, preferenze e opinioni                 | to do, doing, gerundio                | —     |
-| 48  | Dependent prepositions     | Usare la preposizione giusta dopo verbi e aggettivi     | preposizioni rette                    | —     |
-| 49  | Scientific English         | Presentare dati e ricerche                              | inglese scientifico, ESP              | 3°    |
+| 40  | Tag questions              | Chiedere conferma e coinvolgere chi ascolta             | isn't it, don't you, vero?            | —     |
+| 41  | Third conditional          | Fare ipotesi sul passato, esprimere rimpianti           | periodo ipotetico, terzo tipo         | 3°    |
+| 42  | Reported speech            | Riferire cosa ha detto qualcuno; say vs tell            | discorso indiretto                    | 3°    |
+| 43  | The passive voice          | Descrivere notizie e processi                           | forma passiva                         | —     |
+| 44  | Relative clauses           | Definire persone e cose                                 | pronomi relativi, who, which, that    | —     |
+| 45  | Modals of deduction        | Fare supposizioni                                       | must be, can't be, deduzione          | —     |
+| 46  | Make vs do                 | Parlare di impegni e faccende                           | fare, collocazioni                    | —     |
+| 47  | Basic phrasal verbs        | Parlare in modo naturale nella vita quotidiana          | verbi frasali                         | —     |
+| 48  | Infinitive vs gerund       | Esprimere scelte, preferenze e opinioni                 | to do, doing, gerundio                | —     |
+| 49  | Dependent prepositions     | Usare la preposizione giusta dopo verbi e aggettivi     | preposizioni rette                    | —     |
+| 50  | Scientific English         | Presentare dati e ricerche                              | inglese scientifico, ESP              | 3°    |
 
 ---
 
@@ -130,14 +131,33 @@ Legenda:
 
 | #   | Titolo                           | Uso                                              | Chiavi                            | Liceo |
 | --- | -------------------------------- | ------------------------------------------------ | --------------------------------- | ----- |
-| 50  | Past modals                      | Criticare, rimpiangere, fare ipotesi sul passato | should have, might have           | —     |
-| 51  | Mixed conditionals               | Collegare passato e presente nelle ipotesi       | periodo ipotetico misto           | —     |
-| 52  | Inversion and emphatic forms     | Dare enfasi                                      | inversione, frasi scisse          | —     |
-| 53  | Formal and informal English      | Scrivere email formali, affrontare un colloquio  | registro, formale, informale      | —     |
-| 54  | Discourse markers                | Argomentare e collegare le idee                  | connettivi, however, nevertheless | —     |
-| 55  | Idioms and collocations          | Parlare come un madrelingua                      | espressioni idiomatiche           | —     |
-| 56  | Advanced phrasal verbs           | Capire e usare l'inglese colloquiale             | verbi frasali avanzati            | —     |
-| 57  | Pronunciation and British accent | Suonare britannico                               | pronuncia, accento, RP            | —     |
+| 51  | Past modals                      | Criticare, rimpiangere, fare ipotesi sul passato | should have, might have           | —     |
+| 52  | Mixed conditionals               | Collegare passato e presente nelle ipotesi       | periodo ipotetico misto           | —     |
+| 53  | Inversion and emphatic forms     | Dare enfasi                                      | inversione, frasi scisse          | —     |
+| 54  | Formal and informal English      | Scrivere email formali, affrontare un colloquio  | registro, formale, informale      | —     |
+| 55  | Discourse markers                | Argomentare e collegare le idee                  | connettivi, however, nevertheless | —     |
+| 56  | Idioms and collocations          | Parlare come un madrelingua                      | espressioni idiomatiche           | —     |
+| 57  | Advanced phrasal verbs           | Capire e usare l'inglese colloquiale             | verbi frasali avanzati            | —     |
+| 58  | Pronunciation and British accent | Suonare britannico                               | pronuncia, accento, RP            | —     |
+
+---
+
+## Situazioni — L'inglese della vita quotidiana
+
+Lezioni organizzate per situazione, non per regola: le frasi che usano davvero i madrelingua, quello che ti diranno gli altri, le abitudini britanniche, gli errori tipici degli italiani e un dialogo ambientato a Oxford. Ogni lezione rimanda alle lezioni di grammatica che usa. Il livello indica da quando si può affrontare.
+
+| #   | Titolo                      | Uso                                                               | Chiavi                                       | Livello |
+| --- | --------------------------- | ----------------------------------------------------------------- | -------------------------------------------- | ------- |
+| S1  | Presentarsi                 | Salutare, dire chi sei e fare conoscenza                          | saluti, nice to meet you, where are you from | A1      |
+| S2  | Descrivere le persone       | Dire com'è una persona: aspetto fisico, età e carattere           | aspetto, carattere, falsi amici              | A1      |
+| S3  | Al bar e al pub             | Ordinare da bere e da mangiare, pagare, offrire un giro           | ordinare, pint, take away, round             | A1      |
+| S4  | Chiedere e dare indicazioni | Trovare la strada, capire le risposte, aiutare chi si è perso     | indicazioni, domande indirette, distanze     | A1      |
+| S5  | Fare acquisti               | Chiedere, provare, pagare e cambiare quello che compri            | taglie, fit / suit, prezzi, resi             | A2      |
+| S6  | Al ristorante               | Prenotare, ordinare, parlare di allergie, chiedere il conto       | prenotare, menù, allergie, bill, mancia      | A2      |
+| S7  | In viaggio                  | Biglietti, treni, autobus, aeroporto e hotel                      | single / return, platform, twin, miss        | A2      |
+| S8  | Dal medico e in farmacia    | Dire come stai, descrivere i sintomi, capire i consigli           | GP, NHS, sintomi, hurt, prescription         | A2      |
+| S9  | Al telefono                 | Telefonare, capire, fare lo spelling, lasciare un messaggio       | this is, hold on, spelling, voicemail        | B1      |
+| S10 | Small talk e buone maniere  | Chiacchierare, chiedere con garbo, scusarsi, invitare e rifiutare | tempo, would you mind, sorry, understatement | B1      |
 
 ---
 

@@ -22,7 +22,6 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Modal,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -252,7 +251,9 @@ export default function Appunti() {
           {/* La tastiera spinge in su la scheda invece di coprirla */}
           <KeyboardAvoidingView
             style={styles.velo}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            // "padding" anche su Android: con l'app da bordo a bordo la
+            // finestra non si restringe più, e "height" non basterebbe
+            behavior="padding"
           >
             <View style={styles.scheda}>
               <ThemedView

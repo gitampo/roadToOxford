@@ -36,7 +36,7 @@ export const E: Voce[] = [
       "\"Eventualmente ti chiamo\" è I'll call you if necessary. I'll call you eventually vuol dire \"prima o poi ti chiamo\".",
       "L'aggettivo eventual segue la stessa regola: the eventual winner è \"il vincitore finale\", non \"l'eventuale vincitore\" (che è the possible winner).",
     ],
-    lezioni: [{ id: "49", riquadro: 7 }],
+    lezioni: [{ id: "50", riquadro: 7 }],
   },
   {
     id: "educated",
@@ -186,7 +186,7 @@ export const E: Voce[] = [
       "Experience non è \"esperimento\": in laboratorio si fa an experiment. We did an experiment, non We did an experience.",
       "L'esperienza lavorativa è work experience, non numerabile: niente an davanti.",
     ],
-    lezioni: [{ id: "49", riquadro: 7 }],
+    lezioni: [{ id: "50", riquadro: 7 }],
   },
   {
     id: "earn",
@@ -331,7 +331,7 @@ export const E: Voce[] = [
       "Fare uno sforzo si dice make an effort, non do an effort.",
       "L'accento è sulla prima sillaba: Effort.",
     ],
-    lezioni: [{ id: "45", riquadro: 3 }],
+    lezioni: [{ id: "46", riquadro: 3 }],
   },
   {
     id: "either",
@@ -481,7 +481,7 @@ export const E: Voce[] = [
       "Enjoy vuole sempre un oggetto: I enjoyed it o I enjoyed myself, mai solo I enjoyed.",
       "Dopo enjoy si usa -ing: I enjoy cooking, non I enjoy to cook.",
     ],
-    lezioni: [{ id: "47", riquadro: 2 }],
+    lezioni: [{ id: "48", riquadro: 2 }],
   },
   {
     id: "estate",
@@ -576,7 +576,7 @@ export const E: Voce[] = [
       "Even though parla di un fatto vero (anche se era malata, e lo era); even if di un'ipotesi (anche se piovesse).",
       "Nelle negative \"neanche\" si dice not even: Not even a word!",
     ],
-    lezioni: [{ id: "54", riquadro: 3 }],
+    lezioni: [{ id: "55", riquadro: 3 }],
   },
   {
     id: "evidence",

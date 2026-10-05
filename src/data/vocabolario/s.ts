@@ -53,7 +53,7 @@ export const S: Voce[] = [
       "Say o tell? Tell vuole la persona subito dopo (tell me), say no (say something, say something to me). She told me she was tired = She said she was tired.",
       "Says si pronuncia /sez/ e said /sed/, non /seɪz/ e /seɪd/.",
     ],
-    lezioni: [{ id: "41", riquadro: 3 }],
+    lezioni: [{ id: "42", riquadro: 3 }],
   },
   {
     id: "see",
@@ -146,7 +146,7 @@ export const S: Voce[] = [
       parola: "sensibile",
       spiegazione: "Sensibile si dice sensitive: She's very sensitive = è molto sensibile.",
     },
-    lezioni: [{ id: "49", riquadro: 7 }],
+    lezioni: [{ id: "50", riquadro: 7 }],
   },
   {
     id: "stop",
@@ -193,7 +193,7 @@ export const S: Voce[] = [
     attenzione: [
       "Stop + -ing = smettere; stop + to = fermarsi per fare. I stopped smoking (ho smesso di fumare) ≠ I stopped to smoke (mi sono fermato per fumare).",
     ],
-    lezioni: [{ id: "47", riquadro: 6 }],
+    lezioni: [{ id: "48", riquadro: 6 }],
   },
   {
     id: "sympathetic",
@@ -260,7 +260,7 @@ export const S: Voce[] = [
       "Nel calcio save è la parata del portiere: What a save!",
       "I risparmi sono savings (sempre plurale): She spent all her savings.",
     ],
-    lezioni: [{ id: "55", riquadro: 2 }],
+    lezioni: [{ id: "56", riquadro: 2 }],
   },
   {
     id: "seem",
@@ -368,8 +368,8 @@ export const S: Voce[] = [
     ],
     attenzione: ["Set è uguale in tutte e tre le forme: set, set, set."],
     lezioni: [
-      { id: "56", riquadro: 4 },
-      { id: "56", riquadro: 6 },
+      { id: "57", riquadro: 4 },
+      { id: "57", riquadro: 6 },
     ],
   },
   {
@@ -628,7 +628,7 @@ export const S: Voce[] = [
       "Sort non vuol dire \"sorte\" (destino): quella è fate o luck.",
       "Sorted! nel parlato britannico vuol dire \"Sistemato! Tutto a posto!\".",
     ],
-    lezioni: [{ id: "56", riquadro: 1 }],
+    lezioni: [{ id: "57", riquadro: 1 }],
   },
   {
     id: "spend",
@@ -736,8 +736,8 @@ export const S: Voce[] = [
       "Stare in piedi in questo momento è be standing: She's standing by the door.",
     ],
     lezioni: [
-      { id: "46", riquadro: 2 },
-      { id: "56", riquadro: 2 },
+      { id: "47", riquadro: 2 },
+      { id: "57", riquadro: 2 },
     ],
   },
   {
@@ -871,8 +871,8 @@ export const S: Voce[] = [
       "Nei testi accademici suggest è prudente: This suggests that... (questo fa pensare che...), meno forte di prove.",
     ],
     lezioni: [
-      { id: "47", riquadro: 2 },
-      { id: "49", riquadro: 4 },
+      { id: "48", riquadro: 2 },
+      { id: "50", riquadro: 4 },
     ],
   },
   {

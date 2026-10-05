@@ -58,8 +58,8 @@ export const A: Voce[] = [
       "Lo stesso vale per l'aggettivo actual: significa \"reale, vero\" (the actual cost, il costo reale), non \"attuale\", che è current.",
     ],
     lezioni: [
-      { id: "54", riquadro: 7 },
-      { id: "49", riquadro: 7 },
+      { id: "55", riquadro: 7 },
+      { id: "50", riquadro: 7 },
     ],
   },
   {
@@ -136,7 +136,7 @@ export const A: Voce[] = [
       "\"Cambiamo argomento\" è Let's change the subject, non Let's change the argument.",
       "Litigare si dice have an argument o argue: They argue all the time = litigano sempre.",
     ],
-    lezioni: [{ id: "49", riquadro: 7 }],
+    lezioni: [{ id: "50", riquadro: 7 }],
   },
   {
     id: "ask",
@@ -207,7 +207,7 @@ export const A: Voce[] = [
       "Si chiede a qualcuno senza to: Ask your mother, non Ask to your mother.",
       "Per chiedere un oggetto serve for: ask for the menu. Senza for, ask the menu vorrebbe dire \"fare una domanda al menù\".",
     ],
-    lezioni: [{ id: "45", riquadro: 6 }],
+    lezioni: [{ id: "46", riquadro: 6 }],
   },
   {
     id: "assist",
@@ -439,7 +439,7 @@ export const A: Voce[] = [
     ],
     lezioni: [
       { id: "2", riquadro: 9 },
-      { id: "48", riquadro: 2 },
+      { id: "49", riquadro: 2 },
     ],
   },
   {
@@ -548,7 +548,7 @@ export const A: Voce[] = [
       "Si fa domanda per il posto con for (apply for a job, apply for a visa) e all'ente con to (apply to a university).",
       "La domanda scritta è an application; chi la fa è an applicant.",
     ],
-    lezioni: [{ id: "48", riquadro: 2 }],
+    lezioni: [{ id: "49", riquadro: 2 }],
   },
   {
     id: "approach",
@@ -720,7 +720,7 @@ export const A: Voce[] = [
     attenzione: [
       "Dopo avoid si usa -ing: avoid making mistakes, non avoid to make mistakes.",
     ],
-    lezioni: [{ id: "47", riquadro: 2 }],
+    lezioni: [{ id: "48", riquadro: 2 }],
   },
   {
     id: "aware",

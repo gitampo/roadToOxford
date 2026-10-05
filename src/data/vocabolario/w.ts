@@ -189,8 +189,8 @@ export const W: Voce[] = [
       "Work si pronuncia /wɜːk/, walk /wɔːk/: la differenza è nella vocale.",
     ],
     lezioni: [
-      { id: "46", riquadro: 6 },
-      { id: "56", riquadro: 6 },
+      { id: "47", riquadro: 6 },
+      { id: "57", riquadro: 6 },
     ],
   },
   {
@@ -236,7 +236,7 @@ export const W: Voce[] = [
       "Wait (aspettare, passare il tempo) ed expect (aspettarsi, prevedere) non sono uguali: I expect he'll be late.",
       "Il cameriere è waiter: chi \"attende\" ai tavoli.",
     ],
-    lezioni: [{ id: "48", riquadro: 2 }],
+    lezioni: [{ id: "49", riquadro: 2 }],
   },
   {
     id: "wake",
@@ -279,7 +279,7 @@ export const W: Voce[] = [
     ],
     lezioni: [
       { id: "10", riquadro: 7 },
-      { id: "46", riquadro: 2 },
+      { id: "47", riquadro: 2 },
     ],
   },
   {
@@ -417,7 +417,7 @@ export const W: Voce[] = [
       "Si vince una gara o un premio (win a match, win a prize); si batte un avversario con beat: We beat Chelsea, non We won Chelsea.",
       "Won si pronuncia /wʌn/, come one.",
     ],
-    lezioni: [{ id: "40", riquadro: 6 }],
+    lezioni: [{ id: "41", riquadro: 6 }],
   },
   {
     id: "wish",
@@ -472,7 +472,7 @@ export const W: Voce[] = [
     lezioni: [
       { id: "36", riquadro: 6 },
       { id: "36", riquadro: 7 },
-      { id: "40", riquadro: 5 },
+      { id: "41", riquadro: 5 },
     ],
   },
   {
@@ -523,7 +523,7 @@ export const W: Voce[] = [
       "Dopo I wonder l'ordine è quello della frase affermativa: I wonder where she is, non I wonder where is she.",
       "Non confonderlo con wander /ˈwɒndə/ (vagare, girovagare).",
     ],
-    lezioni: [{ id: "53", riquadro: 5 }],
+    lezioni: [{ id: "54", riquadro: 5 }],
   },
   {
     id: "worry",

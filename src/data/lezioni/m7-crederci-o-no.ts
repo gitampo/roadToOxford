@@ -393,7 +393,7 @@ export const credercioNo: Lezione = {
           soluzione:
             "He told me he had lost his phone, but I'm not buying it: there's something fishy here.",
           spiegazione:
-            "Il discorso indiretto vuole il past perfect (he had lost: lezione 41{2}), poi i due idiomi: I'm not buying it e something fishy.",
+            "Il discorso indiretto vuole il past perfect (he had lost: lezione 42{2}), poi i due idiomi: I'm not buying it e something fishy.",
         },
       ],
     },

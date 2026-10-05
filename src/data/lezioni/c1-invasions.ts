@@ -48,7 +48,7 @@ export const invasions: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Molti nomi di fiumi inglesi sono celtici: Thames, Avon (avon in gallese significa proprio \"fiume\").",
+            'Molti nomi di fiumi inglesi sono celtici: Thames, Avon (avon in gallese significa proprio "fiume").',
         },
       ],
     },
@@ -69,7 +69,10 @@ export const invasions: Lezione = {
           tipo: "esempi",
           esempi: [
             { en: "street", it: "dal latino strata (via lastricata)" },
-            { en: "-chester, -caster", it: "da castra (accampamento): Manchester, Lancaster" },
+            {
+              en: "-chester, -caster",
+              it: "da castra (accampamento): Manchester, Lancaster",
+            },
           ],
         },
       ],

@@ -19,14 +19,13 @@ import {
   eliminaNota,
   leggiNote,
 } from "@/data/appunti";
+import { useTastiera } from "@/hooks/use-tastiera";
 import { useTheme } from "@/hooks/use-theme";
 import { Nota } from "@/types/nota";
 import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { SymbolView } from "expo-symbols";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -51,6 +50,9 @@ export default function Appunto() {
   const [titolo, setTitolo] = useState("");
   const [descrizione, setDescrizione] = useState("");
   const [testo, setTesto] = useState("");
+  // In modifica la tastiera non copre mai il campo dove si scrive
+  const scroll = useRef<ScrollView>(null);
+  const tastiera = useTastiera(scroll);
 
   useEffect(() => {
     leggiNote().then((note) => setNota(note.find((n) => n.id === id) ?? null));
@@ -104,13 +106,15 @@ export default function Appunto() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
-      {/* In modifica la tastiera non deve coprire il campo: la pagina si
-          restringe e si può scorrere fino a quello che si sta scrivendo */}
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <ScrollView keyboardShouldPersistTaps="handled">
+      {/* In modifica la tastiera non deve coprire il campo: la pagina scorre
+          fino a quello che si sta scrivendo (vedi useTastiera) */}
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          ref={scroll}
+          onScroll={tastiera.onScroll}
+          scrollEventThrottle={16}
+          keyboardShouldPersistTaps="handled"
+        >
           <ThemedView style={styles.container}>
             {/* In alto: data e pulsanti (Modifica, oppure Annulla e Salva) */}
             <View style={styles.intestazione}>
@@ -289,8 +293,9 @@ export default function Appunto() {
               </Pressable>
             )}
           </ThemedView>
+          <View style={{ height: tastiera.spazio }} />
         </ScrollView>
-      </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 }

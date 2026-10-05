@@ -125,7 +125,7 @@ export const N: Voce[] = [
     ],
     lezioni: [
       { id: "13", riquadro: 3 },
-      { id: "50", riquadro: 6 },
+      { id: "51", riquadro: 6 },
     ],
   },
   {

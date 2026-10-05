@@ -30,7 +30,7 @@ export const pensareDecidere: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Gli idiomi sono frasi fatte: non si cambiano le parole. Si dice the bigger picture, non the larger image. Una prima panoramica degli idiomi la trovi nella lezione 55{3}.",
+            "Gli idiomi sono frasi fatte: non si cambiano le parole. Si dice the bigger picture, non the larger image. Una prima panoramica degli idiomi la trovi nella lezione 56{3}.",
         },
       ],
     },

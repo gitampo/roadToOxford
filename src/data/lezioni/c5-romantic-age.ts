@@ -102,6 +102,13 @@ export const romanticAge: Lezione = {
           testo:
             "The Tyger chiede: può lo stesso Dio che ha creato l'agnello aver creato anche la tigre? Le due poesie vanno lette insieme.",
         },
+        {
+          tipo: "apri",
+          id: "the-tyger",
+          titolo: "The Tyger",
+          descrizione:
+            "William Blake, 1794 · con The Lamb · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -146,6 +153,12 @@ export const romanticAge: Lezione = {
             },
           ],
         },
+        {
+          tipo: "apri",
+          id: "daffodils",
+          titolo: "I Wandered Lonely as a Cloud",
+          descrizione: "William Wordsworth, 1807 · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -171,6 +184,13 @@ export const romanticAge: Lezione = {
           testo:
             "Coleridge distingueva l'immaginazione (Imagination), capace di creare, dalla fantasia (Fancy), che si limita a combinare immagini già esistenti.",
         },
+        {
+          tipo: "apri",
+          id: "ancient-mariner",
+          titolo: "The Rime of the Ancient Mariner",
+          descrizione:
+            "Samuel Taylor Coleridge, 1798 · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -194,6 +214,12 @@ export const romanticAge: Lezione = {
               it: "Lei cammina nella bellezza, come la notte",
             },
           ],
+        },
+        {
+          tipo: "apri",
+          id: "she-walks-in-beauty",
+          titolo: "She Walks in Beauty",
+          descrizione: "Lord Byron, 1815 · lettura e analisi completa",
         },
       ],
     },

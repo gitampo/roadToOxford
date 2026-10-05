@@ -131,7 +131,7 @@ export const R: Voce[] = [
     attenzione: [
       "L'accento si sposta: come nome e aggettivo cade sulla prima sillaba (a REcord), come verbo sulla seconda (to reCORD). Succede lo stesso con present, object, increase, permit, export.",
     ],
-    lezioni: [{ id: "57", riquadro: 2 }],
+    lezioni: [{ id: "58", riquadro: 2 }],
   },
   {
     id: "run",
@@ -363,8 +363,8 @@ export const R: Voce[] = [
       "\"Vado a correre\" si dice I go running o I go for a run, non I go to run.",
     ],
     lezioni: [
-      { id: "46", riquadro: 6 },
-      { id: "56", riquadro: 1 },
+      { id: "47", riquadro: 6 },
+      { id: "57", riquadro: 1 },
     ],
   },
   {
@@ -435,7 +435,7 @@ export const R: Voce[] = [
       "Remember non è riflessivo: I remember, non I remember myself.",
       "Ricordare qualcosa a qualcuno è remind: Remind me to call Anna = ricordami di chiamare Anna.",
     ],
-    lezioni: [{ id: "47", riquadro: 6 }],
+    lezioni: [{ id: "48", riquadro: 6 }],
   },
   {
     id: "rumour",
@@ -883,6 +883,6 @@ export const R: Voce[] = [
       "Rise non ha oggetto (qualcosa sale da solo), raise sì (qualcuno alza qualcosa): The sun rises; raise your hand.",
       "Nei grafici si usa spesso: rise, increase, go up (salire) e fall, decrease, go down (scendere).",
     ],
-    lezioni: [{ id: "49", riquadro: 3 }],
+    lezioni: [{ id: "50", riquadro: 3 }],
   },
 ];

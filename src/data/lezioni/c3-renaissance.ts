@@ -132,6 +132,19 @@ export const renaissance: Lezione = {
           testo:
             "In Hamlet il principe di Danimarca scopre che lo zio ha ucciso suo padre per prenderne il trono e sposarne la vedova. Amleto vuole vendicarsi, ma continua a esitare e a riflettere: è il primo grande personaggio moderno, diviso tra pensiero e azione.",
         },
+        {
+          tipo: "apri",
+          id: "romeo-juliet",
+          titolo: "Romeo and Juliet",
+          descrizione:
+            "La scena del balcone, circa 1595 · lettura e analisi completa",
+        },
+        {
+          tipo: "apri",
+          id: "hamlet",
+          titolo: "Hamlet: to be, or not to be",
+          descrizione: "Il monologo, circa 1600 · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -176,6 +189,12 @@ export const renaissance: Lezione = {
           tipo: "testo",
           testo:
             'Nelle poesie religiose, come Batter my heart, il tono è altrettanto intenso: il poeta chiede a Dio di "colpirgli il cuore" con violenza per poter rinascere.',
+        },
+        {
+          tipo: "apri",
+          id: "death-be-not-proud",
+          titolo: "Death, be not proud",
+          descrizione: "John Donne, 1633 · lettura e analisi completa",
         },
       ],
     },

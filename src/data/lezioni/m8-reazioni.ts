@@ -196,7 +196,7 @@ export const reazioni: Lezione = {
         {
           tipo: "nota",
           testo:
-            "Registro: my bad va bene con amici e colleghi, ma in una lettera formale o con un professore suona fuori luogo (lezione 53{1}).",
+            "Registro: my bad va bene con amici e colleghi, ma in una lettera formale o con un professore suona fuori luogo (lezione 54{1}).",
         },
       ],
     },

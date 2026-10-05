@@ -15,12 +15,12 @@ import LineaTitolo from "@/components/lineaTitolo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { constants, Spacing } from "@/constants/theme";
+import { avanzamento, idCollegati } from "@/data/avanzamento";
 import { LEZIONI } from "@/data/lezioni";
-import { TESTI } from "@/data/testi";
 import { useRisultati } from "@/hooks/use-risultati";
 import { useTheme } from "@/hooks/use-theme";
 import { useVisti } from "@/hooks/use-visti";
-import { ESERCIZI_CON_PUNTEGGIO, Lezione } from "@/types/lezione";
+import { Lezione } from "@/types/lezione";
 import { Link } from "expo-router";
 import { SymbolView } from "expo-symbols";
 import { useState } from "react";
@@ -40,30 +40,36 @@ const LARGHEZZA_COLONNA = 32;
 // I livelli, nell'ordine in cui compaiono le lezioni (A1, A2, B1, ...)
 const LIVELLI = [...new Set(LEZIONI.map((l) => l.livello))];
 
-// "Tempi verbali" non è un livello: è un filtro che raccoglie le lezioni sui
-// tempi sparse nei vari livelli (restano divise per livello sotto)
-const TEMPI_VERBALI = "Tempi verbali";
-const LEZIONI_TEMPI = [
-  "10",
-  "12",
-  "13",
-  "21",
-  "22",
-  "23",
-  "24",
-  "27",
-  "28",
-  "29",
-  "30",
-  "31",
-  "35",
-  "37",
-  "38",
-  "39",
-];
+// "Tempi verbali" e "Modi verbali" non sono livelli: sono filtri che
+// raccolgono le lezioni sparse nei vari livelli (restano divise per livello
+// sotto). Per ogni gruppo, i numeri delle lezioni che ne fanno parte
+const GRUPPI: Record<string, string[]> = {
+  "Tempi verbali": [
+    "10",
+    "12",
+    "13",
+    "21",
+    "22",
+    "23",
+    "24",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "35",
+    "37",
+    "38",
+    "39",
+  ],
+  // Imperativo, condizionali (con wish, che fa da congiuntivo), infinito e -ing
+  "Modi verbali": ["19", "34", "36", "41", "48", "52"],
+};
 
-// Le linguette: i livelli, con "Tempi verbali" subito dopo B2-C1
-const VOCI = LIVELLI.flatMap((l) => (l === "B2-C1" ? [l, TEMPI_VERBALI] : [l]));
+// Le linguette: i livelli, con i gruppi subito dopo B2-C1
+const VOCI = LIVELLI.flatMap((l) =>
+  l === "B2-C1" ? [l, ...Object.keys(GRUPPI)] : [l],
+);
 
 // Il numero di ogni lezione: la sua posizione nell'elenco completo ("Tutti"),
 // lo stesso anche quando si filtra per livello o si cerca
@@ -72,39 +78,8 @@ const NUMERO = new Map(LEZIONI.map((l, i) => [l.id, i + 1]));
 // Vero se la lezione rientra nella linguetta scelta (null = tutte)
 function nelFiltro(lezione: Lezione, voce: string | null) {
   if (voce === null) return true;
-  if (voce === TEMPI_VERBALI) return LEZIONI_TEMPI.includes(lezione.id);
+  if (voce in GRUPPI) return GRUPPI[voce].includes(lezione.id);
   return lezione.livello === voce;
-}
-
-// Quanti esercizi con punteggio ha una lezione (senza contare i testi)
-function contaEsercizi(lezione: Lezione | undefined) {
-  return (lezione?.riquadri ?? []).reduce(
-    (somma, r) =>
-      somma +
-      r.blocchi.filter((b) =>
-        (ESERCIZI_CON_PUNTEGGIO as readonly string[]).includes(b.tipo),
-      ).length,
-    0,
-  );
-}
-
-// I numeri dei riquadri di teoria (quelli senza esercizi con punteggio)
-function riquadriTeoria(lezione: Lezione | undefined) {
-  return (lezione?.riquadri ?? []).flatMap((r, i) =>
-    r.blocchi.some((b) =>
-      (ESERCIZI_CON_PUNTEGGIO as readonly string[]).includes(b.tipo),
-    )
-      ? []
-      : [i + 1],
-  );
-}
-
-// Gli id di una lezione e dei testi che apre (come il Sonetto 18 nel C3)
-function idCollegati(lezione: Lezione) {
-  const testi = (lezione.riquadri ?? []).flatMap((r) =>
-    r.blocchi.flatMap((b) => (b.tipo === "apri" ? [b.id] : [])),
-  );
-  return [lezione.id, ...testi];
 }
 
 // Minuscole, senza accenti e senza spazi ai lati, per confrontare i testi
@@ -225,31 +200,8 @@ function CardLezione({
   visti: ReturnType<typeof useVisti>;
 }) {
   const theme = useTheme();
-  const ids = idCollegati(lezione);
-  const trova = (id: string) => [...LEZIONI, ...TESTI].find((l) => l.id === id);
-
-  // Teoria: i riquadri di teoria aperti, della lezione e dei suoi testi
-  const teoria = ids.reduce(
-    (somma, id) => somma + riquadriTeoria(trova(id)).length,
-    0,
-  );
-  const letti = ids.reduce(
-    (somma, id) =>
-      somma +
-      riquadriTeoria(trova(id)).filter((p) => visti[id]?.includes(p)).length,
-    0,
-  );
-
-  // Esercizi: somma gli esercizi della lezione e dei suoi testi
-  const totale = ids.reduce((somma, id) => somma + contaEsercizi(trova(id)), 0);
-  const giuste = ids.reduce(
-    (somma, id) => somma + (risultati[id]?.giuste ?? 0),
-    0,
-  );
-
   // Progressi: riquadri di teoria aperti + risposte giuste, sul totale
-  const fatti = letti + giuste;
-  const daFare = teoria + totale;
+  const { fatti, daFare } = avanzamento(lezione, risultati, visti);
 
   return (
     <Link

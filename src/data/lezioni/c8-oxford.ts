@@ -19,7 +19,7 @@ export const oxford: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Oxford si trova a circa un'ora di treno a nord-ovest di Londra, dove il Tamigi incontra il fiume Cherwell. Il nome viene da un guado (ford) dove passavano i buoi (oxen). Il poeta Matthew Arnold la chiamò \"la città delle guglie sognanti\", per i campanili e le torri dei suoi college.",
+            'Oxford si trova a circa un\'ora di treno a nord-ovest di Londra, dove il Tamigi incontra il fiume Cherwell. Il nome viene da un guado (ford) dove passavano i buoi (oxen). Il poeta Matthew Arnold la chiamò "la città delle guglie sognanti", per i campanili e le torri dei suoi college.',
         },
       ],
     },
@@ -35,14 +35,14 @@ export const oxford: Lezione = {
           tipo: "tabella",
           righe: [
             ["Christ Church", "il più grande, con la cattedrale della città"],
-            ["Magdalen", "si pronuncia \"MAUD-lin\""],
+            ["Magdalen", 'si pronuncia "MAUD-lin"'],
             ["Balliol, Merton, University", "tra i più antichi, del Duecento"],
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Gli studenti di Oxford chiamano Cambridge, la grande rivale, \"the Other Place\".",
+            'Gli studenti di Oxford chiamano Cambridge, la grande rivale, "the Other Place".',
         },
       ],
     },
@@ -77,11 +77,23 @@ export const oxford: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["Bodleian Library", "una delle biblioteche più antiche d'Europa, aperta nel 1602"],
-            ["Radcliffe Camera", "la sala di lettura rotonda, simbolo della città"],
+            [
+              "Bodleian Library",
+              "una delle biblioteche più antiche d'Europa, aperta nel 1602",
+            ],
+            [
+              "Radcliffe Camera",
+              "la sala di lettura rotonda, simbolo della città",
+            ],
             ["Ashmolean Museum", "il primo museo universitario, del 1683"],
-            ["Christ Church Great Hall", "la mensa che ha ispirato la Sala Grande di Harry Potter"],
-            ["Bridge of Sighs", "il \"Ponte dei Sospiri\" dell'Hertford College"],
+            [
+              "Christ Church Great Hall",
+              "la mensa che ha ispirato la Sala Grande di Harry Potter",
+            ],
+            [
+              "Bridge of Sighs",
+              'il "Ponte dei Sospiri" dell\'Hertford College',
+            ],
           ],
         },
       ],
@@ -102,14 +114,26 @@ export const oxford: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "\"Curiouser and curiouser!\" cried Alice.", it: "\"Sempre più curioso!\" gridò Alice." },
-            { en: "We're all mad here.", it: "Qui siamo tutti matti. (lo Stregatto)" },
+            {
+              en: '"Curiouser and curiouser!" cried Alice.',
+              it: '"Sempre più curioso!" gridò Alice.',
+            },
+            {
+              en: "We're all mad here.",
+              it: "Qui siamo tutti matti. (lo Stregatto)",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "\"Curiouser\" è sbagliato di proposito: il comparativo corretto è \"more curious\" (lezione 26{3}). Alice è così sorpresa che dimentica la grammatica.",
+            '"Curiouser" è sbagliato di proposito: il comparativo corretto è "more curious" (lezione 26{3}). Alice è così sorpresa che dimentica la grammatica.',
+        },
+        {
+          tipo: "apri",
+          id: "alice",
+          titolo: "Alice nel Paese delle Meraviglie",
+          descrizione: "Lewis Carroll, 1865 · lettura e analisi completa",
         },
       ],
     },
@@ -133,13 +157,15 @@ export const oxford: Lezione = {
       blocchi: [
         {
           tipo: "testo",
-          testo:
-            "Per iscriversi da uno studente italiano servono, in genere:",
+          testo: "Per iscriversi da uno studente italiano servono, in genere:",
         },
         {
           tipo: "tabella",
           righe: [
-            ["UCAS", "il portale unico per le domande alle università britanniche"],
+            [
+              "UCAS",
+              "il portale unico per le domande alle università britanniche",
+            ],
             ["scadenza", "a metà ottobre dell'anno prima dell'inizio"],
             ["personal statement", "un testo in cui presenti te stesso"],
             ["test di inglese", "per esempio IELTS"],

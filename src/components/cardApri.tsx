@@ -2,7 +2,7 @@ import { useRisultati } from "@/hooks/use-risultati";
 import { useTheme } from "@/hooks/use-theme";
 import { Link } from "expo-router";
 import { SymbolView } from "expo-symbols";
-import { Pressable, StyleSheet } from "react-native";
+import { Platform, Pressable, StyleSheet } from "react-native";
 import { BarraRisultato } from "./risultato";
 import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
@@ -25,16 +25,27 @@ export default function CardApri({ id, titolo, descrizione }: Props) {
     // push: apre una nuova schermata sopra il modulo, così "Fine" riporta indietro
     <Link push href={{ pathname: "/lezione/[id]", params: { id } }} asChild>
       <Pressable
-        style={({ pressed }) => [
-          styles.card,
-          { backgroundColor: theme.backgroundElement },
-          pressed && { opacity: 0.7 },
-        ]}
+        // Sul web Link (asChild) vuole uno stile unico (non una funzione né
+        // un array): lì si usa lo stile fisso, senza l'effetto al tocco
+        style={
+          Platform.OS === "web"
+            ? StyleSheet.flatten([
+                styles.card,
+                { backgroundColor: theme.backgroundElement },
+              ])
+            : ({ pressed }) => [
+                styles.card,
+                { backgroundColor: theme.backgroundElement },
+                pressed && { opacity: 0.7 },
+              ]
+        }
       >
         <ThemedView type="backgroundElement" style={styles.testi}>
           <ThemedText style={styles.titolo}>{titolo}</ThemedText>
           {descrizione && (
-            <ThemedText style={[styles.descrizione, { color: theme.textSecondary }]}>
+            <ThemedText
+              style={[styles.descrizione, { color: theme.textSecondary }]}
+            >
               {descrizione}
             </ThemedText>
           )}

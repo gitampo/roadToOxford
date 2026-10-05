@@ -85,8 +85,8 @@ export const K: Voce[] = [
     ],
     attenzione: ["Dopo keep si usa -ing: keep trying, non keep to try."],
     lezioni: [
-      { id: "47", riquadro: 2 },
-      { id: "56", riquadro: 1 },
+      { id: "48", riquadro: 2 },
+      { id: "57", riquadro: 1 },
     ],
   },
   {
@@ -147,7 +147,7 @@ export const K: Voce[] = [
     ],
     lezioni: [
       { id: "25", riquadro: 1 },
-      { id: "57", riquadro: 6 },
+      { id: "58", riquadro: 6 },
     ],
   },
   {
@@ -208,6 +208,6 @@ export const K: Voce[] = [
       "Gentile con qualcuno è kind to (o nice to), non kind with.",
       "Kind è la parola giusta per \"gentile\"; gentle vuol dire delicato.",
     ],
-    lezioni: [{ id: "53", riquadro: 3 }],
+    lezioni: [{ id: "54", riquadro: 3 }],
   },
 ];

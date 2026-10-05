@@ -168,7 +168,7 @@ export const F: Voce[] = [
       "Non confondere find (trovare: found, found) con found (fondare: founded, founded): The University of Oxford was founded in the 12th century.",
       "Per scoprire un'informazione si usa find out, non discover: discover è per le scoperte (Fleming discovered penicillin).",
     ],
-    lezioni: [{ id: "46", riquadro: 6 }],
+    lezioni: [{ id: "47", riquadro: 6 }],
   },
   {
     id: "fine",
@@ -488,8 +488,8 @@ export const F: Voce[] = [
       "Far cadere qualcosa non è fall ma drop: I dropped my phone.",
     ],
     lezioni: [
-      { id: "49", riquadro: 3 },
-      { id: "56", riquadro: 5 },
+      { id: "50", riquadro: 3 },
+      { id: "57", riquadro: 5 },
     ],
   },
   {

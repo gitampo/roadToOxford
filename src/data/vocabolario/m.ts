@@ -132,10 +132,10 @@ export const M: Voce[] = [
       "Make o do? Make per creare o produrre (make a cake, make a mistake, make a noise); do per attività e lavori (do homework, do the shopping).",
     ],
     lezioni: [
-      { id: "45", riquadro: 1 },
-      { id: "45", riquadro: 3 },
-      { id: "45", riquadro: 5 },
-      { id: "56", riquadro: 5 },
+      { id: "46", riquadro: 1 },
+      { id: "46", riquadro: 3 },
+      { id: "46", riquadro: 5 },
+      { id: "57", riquadro: 5 },
     ],
   },
   {
@@ -504,8 +504,8 @@ export const M: Voce[] = [
       "Attenzione alla risposta: a Do you mind...? si risponde No, not at all se si è d'accordo (no, non mi dispiace).",
     ],
     lezioni: [
-      { id: "47", riquadro: 2 },
-      { id: "55", riquadro: 5 },
+      { id: "48", riquadro: 2 },
+      { id: "56", riquadro: 5 },
     ],
   },
   {
@@ -545,7 +545,7 @@ export const M: Voce[] = [
       "Mistake (errore in generale) ed error (più formale, tecnico) sono simili: a spelling mistake, a computer error.",
       "Be mistaken vuol dire sbagliarsi: If I'm not mistaken... (se non sbaglio...).",
     ],
-    lezioni: [{ id: "45", riquadro: 3 }],
+    lezioni: [{ id: "46", riquadro: 3 }],
   },
   {
     id: "move",

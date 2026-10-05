@@ -35,11 +35,11 @@ const SONETTO_18_TRADUZIONE = [
   "vivrà questo, e questo darà vita a te.",
 ];
 
-
 export const sonetto18: Lezione = {
   id: "sonetto-18",
   titolo: "Sonetto 18",
-  descrizione: "La bellezza resa eterna dalla poesia: lettura, analisi ed esercizi",
+  descrizione:
+    "La bellezza resa eterna dalla poesia: lettura, analisi ed esercizi",
   chiavi: "sonetto shakespeariano, pentametro giambico, thou / thee",
   livello: "Letteratura",
   sottotitolo: "Modulo C3 · William Shakespeare",
@@ -75,8 +75,11 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["sonetti 1–126", "rivolti a un giovane uomo, il \"Fair Youth\""],
-            ["sonetti 127–152", "rivolti a una donna misteriosa, la \"Dark Lady\""],
+            ["sonetti 1–126", 'rivolti a un giovane uomo, il "Fair Youth"'],
+            [
+              "sonetti 127–152",
+              'rivolti a una donna misteriosa, la "Dark Lady"',
+            ],
             ["sonetti 153–154", "due brevi poesie su Cupido"],
           ],
         },
@@ -98,7 +101,7 @@ export const sonetto18: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Prima di iniziare, alcune forme antiche che incontrerai. L'inglese del Cinquecento aveva ancora un \"tu\" (thou) distinto dal \"voi\" (you), con i suoi pronomi e le sue desinenze:",
+            'Prima di iniziare, alcune forme antiche che incontrerai. L\'inglese del Cinquecento aveva ancora un "tu" (thou) distinto dal "voi" (you), con i suoi pronomi e le sue desinenze:',
         },
         {
           tipo: "tabella",
@@ -143,15 +146,24 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Shall I compare thee…?", it: "Shall I…? chiede un parere: \"dovrei…?\", \"vuoi che…?\". Come in \"Shall I open the door?\", vuoi che apra la porta? (lezione 28{3})" },
-            { en: "compare thee", it: "thee è complemento, come me, him, them (lezione 16{1})" },
-            { en: "more lovely and more temperate", it: "comparativi con more: aggettivi di due o più sillabe (lezione 26{3})" },
+            {
+              en: "Shall I compare thee…?",
+              it: 'Shall I…? chiede un parere: "dovrei…?", "vuoi che…?". Come in "Shall I open the door?", vuoi che apra la porta? (lezione 28{3})',
+            },
+            {
+              en: "compare thee",
+              it: "thee è complemento, come me, him, them (lezione 16{1})",
+            },
+            {
+              en: "more lovely and more temperate",
+              it: "comparativi con more: aggettivi di due o più sillabe (lezione 26{3})",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Con lovely vanno bene sia lovelier sia more lovely. Shakespeare sceglie more lovely per il ritmo: \"thou ART more LOVE-ly\" segue il battito da-DUM, mentre \"thou ART LOVE-li-er\" metterebbe due accenti di fila. In più, more lovely e more temperate creano un parallelismo.",
+            'Con lovely vanno bene sia lovelier sia more lovely. Shakespeare sceglie more lovely per il ritmo: "thou ART more LOVE-ly" segue il battito da-DUM, mentre "thou ART LOVE-li-er" metterebbe due accenti di fila. In più, more lovely e more temperate creano un parallelismo.',
         },
         {
           tipo: "sottotitolo",
@@ -160,7 +172,10 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["rhetorical question (domanda retorica)", "Shall I compare thee…? Il poeta non aspetta una risposta: se la dà da solo, nel verso 2."],
+            [
+              "rhetorical question (domanda retorica)",
+              "Shall I compare thee…? Il poeta non aspetta una risposta: se la dà da solo, nel verso 2.",
+            ],
           ],
         },
       ],
@@ -189,13 +204,16 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "shall I | com-PARE | thee TO | a SUM- | mer's DAY", it: "da-DUM / da-DUM / da-DUM / da-DUM / da-DUM" },
+            {
+              en: "shall I | com-PARE | thee TO | a SUM- | mer's DAY",
+              it: "da-DUM / da-DUM / da-DUM / da-DUM / da-DUM",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Perché proprio il giambo? Perché è il ritmo naturale dell'inglese parlato, che alterna sillabe deboli e forti (lezione 57{5}). Molte frasi di tutti i giorni sono già giambiche: \"I want to go to bed\".",
+            'Perché proprio il giambo? Perché è il ritmo naturale dell\'inglese parlato, che alterna sillabe deboli e forti (lezione 58{5}). Molte frasi di tutti i giorni sono già giambiche: "I want to go to bed".',
         },
       ],
     },
@@ -224,15 +242,24 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Rough winds do shake…", it: "do enfatico: \"scuotono\" con più forza (lezione 52{6})" },
-            { en: "summer's lease", it: "genitivo sassone: il contratto dell'estate (lezione 5{6})" },
-            { en: "hath all too short a date", it: "inglese moderno: has a date that is much too short" },
+            {
+              en: "Rough winds do shake…",
+              it: 'do enfatico: "scuotono" con più forza (lezione 53{6})',
+            },
+            {
+              en: "summer's lease",
+              it: "genitivo sassone: il contratto dell'estate (lezione 5{6})",
+            },
+            {
+              en: "hath all too short a date",
+              it: "inglese moderno: has a date that is much too short",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Rough winds: l'aggettivo resta invariato anche davanti a un plurale, mai \"roughs winds\" (lezione 4{1}).",
+            'Rough winds: l\'aggettivo resta invariato anche davanti a un plurale, mai "roughs winds" (lezione 4{1}).',
         },
         {
           tipo: "sottotitolo",
@@ -241,7 +268,10 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["metaphor (metafora)", "summer's lease: l'estate è un contratto d'affitto, con una scadenza. Il paragone c'è, ma senza \"come\"."],
+            [
+              "metaphor (metafora)",
+              "summer's lease: l'estate è un contratto d'affitto, con una scadenza. Il paragone c'è, ma senza \"come\".",
+            ],
           ],
         },
         {
@@ -258,7 +288,7 @@ export const sonetto18: Lezione = {
         {
           tipo: "testo",
           testo:
-            "In inglese la rima dipende dal suono, non dalla grafia: day e May finiscono con lo stesso suono \"-ei\", mentre date (\"-eit\") non rima con loro. Temperate e date oggi non rimano perfettamente: è una rima imperfetta, accettata in poesia soprattutto quando l'ultima sillaba della parola non è accentata.",
+            'In inglese la rima dipende dal suono, non dalla grafia: day e May finiscono con lo stesso suono "-ei", mentre date ("-eit") non rima con loro. Temperate e date oggi non rimano perfettamente: è una rima imperfetta, accettata in poesia soprattutto quando l\'ultima sillaba della parola non è accentata.',
         },
       ],
     },
@@ -278,7 +308,7 @@ export const sonetto18: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Il sole, \"l'occhio del cielo\", a volte scotta e a volte si nasconde dietro le nuvole. Poi il discorso si allarga: ogni cosa bella, prima o poi, perde la sua bellezza, per caso o per il corso della natura.",
+            'Il sole, "l\'occhio del cielo", a volte scotta e a volte si nasconde dietro le nuvole. Poi il discorso si allarga: ogni cosa bella, prima o poi, perde la sua bellezza, per caso o per il corso della natura.',
         },
         {
           tipo: "sottotitolo",
@@ -291,23 +321,35 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "Sometime too hot the eye of heaven shines", it: "→ Sometimes the eye of heaven shines too hot" },
-            { en: "And often is his gold complexion dimm'd", it: "→ And his gold complexion is often dimmed" },
+            {
+              en: "Sometime too hot the eye of heaven shines",
+              it: "→ Sometimes the eye of heaven shines too hot",
+            },
+            {
+              en: "And often is his gold complexion dimm'd",
+              it: "→ And his gold complexion is often dimmed",
+            },
           ],
         },
         {
           tipo: "tabella",
           righe: [
             ["sometime, often", "avverbi di frequenza (lezione 11{1})"],
-            ["is… dimm'd", "forma passiva: to be + participio (lezione 42{1})"],
-            ["dimm'd, untrimm'd", "l'apostrofo indica che -ed non è una sillaba in più (lezione 22{4})"],
-            ["every fair… declines", "every + verbo al singolare, con la -s (lezione 10{2})"],
+            ["is… dimm'd", "forma passiva: to be + participio (lezione 43{1})"],
+            [
+              "dimm'd, untrimm'd",
+              "l'apostrofo indica che -ed non è una sillaba in più (lezione 22{4})",
+            ],
+            [
+              "every fair… declines",
+              "every + verbo al singolare, con la -s (lezione 10{2})",
+            ],
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Fair qui è un aggettivo usato come nome: \"ogni cosa bella\". È lo stesso meccanismo di \"the rich\", i ricchi (lezione 3{6}).",
+            'Fair qui è un aggettivo usato come nome: "ogni cosa bella". È lo stesso meccanismo di "the rich", i ricchi (lezione 3{6}).',
         },
         {
           tipo: "sottotitolo",
@@ -316,9 +358,18 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["metaphor (metafora)", "the eye of heaven: il sole è l'occhio del cielo"],
-            ["personification (personificazione)", "his gold complexion: il sole ha un volto, come una persona"],
-            ["polyptoton (poliptoto)", "every fair from fair: la stessa parola in due sensi, \"ogni cosa bella\" e \"la sua bellezza\""],
+            [
+              "metaphor (metafora)",
+              "the eye of heaven: il sole è l'occhio del cielo",
+            ],
+            [
+              "personification (personificazione)",
+              "his gold complexion: il sole ha un volto, come una persona",
+            ],
+            [
+              "polyptoton (poliptoto)",
+              'every fair from fair: la stessa parola in due sensi, "ogni cosa bella" e "la sua bellezza"',
+            ],
           ],
         },
         {
@@ -355,7 +406,7 @@ export const sonetto18: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Con \"But\" il sonetto cambia direzione, è la volta. L'estate finisce, ma la \"tua eterna estate\" no. Nemmeno la Morte potrà vantarsi di averti nella sua ombra, perché vivrai \"in eternal lines\": nei versi di questa poesia.",
+            'Con "But" il sonetto cambia direzione, è la volta. L\'estate finisce, ma la "tua eterna estate" no. Nemmeno la Morte potrà vantarsi di averti nella sua ombra, perché vivrai "in eternal lines": nei versi di questa poesia.',
         },
         {
           tipo: "sottotitolo",
@@ -364,16 +415,28 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "thy eternal summer shall not fade", it: "shall = will, futuro (lezione 28{1})" },
-            { en: "that fair thou ow'st", it: "relativa senza pronome: the beauty (that) you own (lezione 43{3})" },
-            { en: "Nor shall Death brag…", it: "inversione dopo una negazione: shall prima del soggetto (lezione 52{2})" },
-            { en: "When… thou grow'st", it: "dopo when il presente, anche per il futuro (lezione 34{4})" },
+            {
+              en: "thy eternal summer shall not fade",
+              it: "shall = will, futuro (lezione 28{1})",
+            },
+            {
+              en: "that fair thou ow'st",
+              it: "relativa senza pronome: the beauty (that) you own (lezione 44{3})",
+            },
+            {
+              en: "Nor shall Death brag…",
+              it: "inversione dopo una negazione: shall prima del soggetto (lezione 53{2})",
+            },
+            {
+              en: "When… thou grow'st",
+              it: "dopo when il presente, anche per il futuro (lezione 34{4})",
+            },
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Il gioco di parole: lines sono i versi, ma anche le linee del tempo. L'amato \"cresce insieme al tempo\" invece di esserne distrutto.",
+            'Il gioco di parole: lines sono i versi, ma anche le linee del tempo. L\'amato "cresce insieme al tempo" invece di esserne distrutto.',
         },
         {
           tipo: "sottotitolo",
@@ -382,9 +445,18 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["antithesis (antitesi)", "thy eternal summer contro l'estate che finisce dei versi 1–8"],
-            ["personification (personificazione)", "Death brag: la Morte si vanta, come una persona"],
-            ["anaphora (anafora)", "Nor… / Nor…: la stessa parola all'inizio di due versi vicini"],
+            [
+              "antithesis (antitesi)",
+              "thy eternal summer contro l'estate che finisce dei versi 1–8",
+            ],
+            [
+              "personification (personificazione)",
+              "Death brag: la Morte si vanta, come una persona",
+            ],
+            [
+              "anaphora (anafora)",
+              "Nor… / Nor…: la stessa parola all'inizio di due versi vicini",
+            ],
           ],
         },
         {
@@ -411,9 +483,18 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "ROUGH WINDS | do SHAKE | the DAR- | ling BUDS | of MAY", it: "verso 3: due accenti di fila all'inizio, come una raffica di vento" },
-            { en: "and SUM- | mer's LEASE | hath ALL | too SHORT | a DATE", it: "verso 4: regolare, e \"all too short\" cade sugli accenti forti" },
-            { en: "but THY | e-TER- | nal SUM- | mer SHALL | not FADE", it: "verso 9: il \"But\" della svolta, poi un ritmo regolare e sicuro" },
+            {
+              en: "ROUGH WINDS | do SHAKE | the DAR- | ling BUDS | of MAY",
+              it: "verso 3: due accenti di fila all'inizio, come una raffica di vento",
+            },
+            {
+              en: "and SUM- | mer's LEASE | hath ALL | too SHORT | a DATE",
+              it: 'verso 4: regolare, e "all too short" cade sugli accenti forti',
+            },
+            {
+              en: "but THY | e-TER- | nal SUM- | mer SHALL | not FADE",
+              it: 'verso 9: il "But" della svolta, poi un ritmo regolare e sicuro',
+            },
           ],
         },
         {
@@ -425,14 +506,17 @@ export const sonetto18: Lezione = {
           tipo: "tabella",
           righe: [
             ["dimm'd", "dimmed: una sillaba, non due"],
-            ["ow'st", "owest (da owe, che allora significava possedere): una sillaba invece di due"],
+            [
+              "ow'st",
+              "owest (da owe, che allora significava possedere): una sillaba invece di due",
+            ],
             ["wander'st", "wanderest: due sillabe invece di tre"],
           ],
         },
         {
           tipo: "nota",
           testo:
-            "Il trucco per sentire il ritmo: leggi il verso ad alta voce battendo la mano sulle sillabe forti. Per sapere dove cade l'accento delle singole parole, vedi la lezione 57{2}.",
+            "Il trucco per sentire il ritmo: leggi il verso ad alta voce battendo la mano sulle sillabe forti. Per sapere dove cade l'accento delle singole parole, vedi la lezione 58{2}.",
         },
       ],
     },
@@ -452,7 +536,7 @@ export const sonetto18: Lezione = {
         {
           tipo: "testo",
           testo:
-            "Finché ci sarà qualcuno che respira e legge, questa poesia vivrà, e darà vita a te. \"This\" è la poesia stessa: il vero protagonista del sonetto è il potere dell'arte di vincere il tempo.",
+            'Finché ci sarà qualcuno che respira e legge, questa poesia vivrà, e darà vita a te. "This" è la poesia stessa: il vero protagonista del sonetto è il potere dell\'arte di vincere il tempo.',
         },
         {
           tipo: "sottotitolo",
@@ -461,9 +545,18 @@ export const sonetto18: Lezione = {
         {
           tipo: "esempi",
           esempi: [
-            { en: "So long as men can breathe", it: "so long as = as long as, finché: presente anche per il futuro (lezione 34{4})" },
-            { en: "So long lives this", it: "→ this lives so long: soggetto dopo il verbo, per il ritmo" },
-            { en: "this gives life to thee", it: "this usato da solo, come pronome (lezione 15{3}); to thee = to you (lezione 16{3})" },
+            {
+              en: "So long as men can breathe",
+              it: "so long as = as long as, finché: presente anche per il futuro (lezione 34{4})",
+            },
+            {
+              en: "So long lives this",
+              it: "→ this lives so long: soggetto dopo il verbo, per il ritmo",
+            },
+            {
+              en: "this gives life to thee",
+              it: "this usato da solo, come pronome (lezione 15{3}); to thee = to you (lezione 16{3})",
+            },
           ],
         },
         {
@@ -478,7 +571,10 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["anaphora (anafora)", "So long… / So long…: la ripetizione dà al distico il tono di una promessa solenne"],
+            [
+              "anaphora (anafora)",
+              "So long… / So long…: la ripetizione dà al distico il tono di una promessa solenne",
+            ],
           ],
         },
         {
@@ -487,9 +583,7 @@ export const sonetto18: Lezione = {
         },
         {
           tipo: "tabella",
-          righe: [
-            ["see / thee", "versi 13 e 14: rima G, baciata"],
-          ],
+          righe: [["see / thee", "versi 13 e 14: rima G, baciata"]],
         },
         {
           tipo: "nota",
@@ -510,7 +604,10 @@ export const sonetto18: Lezione = {
           tipo: "tabella",
           righe: [
             ["prima quartina", "la domanda e i primi difetti dell'estate"],
-            ["seconda quartina", "altri difetti, poi una legge generale: tutto ciò che è bello finisce"],
+            [
+              "seconda quartina",
+              "altri difetti, poi una legge generale: tutto ciò che è bello finisce",
+            ],
             ["terza quartina", "la svolta (But): tu invece non finirai"],
             ["distico", "la ragione: vivrai in questa poesia"],
           ],
@@ -538,7 +635,10 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["sonetto petrarchesco", "un'ottava (8 versi) + una sestina (6 versi)"],
+            [
+              "sonetto petrarchesco",
+              "un'ottava (8 versi) + una sestina (6 versi)",
+            ],
             ["sonetto shakespeariano", "tre quartine (4+4+4) + un distico (2)"],
           ],
         },
@@ -600,12 +700,27 @@ export const sonetto18: Lezione = {
         {
           tipo: "tabella",
           righe: [
-            ["rhetorical question (domanda retorica)", "Shall I compare thee…? (v. 1)"],
-            ["metaphor (metafora)", "summer's lease (v. 4), the eye of heaven (v. 5)"],
-            ["personification (personificazione)", "his gold complexion (v. 6), Death brag (v. 11)"],
+            [
+              "rhetorical question (domanda retorica)",
+              "Shall I compare thee…? (v. 1)",
+            ],
+            [
+              "metaphor (metafora)",
+              "summer's lease (v. 4), the eye of heaven (v. 5)",
+            ],
+            [
+              "personification (personificazione)",
+              "his gold complexion (v. 6), Death brag (v. 11)",
+            ],
             ["polyptoton (poliptoto)", "every fair from fair (v. 7)"],
-            ["antithesis (antitesi)", "l'estate che finisce contro thy eternal summer (v. 9)"],
-            ["anaphora (anafora)", "Nor… Nor… (vv. 10–11), So long… So long… (vv. 13–14)"],
+            [
+              "antithesis (antitesi)",
+              "l'estate che finisce contro thy eternal summer (v. 9)",
+            ],
+            [
+              "anaphora (anafora)",
+              "Nor… Nor… (vv. 10–11), So long… So long… (vv. 13–14)",
+            ],
           ],
         },
         {
@@ -629,7 +744,8 @@ export const sonetto18: Lezione = {
         },
         {
           tipo: "sceltaMultipla",
-          domanda: "Secondo il poeta, perché la bellezza della persona amata non svanirà?",
+          domanda:
+            "Secondo il poeta, perché la bellezza della persona amata non svanirà?",
           opzioni: [
             "Perché avrà dei figli che le somiglieranno",
             "Perché vivrà nei versi di questa poesia",
@@ -637,26 +753,26 @@ export const sonetto18: Lezione = {
           ],
           giusta: 1,
           spiegazione:
-            "\"So long lives this, and this gives life to thee\": è la poesia a renderla eterna. La prima risposta è la tesi dei sonetti 1–17, che il Sonetto 18 abbandona.",
+            '"So long lives this, and this gives life to thee": è la poesia a renderla eterna. La prima risposta è la tesi dei sonetti 1–17, che il Sonetto 18 abbandona.',
           rivedi: "VERSI 13–14: IL DISTICO",
         },
         {
           tipo: "sceltaMultipla",
-          domanda: "Che cosa indica \"the eye of heaven\"?",
+          domanda: 'Che cosa indica "the eye of heaven"?',
           citazione: "Sometime too hot the eye of heaven shines",
           opzioni: ["La luna", "Dio", "Il sole", "Le stelle"],
           giusta: 2,
           spiegazione:
-            "È una metafora: il sole è l'occhio del cielo. Nel verso dopo ha anche un \"volto dorato\" (gold complexion): è personificato.",
+            'È una metafora: il sole è l\'occhio del cielo. Nel verso dopo ha anche un "volto dorato" (gold complexion): è personificato.',
           rivedi: "VERSI 5–8: IL SOLE E IL DECLINO",
         },
         {
           tipo: "sceltaMultipla",
           domanda: "In quale punto il sonetto cambia direzione (la volta)?",
           opzioni: [
-            "Al verso 5, con \"Sometime\"",
-            "Al verso 9, con \"But\"",
-            "Al verso 13, con \"So long\"",
+            'Al verso 5, con "Sometime"',
+            'Al verso 9, con "But"',
+            'Al verso 13, con "So long"',
           ],
           giusta: 1,
           spiegazione:
@@ -683,7 +799,7 @@ export const sonetto18: Lezione = {
         },
         {
           tipo: "completa",
-          consegna: "Completa il verso con la forma antica di \"are\".",
+          consegna: 'Completa il verso con la forma antica di "are".',
           prima: "Thou",
           dopo: "more lovely and more temperate",
           risposte: ["art"],
@@ -692,11 +808,12 @@ export const sonetto18: Lezione = {
         },
         {
           tipo: "completa",
-          consegna: "Completa il verso con la forma antica di \"has\".",
+          consegna: 'Completa il verso con la forma antica di "has".',
           prima: "And summer's lease",
           dopo: "all too short a date",
           risposte: ["hath"],
-          spiegazione: "Hath = has: al posto della -s, l'inglese antico usava -th.",
+          spiegazione:
+            "Hath = has: al posto della -s, l'inglese antico usava -th.",
           rivedi: "VERSI 3–4: IL VENTO E IL TEMPO",
         },
         {
@@ -708,17 +825,43 @@ export const sonetto18: Lezione = {
           consegna: "Riscrivi il verso nell'ordine dell'inglese moderno.",
           citazione: "And often is his gold complexion dimm'd",
           parole: ["often", "gold", "and", "dimmed", "his", "is", "complexion"],
-          soluzione: ["and", "his", "gold", "complexion", "is", "often", "dimmed"],
+          soluzione: [
+            "and",
+            "his",
+            "gold",
+            "complexion",
+            "is",
+            "often",
+            "dimmed",
+          ],
           spiegazione:
-            "È un passivo (is dimmed, lezione 42{1}), e l'avverbio di frequenza va tra is e il participio (lezione 11{3}).",
+            "È un passivo (is dimmed, lezione 43{1}), e l'avverbio di frequenza va tra is e il participio (lezione 11{3}).",
           rivedi: "VERSI 5–8: IL SOLE E IL DECLINO",
         },
         {
           tipo: "riordina",
           consegna: "Riscrivi il verso nell'ordine dell'inglese moderno.",
           citazione: "Sometime too hot the eye of heaven shines",
-          parole: ["too", "the", "shines", "sometimes", "heaven", "hot", "eye", "of"],
-          soluzione: ["sometimes", "the", "eye", "of", "heaven", "shines", "too", "hot"],
+          parole: [
+            "too",
+            "the",
+            "shines",
+            "sometimes",
+            "heaven",
+            "hot",
+            "eye",
+            "of",
+          ],
+          soluzione: [
+            "sometimes",
+            "the",
+            "eye",
+            "of",
+            "heaven",
+            "shines",
+            "too",
+            "hot",
+          ],
           spiegazione:
             "Nell'ordine normale il soggetto (the eye of heaven) viene prima del verbo, e \"too hot\" va dopo il verbo. Sometime, nell'inglese di Shakespeare, significa sometimes.",
           rivedi: "VERSI 5–8: IL SOLE E IL DECLINO",
@@ -730,7 +873,7 @@ export const sonetto18: Lezione = {
           parole: ["long", "lives", "this", "so"],
           soluzione: ["this", "lives", "so", "long"],
           spiegazione:
-            "Shakespeare mette il soggetto (this) dopo il verbo per il ritmo e per la ripetizione di \"So long\" (anafora).",
+            'Shakespeare mette il soggetto (this) dopo il verbo per il ritmo e per la ripetizione di "So long" (anafora).',
           rivedi: "VERSI 13–14: IL DISTICO",
         },
         {
@@ -739,7 +882,8 @@ export const sonetto18: Lezione = {
         },
         {
           tipo: "sceltaMultipla",
-          domanda: "Quale struttura grammaticale c'è all'inizio di questo verso?",
+          domanda:
+            "Quale struttura grammaticale c'è all'inizio di questo verso?",
           citazione: "Nor shall Death brag thou wander'st in his shade",
           opzioni: [
             "Una forma passiva",
@@ -749,12 +893,12 @@ export const sonetto18: Lezione = {
           ],
           giusta: 1,
           spiegazione:
-            "Dopo Nor, shall va prima del soggetto (Death), come in una domanda (lezione 52{2}).",
+            "Dopo Nor, shall va prima del soggetto (Death), come in una domanda (lezione 53{2}).",
           rivedi: "VERSI 9–12: LA SVOLTA",
         },
         {
           tipo: "sceltaMultipla",
-          domanda: "Perché c'è \"do\" in questo verso?",
+          domanda: 'Perché c\'è "do" in questo verso?',
           citazione: "Rough winds do shake the darling buds of May",
           opzioni: [
             "Perché è una domanda",
@@ -763,7 +907,7 @@ export const sonetto18: Lezione = {
           ],
           giusta: 2,
           spiegazione:
-            "È il do enfatico: rafforza il verbo, come in \"I do like it!\" (lezione 52{6}). Aiuta anche il ritmo del verso.",
+            'È il do enfatico: rafforza il verbo, come in "I do like it!" (lezione 53{6}). Aiuta anche il ritmo del verso.',
           rivedi: "VERSI 3–4: IL VENTO E IL TEMPO",
         },
         {
@@ -777,12 +921,13 @@ export const sonetto18: Lezione = {
           ],
           giusta: 0,
           spiegazione:
-            "That fair (which) thou ow'st: il pronome relativo si può togliere quando è complemento (lezione 43{3}).",
+            "That fair (which) thou ow'st: il pronome relativo si può togliere quando è complemento (lezione 44{3}).",
           rivedi: "VERSI 9–12: LA SVOLTA",
         },
         {
           tipo: "sceltaMultipla",
-          domanda: "Perché dopo When c'è il presente, anche se si parla del futuro?",
+          domanda:
+            "Perché dopo When c'è il presente, anche se si parla del futuro?",
           citazione: "When in eternal lines to time thou grow'st",
           opzioni: [
             "È un errore di Shakespeare",
@@ -791,7 +936,7 @@ export const sonetto18: Lezione = {
           ],
           giusta: 1,
           spiegazione:
-            "Come dopo if, dopo when non si usa will: \"I'll call you when I arrive\" (lezione 34{4}).",
+            'Come dopo if, dopo when non si usa will: "I\'ll call you when I arrive" (lezione 34{4}).',
           rivedi: "VERSI 9–12: LA SVOLTA",
         },
         {
@@ -800,17 +945,30 @@ export const sonetto18: Lezione = {
         },
         {
           tipo: "seleziona",
-          consegna: "Tocca le parole che rimano con \"day\". Attenzione: conta il suono, non la grafia.",
+          consegna:
+            'Tocca le parole che rimano con "day". Attenzione: conta il suono, non la grafia.',
           parole: ["May", "date", "shade", "temperate", "fade", "day"],
           giuste: [0, 5],
           spiegazione:
-            "Day e May finiscono con lo stesso suono \"-ei\". Date sembra simile, ma finisce con una t: rima con temperate. Shade e fade rimano tra loro.",
+            'Day e May finiscono con lo stesso suono "-ei". Date sembra simile, ma finisce con una t: rima con temperate. Shade e fade rimano tra loro.',
           rivedi: "VERSI 3–4: IL VENTO E IL TEMPO",
         },
         {
           tipo: "seleziona",
-          consegna: "Ecco il verso 4 diviso in sillabe. Tocca le 5 sillabe accentate.",
-          parole: ["and", "sum", "mer's", "lease", "hath", "all", "too", "short", "a", "date"],
+          consegna:
+            "Ecco il verso 4 diviso in sillabe. Tocca le 5 sillabe accentate.",
+          parole: [
+            "and",
+            "sum",
+            "mer's",
+            "lease",
+            "hath",
+            "all",
+            "too",
+            "short",
+            "a",
+            "date",
+          ],
           giuste: [1, 3, 5, 7, 9],
           sillabe: true,
           spiegazione:
@@ -877,24 +1035,26 @@ export const sonetto18: Lezione = {
         {
           tipo: "traduci",
           consegna: "Traduci in italiano il distico finale.",
-          testo: "So long as men can breathe or eyes can see,\nSo long lives this, and this gives life to thee.",
+          testo:
+            "So long as men can breathe or eyes can see,\nSo long lives this, and this gives life to thee.",
           soluzione:
             "Finché gli uomini respireranno e gli occhi potranno vedere, vivrà questa poesia, e questa darà vita a te.",
           spiegazione:
-            "Hai tradotto \"this\" con \"questa poesia\" o \"questi versi\"? È la scelta più chiara: \"this\" si riferisce al sonetto stesso.",
+            'Hai tradotto "this" con "questa poesia" o "questi versi"? È la scelta più chiara: "this" si riferisce al sonetto stesso.',
           rivedi: "VERSI 13–14: IL DISTICO",
         },
         {
           tipo: "scrivi",
-          consegna: "Write a short analysis (4–5 sentences) of the third quatrain (lines 9–12).",
+          consegna:
+            "Write a short analysis (4–5 sentences) of the third quatrain (lines 9–12).",
           punti: [
-            "the volta: what changes with \"But\"",
+            'the volta: what changes with "But"',
             "the personification of Death",
-            "the meaning of \"eternal lines\"",
+            'the meaning of "eternal lines"',
             "one grammar structure (for example the inversion after Nor)",
           ],
           modello:
-            "The third quatrain marks the volta of the sonnet. With the word \"But\", the poet moves from the faults of summer to the eternal summer of the beloved, which \"shall not fade\". Death is personified as a boastful figure who cannot claim the beloved, and the inversion \"Nor shall Death brag\" gives the line a solemn, emphatic tone. The key image is \"eternal lines\": the lines of the poem itself, which will make the beloved grow with time instead of being destroyed by it.",
+            'The third quatrain marks the volta of the sonnet. With the word "But", the poet moves from the faults of summer to the eternal summer of the beloved, which "shall not fade". Death is personified as a boastful figure who cannot claim the beloved, and the inversion "Nor shall Death brag" gives the line a solemn, emphatic tone. The key image is "eternal lines": the lines of the poem itself, which will make the beloved grow with time instead of being destroyed by it.',
           spiegazione:
             "Confronta: hai citato il testo tra virgolette? Hai usato termini tecnici come volta, personification, inversion? Sono le cose che un esaminatore cerca.",
         },

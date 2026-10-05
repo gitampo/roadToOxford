@@ -88,9 +88,9 @@ export const T: Voce[] = [
       "Fare (sostenere) un esame è take an exam; superarlo è pass: I took the exam but I didn't pass = ho fatto l'esame ma non l'ho passato.",
     ],
     lezioni: [
-      { id: "45", riquadro: 6 },
-      { id: "46", riquadro: 3 },
-      { id: "56", riquadro: 3 },
+      { id: "46", riquadro: 6 },
+      { id: "47", riquadro: 3 },
+      { id: "57", riquadro: 3 },
     ],
   },
   {
@@ -147,8 +147,8 @@ export const T: Voce[] = [
       "Si dice tell the truth, tell a lie, tell a story, tell a joke: qui si usa sempre tell, anche senza la persona.",
     ],
     lezioni: [
-      { id: "41", riquadro: 3 },
-      { id: "41", riquadro: 6 },
+      { id: "42", riquadro: 3 },
+      { id: "42", riquadro: 6 },
     ],
   },
   {
@@ -239,8 +239,8 @@ export const T: Voce[] = [
       "La th di think è sorda: lingua tra i denti e si soffia. Se la pronunci come s, diventa sink (affondare).",
     ],
     lezioni: [
-      { id: "56", riquadro: 1 },
-      { id: "57", riquadro: 3 },
+      { id: "57", riquadro: 1 },
+      { id: "58", riquadro: 3 },
     ],
   },
   {
@@ -298,7 +298,7 @@ export const T: Voce[] = [
       "Try to + verbo (sforzo) e try + -ing (esperimento) non sono uguali: I tried to open it = ho cercato di aprirlo; Try opening it = prova ad aprirlo e vedi.",
       "Nel parlato si sente spesso try and + verbo: Try and relax = cerca di rilassarti.",
     ],
-    lezioni: [{ id: "47", riquadro: 6 }],
+    lezioni: [{ id: "48", riquadro: 6 }],
   },
   {
     id: "turn",
@@ -391,7 +391,7 @@ export const T: Voce[] = [
     attenzione: [
       "Accendere e spegnere apparecchi è turn on/off o switch on/off: open the light e close the light sono errori tipici degli italiani.",
     ],
-    lezioni: [{ id: "46", riquadro: 3 }],
+    lezioni: [{ id: "47", riquadro: 3 }],
   },
   {
     id: "teach",

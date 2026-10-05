@@ -106,6 +106,12 @@ export const middleAges: Lezione = {
           testo:
             "Tolkien, professore a Oxford, fu un grande studioso del Beowulf. Il drago del poema ha ispirato lo Smaug dello Hobbit.",
         },
+        {
+          tipo: "apri",
+          id: "beowulf",
+          titolo: "Beowulf",
+          descrizione: "Anonimo, VIII–XI secolo · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -134,6 +140,13 @@ export const middleAges: Lezione = {
           testo:
             "Esistono molte versioni, perché ogni cantore la modificava. Il testo qui è in parte modernizzato.",
         },
+        {
+          tipo: "apri",
+          id: "lord-randal",
+          titolo: "Lord Randal",
+          descrizione:
+            "Ballata tradizionale scozzese · lettura e analisi completa",
+        },
       ],
     },
     {
@@ -161,6 +174,13 @@ export const middleAges: Lezione = {
           tipo: "testo",
           testo:
             "Il personaggio più famoso è la Donna di Bath (Wife of Bath): sposata cinque volte, ironica e indipendente, sostiene che nel matrimonio debba comandare la donna.",
+        },
+        {
+          tipo: "apri",
+          id: "canterbury-tales",
+          titolo: "I racconti di Canterbury",
+          descrizione:
+            "Geoffrey Chaucer, circa 1387 · lettura e analisi completa",
         },
       ],
     },

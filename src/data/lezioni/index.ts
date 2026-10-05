@@ -38,24 +38,35 @@ import { secondConditional } from "./36-second-conditional";
 import { pastPerfect } from "./37-past-perfect";
 import { usedTo } from "./38-used-to";
 import { presentPerfectContinuous } from "./39-present-perfect-continuous";
-import { thirdConditional } from "./40-third-conditional";
-import { reportedSpeech } from "./41-reported-speech";
-import { passive } from "./42-passive";
-import { relativeClauses } from "./43-relative-clauses";
-import { modalsDeduction } from "./44-modals-deduction";
-import { makeDo } from "./45-make-do";
-import { phrasalVerbs } from "./46-phrasal-verbs";
-import { infinitiveGerund } from "./47-infinitive-gerund";
-import { dependentPrepositions } from "./48-dependent-prepositions";
-import { scientificEnglish } from "./49-scientific-english";
-import { pastModals } from "./50-past-modals";
-import { mixedConditionals } from "./51-mixed-conditionals";
-import { inversion } from "./52-inversion";
-import { formalInformal } from "./53-formal-informal";
-import { discourseMarkers } from "./54-discourse-markers";
-import { idioms } from "./55-idioms";
-import { advancedPhrasalVerbs } from "./56-advanced-phrasal-verbs";
-import { pronunciation } from "./57-pronunciation";
+import { tagQuestions } from "./40-tag-questions";
+import { thirdConditional } from "./41-third-conditional";
+import { reportedSpeech } from "./42-reported-speech";
+import { passive } from "./43-passive";
+import { relativeClauses } from "./44-relative-clauses";
+import { modalsDeduction } from "./45-modals-deduction";
+import { makeDo } from "./46-make-do";
+import { phrasalVerbs } from "./47-phrasal-verbs";
+import { infinitiveGerund } from "./48-infinitive-gerund";
+import { dependentPrepositions } from "./49-dependent-prepositions";
+import { scientificEnglish } from "./50-scientific-english";
+import { pastModals } from "./51-past-modals";
+import { mixedConditionals } from "./52-mixed-conditionals";
+import { inversion } from "./53-inversion";
+import { formalInformal } from "./54-formal-informal";
+import { discourseMarkers } from "./55-discourse-markers";
+import { idioms } from "./56-idioms";
+import { advancedPhrasalVerbs } from "./57-advanced-phrasal-verbs";
+import { pronunciation } from "./58-pronunciation";
+import { presentarsi } from "./s1-presentarsi";
+import { descriverePersone } from "./s2-descrivere-persone";
+import { barPub } from "./s3-bar-pub";
+import { indicazioni } from "./s4-indicazioni";
+import { acquisti } from "./s5-acquisti";
+import { ristorante } from "./s6-ristorante";
+import { inViaggio } from "./s7-in-viaggio";
+import { medicoFarmacia } from "./s8-medico-farmacia";
+import { telefono } from "./s9-telefono";
+import { smallTalk } from "./s10-small-talk";
 import { invasions } from "./c1-invasions";
 import { middleAges } from "./c2-middle-ages";
 import { renaissance } from "./c3-renaissance";
@@ -113,6 +124,7 @@ export const LEZIONI: Lezione [] = [
     pastPerfect,
     usedTo,
     presentPerfectContinuous,
+    tagQuestions,
     thirdConditional,
     reportedSpeech,
     passive,
@@ -131,6 +143,18 @@ export const LEZIONI: Lezione [] = [
     idioms,
     advancedPhrasalVerbs,
     pronunciation,
+    // Situazioni: le frasi per la vita di tutti i giorni (presentarsi,
+    // ordinare, chiedere la strada...), una lezione per situazione
+    presentarsi,
+    descriverePersone,
+    barPub,
+    indicazioni,
+    acquisti,
+    ristorante,
+    inViaggio,
+    medicoFarmacia,
+    telefono,
+    smallTalk,
     invasions,
     middleAges,
     renaissance,

@@ -204,7 +204,7 @@ export const guaiProblemi: Lezione = {
         {
           tipo: "testo",
           testo:
-            'Spill the beans vuol dire rivelare un segreto, spesso per sbaglio o troppo presto: rovesciare i fagioli, cioè far uscire tutto. È informale e corrisponde al nostro "vuotare il sacco". Simile è let the cat out of the bag (lezione 55{4}).',
+            'Spill the beans vuol dire rivelare un segreto, spesso per sbaglio o troppo presto: rovesciare i fagioli, cioè far uscire tutto. È informale e corrisponde al nostro "vuotare il sacco". Simile è let the cat out of the bag (lezione 56{4}).',
         },
         {
           tipo: "esempi",

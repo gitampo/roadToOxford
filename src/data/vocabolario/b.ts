@@ -166,9 +166,9 @@ export const B: Voce[] = [
       "Il participio è broken: I have broken, non I have broke.",
     ],
     lezioni: [
-      { id: "46", riquadro: 5 },
+      { id: "47", riquadro: 5 },
+      { id: "57", riquadro: 6 },
       { id: "56", riquadro: 6 },
-      { id: "55", riquadro: 6 },
     ],
   },
   {
@@ -236,7 +236,7 @@ export const B: Voce[] = [
       "Bring è portare verso qui (dove sono io, o dove sei tu); take è portare verso lì. Bring it here, ma Take it to the office.",
       "Brought si pronuncia /brɔːt/ e fa rima con bought /bɔːt/ (il passato di buy): attenzione a non confonderli.",
     ],
-    lezioni: [{ id: "46", riquadro: 5 }],
+    lezioni: [{ id: "47", riquadro: 5 }],
   },
   {
     id: "become",

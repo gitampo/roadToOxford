@@ -24,7 +24,9 @@ const GIALLO = "#ffe100";
 
 // Nei dati un rimando si scrive "lezione 28{3}": lezione 28, riquadro 3.
 // Nell'app si vede solo "lezione 28", sottolineato e cliccabile.
-const RIMANDO = /(lezione )?(\d+)\{(\d+)\}/g;
+// Anche le lezioni con la lettera: M3{2} (modi di dire), C1{4} (cultura),
+// S4{2} (situazioni)
+const RIMANDO = /(lezione )?([MCS]?\d+)\{(\d+)\}/g;
 
 type Props = {
   testo: string;
@@ -183,9 +185,17 @@ export default function TestoConRimandi({ testo, style, chiave }: Props) {
 
   // Uno spazio è evidenziato se sta tra due parole selezionate (o della
   // stessa nota)
-  let precedente = -1;
+  // Per ogni pezzo, il numero della parola che lo precede (-1 se nessuna)
+  const precedenti = pezzi.map((_, i) => {
+    for (let j = i - 1; j >= 0; j--) {
+      const q = pezzi[j];
+      if (q.tipo !== "spazio") return q.n;
+    }
+    return -1;
+  });
   const figli = pezzi.map((p, i) => {
     if (p.tipo === "spazio") {
+      const precedente = precedenti[i];
       const dentro = precedente >= da && precedente < a;
       const inNota = noteQui.some(
         (r) => precedente >= r.da && precedente < r.a,
@@ -198,7 +208,6 @@ export default function TestoConRimandi({ testo, style, chiave }: Props) {
         p.testo
       );
     }
-    precedente = p.n;
     const evidenziato = p.n >= da && p.n <= a;
     const nota = notaDi(p.n);
     if (p.tipo === "rimando") {

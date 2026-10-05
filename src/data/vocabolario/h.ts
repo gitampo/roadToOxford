@@ -151,7 +151,7 @@ export const H: Voce[] = [
       { id: "6", riquadro: 1 },
       { id: "29", riquadro: 7 },
       { id: "32", riquadro: 1 },
-      { id: "45", riquadro: 6 },
+      { id: "46", riquadro: 6 },
     ],
   },
   {
@@ -394,7 +394,7 @@ export const H: Voce[] = [
       },
     ],
     attenzione: ["Hit è uguale in tutte e tre le forme: hit, hit, hit."],
-    lezioni: [{ id: "55", riquadro: 3 }],
+    lezioni: [{ id: "56", riquadro: 3 }],
   },
   {
     id: "hope",
@@ -442,7 +442,7 @@ export const H: Voce[] = [
       "Hope (spero che succeda, ed è possibile) e wish (vorrei che fosse così, ma non lo è) non sono uguali: I hope you pass ≠ I wish I were rich.",
       "Spero di no è I hope not, non I don't hope so.",
     ],
-    lezioni: [{ id: "47", riquadro: 3 }],
+    lezioni: [{ id: "48", riquadro: 3 }],
   },
   {
     id: "hurt",

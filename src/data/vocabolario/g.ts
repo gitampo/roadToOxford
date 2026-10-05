@@ -189,8 +189,8 @@ export const G: Voce[] = [
       { id: "6", riquadro: 1 },
       { id: "10", riquadro: 7 },
       { id: "38", riquadro: 5 },
-      { id: "46", riquadro: 2 },
-      { id: "53", riquadro: 1 },
+      { id: "47", riquadro: 2 },
+      { id: "54", riquadro: 1 },
     ],
   },
   {
@@ -274,8 +274,8 @@ export const G: Voce[] = [
       "Dopo give up si usa -ing: give up smoking, non give up to smoke.",
     ],
     lezioni: [
-      { id: "46", riquadro: 1 },
-      { id: "46", riquadro: 6 },
+      { id: "47", riquadro: 1 },
+      { id: "47", riquadro: 6 },
     ],
   },
   {
@@ -400,7 +400,7 @@ export const G: Voce[] = [
     lezioni: [
       { id: "27", riquadro: 2 },
       { id: "29", riquadro: 4 },
-      { id: "46", riquadro: 2 },
+      { id: "47", riquadro: 2 },
     ],
   },
   {
@@ -497,7 +497,7 @@ export const G: Voce[] = [
     attenzione: [
       "Crescere un figlio non è grow ma bring up o raise: She was brought up by her aunt.",
     ],
-    lezioni: [{ id: "46", riquadro: 5 }],
+    lezioni: [{ id: "47", riquadro: 5 }],
   },
   {
     id: "guess",

@@ -179,7 +179,7 @@ export const C: Voce[] = [
       "Caught si pronuncia /kɔːt/, come court.",
       "Il treno si prende con catch o take, ma non si \"perde\" con lose: perdere il treno è miss the train.",
     ],
-    lezioni: [{ id: "56", riquadro: 2 }],
+    lezioni: [{ id: "57", riquadro: 2 }],
   },
   {
     id: "chance",
@@ -376,8 +376,8 @@ export const C: Voce[] = [
       "Quando ci si muove verso chi ascolta si usa come, anche se in italiano diciamo \"arrivo\": — Dinner's ready! — I'm coming! (Arrivo!)",
     ],
     lezioni: [
-      { id: "46", riquadro: 2 },
-      { id: "56", riquadro: 2 },
+      { id: "47", riquadro: 2 },
+      { id: "57", riquadro: 2 },
     ],
   },
   {
@@ -472,7 +472,7 @@ export const C: Voce[] = [
     attenzione: [
       "Carry è portare addosso spostandosi; bring e take dicono la direzione (verso qui, verso lì); wear è portare un vestito: She's wearing a hat.",
     ],
-    lezioni: [{ id: "46", riquadro: 6 }],
+    lezioni: [{ id: "47", riquadro: 6 }],
   },
   {
     id: "case",
@@ -889,7 +889,7 @@ export const C: Voce[] = [
       "Cost è uguale in tutte e tre le forme: Yesterday it cost £5, non costed.",
       "Si chiede il prezzo con How much: How much does it cost? oppure How much is it?",
     ],
-    lezioni: [{ id: "55", riquadro: 3 }],
+    lezioni: [{ id: "56", riquadro: 3 }],
   },
   {
     id: "count",
@@ -1032,7 +1032,7 @@ export const C: Voce[] = [
       },
     ],
     attenzione: ["Make + persona + cry, senza to: It made me cry."],
-    lezioni: [{ id: "45", riquadro: 5 }],
+    lezioni: [{ id: "46", riquadro: 5 }],
   },
   {
     id: "cut",

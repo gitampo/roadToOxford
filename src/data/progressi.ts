@@ -1,6 +1,8 @@
 /**
  * Salvataggio dei progressi sul telefono (AsyncStorage).
  * Per ogni lezione si salvano le risposte agli esercizi e il risultato.
+ * A parte c'è lo storico: quanto si è studiato giorno per giorno, per il
+ * grafico dei miglioramenti.
  */
 
 import { Risultato, StatoEsercizio } from "@/types/lezione";
@@ -65,6 +67,8 @@ export async function segnaVisto(id: string, pagina: number) {
       chiaveVisti(id),
       JSON.stringify([...visti, pagina]),
     );
+    // Solo la prima apertura di un riquadro conta come studio
+    await registraAttivita({ riquadri: 1 });
   } catch {}
 }
 
@@ -82,4 +86,53 @@ export async function leggiVisti(
   } catch {
     return {};
   }
+}
+
+// ---------- Storico ----------
+
+// Quello che si è fatto in un giorno
+export type Giorno = { risposte: number; giuste: number; riquadri: number };
+
+// Tutti i giorni con attività, sotto la data "2026-10-04"
+export type Storico = Record<string, Giorno>;
+
+const CHIAVE_STORICO = "storico";
+
+// La data di oggi (o di d), nell'ora del telefono. toISOString() userebbe
+// l'ora di Greenwich: in Italia, poco dopo mezzanotte, darebbe il giorno prima
+export function dataDi(d = new Date()) {
+  const due = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${due(d.getMonth() + 1)}-${due(d.getDate())}`;
+}
+
+export async function leggiStorico(): Promise<Storico> {
+  try {
+    const testo = await AsyncStorage.getItem(CHIAVE_STORICO);
+    return testo ? (JSON.parse(testo) as Storico) : {};
+  } catch {
+    return {};
+  }
+}
+
+// Le scritture vanno in fila: se due arrivassero insieme (un riquadro aperto
+// e una risposta), entrambe leggerebbero lo stesso storico e la seconda
+// cancellerebbe la prima
+let coda: Promise<void> = Promise.resolve();
+
+// Aggiunge al giorno di oggi quello che si è appena fatto
+export function registraAttivita(fatto: Partial<Giorno>) {
+  coda = coda.then(async () => {
+    try {
+      const storico = await leggiStorico();
+      const oggi = dataDi();
+      const g = storico[oggi] ?? { risposte: 0, giuste: 0, riquadri: 0 };
+      storico[oggi] = {
+        risposte: g.risposte + (fatto.risposte ?? 0),
+        giuste: g.giuste + (fatto.giuste ?? 0),
+        riquadri: g.riquadri + (fatto.riquadri ?? 0),
+      };
+      await AsyncStorage.setItem(CHIAVE_STORICO, JSON.stringify(storico));
+    } catch {}
+  });
+  return coda;
 }

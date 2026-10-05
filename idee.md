@@ -40,3 +40,5 @@ Opzione per salvare la frase del giorno
 Funzione in cui data una frase, viene fatta l'analisi  logica, grammaticale e semantica
 Esercizi che aiutino all'analisi logica e grammaticale
 Grafico miglioramenti
+
+
