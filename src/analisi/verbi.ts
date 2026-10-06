@@ -22,7 +22,7 @@ import {
   MODALI,
   VERBI_DI_STATO,
 } from "./lessico";
-import { INVARIABILI, Parola, PARTICIPI } from "./parole";
+import { INVARIABILI, PASSATI, Parola, PARTICIPI } from "./parole";
 
 export type GruppoVerbale = {
   // Tutte le parole del gruppo, compresi not e gli avverbi in mezzo
@@ -165,6 +165,14 @@ function puoEssereDomanda(parole: Parola[], j: number) {
   )
     return true;
   if (prima.dopo.match(/[,;:]/)) return true;
+  // Dopo un'espressione interrogativa di più parole, se prima non ci sono
+  // verbi: HOW LONG have you lived here? HOW MANY TIMES have you seen it?
+  if (
+    parole[0].dettaglio.includes("interrogativ") &&
+    parole[parole.length - 1].dopo.includes("?") &&
+    parole.slice(0, j).every((q) => q.categoria !== "verbo")
+  )
+    return true;
   return false;
 }
 
@@ -188,6 +196,8 @@ function formaDi(p: Parola, prima?: Parola): FormaVerbo {
   if (f in FORME_HAVE) {
     const t = FORME_HAVE[f];
     if (t === "ing") return "ing";
+    // have had, had had: had dopo have è il participio
+    if (f === "had" && prima?.base === "have") return "participio";
     if (
       prima &&
       (prima.forma in MODALI || prima.forma === "to" || prima.base === "do")
@@ -219,6 +229,8 @@ function formaDi(p: Parola, prima?: Parola): FormaVerbo {
     return "base";
   if (p.tags.has("Participle")) return "participio";
   if (p.tags.has("PastTense")) return "passato";
+  // went, saw... nei phrasal verb compromise a volte perde il passato
+  if (PASSATI.has(f) && !INVARIABILI.has(f) && f !== p.base) return "passato";
   if (p.tags.has("Infinitive") || p.tags.has("Imperative")) return "base";
   return "presente";
 }
@@ -584,8 +596,10 @@ function descrivi(
 
   // La copula: be (o seem, become...) seguito da un aggettivo o da un nome
   // (nelle domande, dopo il soggetto: Are you TIRED?)
-  const dopoGruppo =
+  let dopoGruppo =
     Math.max(...indici, soggettoInterno ? soggettoInterno[1] : -1) + 1;
+  // (saltando la negazione: She isn't VERY tall)
+  if (parole[dopoGruppo]?.forma === "not") dopoGruppo++;
   const seguente = parole[dopoGruppo];
   const copula =
     COPULATIVI.has(base) &&
@@ -602,6 +616,15 @@ function descrivi(
       seguente.categoria === "articolo" ||
       seguente.categoria === "numerale" ||
       (base === "be" && seguente.categoria === "nome") ||
+      // If I were YOU, It's ME: il pronome dopo be è nome del predicato
+      (base === "be" &&
+        !soggettoInterno &&
+        ["you", "me", "him", "her", "us", "them"].includes(seguente.forma)) ||
+      // This bag is MINE: il pronome possessivo è nome del predicato
+      (base === "be" &&
+        ["mine", "yours", "his", "hers", "ours", "theirs"].includes(
+          seguente.forma,
+        )) ||
       (seguente.categoria === "avverbio" &&
         parole[dopoGruppo + 1]?.categoria === "aggettivo"));
 

@@ -14,7 +14,13 @@
 import { glosse } from "./glossario";
 import { dividiInProposizioni, Proposizione } from "./logica";
 import { PRONOMI } from "./lessico";
-import { Categoria, dividiInParole, Parola, unisci } from "./parole";
+import {
+  Categoria,
+  dividiInParole,
+  Parola,
+  ricomponi,
+  unisci,
+} from "./parole";
 import { analisiSemantica, Semantica } from "./semantica";
 import { GruppoVerbale, trovaGruppiVerbali } from "./verbi";
 
@@ -66,12 +72,14 @@ export function analizza(testo: string): AnalisiFrase[] {
     const semantica = analisiSemantica(parole, gruppi, proposizioni);
     const traduzioni = glosse(parole, gruppi, proposizioni, semantica.senso);
     return {
-      testo: parole
-        .map((p) => p.testo + p.dopo)
-        .join(" ")
-        .replace(/ ('|n't)/g, "$1")
-        .replace(/\s+/g, " ")
-        .trim(),
+      testo: ricomponi(
+        parole
+          .map((p) => p.testo + p.dopo)
+          .join(" ")
+          .replace(/ ('|n't)/g, "$1")
+          .replace(/\s+/g, " ")
+          .trim(),
+      ),
       parole,
       gruppi,
       grammaticale: analisiGrammaticale(

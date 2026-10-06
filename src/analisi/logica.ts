@@ -462,10 +462,18 @@ function analizzaProposizione(parole: Parola[], p: Proposizione) {
   const paroleGruppo = g.parole.filter((k) => insieme.has(k));
   const tipoPredicato =
     g.copula && g.base === "be" ? "copula" : "predicato verbale";
+  // be + not: la negazione fa parte della copula (We AREN'T hungry)
+  if (
+    tipoPredicato === "copula" &&
+    !g.soggettoInterno &&
+    parole[fineGruppo + 1]?.forma === "not" &&
+    insieme.has(fineGruppo + 1)
+  )
+    paroleGruppo.push(fineGruppo + 1);
   for (const k of paroleGruppo) usate.add(k);
   elementi.push({
     da: inizioGruppo,
-    a: fineGruppo,
+    a: Math.max(...paroleGruppo),
     indici: g.soggettoInterno ? paroleGruppo : undefined,
     ruolo: tipoPredicato,
     domanda:
@@ -479,9 +487,15 @@ function analizzaProposizione(parole: Parola[], p: Proposizione) {
   // Il soggetto
   const soggetto = trovaSoggetto(parole, p, g, insieme, usate);
   if (soggetto) aggiungi(soggetto);
-  // there di there is / there are
-  const there = inizioGruppo - 1;
-  if (parole[there]?.forma === "there" && g.base === "be" && insieme.has(there))
+  // there di there is / there are (o Is THERE...? nelle domande)
+  const there =
+    parole[inizioGruppo - 1]?.forma === "there"
+      ? inizioGruppo - 1
+      : parole[fineGruppo + 1]?.forma === "there" &&
+          (g.domanda || inizioGruppo === 0)
+        ? fineGruppo + 1
+        : -1;
+  if (there >= 0 && g.base === "be" && insieme.has(there))
     aggiungi({
       da: there,
       a: there,
@@ -534,7 +548,13 @@ function analizzaProposizione(parole: Parola[], p: Proposizione) {
       // be + aggettivo/nome = predicato nominale; seem/become... + aggettivo
       // = complemento predicativo del soggetto
       // L'avverbio di grado fa parte del nome del predicato (very long)
+      // (gli avverbi di frequenza restano fuori: He is NEVER late)
       k = subitoDopo;
+      while (
+        parole[k]?.categoria === "avverbio" &&
+        (AVVERBI[parole[k].forma]?.complemento || parole[k].forma === "not")
+      )
+        k++;
       const fine = fineNomeDelPredicato(parole, k, insieme);
       const ruolo =
         g.base === "be"
@@ -627,6 +647,12 @@ function attributi(parole: Parola[], da: number, a: number) {
 function eTempo(parole: Parola[], da: number, a: number) {
   const testa = parole[a];
   if (testa.classe !== "tempo") return false;
+  // I pasti subito dopo il verbo sono l'oggetto: we have LUNCH at one
+  if (
+    ["breakfast", "lunch", "dinner", "supper", "brunch"].includes(testa.base) &&
+    parole[da - 1]?.categoria === "verbo"
+  )
+    return false;
   const primo = parole[da];
   return (
     INIZIO_TEMPO.has(primo.forma) ||
@@ -682,13 +708,18 @@ function trovaSoggetto(
         : "pronome relativo",
     });
   }
-  // there is / there are: il vero soggetto viene dopo
+  // there is / there are: il vero soggetto viene dopo (anche nelle domande:
+  // Is there a bank...?; e dopo not: There aren't ANY EGGS)
   const prima = parole[inizio - 1];
-  if (prima?.forma === "there" && g.base === "be") {
-    usate.add(inizio - 1);
-    const fine = fineGruppoNominale(parole, Math.max(...g.parole) + 1);
+  const fineG = Math.max(...g.parole);
+  const thereDopo =
+    parole[fineG + 1]?.forma === "there" && (g.domanda || inizio === 0);
+  if ((prima?.forma === "there" || thereDopo) && g.base === "be") {
+    usate.add(thereDopo ? fineG + 1 : inizio - 1);
+    let da = fineG + 1 + (thereDopo ? 1 : 0);
+    while (parole[da]?.forma === "not") da++;
+    const fine = fineGruppoNominale(parole, da);
     if (fine >= 0) {
-      const da = Math.max(...g.parole) + 1;
       return el(da, fine, "soggetto", {
         nota: "posposto: there è il soggetto apparente (c'è, ci sono)",
         attributi: attributi(parole, da, fine),
@@ -775,7 +806,12 @@ function analizzaResto(
         el(
           0,
           1,
-          g.base === "be" ? "nome del predicato" : "complemento di modo",
+          g.base === "be"
+            ? "nome del predicato"
+            : // How long have you lived here? (da quanto tempo?)
+              parole[1].forma === "long"
+              ? "complemento di tempo continuato"
+              : "complemento di modo",
           {
             nota: "How + aggettivo: la domanda chiede una misura o una qualità (how old = quanti anni)",
           },
@@ -797,7 +833,11 @@ function analizzaResto(
                 ? "complemento di modo"
                 : w.forma === "whose"
                   ? "complemento di specificazione"
-                  : "complemento oggetto";
+                  : // What time...? (a che ora?)
+                    parole[i + 1]?.forma === "time" &&
+                      w.categoria === "aggettivo"
+                    ? "complemento di tempo determinato"
+                    : "complemento oggetto";
       const fine =
         w.categoria === "aggettivo"
           ? Math.max(i, fineGruppoNominale(parole, i + 1))

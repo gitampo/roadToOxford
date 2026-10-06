@@ -434,29 +434,58 @@ export function analisiSemantica(
 
 // ---------- Gli errori tipici ----------
 
+// Le unità di durata: since three YEARS è sbagliato (for three years)
+const DURATE = new Set([
+  "second",
+  "minute",
+  "hour",
+  "day",
+  "week",
+  "month",
+  "year",
+  "decade",
+  "century",
+]);
+
 function trovaErrori(
   parole: Parola[],
   gruppi: GruppoVerbale[],
   proposizioni: Proposizione[],
 ): Errore[] {
   const errori: Errore[] = [];
-  const forme = parole.map((w) => w.forma);
-  const ha = (f: string) => forme.includes(f);
+
+  // I momenti passati precisi (yesterday, ago, last week, in 2019), ciascuno
+  // con il gruppo verbale più vicino, quello a cui si riferisce: in "Have you
+  // seen the book I bought yesterday?" yesterday va con bought
+  const momenti = (gruppi.length ? parole : [])
+    .map((w, i) => ({ w, i }))
+    // (since last summer, since yesterday vanno bene col present perfect)
+    .filter(
+      ({ i }) =>
+        parole[i - 1]?.forma !== "since" &&
+        !(parole[i - 1]?.forma === "last" && parole[i - 2]?.forma === "since"),
+    )
+    .filter(
+      ({ w, i }) =>
+        w.forma === "yesterday" ||
+        w.forma === "ago" ||
+        (w.forma === "last" && parole[i + 1]?.classe === "tempo") ||
+        (/^(1[0-9]|20)\d\d$/.test(w.forma) && parole[i - 1]?.forma === "in"),
+    )
+    .map(({ i }) => {
+      // (last di "last week" a volte è preso per il verbo last, durare)
+      const altri = gruppi.filter((g) => !g.parole.includes(i));
+      const lontano = (g: GruppoVerbale) =>
+        Math.min(...g.parole.map((k) => Math.abs(k - i)));
+      return altri.length
+        ? altri.reduce((a, b) => (lontano(b) < lontano(a) ? b : a))
+        : undefined;
+    });
 
   for (const g of gruppi) {
     const testo = unisci(parole, g.parole);
     // Present perfect con un momento passato preciso
-    if (
-      g.tempo.startsWith("present perfect") &&
-      (ha("yesterday") ||
-        ha("ago") ||
-        (ha("last") && parole[forme.indexOf("last") + 1]?.classe === "tempo") ||
-        parole.some(
-          (w) =>
-            /^(1[0-9]|20)\d\d$/.test(w.forma) &&
-            parole[w.i - 1]?.forma === "in",
-        ))
-    )
+    if (g.tempo.startsWith("present perfect") && momenti.includes(g))
       errori.push({
         testo,
         correzione: `past simple (to ${g.base} al passato)`,
@@ -497,12 +526,12 @@ function trovaErrori(
       });
   }
 
-  // since + durata (since three years)
+  // since + durata (since three years; ma since seven o'clock va bene)
   parole.forEach((w, i) => {
     if (
       w.forma === "since" &&
       parole[i + 1]?.categoria === "numerale" &&
-      parole[i + 2]?.classe === "tempo"
+      DURATE.has(parole[i + 2]?.base ?? "")
     )
       errori.push({
         testo: `since ${parole[i + 1].testo} ${parole[i + 2].testo}`,
@@ -596,13 +625,27 @@ function trovaErrori(
     });
   }
 
-  // Doppia negazione (I don't know nothing)
-  const negazioni = parole.filter(
-    (w) =>
-      w.forma === "not" ||
-      ["nothing", "nobody", "never", "none", "nowhere"].includes(w.forma),
-  );
-  if (negazioni.length >= 2 && negazioni.some((w) => w.forma === "not"))
+  // Doppia negazione (I don't know nothing), dentro la stessa parte di
+  // frase: in "Don't worry, I won't tell anyone" le negazioni sono due, ma
+  // in due frasi diverse (separate dalla virgola o da and, but, so...)
+  const parti: Parola[][] = [[]];
+  for (const w of parole) {
+    if (w.categoria === "congiunzione" && parti[parti.length - 1].length)
+      parti.push([]);
+    parti[parti.length - 1].push(w);
+    if (/[,;:]/.test(w.dopo)) parti.push([]);
+  }
+  const negazioni =
+    parti
+      .map((parte) =>
+        parte.filter(
+          (w) =>
+            w.forma === "not" ||
+            ["nothing", "nobody", "never", "none", "nowhere"].includes(w.forma),
+        ),
+      )
+      .find((n) => n.length >= 2 && n.some((w) => w.forma === "not")) ?? [];
+  if (negazioni.length)
     errori.push({
       testo: negazioni.map((w) => w.testo || w.forma).join(" ... "),
       correzione: "una sola negazione (I don't know anything / I know nothing)",

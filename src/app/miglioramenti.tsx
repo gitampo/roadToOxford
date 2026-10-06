@@ -3,11 +3,12 @@
  * Raggiungibile da /miglioramenti, con il bottone nella pagina del test. Mostra quanto si è studiato e quanto si risponde
  * bene, nel tempo, leggendo lo storico giorno per giorno (vedi progressi.ts):
  * - in alto tre numeri di riepilogo, sempre in vista;
- * - sotto, in un carosello che si scorre verso destra, tre sezioni:
+ * - sotto, in un carosello che si scorre verso destra, due sezioni:
  *   la precisione delle ultime 8 settimane (risposte giuste sul totale) come
- *   curva su un grafico cartesiano; l'avanzamento in ogni livello, con gli
- *   stessi conti della lista lezioni; l'attività degli ultimi 14 giorni
+ *   curva su un grafico cartesiano; l'attività degli ultimi 14 giorni
  *   (riquadri letti + esercizi fatti).
+ * L'avanzamento in ogni livello sta nella pagina Test
+ * (components/avanzamentoLivelli.tsx).
  */
 
 import { Children, useRef, useState } from "react";
@@ -16,24 +17,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Grafico from "@/components/grafico";
 import GraficoCurva from "@/components/graficoCurva";
-import LineaTitolo from "@/components/lineaTitolo";
+import IntestazioneTest, {
+  contenitoreTest,
+} from "@/components/intestazioneTest";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
-import { avanzamento, idCollegati } from "@/data/avanzamento";
-import { LEZIONI } from "@/data/lezioni";
+import { ColoriAttivita, Spacing } from "@/constants/theme";
 import { dataDi, Giorno, Storico } from "@/data/progressi";
-import { useRisultati } from "@/hooks/use-risultati";
 import { useStorico } from "@/hooks/use-storico";
 import { useTheme } from "@/hooks/use-theme";
-import { useVisti } from "@/hooks/use-visti";
 
 const VERDE = ColoriAttivita.test;
 const GIORNI = 14;
 const SETTIMANE = 8;
 const INIZIALI = ["D", "L", "M", "M", "G", "V", "S"]; // getDay(): 0 = domenica
-
-const LIVELLI = [...new Set(LEZIONI.map((l) => l.livello))];
 
 // Il giorno che sta n giorni prima di oggi
 function giorniFa(n: number) {
@@ -63,9 +60,6 @@ function precisione(g: Giorno) {
 export default function Miglioramenti() {
   const theme = useTheme();
   const storico = useStorico();
-  const ids = LEZIONI.flatMap(idCollegati);
-  const risultati = useRisultati(ids);
-  const visti = useVisti(ids);
 
   // Attività: un valore per ognuno degli ultimi 14 giorni, oggi per ultimo.
   // I giorni senza studio valgono 0, così la barra resta vuota ma c'è
@@ -104,11 +98,8 @@ export default function Miglioramenti() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={constants.container}>
-        <ThemedText type="title" style={constants.title}>
-          Le tue statistiche
-        </ThemedText>
-        <LineaTitolo colore={VERDE} />
+      <ThemedView style={contenitoreTest}>
+        <IntestazioneTest titolo="Le tue statistiche" />
 
         <ScrollView contentContainerStyle={styles.contenuto}>
           {/* Il riepilogo, sempre in vista in alto */}
@@ -137,7 +128,7 @@ export default function Miglioramenti() {
           )}
 
           {/* Sotto, le sezioni una accanto all'altra: si scorre a destra */}
-          <Carosello titoli={["Precisione", "Livelli", "Costanza"]}>
+          <Carosello titoli={["Precisione", "Costanza"]}>
             <Sezione
               etichetta="Il miglioramento"
               titolo="Precisione"
@@ -164,63 +155,6 @@ export default function Miglioramenti() {
                       : "Sei stabile rispetto alla prima settimana del grafico."}
                 </ThemedText>
               )}
-            </Sezione>
-
-            <Sezione
-              etichetta="Dove sei arrivato"
-              titolo="Per livello"
-              spiegazione="Riquadri di teoria letti e risposte giuste, sul totale del livello."
-            >
-              {/* Su due colonne: la card resta bassa come le altre */}
-              <View style={styles.grigliaLivelli}>
-                {LIVELLI.map((livello) => {
-                  const lezioni = LEZIONI.filter((l) => l.livello === livello);
-                  const tot = lezioni.reduce(
-                    (t, l) => {
-                      const a = avanzamento(l, risultati, visti);
-                      return {
-                        fatti: t.fatti + a.fatti,
-                        daFare: t.daFare + a.daFare,
-                      };
-                    },
-                    { fatti: 0, daFare: 0 },
-                  );
-                  const quota = tot.daFare > 0 ? tot.fatti / tot.daFare : 0;
-                  return (
-                    <View key={livello} style={styles.livello}>
-                      <View style={styles.rigaLivello}>
-                        <ThemedText style={styles.nomeLivello}>
-                          {livello}
-                        </ThemedText>
-                        <ThemedText
-                          style={[
-                            styles.percentuale,
-                            { color: theme.textSecondary },
-                          ]}
-                        >
-                          {Math.round(quota * 100)}%
-                        </ThemedText>
-                      </View>
-                      <View
-                        style={[
-                          styles.binario,
-                          { backgroundColor: theme.backgroundElement },
-                        ]}
-                      >
-                        <View
-                          style={[
-                            styles.riempimento,
-                            {
-                              width: `${quota * 100}%`,
-                              backgroundColor: VERDE,
-                            },
-                          ]}
-                        />
-                      </View>
-                    </View>
-                  );
-                })}
-              </View>
             </Sezione>
 
             <Sezione
@@ -461,38 +395,5 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 13,
     lineHeight: 19,
-  },
-  grigliaLivelli: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    columnGap: Spacing.three,
-    rowGap: Spacing.three,
-  },
-  // Due per riga: ognuno prende metà dello spazio, meno lo stacco
-  livello: {
-    gap: 4,
-    flexBasis: "45%",
-    flexGrow: 1,
-  },
-  rigaLivello: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  nomeLivello: {
-    fontFamily: "Inter_600SemiBold",
-    fontSize: 14,
-  },
-  percentuale: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 13,
-  },
-  binario: {
-    height: 8,
-    borderRadius: 4,
-    overflow: "hidden",
-  },
-  riempimento: {
-    height: "100%",
-    borderRadius: 4,
   },
 });

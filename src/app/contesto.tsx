@@ -11,13 +11,16 @@
  * vedere la soluzione e passare al contesto successivo.
  */
 
-import { Correzione, correggi } from "@/analisi/correzione";
+import { Correzione, correggi, Messaggio } from "@/analisi/correzione";
 import { usePalette } from "@/components/analisi/colori";
-import LineaTitolo from "@/components/lineaTitolo";
+import PaginaGirata from "@/components/paginaGirata";
+import IntestazioneTest, {
+  contenitoreTest,
+} from "@/components/intestazioneTest";
 import TestoConRimandi from "@/components/testoConRimandi";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
+import { ColoriAttivita, Spacing } from "@/constants/theme";
 import { CONTESTI, Contesto, Parola } from "@/data/contesti";
 import { registraAttivita } from "@/data/progressi";
 import { useTastiera } from "@/hooks/use-tastiera";
@@ -32,8 +35,11 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SymbolView, SymbolViewProps } from "expo-symbols";
 
 const VERDE = ColoriAttivita.test;
+// Il colore dei suggerimenti
+const AMBRA = "#f59e0b";
 const LIVELLI = ["A1", "A2", "B1", "B2-C1"] as const;
 type Livello = (typeof LIVELLI)[number];
 
@@ -57,6 +63,9 @@ export default function ImparaDalContesto() {
   // La tastiera non copre mai il campo della risposta
   const scroll = useRef<ScrollView>(null);
   const tastiera = useTastiera(scroll);
+  // Dove comincia l'esercizio nella pagina: quando la scheda gira, la si
+  // riporta in vista
+  const yEsercizio = useRef(0);
 
   function cambiaLivello(l: Livello) {
     setLivello(l);
@@ -66,11 +75,8 @@ export default function ImparaDalContesto() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={constants.container}>
-        <ThemedText type="title" style={constants.title}>
-          Impara dal contesto
-        </ThemedText>
-        <LineaTitolo colore={VERDE} />
+      <ThemedView style={contenitoreTest}>
+        <IntestazioneTest titolo="Impara dal contesto" />
 
         <ScrollView
           ref={scroll}
@@ -124,11 +130,23 @@ export default function ImparaDalContesto() {
             </ThemedText>
           </View>
           {/* Ogni contesto ha il suo stato: cambiando contesto si riparte */}
-          <Esercizio
-            key={`${c.id}-${indice}`}
-            c={c}
-            onSuccessivo={() => setIndice((i) => i + 1)}
-          />
+          <View
+            onLayout={(e) => {
+              yEsercizio.current = e.nativeEvent.layout.y;
+            }}
+          >
+            <Esercizio
+              key={`${c.id}-${indice}`}
+              c={c}
+              onSuccessivo={() => setIndice((i) => i + 1)}
+              onGira={() =>
+                scroll.current?.scrollTo({
+                  y: Math.max(0, yEsercizio.current - Spacing.two),
+                  animated: true,
+                })
+              }
+            />
+          </View>
           <View style={{ height: tastiera.spazio }} />
         </ScrollView>
       </ThemedView>
@@ -139,9 +157,11 @@ export default function ImparaDalContesto() {
 function Esercizio({
   c,
   onSuccessivo,
+  onGira,
 }: {
   c: Contesto;
   onSuccessivo: () => void;
+  onGira: () => void;
 }) {
   const theme = useTheme();
   const pal = usePalette();
@@ -171,12 +191,25 @@ function Esercizio({
     soluzione ||
     correzione?.esito === "giusta" ||
     correzione?.esito === "quasi";
+  // Quale facciata della scheda si vede: il contesto o, a esercizio finito,
+  // la soluzione (la scheda "gira pagina" e resta al suo posto)
+  const [retro, setRetro] = useState(false);
+  // A esercizio finito la scheda gira e torna in vista
+  function giraSullaSoluzione() {
+    setRetro(true);
+    onGira();
+  }
+  const soluzioneMostrata =
+    correzione && correzione.esito !== "sbagliata"
+      ? correzione.vicina
+      : c.soluzioni[0];
 
   function verifica() {
     if (!risposta.trim()) return;
     Keyboard.dismiss();
     const k = correggi(risposta, c);
     setCorrezione(k);
+    if (k.esito !== "sbagliata") giraSullaSoluzione();
     // Conta nelle statistiche solo il primo tentativo
     if (!contato) {
       registraAttivita({
@@ -189,6 +222,7 @@ function Esercizio({
 
   function mostraSoluzione() {
     setSoluzione(true);
+    giraSullaSoluzione();
     if (!contato) {
       registraAttivita({ risposte: 1, giuste: 0 });
       setContato(true);
@@ -199,24 +233,107 @@ function Esercizio({
     correzione?.esito === "giusta"
       ? pal.verde
       : correzione?.esito === "quasi"
-        ? "#f59e0b"
+        ? AMBRA
         : pal.rosso;
 
   return (
     <View style={styles.esercizio}>
-      {/* Il contesto e la consegna */}
-      <View style={[styles.card, { backgroundColor: theme.backgroundElement }]}>
-        <ThemedText style={[styles.etichetta, { color: theme.textSecondary }]}>
-          Il contesto
-        </ThemedText>
-        <ThemedText style={styles.testoContesto}>{c.contesto}</ThemedText>
-        <View style={[styles.consegna, { borderColor: pal.verde }]}>
-          <ThemedText style={[styles.etichetta, { color: pal.verde }]}>
-            Cosa devi scrivere
-          </ThemedText>
-          <ThemedText style={styles.testoConsegna}>{c.consegna}</ThemedText>
-        </View>
-      </View>
+      {/* La scheda: davanti il contesto e la consegna; a esercizio finito
+          gira pagina e dietro c'è la soluzione. Si può girare avanti e
+          indietro per rileggere il contesto */}
+      <PaginaGirata
+        retro={retro}
+        fronte={
+          <View
+            style={[styles.card, { backgroundColor: theme.backgroundElement }]}
+          >
+            <View style={styles.rigaScheda}>
+              <ThemedText
+                style={[styles.etichetta, { color: theme.textSecondary }]}
+              >
+                Il contesto
+              </ThemedText>
+              {finito && (
+                <Gira
+                  testo="Soluzione"
+                  colore={pal.verde}
+                  onPress={() => setRetro(true)}
+                />
+              )}
+            </View>
+            <ThemedText style={styles.testoContesto}>{c.contesto}</ThemedText>
+            <View style={[styles.consegna, { borderColor: pal.verde }]}>
+              <ThemedText style={[styles.etichetta, { color: pal.verde }]}>
+                Cosa devi scrivere
+              </ThemedText>
+              <ThemedText style={styles.testoConsegna}>{c.consegna}</ThemedText>
+            </View>
+          </View>
+        }
+        retroContenuto={
+          <View
+            style={[
+              styles.card,
+              {
+                backgroundColor: theme.backgroundElement,
+                borderWidth: 1,
+                borderColor: VERDE + "66",
+              },
+            ]}
+          >
+            <View style={styles.rigaScheda}>
+              <ThemedText style={[styles.etichetta, { color: pal.verde }]}>
+                La soluzione
+              </ThemedText>
+              <Gira
+                testo="Il contesto"
+                colore={theme.textSecondary}
+                onPress={() => setRetro(false)}
+              />
+            </View>
+            <ThemedText
+              style={[styles.consegnaRetro, { color: theme.textSecondary }]}
+            >
+              {c.consegna}
+            </ThemedText>
+            <ThemedText style={[styles.soluzione, { color: pal.verde }]}>
+              {soluzioneMostrata}
+            </ThemedText>
+            {c.soluzioni.length > 1 && (
+              <>
+                <ThemedText
+                  style={[
+                    styles.etichetta,
+                    { color: theme.textSecondary, marginTop: 4 },
+                  ]}
+                >
+                  Vanno bene anche
+                </ThemedText>
+                {c.soluzioni
+                  .filter((s) => s !== soluzioneMostrata)
+                  .slice(0, 4)
+                  .map((s) => (
+                    <ThemedText
+                      key={s}
+                      style={[styles.piccolo, { color: theme.textSecondary }]}
+                    >
+                      · {s}
+                    </ThemedText>
+                  ))}
+              </>
+            )}
+            <ThemedText style={[styles.piccolo, { marginTop: 4 }]}>
+              {c.spiegazione}
+            </ThemedText>
+            {c.lezione && (
+              <TestoConRimandi
+                testo={`Ripassa: ${c.lezione}`}
+                style={[styles.piccolo, { color: theme.textSecondary }]}
+              />
+            )}
+          </View>
+        }
+      />
 
       {/* La risposta */}
       <View
@@ -259,54 +376,12 @@ function Esercizio({
 
       {/* La correzione */}
       {correzione && (
-        <View
-          style={[
-            styles.card,
-            {
-              borderWidth: 1,
-              borderColor: coloreEsito + "88",
-              backgroundColor: coloreEsito + "12",
-            },
-          ]}
-        >
-          <ThemedText style={[styles.esito, { color: coloreEsito }]}>
-            {correzione.esito === "giusta"
-              ? "✓ Giusto!"
-              : correzione.esito === "quasi"
-                ? "≈ Quasi giusto: va bene"
-                : "✗ Non ancora"}
-          </ThemedText>
-          {correzione.messaggi.map((m, i) => (
-            <View key={i} style={styles.messaggio}>
-              <ThemedText
-                style={[styles.tipoMessaggio, { color: theme.textSecondary }]}
-              >
-                {m.tipo === "tempo"
-                  ? "Tempo verbale"
-                  : m.tipo === "errore"
-                    ? "Errore"
-                    : m.tipo === "parole"
-                      ? "Le parole"
-                      : "Nota"}
-              </ThemedText>
-              <ThemedText style={styles.piccolo}>{m.testo}</ThemedText>
-              {m.lezione && (
-                <TestoConRimandi
-                  testo={`Ripassa: ${m.lezione}`}
-                  style={[styles.piccolo, { color: theme.textSecondary }]}
-                />
-              )}
-            </View>
-          ))}
-          {correzione.esito === "sbagliata" && !soluzione && (
-            <ThemedText
-              style={[styles.piccolo, { color: theme.textSecondary }]}
-            >
-              Correggi la frase e verifica di nuovo, oppure sblocca un
-              suggerimento.
-            </ThemedText>
-          )}
-        </View>
+        <SchedaCorrezione
+          correzione={correzione}
+          risposta={risposta}
+          colore={coloreEsito}
+          conInvito={correzione.esito === "sbagliata" && !soluzione}
+        />
       )}
 
       {/* I suggerimenti sbloccati */}
@@ -315,9 +390,12 @@ function Esercizio({
           {suggerimenti.slice(0, aiuti).map((s, i) => (
             <View
               key={i}
-              style={[styles.aiuto, { borderColor: theme.backgroundSelected }]}
+              style={[
+                styles.aiuto,
+                { borderColor: AMBRA + "40", backgroundColor: AMBRA + "0d" },
+              ]}
             >
-              <ThemedText style={[styles.etichetta, { color: "#f59e0b" }]}>
+              <ThemedText style={[styles.etichetta, { color: AMBRA }]}>
                 Suggerimento {i + 1} · {s.titolo}
               </ThemedText>
               {s.testo && (
@@ -354,93 +432,80 @@ function Esercizio({
         </View>
       )}
 
-      {/* I comandi: suggerimento, soluzione */}
+      {/* I comandi: suggerimento e soluzione, due tasti affiancati della
+          stessa altezza. Il suggerimento è quello in evidenza (si consiglia
+          di provarci prima); i pallini dicono quanti ne restano */}
       {!finito && (
         <View style={styles.comandi}>
-          {aiuti < suggerimenti.length && (
-            <Pressable
-              onPress={() => setAiuti((a) => a + 1)}
-              style={({ pressed }) => [
-                styles.bottoneVuoto,
-                { borderColor: "#f59e0b" },
-                pressed && { opacity: 0.7 },
-              ]}
-            >
-              <ThemedText style={[styles.testoComando, { color: "#f59e0b" }]}>
-                💡 Vedi suggerimento ({aiuti + 1}/{suggerimenti.length})
+          <Pressable
+            onPress={() => setAiuti((a) => a + 1)}
+            disabled={aiuti >= suggerimenti.length}
+            style={({ pressed }) => [
+              styles.comando,
+              styles.comandoPrincipale,
+              {
+                backgroundColor: AMBRA + "1a",
+                borderColor: AMBRA + "80",
+              },
+              aiuti >= suggerimenti.length && { opacity: 0.45 },
+              pressed && { opacity: 0.7 },
+            ]}
+          >
+            <View style={styles.rigaComando}>
+              <SymbolView
+                name={{
+                  ios: "lightbulb.fill",
+                  android: "lightbulb",
+                  web: "lightbulb",
+                }}
+                size={18}
+                tintColor={AMBRA}
+              />
+              <ThemedText style={[styles.testoComando, { color: AMBRA }]}>
+                {aiuti >= suggerimenti.length
+                  ? "Suggerimenti finiti"
+                  : "Suggerimento"}
               </ThemedText>
-            </Pressable>
-          )}
+            </View>
+            <View style={styles.pallini}>
+              {suggerimenti.map((_, i) => (
+                <View
+                  key={i}
+                  style={[
+                    styles.pallino,
+                    {
+                      borderColor: AMBRA,
+                      backgroundColor: i < aiuti ? AMBRA : "transparent",
+                    },
+                  ]}
+                />
+              ))}
+            </View>
+          </Pressable>
           <Pressable
             onPress={mostraSoluzione}
-            hitSlop={8}
-            style={({ pressed }) => pressed && { opacity: 0.7 }}
+            style={({ pressed }) => [
+              styles.comando,
+              {
+                backgroundColor: theme.backgroundElement,
+                borderColor: theme.backgroundSelected,
+              },
+              pressed && { opacity: 0.7 },
+            ]}
           >
-            <ThemedText
-              style={[styles.testoComando, { color: theme.textSecondary }]}
-            >
-              Vedi soluzione
-            </ThemedText>
-          </Pressable>
-        </View>
-      )}
-
-      {/* La soluzione */}
-      {finito && (
-        <View
-          style={[
-            styles.card,
-            { borderWidth: 1, borderColor: theme.backgroundSelected },
-          ]}
-        >
-          <ThemedText
-            style={[styles.etichetta, { color: theme.textSecondary }]}
-          >
-            La soluzione
-          </ThemedText>
-          <ThemedText style={[styles.soluzione, { color: pal.verde }]}>
-            {correzione && correzione.esito !== "sbagliata"
-              ? correzione.vicina
-              : c.soluzioni[0]}
-          </ThemedText>
-          {c.soluzioni.length > 1 && (
-            <>
+            <View style={styles.rigaComando}>
+              <SymbolView
+                name={{ ios: "eye", android: "visibility", web: "visibility" }}
+                size={18}
+                tintColor={theme.textSecondary}
+              />
               <ThemedText
-                style={[
-                  styles.etichetta,
-                  { color: theme.textSecondary, marginTop: 4 },
-                ]}
+                style={[styles.testoComando, { color: theme.textSecondary }]}
               >
-                Vanno bene anche
+                Soluzione
               </ThemedText>
-              {c.soluzioni
-                .filter(
-                  (s) =>
-                    s !==
-                    (correzione && correzione.esito !== "sbagliata"
-                      ? correzione.vicina
-                      : c.soluzioni[0]),
-                )
-                .slice(0, 4)
-                .map((s) => (
-                  <ThemedText
-                    key={s}
-                    style={[styles.piccolo, { color: theme.textSecondary }]}
-                  >
-                    · {s}
-                  </ThemedText>
-                ))}
-            </>
-          )}
-          <ThemedText style={[styles.piccolo, { marginTop: 4 }]}>
-            {c.spiegazione}
-          </ThemedText>
-          {c.lezione && (
-            <TestoConRimandi
-              testo={`Ripassa: ${c.lezione}`}
-              style={[styles.piccolo, { color: theme.textSecondary }]}
-            />
-          )}
+            </View>
+          </Pressable>
         </View>
       )}
 
@@ -460,6 +525,286 @@ function Esercizio({
         </Pressable>
       )}
     </View>
+  );
+}
+
+// Per ogni tipo di messaggio della correzione: titolo e icona
+const TIPI_MESSAGGIO: Record<
+  Messaggio["tipo"],
+  { titolo: string; icona: SymbolViewProps["name"] }
+> = {
+  tempo: {
+    titolo: "Tempo verbale",
+    icona: { ios: "clock", android: "schedule", web: "schedule" },
+  },
+  errore: {
+    titolo: "Errore",
+    icona: {
+      ios: "exclamationmark.triangle",
+      android: "warning",
+      web: "warning",
+    },
+  },
+  parole: {
+    titolo: "Le parole",
+    icona: { ios: "text.word.spacing", android: "notes", web: "notes" },
+  },
+  nota: {
+    titolo: "Nota",
+    icona: { ios: "info.circle", android: "info", web: "info" },
+  },
+};
+
+// Il riquadro della correzione: in alto l'esito (con un'icona e quante cose
+// sono da sistemare) e la frase dello studente; sotto un punto per ogni
+// problema, con la sua icona. Gli errori puntuali mostrano il pezzo
+// sbagliato barrato e, accanto, come si corregge; poi la regola e il rimando
+// alla lezione. In fondo, se la frase è sbagliata, che cosa fare adesso
+function SchedaCorrezione({
+  correzione,
+  risposta,
+  colore,
+  conInvito,
+}: {
+  correzione: Correzione;
+  risposta: string;
+  colore: string;
+  conInvito: boolean;
+}) {
+  const theme = useTheme();
+  const pal = usePalette();
+  const { esito, messaggi } = correzione;
+  // Nella risposta quasi giusta le parole diverse non sono errori: si
+  // mostrano in ambra e senza barrarle (day → evening)
+  const quasi = esito === "quasi";
+  const coloreTuo = quasi ? colore : pal.rosso;
+  const titolo =
+    esito === "giusta"
+      ? "Giusto!"
+      : esito === "quasi"
+        ? "Quasi giusto: va bene"
+        : "Non ancora";
+  const sottotitolo =
+    esito === "giusta"
+      ? "La tua frase è corretta."
+      : esito === "quasi"
+        ? "C'è una piccola differenza: guardala."
+        : messaggi.length === 1
+          ? "C'è una cosa da sistemare."
+          : `Ci sono ${messaggi.length} cose da sistemare.`;
+  const icona: SymbolViewProps["name"] =
+    esito === "giusta"
+      ? { ios: "checkmark", android: "check", web: "check" }
+      : esito === "quasi"
+        ? { ios: "equal", android: "drag_handle", web: "drag_handle" }
+        : { ios: "xmark", android: "close", web: "close" };
+
+  return (
+    <View
+      style={[
+        styles.correzione,
+        {
+          backgroundColor: theme.backgroundElement,
+          borderColor: colore + "55",
+        },
+      ]}
+    >
+      {/* L'esito */}
+      <View
+        style={[
+          styles.testataCorrezione,
+          { backgroundColor: colore + "14", borderColor: colore + "33" },
+        ]}
+      >
+        <View style={[styles.bollino, { backgroundColor: colore }]}>
+          <SymbolView name={icona} size={18} tintColor="#fff" weight="bold" />
+        </View>
+        <View style={styles.testiEsito}>
+          <ThemedText style={[styles.esito, { color: colore }]}>
+            {titolo}
+          </ThemedText>
+          <ThemedText
+            style={[styles.sottotitoloEsito, { color: theme.textSecondary }]}
+          >
+            {sottotitolo}
+          </ThemedText>
+        </View>
+      </View>
+
+      {/* La frase dello studente, come riferimento */}
+      {esito !== "giusta" && risposta.trim() !== "" && (
+        <View style={[styles.laTuaFrase, { borderColor: colore + "66" }]}>
+          <ThemedText
+            style={[styles.etichetta, { color: theme.textSecondary }]}
+          >
+            La tua frase
+          </ThemedText>
+          <ThemedText style={styles.testoTuaFrase}>
+            {risposta.trim()}
+          </ThemedText>
+        </View>
+      )}
+
+      {/* Un punto per ogni problema */}
+      {messaggi.map((m, i) => {
+        const tipo = TIPI_MESSAGGIO[m.tipo];
+        // La correzione è un pezzo di frase (She goes) o una descrizione
+        // (past simple (to go al passato)): la seconda va su una riga a parte
+        const descrittiva =
+          !!m.giusto &&
+          (/[()]/.test(m.giusto) || m.giusto.split(" ").length > 4);
+        return (
+          <View
+            key={i}
+            style={[styles.punto, { borderTopColor: theme.backgroundSelected }]}
+          >
+            <View
+              style={[styles.iconaPunto, { backgroundColor: colore + "1a" }]}
+            >
+              <SymbolView name={tipo.icona} size={16} tintColor={colore} />
+            </View>
+            <View style={styles.corpoPunto}>
+              <ThemedText style={styles.titoloPunto}>{tipo.titolo}</ThemedText>
+              {/* Il pezzo sbagliato → la correzione */}
+              {m.sbagliato && (
+                <View style={styles.rigaCorrezione}>
+                  <View
+                    style={[
+                      styles.pezzo,
+                      { backgroundColor: coloreTuo + "1a" },
+                    ]}
+                  >
+                    <ThemedText
+                      style={[
+                        styles.testoPezzo,
+                        !quasi && styles.barrato,
+                        { color: coloreTuo },
+                      ]}
+                    >
+                      {m.sbagliato}
+                    </ThemedText>
+                  </View>
+                  {m.giusto && !descrittiva && (
+                    <>
+                      <SymbolView
+                        name={{
+                          ios: "arrow.right",
+                          android: "arrow_forward",
+                          web: "arrow_forward",
+                        }}
+                        size={14}
+                        tintColor={theme.textSecondary}
+                      />
+                      <View
+                        style={[
+                          styles.pezzo,
+                          { backgroundColor: pal.verde + "1a" },
+                        ]}
+                      >
+                        <ThemedText
+                          style={[styles.testoPezzo, { color: pal.verde }]}
+                        >
+                          {m.giusto}
+                        </ThemedText>
+                      </View>
+                    </>
+                  )}
+                </View>
+              )}
+              {descrittiva && (
+                <ThemedText style={[styles.piccolo, { color: pal.verde }]}>
+                  Serve: {m.giusto}
+                </ThemedText>
+              )}
+              <ThemedText style={[styles.piccolo, { color: theme.text }]}>
+                {m.testo}
+              </ThemedText>
+              {m.lezione && (
+                <View
+                  style={[
+                    styles.ripassa,
+                    { borderColor: theme.backgroundSelected },
+                  ]}
+                >
+                  <SymbolView
+                    name={{
+                      ios: "book",
+                      android: "menu_book",
+                      web: "menu_book",
+                    }}
+                    size={13}
+                    tintColor={theme.textSecondary}
+                  />
+                  <TestoConRimandi
+                    testo={`Ripassa: ${m.lezione}`}
+                    style={[
+                      styles.testoRipassa,
+                      { color: theme.textSecondary },
+                    ]}
+                  />
+                </View>
+              )}
+            </View>
+          </View>
+        );
+      })}
+
+      {/* Che cosa fare adesso */}
+      {conInvito && (
+        <View
+          style={[styles.invito, { borderTopColor: theme.backgroundSelected }]}
+        >
+          <SymbolView
+            name={{
+              ios: "arrow.uturn.backward",
+              android: "undo",
+              web: "undo",
+            }}
+            size={14}
+            tintColor={theme.textSecondary}
+          />
+          <ThemedText
+            style={[styles.testoInvito, { color: theme.textSecondary }]}
+          >
+            Correggi la frase e verifica di nuovo, oppure sblocca un
+            suggerimento.
+          </ThemedText>
+        </View>
+      )}
+    </View>
+  );
+}
+
+// Il tastino in alto a destra della scheda per girarla (Soluzione,
+// Il contesto)
+function Gira({
+  testo,
+  colore,
+  onPress,
+}: {
+  testo: string;
+  colore: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      onPress={onPress}
+      hitSlop={10}
+      style={({ pressed }) => [styles.gira, pressed && { opacity: 0.6 }]}
+    >
+      <SymbolView
+        name={{
+          ios: "arrow.trianglehead.2.clockwise",
+          android: "autorenew",
+          web: "autorenew",
+        }}
+        size={14}
+        tintColor={colore}
+      />
+      <ThemedText style={[styles.testoGira, { color: colore }]}>
+        {testo}
+      </ThemedText>
+    </Pressable>
   );
 }
 
@@ -557,13 +902,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 23,
   },
-  messaggio: {
-    gap: 2,
-  },
-  tipoMessaggio: {
-    fontFamily: "Inter_600SemiBold",
-    fontSize: 12,
-  },
   aiuti: {
     gap: Spacing.two,
   },
@@ -575,20 +913,179 @@ const styles = StyleSheet.create({
   },
   comandi: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
     gap: Spacing.two,
   },
-  bottoneVuoto: {
+  comando: {
+    flex: 1,
+    minHeight: 56,
     borderWidth: 1,
-    borderRadius: 999,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
+    borderRadius: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+  },
+  // Il suggerimento è più largo: è il primo aiuto da provare
+  comandoPrincipale: {
+    flex: 1.6,
+  },
+  rigaComando: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
   },
   testoComando: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 14,
+    lineHeight: 18,
+  },
+  pallini: {
+    flexDirection: "row",
+    gap: 5,
+  },
+  pallino: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    borderWidth: 1,
+  },
+  // La correzione
+  correzione: {
+    borderWidth: 1,
+    borderRadius: 16,
+    overflow: "hidden",
+    // Spazio in fondo: l'ultima sezione non tocca il bordo
+    paddingBottom: Spacing.three,
+  },
+  testataCorrezione: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+  },
+  bollino: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  testiEsito: {
+    flex: 1,
+    gap: 2,
+  },
+  sottotitoloEsito: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 13,
+    lineHeight: 18,
+  },
+  laTuaFrase: {
+    marginHorizontal: Spacing.three,
+    marginTop: Spacing.three,
+    paddingLeft: 12,
+    borderLeftWidth: 3,
+    gap: 4,
+  },
+  testoTuaFrase: {
+    fontFamily: "PlayfairDisplay_600SemiBold",
+    fontSize: 18,
+    lineHeight: 25,
+    fontStyle: "italic",
+  },
+  punto: {
+    flexDirection: "row",
+    gap: 12,
+    marginHorizontal: Spacing.three,
+    marginTop: Spacing.three,
+    paddingTop: Spacing.three,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  iconaPunto: {
+    width: 30,
+    height: 30,
+    borderRadius: 9,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  corpoPunto: {
+    flex: 1,
+    gap: 6,
+  },
+  titoloPunto: {
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 14,
+    lineHeight: 19,
+  },
+  rigaCorrezione: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 6,
+  },
+  pezzo: {
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  testoPezzo: {
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 14,
+    lineHeight: 19,
+  },
+  barrato: {
+    textDecorationLine: "line-through",
+  },
+  ripassa: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    gap: 6,
+    borderWidth: 1,
+    borderRadius: 999,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  testoRipassa: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 13,
+    lineHeight: 18,
+  },
+  invito: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 8,
+    marginHorizontal: Spacing.three,
+    marginTop: Spacing.three,
+    paddingTop: Spacing.three,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  testoInvito: {
+    flex: 1,
+    fontFamily: "Inter_400Regular",
+    fontSize: 13,
+    lineHeight: 18,
+  },
+  rigaScheda: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  gira: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  testoGira: {
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 12,
+  },
+  consegnaRetro: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 13,
+    lineHeight: 18,
   },
   soluzione: {
     fontFamily: "PlayfairDisplay_700Bold",

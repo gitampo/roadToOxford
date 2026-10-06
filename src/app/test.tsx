@@ -1,13 +1,15 @@
 /**
  * Schermata: testa il tuo livello.
  * Raggiungibile da /test. Raccoglie gli strumenti per mettersi alla prova;
- * ognuno è un bottone che apre la sua pagina: impara dal contesto, l'analisi
- * della frase e le statistiche.
+ * ognuno è un bottone che apre la sua pagina: impara dal contesto e l'analisi
+ * della frase. Sotto, sempre in vista, dove si è arrivati in ogni livello,
+ * con in fondo il collegamento alle altre statistiche (precisione e
+ * costanza).
  */
 
 import { Href, Link } from "expo-router";
 import { SymbolView, SymbolViewProps } from "expo-symbols";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -15,10 +17,13 @@ import Animated, {
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import LineaTitolo from "@/components/lineaTitolo";
+import AvanzamentoLivelli from "@/components/avanzamentoLivelli";
+import IntestazioneTest, {
+  contenitoreTest,
+} from "@/components/intestazioneTest";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
+import { ColoriAttivita, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 const VERDE = ColoriAttivita.test;
@@ -28,48 +33,47 @@ export default function Test() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={constants.container}>
-        <ThemedText type="title" style={constants.title}>
-          Testa il tuo livello
-        </ThemedText>
-        <LineaTitolo colore={VERDE} />
-        <ThemedText style={[styles.intro, { color: theme.textSecondary }]}>
-          Sostieni conversazioni in base al tuo livello, analizza frasi,
-          monitora i tuoi miglioramenti.
-        </ThemedText>
+      <ThemedView style={contenitoreTest}>
+        <IntestazioneTest titolo="Testa il tuo livello" conSezione={false} />
 
-        <View style={styles.bottoni}>
-          <Bottone
-            href="/contesto"
-            titolo="Impara dal contesto"
-            sottotitolo="Una situazione, la tua frase in inglese: correzione e suggerimenti"
-            icona={{
-              ios: "text.bubble.fill",
-              android: "chat",
-              web: "chat",
-            }}
-          />
-          <Bottone
-            href="/analisi"
-            titolo="Analisi della frase"
-            sottotitolo="Grammaticale, logica e semantica: la fa l'app o la fai tu"
-            icona={{
-              ios: "text.magnifyingglass",
-              android: "manage_search",
-              web: "manage_search",
-            }}
-          />
-          <Bottone
-            href="/miglioramenti"
-            titolo="Le tue statistiche"
-            sottotitolo="Precisione, livelli e costanza"
-            icona={{
-              ios: "chart.xyaxis.line",
-              android: "show_chart",
-              web: "show_chart",
-            }}
-          />
-        </View>
+        {/* Sotto il titolo tutto scorre. Lo ScrollView esce dai margini
+            della pagina e li rimette nel contenuto: così l'alone dei bottoni
+            non viene tagliato ai lati e la barra sta sul bordo dello schermo */}
+        <ScrollView
+          style={styles.scorrimento}
+          contentContainerStyle={styles.contenuto}
+        >
+          <ThemedText style={[styles.intro, { color: theme.textSecondary }]}>
+            Sostieni conversazioni in base al tuo livello, analizza frasi,
+            monitora i tuoi miglioramenti.
+          </ThemedText>
+
+          <View style={styles.bottoni}>
+            <Bottone
+              href="/contesto"
+              titolo="Impara dal contesto"
+              sottotitolo="Una situazione, la tua frase in inglese: correzione e suggerimenti"
+              icona={{
+                ios: "text.bubble.fill",
+                android: "chat",
+                web: "chat",
+              }}
+            />
+            <Bottone
+              href="/analisi"
+              titolo="Analisi della frase"
+              sottotitolo="Grammaticale, logica e semantica: la fa l'app o la fai tu"
+              icona={{
+                ios: "text.magnifyingglass",
+                android: "manage_search",
+                web: "manage_search",
+              }}
+            />
+            {/* Dove sei arrivato, livello per livello (sempre in vista), e in
+              fondo il collegamento alle altre statistiche */}
+            <AvanzamentoLivelli />
+          </View>
+        </ScrollView>
       </ThemedView>
     </SafeAreaView>
   );
@@ -144,6 +148,15 @@ function Bottone({
 }
 
 const styles = StyleSheet.create({
+  scorrimento: {
+    marginHorizontal: -Spacing.four,
+  },
+  contenuto: {
+    paddingHorizontal: Spacing.four,
+    // Spazio per l'alone dei bottoni, in alto e in fondo
+    paddingTop: Spacing.one,
+    paddingBottom: Spacing.six,
+  },
   intro: {
     fontFamily: "Inter_400Regular",
     fontSize: 15,

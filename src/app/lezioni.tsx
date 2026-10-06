@@ -17,6 +17,7 @@ import { ThemedView } from "@/components/themed-view";
 import { constants, Spacing } from "@/constants/theme";
 import { avanzamento, idCollegati } from "@/data/avanzamento";
 import { LEZIONI } from "@/data/lezioni";
+import { PAROLE_RICERCA } from "@/data/lezioni/ricerca";
 import { useRisultati } from "@/hooks/use-risultati";
 import { useTheme } from "@/hooks/use-theme";
 import { useVisti } from "@/hooks/use-visti";
@@ -92,12 +93,42 @@ function normalizza(s: string) {
 function corrisponde(lezione: Lezione, query: string) {
   const numero = query.trim().replace(/\.$/, "");
   if (/^\d+$/.test(numero)) return NUMERO.get(lezione.id) === Number(numero);
-  const testo = normalizza(
-    [lezione.livello, lezione.titolo, lezione.descrizione, lezione.chiavi].join(
-      " ",
-    ),
-  );
-  return testo.includes(normalizza(query));
+  const testo = testoRicerca(lezione);
+  // Tutte le parole cercate devono esserci, in qualsiasi ordine
+  // ("countable nouns", "nouns countable"), ciascuna all'inizio di una
+  // parola: "count" trova countable, ma "pub" non trova "repubblica"
+  return normalizza(query)
+    .replace(/[^a-z0-9'+-]+/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .every((parola) => testo.includes(" " + parola));
+}
+
+// Il testo in cui si cerca: quello che si vede (livello, titolo,
+// descrizione, chiavi), i titoli dei riquadri e le parole di ricerca
+// nascoste (data/lezioni/ricerca.ts: countable, present perfect...)
+const testiRicerca = new Map<string, string>();
+function testoRicerca(lezione: Lezione) {
+  let testo = testiRicerca.get(lezione.id);
+  if (testo === undefined) {
+    testo = normalizza(
+      [
+        lezione.livello,
+        lezione.titolo,
+        lezione.descrizione,
+        lezione.chiavi,
+        ...(lezione.riquadri ?? []).map((r) => r.titolo),
+        ...(PAROLE_RICERCA[lezione.id] ?? []),
+      ]
+        .filter(Boolean)
+        .join(" "),
+    );
+    // Uno spazio prima di ogni parola (anche dopo / ( : , ...) per
+    // riconoscerne l'inizio
+    testo = " " + testo.replace(/[^a-z0-9'+-]+/g, " ");
+    testiRicerca.set(lezione.id, testo);
+  }
+  return testo;
 }
 
 export default function Lezioni() {

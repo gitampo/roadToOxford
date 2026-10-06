@@ -16,10 +16,13 @@ import EsercizioAnalisi, {
 } from "@/components/analisi/esercizio";
 import { usePalette } from "@/components/analisi/colori";
 import RisultatoAnalisi from "@/components/analisi/risultato";
-import LineaTitolo from "@/components/lineaTitolo";
+import PaginaGirata from "@/components/paginaGirata";
+import IntestazioneTest, {
+  contenitoreTest,
+} from "@/components/intestazioneTest";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { ColoriAttivita, constants, Spacing } from "@/constants/theme";
+import { ColoriAttivita, Spacing } from "@/constants/theme";
 import {
   CARATTERI_PER_FRASE,
   LIMITE_GIORNALIERO,
@@ -38,6 +41,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SymbolView } from "expo-symbols";
 
 const VERDE = ColoriAttivita.test;
 const MODALITA = ["Analizza una frase", "Analizza tu"] as const;
@@ -58,7 +62,6 @@ function aCaso(lista: FraseEsercizio[], attuale?: string) {
 }
 
 export default function Analisi() {
-  const pal = usePalette();
   // La tastiera non copre mai il campo dove si scrive la frase
   const scroll = useRef<ScrollView>(null);
   const tastiera = useTastiera(scroll);
@@ -67,11 +70,8 @@ export default function Analisi() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={constants.container}>
-        <ThemedText type="title" style={constants.title}>
-          Analisi della frase
-        </ThemedText>
-        <LineaTitolo colore={pal.verde} />
+      <ThemedView style={contenitoreTest}>
+        <IntestazioneTest titolo="Analisi della frase" />
 
         <Segmenti voci={MODALITA} attiva={modalita} onCambia={setModalita} />
 
@@ -84,7 +84,9 @@ export default function Analisi() {
           keyboardDismissMode="on-drag"
         >
           {modalita === "Analizza una frase" ? (
-            <AnalizzaUnaFrase />
+            <AnalizzaUnaFrase
+              onGira={() => scroll.current?.scrollTo({ y: 0, animated: true })}
+            />
           ) : (
             <AnalizzaTu />
           )}
@@ -95,7 +97,11 @@ export default function Analisi() {
   );
 }
 
-function AnalizzaUnaFrase() {
+// Due passi sulla stessa scheda: davanti si scrive (o si sceglie) la frase;
+// con "Analizza" la scheda volta pagina e dietro c'è l'analisi, con le
+// colonne Grammaticale / Logica / Semantica. "Un'altra frase" torna davanti,
+// con la frase ancora nel campo per correggerla
+function AnalizzaUnaFrase({ onGira }: { onGira: () => void }) {
   const theme = useTheme();
   const pal = usePalette();
   const [testo, setTesto] = useState("");
@@ -114,110 +120,166 @@ function AnalizzaUnaFrase() {
     }
   }, [analizzato]);
 
+  // Quale facciata si vede: la frase da scrivere o la sua analisi
+  const [retro, setRetro] = useState(false);
+
   function vai(frase = testo) {
+    if (!frase.trim()) return;
     Keyboard.dismiss();
     setTesto(frase);
     setAnalizzato(frase);
+    setRetro(true);
+    onGira();
   }
 
   return (
-    <View style={styles.sezione}>
-      <ThemedText style={[styles.guida, { color: theme.textSecondary }]}>
-        Scrivi una frase in inglese: l&apos;app ne fa l&apos;analisi
-        grammaticale, logica e semantica, e ti segnala gli errori più comuni.
-      </ThemedText>
-      {/* Il campo e i bottoni nella stessa card */}
-      <View
-        style={[styles.cardCampo, { backgroundColor: theme.backgroundElement }]}
-      >
-        <TextInput
-          value={testo}
-          onChangeText={setTesto}
-          placeholder="Es. My sister has been living in London for three years."
-          placeholderTextColor={theme.textSecondary}
-          multiline
-          style={[styles.campo, { color: theme.text }]}
-        />
-        <Contatore testo={testo} analizzato={analizzato} />
-        <View style={styles.rigaCampo}>
-          {testo ? (
-            <Pressable
-              onPress={() => {
-                setTesto("");
-                setAnalizzato("");
-              }}
-              hitSlop={8}
-            >
-              <ThemedText
-                style={[styles.cancella, { color: theme.textSecondary }]}
-              >
-                Cancella
-              </ThemedText>
-            </Pressable>
-          ) : (
-            <View />
-          )}
-          <Pressable
-            onPress={() => vai()}
-            disabled={!testo.trim()}
-            style={({ pressed }) => [
-              styles.bottone,
-              { backgroundColor: VERDE },
-              !testo.trim() && { opacity: 0.35 },
-              pressed && { opacity: 0.8 },
+    <PaginaGirata
+      retro={retro}
+      fronte={
+        <View style={styles.sezione}>
+          <ThemedText style={[styles.guida, { color: theme.textSecondary }]}>
+            Scrivi una frase in inglese, oppure scegline una qui sotto:
+            l&apos;app ne fa l&apos;analisi grammaticale, logica e semantica, e
+            ti segnala gli errori più comuni.
+          </ThemedText>
+          {/* Il campo e i bottoni nella stessa card */}
+          <View
+            style={[
+              styles.cardCampo,
+              { backgroundColor: theme.backgroundElement },
             ]}
           >
-            <ThemedText style={styles.testoBottone}>Analizza →</ThemedText>
-          </Pressable>
-        </View>
-      </View>
+            <TextInput
+              value={testo}
+              onChangeText={setTesto}
+              placeholder="Es. My sister has been living in London for three years."
+              placeholderTextColor={theme.textSecondary}
+              multiline
+              style={[styles.campo, { color: theme.text }]}
+            />
+            <Contatore testo={testo} analizzato={analizzato} />
+            <View style={styles.rigaCampo}>
+              {testo ? (
+                <Pressable onPress={() => setTesto("")} hitSlop={8}>
+                  <ThemedText
+                    style={[styles.cancella, { color: theme.textSecondary }]}
+                  >
+                    Cancella
+                  </ThemedText>
+                </Pressable>
+              ) : (
+                <View />
+              )}
+              <Pressable
+                onPress={() => vai()}
+                disabled={!testo.trim()}
+                style={({ pressed }) => [
+                  styles.bottone,
+                  { backgroundColor: VERDE },
+                  !testo.trim() && { opacity: 0.35 },
+                  pressed && { opacity: 0.8 },
+                ]}
+              >
+                <ThemedText style={styles.testoBottone}>Analizza →</ThemedText>
+              </Pressable>
+            </View>
+          </View>
 
-      {!analizzato && (
-        <View style={styles.esempi}>
-          <ThemedText
-            style={[styles.etichetta, { color: theme.textSecondary }]}
-          >
-            Prova con
-          </ThemedText>
-          {esempi.map((e) => (
-            <Pressable
-              key={e.testo}
-              onPress={() => vai(e.testo)}
-              style={({ pressed }) => [
-                styles.esempio,
-                { borderColor: theme.backgroundSelected },
-                pressed && { backgroundColor: theme.backgroundElement },
-              ]}
-            >
-              <ThemedText style={styles.testoEsempio}>{e.testo}</ThemedText>
-              <ThemedText style={[styles.livelloEsempio, { color: pal.verde }]}>
-                {e.livello} →
-              </ThemedText>
-            </Pressable>
-          ))}
-        </View>
-      )}
-
-      {guasto && (
-        <ThemedText style={[styles.guida, { color: theme.textSecondary }]}>
-          Questa frase è troppo complessa per l&apos;analisi automatica: prova a
-          dividerla in frasi più brevi.
-        </ThemedText>
-      )}
-
-      {risultati.map((a, i) => (
-        <View key={`${analizzato}-${i}`} style={styles.risultato}>
-          {risultati.length > 1 && (
+          <View style={styles.esempi}>
             <ThemedText
               style={[styles.etichetta, { color: theme.textSecondary }]}
             >
-              Frase {i + 1} di {risultati.length}
+              Oppure prova con
+            </ThemedText>
+            {esempi.map((e) => (
+              <Pressable
+                key={e.testo}
+                onPress={() => vai(e.testo)}
+                style={({ pressed }) => [
+                  styles.esempio,
+                  { borderColor: theme.backgroundSelected },
+                  pressed && { backgroundColor: theme.backgroundElement },
+                ]}
+              >
+                <ThemedText style={styles.testoEsempio}>{e.testo}</ThemedText>
+                <ThemedText
+                  style={[styles.livelloEsempio, { color: pal.verde }]}
+                >
+                  {e.livello} →
+                </ThemedText>
+              </Pressable>
+            ))}
+          </View>
+        </View>
+      }
+      retroContenuto={
+        <View style={styles.sezione}>
+          {/* La frase analizzata, e il ritorno alla scrittura */}
+          <View
+            style={[
+              styles.cardFrase,
+              {
+                backgroundColor: theme.backgroundElement,
+                borderColor: VERDE + "55",
+              },
+            ]}
+          >
+            <View style={styles.rigaFrase}>
+              <ThemedText style={[styles.etichetta, { color: pal.verde }]}>
+                La frase
+              </ThemedText>
+              <Pressable
+                onPress={() => setRetro(false)}
+                hitSlop={10}
+                style={({ pressed }) => [
+                  styles.altraFrase,
+                  pressed && { opacity: 0.6 },
+                ]}
+              >
+                <SymbolView
+                  name={{
+                    ios: "arrow.trianglehead.2.clockwise",
+                    android: "autorenew",
+                    web: "autorenew",
+                  }}
+                  size={14}
+                  tintColor={theme.textSecondary}
+                />
+                <ThemedText
+                  style={[
+                    styles.testoAltraFrase,
+                    { color: theme.textSecondary },
+                  ]}
+                >
+                  Un&apos;altra frase
+                </ThemedText>
+              </Pressable>
+            </View>
+            <ThemedText style={styles.fraseAnalizzata}>{analizzato}</ThemedText>
+          </View>
+
+          {guasto && (
+            <ThemedText style={[styles.guida, { color: theme.textSecondary }]}>
+              Questa frase è troppo complessa per l&apos;analisi automatica:
+              prova a dividerla in frasi più brevi.
             </ThemedText>
           )}
-          <RisultatoAnalisi analisi={a} colore={pal.verde} />
+
+          {risultati.map((a, i) => (
+            <View key={`${analizzato}-${i}`} style={styles.risultato}>
+              {risultati.length > 1 && (
+                <ThemedText
+                  style={[styles.etichetta, { color: theme.textSecondary }]}
+                >
+                  Frase {i + 1} di {risultati.length}
+                </ThemedText>
+              )}
+              <RisultatoAnalisi analisi={a} colore={pal.verde} />
+            </View>
+          ))}
         </View>
-      ))}
-    </View>
+      }
+    />
   );
 }
 
@@ -407,6 +469,32 @@ function Segmenti<T extends string>({
 }
 
 const styles = StyleSheet.create({
+  // La frase analizzata, in cima al retro della scheda
+  cardFrase: {
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: Spacing.three,
+    gap: 6,
+  },
+  rigaFrase: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  altraFrase: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  testoAltraFrase: {
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 12,
+  },
+  fraseAnalizzata: {
+    fontFamily: "PlayfairDisplay_600SemiBold",
+    fontSize: 20,
+    lineHeight: 27,
+  },
   contenuto: {
     paddingTop: Spacing.three,
     paddingBottom: Spacing.six,

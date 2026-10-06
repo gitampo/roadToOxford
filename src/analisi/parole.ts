@@ -72,6 +72,8 @@ export type Parola = {
 const BASE_IRREGOLARE = new Map<string, string>([["born", "bear"]]);
 // I participi passati irregolari (written, gone, born...)
 export const PARTICIPI = new Set<string>(["born"]);
+// I passati irregolari (went, rose, saw...)
+export const PASSATI = new Set<string>();
 // I verbi con il passato uguale al presente (cut, put, hit...)
 export const INVARIABILI = new Set<string>();
 for (const p of PARADIGMI) {
@@ -83,6 +85,8 @@ for (const p of PARADIGMI) {
     BASE_IRREGOLARE.set(f.trim().toLowerCase(), base);
   for (const f of p.past_participle.split("/"))
     PARTICIPI.add(f.trim().toLowerCase());
+  for (const f of p.past_simple.split("/"))
+    PASSATI.add(f.trim().toLowerCase());
   if (p.past_simple.trim().toLowerCase() === base.toLowerCase())
     INVARIABILI.add(base.toLowerCase());
 }
@@ -138,7 +142,16 @@ export function unisci(parole: Parola[], indici: number[]) {
     if (!t) continue;
     testo += testo && !/^'|^n't$/.test(t) ? " " + t : t;
   }
-  return testo;
+  return ricomponi(testo);
+}
+
+// Le contrazioni irregolari tornano come erano: will + n't → won't,
+// can + n't → can't, shall + n't → shan't
+export function ricomponi(testo: string) {
+  return testo
+    .replace(/\b([Ww])illn't\b/g, "$1on't")
+    .replace(/\b([Cc])ann't\b/g, "$1an't")
+    .replace(/\b([Ss])halln't\b/g, "$1han't");
 }
 
 // Le parole che il vocabolario conosce come verbi (need, want, like...)
@@ -253,6 +266,29 @@ export function dividiInParole(testo: string): Parola[][] {
         [p.testo, dopo.testo] = dividiContrazione(p.testo);
         dopo.dopo = p.dopo;
         p.dopo = "";
+      }
+    });
+    // 'd + verbo base è would, non had: I'd DRIVE to Scotland if... (compromise
+    // a volte prende drive per un nome e scioglie 'd in had)
+    parole.forEach((p, i) => {
+      const dopo = parole[i + 1];
+      if (
+        p.testo === "'d" &&
+        p.forma === "had" &&
+        dopo &&
+        !PARTICIPI.has(dopo.forma) &&
+        !dopo.tags.has("PastTense") &&
+        !dopo.tags.has("Participle") &&
+        !/(ed|en)$/.test(dopo.forma) &&
+        dopo.forma !== "better" &&
+        (dopo.tags.has("Verb") || VERBI_VOCABOLARIO().has(dopo.forma))
+      ) {
+        p.forma = "would";
+        p.base = "would";
+        p.tags.delete("PastTense");
+        dopo.tags.delete("Noun");
+        dopo.tags.add("Verb");
+        dopo.tags.add("Infinitive");
       }
     });
     for (const p of parole) classifica(p, parole);
@@ -724,6 +760,107 @@ function correggiDalContesto(parole: Parola[]) {
     const prima = parole[i - 1];
     const dopo = parole[i + 1];
 
+    // What / which + nome + ausiliare: il nome non è un verbo (What TIME does
+    // the museum open?)
+    if (
+      p.categoria === "verbo" &&
+      prima &&
+      i === 1 &&
+      ["what", "which", "whose"].includes(prima.forma) &&
+      dopo &&
+      ["do", "does", "did", "is", "are", "was", "were"].includes(dopo.forma)
+    ) {
+      p.categoria = "nome";
+      p.base = p.forma;
+      descriviNome(p);
+      prima.categoria = "aggettivo";
+      prima.dettaglio = "aggettivo interrogativo";
+    }
+
+    // Domanda con do/does/did + soggetto + verbo: la parola dopo il soggetto
+    // è il verbo (When does the film START? Where does your sister WORK?)
+    if (
+      (p.categoria === "nome" ||
+        p.categoria === "aggettivo" ||
+        p.forma === "like") &&
+      parole[parole.length - 1].dopo.includes("?") &&
+      prima?.categoria === "nome" &&
+      (VERBI_VOCABOLARIO().has(p.forma) ||
+        p.tags.has("Verb") ||
+        p.tags.has("Infinitive") ||
+        (!p.tags.has("Plural") && !/s$/.test(p.forma)))
+    ) {
+      let k = i - 1;
+      let nomi = 0;
+      while (
+        k > 0 &&
+        ["nome", "aggettivo", "articolo", "numerale"].includes(
+          parole[k].categoria,
+        ) &&
+        !parole[k].dopo.match(/[,;:]/)
+      ) {
+        if (parole[k].categoria === "nome") nomi++;
+        k--;
+      }
+      if (nomi > 0 && ["do", "does", "did"].includes(parole[k]?.forma)) {
+        p.categoria = "verbo";
+        p.base = baseVerbo(p.forma);
+      }
+    }
+
+    // last + un nome di tempo è un aggettivo: last NIGHT, last week (non il
+    // verbo last, durare)
+    if (p.forma === "last" && dopo?.classe === "tempo") {
+      p.categoria = "aggettivo";
+      p.base = "last";
+      p.dettaglio = "aggettivo qualificativo";
+    }
+
+    // preposizione + articolo + nome + parola in -s: è un nome composto, non
+    // un verbo (at the traffic LIGHTS, near the bus STOPS)
+    if (
+      p.categoria === "verbo" &&
+      /s$/.test(p.forma) &&
+      prima?.categoria === "nome" &&
+      parole[i - 2]?.categoria === "articolo" &&
+      parole[i - 3]?.categoria === "preposizione"
+    ) {
+      p.categoria = "nome";
+      p.base = p.forma.replace(/s$/, "");
+      descriviNome(p);
+    }
+
+    // turn / go + left, right: sono avverbi di direzione (Turn LEFT), non il
+    // passato di leave
+    if (
+      ["left", "right"].includes(p.forma) &&
+      prima &&
+      ["turn", "go"].includes(prima.base) &&
+      prima.categoria === "verbo"
+    ) {
+      p.categoria = "avverbio";
+      p.base = p.forma;
+      p.dettaglio = "avverbio di luogo";
+    }
+
+    // Il passato di un verbo irregolare subito dopo il soggetto è un verbo,
+    // anche se ha la forma di un nome: Sales ROSE by ten per cent (rose qui
+    // non è la rosa). Solo se prima della parola non c'è ancora un verbo
+    if (
+      p.categoria === "nome" &&
+      PASSATI.has(p.forma) &&
+      !INVARIABILI.has(p.forma) &&
+      prima &&
+      (prima.categoria === "nome" || prima.categoria === "pronome") &&
+      prima.forma !== "the" &&
+      (!dopo || ["preposizione", "avverbio"].includes(dopo.categoria)) &&
+      !parole.slice(0, i).some((q) => q.categoria === "verbo")
+    ) {
+      p.categoria = "verbo";
+      p.base = baseVerbo(p.forma);
+      p.tags.add("PastTense");
+    }
+
     // Un "aggettivo" in fondo a un gruppo nominale è un nome:
     // "a beautiful present." → present è nome
     if (
@@ -791,6 +928,22 @@ function correggiDalContesto(parole: Parola[]) {
       p.base = baseVerbo(p.forma);
     }
 
+    // have (+ not o il soggetto di una domanda) + participio è un tempo
+    // perfect: I have DONE it, I haven't FINISHED it, Have you DONE it?
+    // (compromise a volte lo prende per aggettivo)
+    const haveDavanti =
+      prima?.base === "have" ||
+      ((prima?.forma === "not" || prima?.categoria === "pronome") &&
+        parole[i - 2]?.base === "have");
+    if (
+      p.categoria === "aggettivo" &&
+      haveDavanti &&
+      (PARTICIPI.has(p.forma) || /ed$/.test(p.forma))
+    ) {
+      p.categoria = "verbo";
+      p.base = baseVerbo(p.forma);
+    }
+
     // tired, exhausted, married... dopo be sono aggettivi, se non c'è by
     // (They were exhausted; ma: The house was destroyed by the storm)
     if (
@@ -808,8 +961,14 @@ function correggiDalContesto(parole: Parola[]) {
     if (
       p.categoria === "avverbio" &&
       ["late", "early", "fast", "hard", "alone", "well"].includes(p.forma) &&
-      prima?.base === "be" &&
-      prima.categoria === "verbo"
+      // anche con un avverbio di frequenza in mezzo: He is NEVER late
+      ((prima?.base === "be" && prima.categoria === "verbo") ||
+        (prima &&
+          ["never", "always", "often", "usually", "sometimes", "rarely"].includes(
+            prima.forma,
+          ) &&
+          parole[i - 2]?.base === "be" &&
+          parole[i - 2].categoria === "verbo"))
     ) {
       p.categoria = "aggettivo";
       p.dettaglio = "aggettivo qualificativo";

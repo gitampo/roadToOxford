@@ -17,10 +17,16 @@
 
 import type { Contesto } from "@/data/contesti";
 import { analizza } from "./index";
+import { cercaNelDizionario } from "./dizionario";
+import { baseVerbo } from "./parole";
 
 export type Messaggio = {
   tipo: "tempo" | "errore" | "parole" | "nota";
   testo: string;
+  // Per gli errori puntuali: il pezzo sbagliato della risposta e, se si può
+  // dire senza svelare la soluzione, come va corretto (She go → She goes)
+  sbagliato?: string;
+  giusto?: string;
   lezione?: string;
 };
 
@@ -58,6 +64,25 @@ export function parolePer(frase: string) {
     .filter(Boolean);
 }
 
+// Che cosa vuol dire una parola inglese: prima nel vocabolario del contesto
+// (evening → serata), poi nel dizionario dell'app (day → giorno), anche alla
+// forma base (went → go)
+function significato(parola: string, c: Contesto) {
+  const w = parola.toLowerCase();
+  for (const [it, en] of c.parole) {
+    const alternative = en
+      .toLowerCase()
+      .split("/")
+      .map((x) => x.trim());
+    if (alternative.includes(w)) return it;
+  }
+  return (
+    cercaNelDizionario(w, "nome") ??
+    cercaNelDizionario(baseVerbo(w), "verbo") ??
+    cercaNelDizionario(w.replace(/s$/, ""), "nome")
+  );
+}
+
 // Le parole grammaticali: se la differenza è su una di queste, la frase è
 // sbagliata (had/would, have/has, been...), non "quasi giusta"
 const GRAMMATICALI = new Set([
@@ -87,6 +112,10 @@ const GRAMMATICALI = new Set([
   "not",
   "to",
   "for",
+  "of",
+  "with",
+  "about",
+  "from",
   "since",
   "ago",
   "by",
@@ -140,7 +169,8 @@ const TIPI: Record<string, [string, string]> = {
   verbo: ["un verbo", "verbi"],
 };
 
-function tipiDelleParole(mancano: string[], soluzione: string) {
+// Il tipo di ciascuna parola mancante (nome, verbo, ausiliare...)
+function tipiPer(mancano: string[], soluzione: string) {
   let parole: { forma: string; tipo: string }[] = [];
   try {
     const a = analizza(soluzione)[0];
@@ -155,13 +185,18 @@ function tipiDelleParole(mancano: string[], soluzione: string) {
   } catch {
     // senza analisi si dice solo quante parole mancano
   }
-  const conta = new Map<string, number>();
-  for (const w of mancano) {
+  return mancano.map((w) => {
     const k = parole.findIndex((p) => p.forma === w);
     const tipo = k >= 0 ? parole[k].tipo : "parola";
     if (k >= 0) parole.splice(k, 1);
+    return tipo;
+  });
+}
+
+function tipiDelleParole(mancano: string[], soluzione: string) {
+  const conta = new Map<string, number>();
+  for (const tipo of tipiPer(mancano, soluzione))
     conta.set(tipo, (conta.get(tipo) ?? 0) + 1);
-  }
   return [...conta.entries()].map(([tipo, n]) => {
     const [uno, molti] = TIPI[tipo] ?? ["una parola", "parole"];
     return n === 1 ? uno : `${n} ${molti}`;
@@ -218,25 +253,28 @@ export function correggi(risposta: string, c: Contesto): Correzione {
   let tempoOk = true;
   let errori = 0;
   try {
-    const analisi = analizza(risposta)[0];
-    if (analisi) {
-      const attesi = c.tempo.toLowerCase().split("|");
-      const tempi = analisi.gruppi
+    // Tutte le frasi della risposta (Good morning! How are you?)
+    const frasi = analizza(risposta);
+    const gruppi = frasi.flatMap((a) =>
+      a.gruppi
         .filter((g) => !g.coda)
-        .map((g) => g.tempo.toLowerCase());
-      tempoOk = tempi.some((t) => attesi.some((a) => t.includes(a)));
+        .map((g) => ({
+          g,
+          testo: a.parole
+            .filter((_, i) => g.parole.includes(i))
+            .map((p) => p.testo)
+            .join(" "),
+        })),
+    );
+    if (frasi.length) {
+      const attesi = c.tempo.toLowerCase().split("|");
+      tempoOk = gruppi.some(({ g }) =>
+        attesi.some((a) => g.tempo.toLowerCase().includes(a)),
+      );
       if (!tempoOk) {
-        const usati = analisi.gruppi.filter(
-          (g) => !g.coda && g.modo !== "gerundio",
-        );
+        const usati = gruppi.filter(({ g }) => g.modo !== "gerundio");
         const elenco = usati
-          .map(
-            (g) =>
-              `«${analisi.parole
-                .filter((_, i) => g.parole.includes(i))
-                .map((p) => p.testo)
-                .join(" ")}» (${g.tempo})`,
-          )
+          .map(({ g, testo }) => `«${testo}» (${g.tempo})`)
           .join(", ");
         messaggi.push({
           tipo: "tempo",
@@ -246,11 +284,13 @@ export function correggi(risposta: string, c: Contesto): Correzione {
           lezione: c.lezione,
         });
       }
-      for (const e of analisi.semantica.errori) {
+      for (const e of frasi.flatMap((a) => a.semantica.errori)) {
         errori++;
         messaggi.push({
           tipo: "errore",
-          testo: `«${e.testo}» → ${e.correzione}. ${e.regola}`,
+          sbagliato: e.testo,
+          giusto: e.correzione,
+          testo: e.regola,
           lezione: e.lezione,
         });
       }
@@ -262,12 +302,35 @@ export function correggi(risposta: string, c: Contesto): Correzione {
   // Le parole che mancano e quelle in più rispetto alla soluzione più vicina
   const mancanoGrezze = differenza(tue, migliore.p);
   const inPiuGrezze = differenza(migliore.p, tue);
+  // Le forme sbagliate: la parola giusta nella forma sbagliata (she work →
+  // works, forward to see → seeing, two brother → brothers): è un errore di grammatica, e la forma
+  // giusta non si dice
+  const forme: string[] = [];
+  for (const w of [...inPiuGrezze]) {
+    const giusta = mancanoGrezze.find(
+      (x) =>
+        x !== w &&
+        (baseVerbo(x) === baseVerbo(w) ||
+          // singolare ↔ plurale: two brother → brothers
+          x.replace(/e?s$/, "") === w.replace(/e?s$/, "")),
+    );
+    if (giusta) {
+      forme.push(w);
+      inPiuGrezze.splice(inPiuGrezze.indexOf(w), 1);
+      mancanoGrezze.splice(mancanoGrezze.indexOf(giusta), 1);
+    }
+  }
   // I refusi: una parola in più che somiglia molto a una che manca
   // (studing ↔ studying)
   const refusi: [string, string][] = [];
   for (const w of [...inPiuGrezze]) {
     const giusta = mancanoGrezze.find(
-      (x) => distanza(w, x) <= Math.max(1, Math.floor(x.length / 4)),
+      (x) =>
+        // (she ↔ the, in ↔ on sono parole diverse, non errori di battitura)
+        x.length >= 4 &&
+        !GRAMMATICALI.has(x) &&
+        !GRAMMATICALI.has(w) &&
+        distanza(w, x) <= Math.max(1, Math.floor(x.length / 4)),
     );
     if (giusta) {
       refusi.push([w, giusta]);
@@ -277,18 +340,36 @@ export function correggi(risposta: string, c: Contesto): Correzione {
   }
   const mancano = mancanoGrezze;
   const inPiu = inPiuGrezze;
+  for (const w of forme)
+    messaggi.push({
+      tipo: "errore",
+      sbagliato: w,
+      testo:
+        "È la parola giusta, ma non nella forma giusta: pensa alla persona, al tempo, al singolare o plurale e a che cosa viene prima (un ausiliare, una preposizione, un numero...).",
+    });
   for (const [sbagliata, giusta] of refusi)
     messaggi.push({
       tipo: "errore",
-      testo: `Attenzione all'ortografia: «${sbagliata}» si scrive «${giusta}».`,
+      sbagliato: sbagliata,
+      giusto: giusta,
+      testo: "Attenzione all'ortografia.",
     });
   // "Quasi giusta" solo se le differenze non toccano la grammatica (un
-  // ausiliare, una preposizione, un articolo...) e il tempo è giusto
-  const grammaticale = [...mancano, ...inPiu].some((w) => GRAMMATICALI.has(w));
+  // ausiliare, una preposizione, un articolo, la forma o la scelta di un
+  // verbo: said ↔ told) e il tempo è giusto
+  const grammaticale =
+    forme.length > 0 ||
+    [...mancano, ...inPiu].some((w) => GRAMMATICALI.has(w)) ||
+    tipiPer(mancano, migliore.s).some(
+      (t) => t === "verbo" || t === "ausiliare",
+    );
   // e se qualcosa cambia davvero: le stesse parole in un altro ordine non sono
   // "quasi giuste" (Never I have seen... invece di Never have I seen...)
   const soloOrdine =
-    mancano.length === 0 && inPiu.length === 0 && refusi.length === 0;
+    mancano.length === 0 &&
+    inPiu.length === 0 &&
+    refusi.length === 0 &&
+    forme.length === 0;
   const quasi =
     migliore.simile >= 0.8 &&
     tempoOk &&
@@ -304,10 +385,45 @@ export function correggi(risposta: string, c: Contesto): Correzione {
   } else if (quasi) {
     // Quasi giusta: la soluzione si può mostrare, non c'è più niente da
     // scoprire
-    messaggi.push({
-      tipo: "parole",
-      testo: `Una piccola differenza rispetto a «${migliore.s}»: va bene lo stesso, ma confrontale.`,
-    });
+    // Si spiega ogni differenza: le parole al posto di quelle attese (con
+    // il significato di tutte e due: day = giorno, evening = serata), poi
+    // quelle in più e quelle che mancano
+    const coppie = Math.min(mancano.length, inPiu.length);
+    for (let k = 0; k < coppie; k++) {
+      const tua = inPiu[k];
+      const attesa = mancano[k];
+      const sTua = significato(tua, c);
+      const sAttesa = significato(attesa, c);
+      const sensi = [
+        sTua ? `«${tua}» vuol dire «${sTua}»` : "",
+        sAttesa ? `«${attesa}» vuol dire «${sAttesa}»` : "",
+      ].filter(Boolean);
+      messaggi.push({
+        tipo: "parole",
+        sbagliato: tua,
+        giusto: attesa,
+        testo: `${sensi.length ? sensi.join(", ") + ". " : ""}Qui la parola più adatta alla situazione è «${attesa}»: la tua frase va bene lo stesso, ma il senso cambia un po'.`,
+      });
+    }
+    for (const w of inPiu.slice(coppie))
+      messaggi.push({
+        tipo: "parole",
+        sbagliato: w,
+        testo: `«${w}» nella frase attesa non c'è: puoi lasciarlo, ma la frase sta in piedi anche senza.`,
+      });
+    for (const w of mancano.slice(coppie)) {
+      const sw = significato(w, c);
+      messaggi.push({
+        tipo: "parole",
+        testo: `Nella frase attesa c'è anche «${w}»${sw ? ` («${sw}»)` : ""}: aggiungila per essere più precisa.`,
+      });
+    }
+    // Se non c'è niente di preciso da dire (né refusi né parole diverse)
+    if (!messaggi.length)
+      messaggi.push({
+        tipo: "parole",
+        testo: `Una piccola differenza rispetto a «${migliore.s}»: va bene lo stesso, ma confrontale.`,
+      });
   } else if (mancano.length || inPiu.length) {
     // Sbagliata: niente spoiler. Le parole dello studente da cambiare si
     // citano (sono sue); quelle che mancano si descrivono solo per tipo
@@ -316,7 +432,7 @@ export function correggi(risposta: string, c: Contesto): Correzione {
         ? `da togliere o cambiare: ${inPiu.map((w) => `«${w}»`).join(", ")}`
         : "",
       mancano.length
-        ? `${mancano.length === 1 ? "ti manca" : "ti mancano"} ${elenca(tipiDelleParole(mancano, migliore.s))}`
+        ? `${mancano.length === 1 ? "ti manca o stai sbagliando" : "ti mancano o stai sbagliando"} ${elenca(tipiDelleParole(mancano, migliore.s))}`
         : "",
     ].filter(Boolean);
     messaggi.push({
@@ -337,7 +453,7 @@ export function correggi(risposta: string, c: Contesto): Correzione {
         testo:
           "Il tempo verbale va bene: ti manca una parola del vocabolario. Se non ti viene in mente come si dice, sblocca il suggerimento «Parole utili».",
       });
-  } else if (!identica && !refusi.length) {
+  } else if (!identica && !refusi.length && !forme.length) {
     messaggi.push({
       tipo: "parole",
       testo: "Le parole ci sono tutte, ma l'ordine non è quello giusto.",

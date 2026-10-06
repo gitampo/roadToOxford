@@ -120,6 +120,11 @@ export const passive: Lezione = {
             { en: "You're supposed to wear a helmet.", it: "Dovresti portare il casco." },
           ],
         },
+        {
+          tipo: "nota",
+          testo:
+            "Be supposed to ha un riquadro tutto suo, con i suoi tre usi (la regola, \"doveva ma...\", \"si dice che\"): lezione 32{7}.",
+        },
       ],
     },
     {
